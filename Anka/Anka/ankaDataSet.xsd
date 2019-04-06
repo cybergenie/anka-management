@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ankaDataSet" targetNamespace="http://tempuri.org/ankaDataSet.xsd" xmlns:mstns="http://tempuri.org/ankaDataSet.xsd" xmlns="http://tempuri.org/ankaDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ankaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ankaConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Anka.Properties.Settings.GlobalReference.Default.ankaConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="caseTableAdapter" GeneratorDataComponentClassName="caseTableAdapter" Name="case" UserDataComponentName="caseTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ankaConnectionString (Settings)" DbObjectName="anka.case" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_case`, `collateral_circulation`, `coronary_artery_dominance`, `patient_info_id_patient` FROM `case`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="exerciseTableAdapter" GeneratorDataComponentClassName="exerciseTableAdapter" Name="exercise" UserDataComponentName="exerciseTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ankaConnectionString (Settings)" DbObjectName="anka.exercise" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_record`, `exercise_category`, `exercise_items`, `date`, `mmHg_low`, `mmHg_high`, `bmp`, `SpO2`, `Borg`, `remark`, `ECG`, `case_id_case`, `case_patient_info_id_patient` FROM `exercise`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="gad_scaleTableAdapter" GeneratorDataComponentClassName="gad_scaleTableAdapter" Name="gad_scale" UserDataComponentName="gad_scaleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ankaConnectionString (Settings)" DbObjectName="anka.gad_scale" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_PHQ`, `Q1`, `Q2`, `Q3`, `Q4`, `Q5`, `Q6`, `Q7`, `case_id_case`, `case_patient_info_id_patient` FROM `gad_scale`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ipaq_scaleTableAdapter" GeneratorDataComponentClassName="ipaq_scaleTableAdapter" Name="ipaq_scale" UserDataComponentName="ipaq_scaleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ankaConnectionString (Settings)" DbObjectName="anka.ipaq_scale" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_PHQ`, `Q0`, `Q1`, `Q2`, `Q3`, `Q4`, `Q5`, `case_id_case`, `case_patient_info_id_patient` FROM `ipaq_scale`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ohq_scaleTableAdapter" GeneratorDataComponentClassName="ohq_scaleTableAdapter" Name="ohq_scale" UserDataComponentName="ohq_scaleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ankaConnectionString (Settings)" DbObjectName="anka.ohq_scale" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_PHQ`, `Q1`, `Q2`, `Q3`, `Q4`, `Q5`, `Q6`, `Q7`, `Q8`, `Q9`, `case_id_case`, `case_patient_info_id_patient` FROM `ohq_scale`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="patient_infoTableAdapter" GeneratorDataComponentClassName="patient_infoTableAdapter" Name="patient_info" UserDataComponentName="patient_infoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ankaConnectionString (Settings)" DbObjectName="anka.patient_info" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_patient`, `first_name`, `last_name`, `birth_date` FROM `patient_info`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="phq_scaleTableAdapter" GeneratorDataComponentClassName="phq_scaleTableAdapter" Name="phq_scale" UserDataComponentName="phq_scaleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ankaConnectionString (Settings)" DbObjectName="anka.phq_scale" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id_PHQ`, `Q1`, `Q2`, `Q3`, `Q4`, `Q5`, `Q6`, `Q7`, `Q8`, `Q9`, `case_id_case`, `case_patient_info_id_patient` FROM `phq_scale`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ankaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ankaDataSet" msprop:Generator_UserDSName="ankaDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="case" msprop:Generator_TableClassName="caseDataTable" msprop:Generator_TableVarName="tablecase" msprop:Generator_TablePropName="_case" msprop:Generator_RowDeletingName="caseRowDeleting" msprop:Generator_RowChangingName="caseRowChanging" msprop:Generator_RowEvHandlerName="caseRowChangeEventHandler" msprop:Generator_RowDeletedName="caseRowDeleted" msprop:Generator_UserTableName="case" msprop:Generator_RowChangedName="caseRowChanged" msprop:Generator_RowEvArgName="caseRowChangeEvent" msprop:Generator_RowClassName="caseRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="exercise" msprop:Generator_TableClassName="exerciseDataTable" msprop:Generator_TableVarName="tableexercise" msprop:Generator_TablePropName="exercise" msprop:Generator_RowDeletingName="exerciseRowDeleting" msprop:Generator_RowChangingName="exerciseRowChanging" msprop:Generator_RowEvHandlerName="exerciseRowChangeEventHandler" msprop:Generator_RowDeletedName="exerciseRowDeleted" msprop:Generator_UserTableName="exercise" msprop:Generator_RowChangedName="exerciseRowChanged" msprop:Generator_RowEvArgName="exerciseRowChangeEvent" msprop:Generator_RowClassName="exerciseRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="gad_scale" msprop:Generator_TableClassName="gad_scaleDataTable" msprop:Generator_TableVarName="tablegad_scale" msprop:Generator_TablePropName="gad_scale" msprop:Generator_RowDeletingName="gad_scaleRowDeleting" msprop:Generator_RowChangingName="gad_scaleRowChanging" msprop:Generator_RowEvHandlerName="gad_scaleRowChangeEventHandler" msprop:Generator_RowDeletedName="gad_scaleRowDeleted" msprop:Generator_UserTableName="gad_scale" msprop:Generator_RowChangedName="gad_scaleRowChanged" msprop:Generator_RowEvArgName="gad_scaleRowChangeEvent" msprop:Generator_RowClassName="gad_scaleRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ipaq_scale" msprop:Generator_TableClassName="ipaq_scaleDataTable" msprop:Generator_TableVarName="tableipaq_scale" msprop:Generator_TablePropName="ipaq_scale" msprop:Generator_RowDeletingName="ipaq_scaleRowDeleting" msprop:Generator_RowChangingName="ipaq_scaleRowChanging" msprop:Generator_RowEvHandlerName="ipaq_scaleRowChangeEventHandler" msprop:Generator_RowDeletedName="ipaq_scaleRowDeleted" msprop:Generator_UserTableName="ipaq_scale" msprop:Generator_RowChangedName="ipaq_scaleRowChanged" msprop:Generator_RowEvArgName="ipaq_scaleRowChangeEvent" msprop:Generator_RowClassName="ipaq_scaleRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ohq_scale" msprop:Generator_TableClassName="ohq_scaleDataTable" msprop:Generator_TableVarName="tableohq_scale" msprop:Generator_TablePropName="ohq_scale" msprop:Generator_RowDeletingName="ohq_scaleRowDeleting" msprop:Generator_RowChangingName="ohq_scaleRowChanging" msprop:Generator_RowEvHandlerName="ohq_scaleRowChangeEventHandler" msprop:Generator_RowDeletedName="ohq_scaleRowDeleted" msprop:Generator_UserTableName="ohq_scale" msprop:Generator_RowChangedName="ohq_scaleRowChanged" msprop:Generator_RowEvArgName="ohq_scaleRowChangeEvent" msprop:Generator_RowClassName="ohq_scaleRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="patient_info" msprop:Generator_TableClassName="patient_infoDataTable" msprop:Generator_TableVarName="tablepatient_info" msprop:Generator_TablePropName="patient_info" msprop:Generator_RowDeletingName="patient_infoRowDeleting" msprop:Generator_RowChangingName="patient_infoRowChanging" msprop:Generator_RowEvHandlerName="patient_infoRowChangeEventHandler" msprop:Generator_RowDeletedName="patient_infoRowDeleted" msprop:Generator_UserTableName="patient_info" msprop:Generator_RowChangedName="patient_infoRowChanged" msprop:Generator_RowEvArgName="patient_infoRowChangeEvent" msprop:Generator_RowClassName="patient_infoRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="phq_scale" msprop:Generator_TableClassName="phq_scaleDataTable" msprop:Generator_TableVarName="tablephq_scale" msprop:Generator_TablePropName="phq_scale" msprop:Generator_RowDeletingName="phq_scaleRowDeleting" msprop:Generator_RowChangingName="phq_scaleRowChanging" msprop:Generator_RowEvHandlerName="phq_scaleRowChangeEventHandler" msprop:Generator_RowDeletedName="phq_scaleRowDeleted" msprop:Generator_UserTableName="phq_scale" msprop:Generator_RowChangedName="phq_scaleRowChanged" msprop:Generator_RowEvArgName="phq_scaleRowChangeEvent" msprop:Generator_RowClassName="phq_scaleRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
