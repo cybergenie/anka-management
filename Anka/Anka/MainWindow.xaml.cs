@@ -1144,11 +1144,11 @@ namespace Anka
             newPerson.ShowDialog();
             this.lbBasicName.Content = DataAdapter.Name;
             this.lbBasicNumber.Content = DataAdapter.Number.ToString();
-            if(DataAdapter.Male==true)
+            if(DataAdapter.Male.Contains("男"))
             {
                 this.lbBasicMale.Content = "男";
             }
-            else if (DataAdapter.Male == false)
+            else if (DataAdapter.Male.Contains("女"))
             {
                 this.lbBasicMale.Content = "女";
             }
@@ -1157,43 +1157,43 @@ namespace Anka
                 this.lbLoadName.Content = this.lbBasicName.Content;
                 this.lbLoadAge.Content = this.lbBasicAge.Content;
                 this.lbLoadMale.Content = this.lbBasicMale.Content;
-                this.lbLoadNumber.Content = this.lbBasicNumber.Content;
+                this.lbLoadNumber.Content = this.lbBasicNumber.Content+" -";
             }
             {
                 this.lbPHQName.Content = this.lbBasicName.Content;
                 this.lbPHQAge.Content = this.lbBasicAge.Content;
                 this.lbPHQMale.Content = this.lbBasicMale.Content;
-                this.lbPHQNumber.Content = this.lbBasicNumber.Content;
+                this.lbPHQNumber.Content = this.lbBasicNumber.Content + " -";
             }
             {
                 this.lbGADName.Content = this.lbBasicName.Content;
                 this.lbGADAge.Content = this.lbBasicAge.Content;
                 this.lbGADMale.Content = this.lbBasicMale.Content;
-                this.lbGADNumber.Content = this.lbBasicNumber.Content;
+                this.lbGADNumber.Content = this.lbBasicNumber.Content + " -";
             }
             {
                 this.lbIPAQName.Content = this.lbBasicName.Content;
                 this.lbIPAQAge.Content = this.lbBasicAge.Content;
                 this.lbIPAQMale.Content = this.lbBasicMale.Content;
-                this.lbIPAQNumber.Content = this.lbBasicNumber.Content;
+                this.lbIPAQNumber.Content = this.lbBasicNumber.Content + " -";
             }
             {
                 this.lbOHQName.Content = this.lbBasicName.Content;
                 this.lbOHQAge.Content = this.lbBasicAge.Content;
                 this.lbOHQMale.Content = this.lbBasicMale.Content;
-                this.lbOHQNumber.Content = this.lbBasicNumber.Content;
+                this.lbOHQNumber.Content = this.lbBasicNumber.Content + " -";
             }
             {
                 this.lbSPPBName.Content = this.lbBasicName.Content;
                 this.lbSPPBAge.Content = this.lbBasicAge.Content;
                 this.lbSPPBMale.Content = this.lbBasicMale.Content;
-                this.lbSPPBNumber.Content = this.lbBasicNumber.Content;
+                this.lbSPPBNumber.Content = this.lbBasicNumber.Content + " -";
             }
             {
                 this.lbBIName.Content = this.lbBasicName.Content;
                 this.lbBIAge.Content = this.lbBasicAge.Content;
                 this.lbBIMale.Content = this.lbBasicMale.Content;
-                this.lbBINumber.Content = this.lbBasicNumber.Content;
+                this.lbBINumber.Content = this.lbBasicNumber.Content + " -";
             }
 
         }
@@ -1207,27 +1207,27 @@ namespace Anka
             DataAdapter.BasicRisk = DataAdapter.BasicRisk;
             DataAdapter.RiskOther = this.txRisk13.Text;    
             
-            if (DataAdapter.ToInt(this.txPCI.Text,  out int pci) == true)
-                DataAdapter.PCI = pci;
+            if (DataAdapter.IsNumber(this.txPCI.Text) == true)
+                DataAdapter.PCI = Convert.ToInt32(this.txPCI.Text);
             else
                 MessageBox.Show("请输入PCI支架个数。");     
             
-            if (DataAdapter.ToInt(this.txRS.Text, out int residualStenosis) == true)
-                DataAdapter.ResidualStenosis = residualStenosis;
+            if (DataAdapter.IsNumber(this.txRS.Text) == true)
+                DataAdapter.ResidualStenosis = Convert.ToInt32(this.txRS.Text);
             else
                 MessageBox.Show("请输入75%残余狭窄数量。");
 
             if(this.rbDCL.IsChecked==true)
             {
-                DataAdapter.DominantCoronary = 1;
+                DataAdapter.DominantCoronary = "左优势型";
             }
             else if(this.rbDCB.IsChecked==true)
             {
-                DataAdapter.DominantCoronary = 2;
+                DataAdapter.DominantCoronary = "均衡型";
             }
             else if(this.rbDCR.IsChecked==true)
             {
-                DataAdapter.DominantCoronary = 3;
+                DataAdapter.DominantCoronary = "右优势型";
             }
             else
             {
@@ -1441,6 +1441,451 @@ namespace Anka
             {
                 this.cbCC.Content = "侧枝循环：无";
             }
+        }
+
+        private void BtExcerciseSave_Click(object sender, RoutedEventArgs e)
+        {
+            if(txExerciseLoop.Text.Trim(' ')=="")
+            {
+                MessageBox.Show("请输入是第几次运动记录。");                
+
+            }
+
+            DataAdapter.ExerciseNumber = DataAdapter.Number +"-"+ this.txExerciseLoop.Text.Trim();
+
+            DataAdapter.Date = new string[9] { this.dpBedup1.Text.Trim(),
+                this.dpBedup2.Text.Trim(),
+                this.dpBedup3.Text.Trim(),
+                this.dpBedup4.Text.Trim(),
+                this.dpInRoom1.Text.Trim(),
+                this.dpInRoom2.Text.Trim(),
+                this.dpOutRoom1.Text.Trim(),
+                this.dpOutRoom2.Text.Trim(),
+                this.dpOutRoom3.Text.Trim()
+            };
+
+            int[] bpLower = new int[9]; int[] bpUpper = new int[9];
+            string[] txBPUp = new string[9]{this.txBPBedUp1.Text.ToString(),
+                this.txBPBedUp2.Text.ToString(),
+                this.txBPBedUp3.Text.ToString(),
+                this.txBPBedUp4.Text.ToString(),
+                this.txBPInRoom1.Text.ToString(),
+                this.txBPInRoom2.Text.ToString(),
+                this.txBPOutRoom1.Text.ToString(),
+                this.txBPOutRoom2.Text.ToString(),
+                this.txBPOutRoom3.Text.ToString()
+            };
+            for (int i =0;i<9;i++)
+            {
+                DataAdapter.GetBloodPressure(txBPUp[i], bpLower[i], bpUpper[i]);
+            }
+            DataAdapter.BloodPressureLower = bpLower;
+            DataAdapter.BloodPressureUpper = bpUpper;
+
+            int[] HeartRate = new int[9];
+            string[] txBMP = new string[9] {this.txBMPBedUp1.Text.Trim(),
+                this.txBMPBedUp2.Text.Trim(),
+                this.txBMPBedUp3.Text.Trim(),
+                this.txBMPBedUp4.Text.Trim(),
+                this.txBMPInRoom1.Text.Trim(),
+                this.txBMPInRoom2.Text.Trim(),
+                this.txBMPOutRoom1.Text.Trim(),
+                this.txBMPOutRoom2.Text.Trim(),
+                this.txBMPOutRoom3.Text.Trim()
+            };
+            for(int i=0;i<9;i++)
+            {
+                HeartRate[i] = DataAdapter.IsNumber(txBMP[i]) ? Convert.ToInt32(txBMP[i]) : 0;
+            }
+            DataAdapter.HeartRate = HeartRate;
+
+            int[] BloodOxygen = new int[9];
+            string[] txBloodOxygen = new string[9] {this.txBOBedUp1.Text.Trim(),
+                this.txBOBedUp2.Text.Trim(),
+                this.txBOBedUp3.Text.Trim(),
+                this.txBOBedUp4.Text.Trim(),
+                this.txBOInRoom1.Text.Trim(),
+                this.txBOInRoom2.Text.Trim(),
+                this.txBOOutRoom1.Text.Trim(),
+                this.txBOOutRoom2.Text.Trim(),
+                this.txBOOutRoom3.Text.Trim()
+            };
+            for (int i = 0; i < 9; i++)
+            {
+                BloodOxygen[i] = DataAdapter.IsNumber(txBloodOxygen[i]) ? Convert.ToInt32(txBloodOxygen[i]) : 0;
+            }
+            DataAdapter.BloodOxygen = BloodOxygen;
+
+            int[] BorgIndex = new int[9];
+            string[] txBorgIndex = new string[9] {this.txBorgBedUp1.Text.Trim(),
+                this.txBorgBedUp2.Text.Trim(),
+                this.txBorgBedUp3.Text.Trim(),
+                this.txBorgBedUp4.Text.Trim(),
+                this.txBorgInRoom1.Text.Trim(),
+                this.txBorgInRoom2.Text.Trim(),
+                this.txBorgOutRoom1.Text.Trim(),
+                this.txBorgOutRoom2.Text.Trim(),
+                this.txBorgOutRoom3.Text.Trim()
+            };
+            for (int i = 0; i < 9; i++)
+            {
+                BorgIndex[i] = DataAdapter.IsNumber(txBorgIndex[i]) ? Convert.ToInt32(txBorgIndex[i]) : 0;
+            }
+            DataAdapter.BorgIndex = BorgIndex;
+
+            //string[] Remarks = new string[9];
+            string[] Remarks = new string[9] {this.txAddBedUp1.Text.Trim(),
+                this.txAddBedUp2.Text.Trim(),
+                this.txAddBedUp3.Text.Trim(),
+                this.txAddBedUp4.Text.Trim(),
+                this.txAddInRoom1.Text.Trim(),
+                this.txAddInRoom2.Text.Trim(),
+                this.txAddOutRoom1.Text.Trim(),
+                this.txAddOutRoom2.Text.Trim(),
+                this.txAddOutRoom3.Text.Trim()
+            };           
+            DataAdapter.Remarks = Remarks;
+
+            string[] ECGs = new string[9] {this.txECGBedUp1.Text.Trim(),
+                this.txECGBedUp2.Text.Trim(),
+                this.txECGBedUp3.Text.Trim(),
+                this.txECGBedUp4.Text.Trim(),
+                this.txECGInRoom1.Text.Trim(),
+                this.txECGInRoom2.Text.Trim(),
+                this.txECGOutRoom1.Text.Trim(),
+                this.txECGOutRoom2.Text.Trim(),
+                this.txECGOutRoom3.Text.Trim()
+            };
+            DataAdapter.ECGs = ECGs;
+
+            RadioButton[] CheckYes = new RadioButton[9]{this.rbBedUpYes1,
+                this.rbBedUpYes2,
+                this.rbBedUpYes3,
+                this.rbBedUpYes4,
+                this.rbInRoomYes1,
+                this.rbInRoomYes2,
+                this.rbOutRoomYes1,
+                this.rbOutRoomYes2,
+                this.rbOutRoomYes3
+            };
+            RadioButton[] CheckNo = new RadioButton[9]{this.rbBedUpNo1,
+                this.rbBedUpNo2,
+                this.rbBedUpNo3,
+                this.rbBedUpNo4,
+                this.rbInRoomNo1,
+                this.rbInRoomNo2,
+                this.rbOutRoomNo1,
+                this.rbOutRoomNo2,
+                this.rbOutRoomNo3
+            };
+            for(int i=0;i<9;i++)
+            {
+                if (CheckYes[i].IsChecked == true)
+                    DataAdapter.Checks[i] = true;
+                else if (this.rbBedUpNo1.IsChecked == true)
+                    DataAdapter.Checks[i]  = false;
+            }   
+        }
+
+        private void TxBloodPressure_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(((TextBox)sender).Text.Trim(' ')=="/")
+            {
+                ((TextBox)sender).Text = "";
+            }
+        }
+
+        private void TxBloodPressure_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(((TextBox)sender).Text.Trim(' ' )=="")
+            {
+                ((TextBox)sender).Text = "/";
+            }
+        }
+
+        private void BtPHQSave_Click(object sender, RoutedEventArgs e)
+        {
+            DataAdapter.PHQNumber = DataAdapter.Number + "-" + this.txPHQLoop.Text.Trim();
+            DataAdapter.PHQResult = PHQData();
+        }
+
+        private int[] PHQData()
+        {
+            int[] Data = new int[9];
+            RadioButton[,] rbPHQs = new RadioButton[9, 4]
+               {{this.rbPHQ11,this.rbPHQ12,this.rbPHQ13,this.rbPHQ14},
+                {this.rbPHQ21,this.rbPHQ22,this.rbPHQ23,this.rbPHQ24 },
+                {this.rbPHQ31,this.rbPHQ32,this.rbPHQ33,this.rbPHQ34 },
+                {this.rbPHQ41,this.rbPHQ42,this.rbPHQ43,this.rbPHQ44 },
+                {this.rbPHQ51,this.rbPHQ52,this.rbPHQ53,this.rbPHQ54 },
+                {this.rbPHQ61,this.rbPHQ62,this.rbPHQ63,this.rbPHQ64 },
+                {this.rbPHQ71,this.rbPHQ72,this.rbPHQ73,this.rbPHQ74 },
+                {this.rbPHQ81,this.rbPHQ82,this.rbPHQ83,this.rbPHQ84 },
+                {this.rbPHQ91,this.rbPHQ92,this.rbPHQ93,this.rbPHQ94 }
+               };
+            for(int i=0;i<9;i++)
+            {
+                int temp = -1;
+                for (int j=0;j<4;j++)
+                {
+                    if (rbPHQs[i, j].IsChecked == true)
+                        temp = j;
+                }
+                Data[i] = temp;
+            }
+
+            return Data;
+        }
+
+        private int[] GADData()
+        {
+            int[] Data = new int[7];
+            RadioButton[,] rbGADs = new RadioButton[7, 4]
+               {{this.rbGAD11,this.rbGAD12,this.rbGAD13,this.rbGAD14},
+                {this.rbGAD21,this.rbGAD22,this.rbGAD23,this.rbGAD24 },
+                {this.rbGAD31,this.rbGAD32,this.rbGAD33,this.rbGAD34 },
+                {this.rbGAD41,this.rbGAD42,this.rbGAD43,this.rbGAD44 },
+                {this.rbGAD51,this.rbGAD52,this.rbGAD53,this.rbGAD54 },
+                {this.rbGAD61,this.rbGAD62,this.rbGAD63,this.rbGAD64 },
+                {this.rbGAD71,this.rbGAD72,this.rbGAD73,this.rbGAD74 }                
+               };
+            for (int i = 0; i < 7; i++)
+            {
+                int temp = -1;
+                for (int j = 0; j < 4; j++)
+                {
+                    if (rbGADs[i, j].IsChecked == true)
+                        temp = j;
+                }
+                Data[i] = temp;
+            }
+
+            return Data;
+        }
+
+
+        private void RbPHQ_Click(object sender, RoutedEventArgs e)
+        {
+            int result = 0;
+            int[] Data = PHQData();
+            foreach (int temp in Data)
+            {
+                if (temp >= 0)
+                result += temp;
+            }
+
+            if (result >= 0 && result <= 4)
+                this.rbPHQResult1.IsChecked = true;
+            if (result >= 5 && result <= 9)
+                this.rbPHQResult2.IsChecked = true;
+            if (result >= 10 && result <= 13)
+                this.rbPHQResult3.IsChecked = true;
+            if (result >= 14 && result <= 18)
+                this.rbPHQResult4.IsChecked = true;
+            if (result >= 19 )
+                this.rbPHQResult5.IsChecked = true;
+
+            this.lbPHQResult.Content = result.ToString();
+        }
+
+        private void RbGAD_Click(object sender, RoutedEventArgs e)
+        {
+            int result = 0;
+            int[] Data = GADData();
+            foreach (int temp in Data)
+            {
+                if (temp >= 0)
+                    result += temp;
+            }                       
+
+            this.lbGADResult.Content = result.ToString();
+        }
+
+        private void BtGADSave_Click(object sender, RoutedEventArgs e)
+        {
+            DataAdapter.GADNumber = DataAdapter.Number + "-" + this.txGADLoop.Text.Trim();
+            DataAdapter.GADResult = GADData();
+        }
+
+        private void BtIPAQSave_Click(object sender, RoutedEventArgs e)
+        {
+            DataAdapter.IPAQNumber = DataAdapter.Number + "-" + this.txIPAQLoop.Text.Trim();
+
+            if (this.rbIPAQYes.IsChecked == true)
+                DataAdapter.IPAQResult.IPAQ0 = true;
+            if (this.rbIPAQNo.IsChecked == false)
+                DataAdapter.IPAQResult.IPAQ0 = false;
+            DataAdapter.IPAQResult.IPAQ1 = DataAdapter.IsNumber(this.txIPAQ1.Text.Trim()) ? Convert.ToInt32(this.txIPAQ1.Text.Trim()) : 0;
+            DataAdapter.IPAQResult.IPAQ2 = DataAdapter.IsNumber(this.txIPAQ2.Text.Trim()) ? Convert.ToInt32(this.txIPAQ2.Text.Trim()) : 0;
+            DataAdapter.IPAQResult.IPAQ3 = DataAdapter.IsNumber(this.txIPAQ3.Text.Trim()) ? Convert.ToInt32(this.txIPAQ3.Text.Trim()) : 0;
+            DataAdapter.IPAQResult.IPAQ4 = DataAdapter.IsNumber(this.txIPAQ4.Text.Trim()) ? Convert.ToInt32(this.txIPAQ4.Text.Trim()) : 0;
+
+            RadioButton[] rbIPAQ5 = new RadioButton[7] { this.rbIPAQ51, this.rbIPAQ52, this.rbIPAQ53, this.rbIPAQ54, this.rbIPAQ55, this.rbIPAQ56, this.rbIPAQ57 };
+            for(int i=0;i<7;i++)
+            {
+                if (rbIPAQ5[i].IsChecked == true)
+                    DataAdapter.IPAQResult.IPAQ5 = i;
+            }
+
+        }
+
+        private void TxIPAQ4_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.txIPAQ4.Text.Contains('h')|| this.txIPAQ4.Text.Contains('H'))
+                this.txIPAQ4.Text = (Convert.ToInt32(this.txIPAQ4.Text.Trim('h')) * 60).ToString();
+        }
+
+        private void BtOHQSave_Click(object sender, RoutedEventArgs e)
+        {
+            DataAdapter.OHQNumber = DataAdapter.Number + "-" + this.txOHQLoop.Text.Trim();
+            OHQData();
+        }
+
+        private void OHQData()
+        {
+            RadioButton[] rbOHQ1 = new RadioButton[4] { this.rbOHQ11, this.rbOHQ12, this.rbOHQ13, this.rbOHQ14 };
+            RadioButton[] rbOHQ2 = new RadioButton[3] { this.rbOHQ21, this.rbOHQ22, this.rbOHQ23 };
+            RadioButton[] rbOHQ3 = new RadioButton[6] { this.rbOHQ31, this.rbOHQ32, this.rbOHQ33, this.rbOHQ34, this.rbOHQ35, this.rbOHQ36 };
+            RadioButton[] rbOHQ4 = new RadioButton[3] { this.rbOHQ41, this.rbOHQ42, this.rbOHQ43 };
+            RadioButton[] rbOHQ5 = new RadioButton[4] { this.rbOHQ51, this.rbOHQ52, this.rbOHQ53, this.rbOHQ54 };
+            RadioButton[] rbOHQ6 = new RadioButton[3] { this.rbOHQ61, this.rbOHQ62, this.rbOHQ63 };
+            RadioButton[] rbOHQ7 = new RadioButton[3] { this.rbOHQ71, this.rbOHQ72, this.rbOHQ73 };
+            RadioButton[] rbOHQ8 = new RadioButton[3] { this.rbOHQ81, this.rbOHQ82, this.rbOHQ83 };
+            RadioButton[] rbOHQ9 = new RadioButton[2] { this.rbOHQ91, this.rbOHQ92 };
+
+            for(int i=0;i<rbOHQ1.Length;i++)
+            {
+                if (rbOHQ1[i].IsChecked == true)
+                    DataAdapter.OHQResult.OHQ1 = i.ToString();
+            }
+
+            for (int i = 0; i < rbOHQ2.Length; i++)
+            {
+                if (rbOHQ2[i].IsChecked == true)
+                    DataAdapter.OHQResult.OHQ2 = i.ToString();
+            }
+
+            for (int i = 0; i < rbOHQ3.Length; i++)
+            {
+                if (rbOHQ3[i].IsChecked == true)
+                    DataAdapter.OHQResult.OHQ3 = i.ToString();
+            }
+
+            
+            for (int i = 0; i < rbOHQ4.Length; i++)
+            {
+                if (rbOHQ4[i].IsChecked == true)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            DataAdapter.OHQResult.OHQ4 = "A-" + this.txOHQ41.Text.Trim();
+                            break;
+                        case 1:
+                            DataAdapter.OHQResult.OHQ4 = "B-" + this.txOHQ42.Text.Trim();
+                            break;
+                        case 2:
+                            DataAdapter.OHQResult.OHQ4 = "C-0" ;
+                            break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < rbOHQ5.Length; i++)
+            {
+                if (rbOHQ5[i].IsChecked == true)
+                    DataAdapter.OHQResult.OHQ5 = i.ToString();
+            }
+
+            for (int i = 0; i < rbOHQ6.Length; i++)
+            {
+                if (rbOHQ6[i].IsChecked == true)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            DataAdapter.OHQResult.OHQ6 = "0";
+                            break;
+                        case 1:
+                            DataAdapter.OHQResult.OHQ6 = this.txOHQ62.Text.Trim();
+                            break;
+                        case 2:
+                            DataAdapter.OHQResult.OHQ6 = "99";
+                            break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < rbOHQ7.Length; i++)
+            {
+                if (rbOHQ7[i].IsChecked == true)
+                    DataAdapter.OHQResult.OHQ7 = i.ToString();
+            }
+
+            for (int i = 0; i < rbOHQ8.Length; i++)
+            {
+                if (rbOHQ8[i].IsChecked == true)
+                    DataAdapter.OHQResult.OHQ8 = i.ToString();
+            }
+
+            for (int i = 0; i < rbOHQ9.Length; i++)
+            {
+                if (rbOHQ9[i].IsChecked == true)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            DataAdapter.OHQResult.OHQ9 = "A-0-0";
+                            break;
+                        case 1:
+                            DataAdapter.OHQResult.OHQ9 = "B-"+this.txOHQ91.Text.Trim()+"-"+ this.txOHQ92.Text.Trim();
+                            break;                        
+                    }
+                }
+            }
+
+        }
+
+        private void RbOHQ62_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.rbOHQ62.IsChecked == true)
+            {
+                this.txOHQ62.IsEnabled = true;
+            }
+            else
+            {
+                this.txOHQ62.Text = "";
+                this.txOHQ62.IsEnabled = false;
+            }
+        }
+
+        private void RbOHQ4_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.rbOHQ41.IsChecked == true)
+                this.txOHQ41.IsEnabled = true;
+            else
+            {
+                this.txOHQ41.Text = "";
+                this.txOHQ41.IsEnabled = false;
+            }
+
+            if (this.rbOHQ42.IsChecked == true)
+                this.txOHQ42.IsEnabled = true;
+            else
+            {
+                this.txOHQ42.Text = "";
+                this.txOHQ42.IsEnabled = false;
+            }
+        }
+
+        private void BtSPPBSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RbSPPB1_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
