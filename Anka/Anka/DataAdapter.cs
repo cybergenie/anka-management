@@ -18,43 +18,43 @@ namespace Anka
         public static int Age { set; get; }
         public static string Male { set; get; }
 
-        ///
-        public static string Killip { set; get; }
-        public static string EF { set; get; }
-        public static string LV { set; get; }
-        public static string BasicOther { set; get; }
-        public static int BasicRisk { set; get; } = 0b10000000000000;
-        public static string RiskOther { get; set; }
-        public static int PCI { get; set; }
-        public static int ResidualStenosis { get; set; }
-        public static bool CollatCirc { get; set; }
-        public static string DominantCoronary { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// 
+        public struct BasicInfoData
+        {
+            public string Killip;
+            public string EF;
+            public string LV;
+            public string BasicOther;
+            public bool[] BasicRisk;
+            public string RiskOther;
+            public int PCI;
+            public int ResidualStenosis;
+            public bool CollatCirc;
+            public int DominantCoronary;//-1:"左优势型" 0:"均衡型" 1:"右优势型"
+        }
+        public static BasicInfoData BasicInfoResult = new BasicInfoData();
 
         /// <summary>
         /// 运动负荷记录
         /// </summary>
         public static string ExerciseNumber { set; get; }
-        public static string[] Date { get; set; }     
-
-   
-        public static int[] BloodPressureLower { get; set; }
-
-        public static int[] BloodPressureUpper { get; set; }
-
-
-        public static int[] HeartRate { get; set; }       
-
-        
-        public static int[] BloodOxygen { get; set; }
-       
-
-        public static int[] BorgIndex { get; set; }        
-
-        public static string[] Remarks { get; set; }        
-
-        public static string[] ECGs { get; set; }       
-
-        public static bool[] Checks { get; set; }
+        public struct ExerciseData
+        {
+            public bool InRoomUp;//true:5  ;false:10;
+            public  string[] Date;
+            public  int[] BloodPressureLower;
+            public  int[] BloodPressureUpper;
+            public  int[] HeartRate;
+            public  int[] BloodOxygen;
+            public  int[] BorgIndex;
+            public  string[] Remarks;
+            public  string[] ECGs;
+            public  bool[] Checks;
+        }
+        public static ExerciseData ExerciseResult = new ExerciseData();
 
 
         /// <summary>
@@ -105,73 +105,95 @@ namespace Anka
 
         public struct SPPBData
         {
-            public string BalanceTesting1 { get; set; }//A-0-0:是；B-d-d：否 d秒d分秒
-            public string BalanceTesting2 { get; set; }//A-0-0:是；B-d-d：否 d秒d分秒
-            public string BalanceTesting3 { get; set; }//A-0-0:是；B-d-d：否 d秒d分秒
-            public string walkingTesting1 { get; set; }//d-d：d秒d分秒
-            public string walkingTesting2 { get; set; }//d-d：d秒d分秒
-            public string SitUpTesting { get; set; }//A-d-d：d秒d分秒 B-0-d：可完成d次
+            public string BalanceTesting1;//A-0-0:是；B-d-d：否 d秒d分秒
+            public string BalanceTesting2;//A-0-0:是；B-d-d：否 d秒d分秒
+            public string BalanceTesting3;//A-0-0:是；B-d-d：否 d秒d分秒
+            public string walkingTesting1;//A-d-d：有使用辅助工具d秒d分秒;B-d-d:无辅助工具d秒d分秒
+            public string walkingTesting2;//A-d-d：有使用辅助工具d秒d分秒;B-d-d:无辅助工具d秒d分秒
+            public string SitUpTesting;//A-d-d：d秒d分秒 B-0-d：可完成d次
         }
         public static SPPBData SPPBResult = new SPPBData();
 
         public struct BalanceCapability
         {
-            public string TUG { get; set; }
-            public string FRTLeft1 { get; set; }
-            public string FRTLeft2 { get; set; }
-            public string FRTRight1 { get; set; }
-            public string FRTRight2 { get; set; }
-            public string SFO1 { get; set; }
-            public string SFO2 { get; set; }
-            public string OneFootLeft1 { set; get; }
-            public string OneFootLeft2 { set; get; }
-            public string OneFootRight1 { set; get; }
-            public string OneFootRight2 { set; get; }
+            public string TUG;
+            public string FRTLeft1;
+            public string FRTLeft2;
+            public string FRTRight1;
+            public string FRTRight2;
+            public string SFO1;//座位双脚开闭1
+            public string SFO2;//座位双脚开闭2
+            public string OneFootLeft1;
+            public string OneFootLeft2;
+            public string OneFootRight1;
+            public string OneFootRight2;
         }
         public static BalanceCapability BalanceCapabilityResult = new BalanceCapability();
 
         public struct Size
         {
-            public double Hight { get; set; }
-            public double Weight { get; set; }
-            public double Waistline { get; set; }
-            public double Hipline { get; set; }
-            public double ArmlineLeft { get; set; }
-            public double ArmlineRight { get; set; }
-            public double LeglineLeft { get; set; }
-            public double LeglineRight { get; set; }
+            public double Hight;
+            public double Weight;
+            public double Waistline;
+            public double Hipline;
+            public double ArmlineLeft;
+            public double ArmlineRight;
+            public double LeglineLeft;
+            public double LeglineRight;
 
         }
+        public static Size SizeResult = new Size();
 
         public struct Vitals
         {
-            public int BloodPressureUpper { get; set; }
-            public int BloodPressureLower { get; set; }
-            public int HeartRate { get; set; }
-            public double temperature { get; set; }
-            public int breathe { get; set; }
+            public int BloodPressureUpper;
+            public int BloodPressureLower;
+            public int HeartRate;
+            public double Temperature;
+            public int Breathe;
 
         }
+        public static Vitals VitalsResult = new Vitals();
 
         public struct GripStrength
         {
-            public bool LeftHandHurt { get; set; }
-            public bool RightHandHurt { get; set; }
-            public double GripStrengthLeft1 { get; set; }
-            public double GripStrengthRight1 { get; set; }
-            public double GripStrengthLeft2 { get; set; }
-            public double GripStrengthRight2 { get; set; }
+            public bool LeftHandHurt;
+            public bool RightHandHurt;
+            public double GripStrengthLeft1;
+            public double GripStrengthRight1;
+            public double GripStrengthLeft2;
+            public double GripStrengthRight2;
         }
+        public static GripStrength GripStrengthResult = new GripStrength();
 
         public struct LapStrength
         {
-            public bool LeftLapHurt { get; set; }
-            public bool RightLapHurt { get; set; }
-            public double LapStrengthLeft1 { get; set; }
-            public double LapStrengthRight1 { get; set; }
-            public double LapStrengthLeft2 { get; set; }
-            public double LapStrengthRight2 { get; set; }
+            public bool LeftLapHurt;
+            public bool RightLapHurt;
+            public double LapStrengthLeft1;
+            public double LapStrengthRight1;
+            public double LapStrengthLeft2;
+            public double LapStrengthRight2;
         }
+        public static LapStrength LapStrengthResult = new LapStrength();
+
+        public static string PhysiqueNumber { set; get; }
+        public struct Physique
+        {
+            public double FM;
+            public double TBW;
+            public double BCW;
+            public double SMMAll;
+            public double SMMArmLeft;
+            public double SMMArmRight;
+            public double SMMBody;
+            public double SMMLegLeft;
+            public double SMMLegRight;
+            public double VAT;
+            public double PA;
+            public double PAPercent;
+        }
+        public static Physique PhysiqueResult = new Physique();
 
         public static bool IsNumber(string str)
         {

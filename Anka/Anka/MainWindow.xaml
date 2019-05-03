@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anka"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000">
+        Title="MainWindow" Height="1107" Width="1000">
     <DockPanel>
         <Menu Height="25" DockPanel.Dock="Top" Margin="0" VerticalAlignment="Top">
             <MenuItem Header="文件">
@@ -77,31 +77,31 @@
 
                             <StackPanel Margin="5,12,5,5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                                    <CheckBox x:Name="cbRisk1" Content="高血压" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CbRisk1_Click" />
-                                    <CheckBox x:Name="cbRisk2" Content="糖尿病" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CbRisk2_Click" />
-                                    <CheckBox x:Name="cbRisk3" Content="脑卒中" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CbRisk3_Click" />
+                                    <CheckBox x:Name="cbRisk1" Content="高血压" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                    <CheckBox x:Name="cbRisk2" Content="糖尿病" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                    <CheckBox x:Name="cbRisk3" Content="脑卒中" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                                 </StackPanel>
                                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" >
-                                    <CheckBox x:Name="cbRisk4" Content="吸  烟" Height="25" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="CbRisk4_Click" />
-                                    <CheckBox x:Name="cbRisk5" Content="高LDL-C" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="120" Height="25" Click="CbRisk5_Click" />
-                                    <CheckBox x:Name="cbRisk6" Content="高  TG" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" Click="CbRisk6_Click" />
+                                    <CheckBox x:Name="cbRisk4" Content="吸  烟" Height="25" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                                    <CheckBox x:Name="cbRisk5" Content="高LDL-C" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="120" Height="25" />
+                                    <CheckBox x:Name="cbRisk6" Content="高  TG" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" />
                                 </StackPanel>
                                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" >
-                                    <CheckBox x:Name="cbRisk7" Content="肥  胖" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CbRisk7_Click" />
-                                    <CheckBox x:Name="cbRisk8" Content="痛  风" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CbRisk8_Click" />
-                                    <CheckBox x:Name="cbRisk9" Content="运动不足" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" Click="CbRisk9_Click" />
+                                    <CheckBox x:Name="cbRisk7" Content="肥  胖" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                    <CheckBox x:Name="cbRisk8" Content="痛  风" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                                    <CheckBox x:Name="cbRisk9" Content="运动不足" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
-                                    <CheckBox x:Name="cbRisk10" Content="周围动脉硬化闭塞" Height="25" VerticalContentAlignment="Center" Click="CbRisk10_Click" />
+                                    <CheckBox x:Name="cbRisk10" Content="周围动脉硬化闭塞" Height="25" VerticalContentAlignment="Center" />
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" >
-                                    <CheckBox x:Name="cbRisk11" Content="肾功能不全 CRE" VerticalContentAlignment="Center" Height="25" Click="CbRisk11_Click" />
+                                    <CheckBox x:Name="cbRisk11" Content="肾功能不全 CRE" VerticalContentAlignment="Center" Height="25" />
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" >
-                                    <CheckBox x:Name="cbRisk12" Content="肝功能异常 ALT" Height="25" VerticalContentAlignment="Center" Click="CbRisk12_Click" />
+                                    <CheckBox x:Name="cbRisk12" Content="肝功能异常 ALT" Height="25" VerticalContentAlignment="Center" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
-                                    <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" Click="CbRisk13_Click" />
+                                    <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" />
                                     <TextBox x:Name="txRisk13" Width="135" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
                                 </StackPanel>
 
@@ -1848,7 +1848,7 @@
                                     <Image Source="recourse/SPPB_1.bmp" Height="25" />
                                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
                                     <RadioButton x:Name="rbSPPBYes1" Content="是" GroupName="SPPB11" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="RbSPPB1_Click" />
-                                    <RadioButton x:Name="rbSPPBNo1"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB11" >
+                                    <RadioButton x:Name="rbSPPBNo1"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB11" Click="RbSPPB1_Click" >
                                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="否：" />
                                             <TextBox x:Name="txSPPB11" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
@@ -1862,8 +1862,8 @@
                                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                                     <Image Height="25" Source="recourse/SPPB_2.bmp" />
                                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                    <RadioButton x:Name="rbSPPBYes2" Content="是" GroupName="SPPB12" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                                    <RadioButton x:Name="rbSPPBNo2"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB12" >
+                                    <RadioButton x:Name="rbSPPBYes2" Content="是" GroupName="SPPB12" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="RbSPPB2_Click" />
+                                    <RadioButton x:Name="rbSPPBNo2"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB12" Click="RbSPPB2_Click" >
                                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="否：" />
                                             <TextBox x:Name="txSPPB21" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
@@ -1877,8 +1877,8 @@
                                     <Label Content="③" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                                     <Image Source="recourse/SPPB_3.bmp" Height="25" />
                                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                    <RadioButton x:Name="rbSPPBYes3" Content="是" GroupName="SPPB13" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                                    <RadioButton x:Name="rbSPPBNo3"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB13" >
+                                    <RadioButton x:Name="rbSPPBYes3" Content="是" GroupName="SPPB13" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="RbSPPB3_Click" />
+                                    <RadioButton x:Name="rbSPPBNo3"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB13" Click="RbSPPB3_Click" >
                                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="否：" />
                                             <TextBox x:Name="txSPPB31" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
@@ -1913,7 +1913,7 @@
                             </StackPanel>
                             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1" >
                                 <Label Content="(3) 坐立起测试（5次）" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                <RadioButton x:Name="rbSPPBYes5"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" HorizontalAlignment="Left" GroupName="SPPB31" >
+                                <RadioButton x:Name="rbSPPBYes5"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" HorizontalAlignment="Left" GroupName="SPPB31" Click="RbSPPB5_Click" >
                                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="时间" />
                                         <TextBox x:Name="txSPPB61" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
@@ -1923,7 +1923,7 @@
                                     </StackPanel>
                                 </RadioButton>
 
-                                <RadioButton x:Name="rbSPPBNo5"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB31" >
+                                <RadioButton x:Name="rbSPPBNo5"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB31" Click="RbSPPB5_Click" >
                                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="不能完成5次，可完成" />
                                         <TextBox x:Name="txSPPB7" Width="25" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
@@ -1977,7 +1977,7 @@
 
                             </StackPanel>
                             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Grid.Row="3" >
-                                <Label Content="(3) 座位双脚开闭）" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                                <Label Content="(3) 座位双脚开闭" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                                     <TextBox x:Name="txBalance41" Width="25" Height="25" VerticalContentAlignment="Center" />
@@ -2018,35 +2018,45 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Margin="15,0" Width="120">
                                         <Label Content="身高：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txSize1" Width="45" Height="25" VerticalContentAlignment="Center" LostFocus="OnBMIHeightChanged" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="体重：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txSize2" Width="45" Height="25" VerticalContentAlignment="Center" LostFocus="OnBMIWeightChanged" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="腰围：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txSize3" Width="45" Height="25" VerticalContentAlignment="Center" LostFocus="OnWCTextChanged" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="臀围：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txSize4" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     </StackPanel>
                                 </WrapPanel>
 
-                                <WrapPanel Orientation="Horizontal">
-                                    <StackPanel Orientation="Horizontal" Margin="15,0" Width="270">
+                                <WrapPanel Orientation="Horizontal" Margin="0,5">
+                                    <StackPanel Orientation="Horizontal" Margin="15,0" Width="180">
                                         <Label Content="上臂围度（左）：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="50" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txSize5" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
+                                    <StackPanel Orientation="Horizontal" Width="180" Margin="15,0">
                                         <Label Content="上臂围度（右）：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="50" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txSize6" Width="45" Height="25" VerticalContentAlignment="Center" />
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="15,0" Width="180">
+                                        <Label Content="大腿围度（左）：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
+                                        <TextBox x:Name="txSize7" Width="45" Height="25" VerticalContentAlignment="Center" />
+                                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Width="180" Margin="15,0">
+                                        <Label Content="大腿围度（右）：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
+                                        <TextBox x:Name="txSize8" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     </StackPanel>
                                 </WrapPanel>
@@ -2061,24 +2071,24 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Margin="15,0" Width="180">
                                         <Label Content="血压：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals1" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="/" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals2" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="mmHg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="心率：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals3" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="bmp" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="体温：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals4" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="℃" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="呼吸：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals5" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次" />
                                     </StackPanel>
                                 </WrapPanel>
@@ -2093,32 +2103,32 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="左手：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txGripStrength1" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                        <TextBox Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txGripStrength2" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="左手外伤等情况：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <RadioButton Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB51" />
-                                        <RadioButton Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB51" />
+                                        <RadioButton x:Name="rbGripStrengthYes1" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB51" />
+                                        <RadioButton x:Name="rbGripStrengthNo1" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB51" />
                                     </StackPanel>
                                 </WrapPanel>
 
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="右手：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txGripStrength3" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                        <TextBox Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txGripStrength4" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="右手外伤等情况：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <RadioButton Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB52" />
-                                        <RadioButton Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB52" />
+                                        <RadioButton x:Name="rbGripStrengthYes2" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB52" />
+                                        <RadioButton x:Name="rbGripStrengthNo2" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB52" />
                                     </StackPanel>
                                 </WrapPanel>
                             </StackPanel>
@@ -2132,32 +2142,32 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="左：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txLapStrength1" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                        <TextBox Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txLapStrength2" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="（左）外伤等情况：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <RadioButton Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB61" />
-                                        <RadioButton Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB61" />
+                                        <RadioButton x:Name="rbLapStrengthYes1" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB61" />
+                                        <RadioButton x:Name="rbLapStrengthNo1" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB61" />
                                     </StackPanel>
                                 </WrapPanel>
 
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="右：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txLapStrength3" Width="25" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                        <TextBox Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txLapStrength4" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="（右）外伤等情况：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <RadioButton Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB62" />
-                                        <RadioButton Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB62" />
+                                        <RadioButton x:Name="rbLapStrengthYes2" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB62" />
+                                        <RadioButton x:Name="rbLapStrengthNo2" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB62" />
                                     </StackPanel>
                                 </WrapPanel>
                             </StackPanel>
@@ -2180,8 +2190,8 @@
                             <Label x:Name="lbBIAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbBINumber" Content="" Height="25" Width="80" />
-                            <TextBox Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
-                            <Button Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" />
+                            <TextBox x:Name="txPhysiqueLoop" Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <Button x:Name="btPhysiqueSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtPhysiqueSave_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
                             <Grid.RowDefinitions>
@@ -2200,15 +2210,20 @@
                                         <local:Indicator x:Key="bmiIndicator"/>
                                     </StackPanel.Resources>
                                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="180">
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="120">
                                             <Label Content="体重:"/>
-                                            <TextBox x:Name="bmiWeight" Width="60" Height="25" VerticalContentAlignment="Center" Text="{Binding InputValue1, Mode=OneWayToSource, Source={StaticResource bmiIndicator}}" LostFocus="OnBMITextChanged"  />
+                                            <TextBox x:Name="bmiWeight" Width="60" Height="25" VerticalContentAlignment="Center" Text="{Binding InputValue1, Mode=OneWayToSource, Source={StaticResource bmiIndicator}}" LostFocus="OnBMIWeightChanged"  />
                                             <Label Content="kg"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="180">
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="120">
                                             <Label Content="身高:"/>
                                             <TextBox x:Name="bmiHeight" Width="60" Height="25" VerticalContentAlignment="Center" Text="{Binding InputValue2, Mode=OneWayToSource, Source={StaticResource bmiIndicator}}" LostFocus="OnBMIHeightChanged" />
                                             <Label Content="m"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="135">
+                                            <Label Content="BMI:"/>
+                                            <TextBox x:Name="bmiBMI" Width="60" Height="25" VerticalContentAlignment="Center" IsReadOnly="True" />
+                                            <Label Content="kg/m²"/>
                                         </StackPanel>
                                     </WrapPanel>
                                     <WrapPanel>
@@ -2220,8 +2235,8 @@
                                             <Path x:Name="bmiPath1" Stroke="DarkGray">
                                                 <Path.Data>
                                                     <PathGeometry>
-                                                        <PathFigure  StartPoint="25,40" IsClosed="True">
-                                                            <ArcSegment Point="25,65" Size="15,15"/>
+                                                        <PathFigure  StartPoint="15,40" IsClosed="True">
+                                                            <ArcSegment Point="15,65" Size="7.5,7.5"/>
                                                             <LineSegment Point="75,65"/>
                                                             <LineSegment Point="75,40"/>
                                                         </PathFigure>
@@ -2257,7 +2272,7 @@
                                                     <PathGeometry>
                                                         <PathFigure StartPoint="215,65"  >
                                                             <LineSegment Point="325,65"/>
-                                                            <ArcSegment Point="325,40" Size="15,15" RotationAngle="180"/>
+                                                            <ArcSegment Point="325,40" Size="7.5,7.5" RotationAngle="180"/>
                                                             <LineSegment Point="215,40"/>
 
                                                         </PathFigure>
@@ -2279,7 +2294,7 @@
                                             <Label  Canvas.Top="65"  FontWeight="Bold" Content="18.5" Canvas.Left="60"/>
                                             <Label Canvas.Top="65"  Width="35" FontWeight="Bold" Content="25.0" Canvas.Left="135"/>
                                             <Label Canvas.Top="65"  Width="35" FontWeight="Bold" Canvas.Left="195" Content="30.0"/>
-                                            <Label Canvas.Top="40"  Height="25" Content="低体重" Canvas.Left="25"/>
+                                            <Label Canvas.Top="40"  Height="25" Content="低体重" Canvas.Left="15"/>
                                             <Label  Canvas.Top="40"  Height="25" Content="正常体重" Canvas.Left="85"/>
                                             <Label  Canvas.Top="40" Height="25" Content="超重" Canvas.Left="170"/>
                                             <Label  Canvas.Top="40"  Height="25" Canvas.Left="235" Content="Ⅰ级肥胖"/>
@@ -2316,8 +2331,8 @@
                                             <Path x:Name="fmiPath1" Stroke="DarkGray">
                                                 <Path.Data>
                                                     <PathGeometry>
-                                                        <PathFigure  StartPoint="25,40" IsClosed="True">
-                                                            <ArcSegment Point="25,65" Size="15,15"/>
+                                                        <PathFigure  StartPoint="15,40" IsClosed="True">
+                                                            <ArcSegment Point="15,65" Size="7.5,7.5"/>
                                                             <LineSegment Point="75,65"/>
                                                             <LineSegment Point="75,40"/>
                                                         </PathFigure>
@@ -2353,7 +2368,7 @@
                                                     <PathGeometry>
                                                         <PathFigure StartPoint="215,65"  >
                                                             <LineSegment Point="325,65"/>
-                                                            <ArcSegment Point="325,40" Size="15,15" RotationAngle="180"/>
+                                                            <ArcSegment Point="325,40" Size="7.5,7.5" RotationAngle="180"/>
                                                             <LineSegment Point="215,40"/>
 
                                                         </PathFigure>
@@ -2430,8 +2445,8 @@
                                             <Path x:Name="tbwPath1" Stroke="DarkGray">
                                                 <Path.Data>
                                                     <PathGeometry>
-                                                        <PathFigure  StartPoint="25,40" IsClosed="True">
-                                                            <ArcSegment Point="25,55" Size="7.5,7.5"/>
+                                                        <PathFigure  StartPoint="15,40" IsClosed="True">
+                                                            <ArcSegment Point="15,55" Size="7.5,7.5"/>
                                                             <LineSegment Point="75,55"/>
                                                             <LineSegment Point="75,40"/>
                                                         </PathFigure>
@@ -2502,8 +2517,8 @@
                                             <Path x:Name="bcwPath1" Stroke="DarkGray">
                                                 <Path.Data>
                                                     <PathGeometry>
-                                                        <PathFigure  StartPoint="25,40" IsClosed="True">
-                                                            <ArcSegment Point="25,55" Size="7.5,7.5"/>
+                                                        <PathFigure  StartPoint="15,40" IsClosed="True">
+                                                            <ArcSegment Point="15,55" Size="7.5,7.5"/>
                                                             <LineSegment Point="75,55"/>
                                                             <LineSegment Point="75,40"/>
                                                         </PathFigure>
@@ -2575,15 +2590,15 @@
                                             <Path x:Name="ebwPath1" Stroke="DarkGray">
                                                 <Path.Data>
                                                     <PathGeometry>
-                                                        <PathFigure  StartPoint="25,40" IsClosed="True">
-                                                            <ArcSegment Point="25,55" Size="15,15"/>
+                                                        <PathFigure  StartPoint="15,40" IsClosed="True">
+                                                            <ArcSegment Point="15,55" Size="7.5,7.5"/>
                                                             <LineSegment Point="75,55"/>
                                                             <LineSegment Point="75,40"/>
                                                         </PathFigure>
                                                     </PathGeometry>
                                                 </Path.Data>
                                             </Path>
-                                            <Path x:Name="ebwPath2"  Stroke="DarkGray">
+                                            <Path x:Name="ebwPath2"  Stroke="DarkGray" Fill="LightGreen">
                                                 <Path.Data>
                                                     <PathGeometry>
                                                         <PathFigure  IsClosed="True" StartPoint="76,40" >
@@ -2594,7 +2609,7 @@
                                                     </PathGeometry>
                                                 </Path.Data>
                                             </Path>
-                                            <Path x:Name="ebwPath3" Stroke="DarkGray">
+                                            <Path x:Name="ebwPath3" Stroke="DarkGray" Fill="LightGreen">
                                                 <Path.Data>
                                                     <PathGeometry>
                                                         <PathFigure StartPoint="175,40"  >
@@ -2611,7 +2626,7 @@
                                                     <PathGeometry>
                                                         <PathFigure StartPoint="275,55"  >
                                                             <LineSegment Point="325,55"/>
-                                                            <ArcSegment Point="325,40" Size="15,15" RotationAngle="180"/>
+                                                            <ArcSegment Point="325,40" Size="7.5,7.5" RotationAngle="180"/>
                                                             <LineSegment Point="275,40"/>
 
                                                         </PathFigure>
@@ -3138,8 +3153,8 @@
                                             <Path x:Name="vatPath1" Stroke="DarkGray">
                                                 <Path.Data>
                                                     <PathGeometry>
-                                                        <PathFigure  StartPoint="25,40" IsClosed="True">
-                                                            <ArcSegment Point="25,55" Size="7.5,7.5"/>
+                                                        <PathFigure  StartPoint="15,40" IsClosed="True">
+                                                            <ArcSegment Point="15,55" Size="7.5,7.5"/>
                                                             <LineSegment Point="125,55"/>
                                                             <LineSegment Point="125,40"/>
                                                         </PathFigure>
@@ -3199,8 +3214,8 @@
                                             <Path x:Name="wcPath1" Stroke="DarkGray">
                                                 <Path.Data>
                                                     <PathGeometry>
-                                                        <PathFigure  StartPoint="25,40" IsClosed="True">
-                                                            <ArcSegment Point="25,55" Size="7.5,7.5"/>
+                                                        <PathFigure  StartPoint="15,40" IsClosed="True">
+                                                            <ArcSegment Point="15,55" Size="7.5,7.5"/>
                                                             <LineSegment Point="175,55"/>
                                                             <LineSegment Point="175,40"/>
                                                         </PathFigure>
@@ -3250,13 +3265,13 @@
                                     </StackPanel.Resources>
                                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
                                         <StackPanel Margin="0,0,15,0" Width="120">
-                                            <Label Content="相角:"/>
-                                            <TextBox x:Name="txPA" Width="45" Height="25" VerticalContentAlignment="Center" Text="{Binding InputValue1, Mode=OneWayToSource, Source={StaticResource VWCIndicator}}" LostFocus="OnVATTextChanged"  />
+                                            <Label Content="相角(φ):"/>
+                                            <TextBox x:Name="txPA" Width="45" Height="25" VerticalContentAlignment="Center" Text="{Binding InputValue1, Mode=OneWayToSource, Source={StaticResource VWCIndicator}}" LostFocus="OnPATextChanged"  />
                                         </StackPanel>
                                         <StackPanel Margin="0,0,15,0" Width="120">
 
-                                            <Label Content="腰围 单位(WC):"/>
-                                            <TextBox x:Name="txCT" Width="45" Height="25" VerticalContentAlignment="Center" LostFocus="OnWCTextChanged" />
+                                            <Label Content="百分位:"/>
+                                            <TextBox x:Name="txPAPercent" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         </StackPanel>
                                     </WrapPanel>
                                     <WrapPanel Margin="0,15,0,0">
@@ -3298,6 +3313,17 @@
                                                 </Path.Data>
                                             </Path>
 
+                                            <Path Fill="Black" Stroke="DarkGray">
+                                                <Path.Data>
+                                                    <PathGeometry>
+                                                        <PathFigure x:Name="PAPoint" IsClosed="True" >
+                                                            <ArcSegment x:Name="PAMid" Size="2.5,2.5"  />
+                                                            <ArcSegment x:Name="PAEnd"  Size="2.5,2.5" />
+                                                        </PathFigure>
+                                                    </PathGeometry>
+                                                </Path.Data>
+                                            </Path>
+
                                             <Path Stroke="DarkGray">
                                                 <Path.Data>
                                                     <PathGeometry>
@@ -3311,15 +3337,8 @@
                                                 </Path.Data>
                                             </Path>
 
-                                            <Path Fill="LightGray" Stroke="DarkGray">
-                                                <Path.Data>
-                                                    <PathGeometry>
-                                                        <PathFigure x:Name="Marker" IsClosed="True" StartPoint="{Binding IndicatorValue, Source={StaticResource VWCIndicator}}">
-
-                                                        </PathFigure>
-                                                    </PathGeometry>
-                                                </Path.Data>
-                                            </Path>
+                                            
+                                            
 
                                             <Grid Width="50" Height="160">
                                                 <Grid.ColumnDefinitions>

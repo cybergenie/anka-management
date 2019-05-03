@@ -80,7 +80,7 @@ namespace Anka
         
         private void InitBMI()
         {
-            BMIIndicator = new Indicator();
+            BMIIndicator = new Indicator();            
             BMIIndicatorBinding();
         }
 
@@ -93,25 +93,20 @@ namespace Anka
             double Endvalue = 40.0;
 
             double PositionStar = 0;
-            BMIIndicator.IndicatorValue = 0;
-            BMIIndicator.InputValue1 = 0;
-            BMIIndicator.InputValue2 = 0;
+            BMIIndicator.IndicatorValue = 0;           
 
-            BMIIndicator.InputValue2 = BMIIndicator.ToDouble(this.bmiHeight.Text.ToString());
-            BMIIndicator.InputValue1 = BMIIndicator.ToDouble(this.bmiWeight.Text.ToString());
-
-            if (BMIIndicator.InputValue2 > 0 && BMIIndicator.InputValue1 > 0)
+            if (DataAdapter.SizeResult.Hight > 0 && DataAdapter.SizeResult.Hight > 0)
             {
-                BMIIndicator.IndicatorValue = BMIIndicator.InputValue1 / (BMIIndicator.InputValue2 * BMIIndicator.InputValue2);               
+                BMIIndicator.IndicatorValue = DataAdapter.SizeResult.Weight / (DataAdapter.SizeResult.Hight * DataAdapter.SizeResult.Hight);               
             }
 
             if (BMIIndicator.IndicatorValue < Headvalue)
             {
-                PositionStar = 15;
+                PositionStar = 10;
             }
             else if (BMIIndicator.IndicatorValue < Lower)
             {
-                PositionStar = (BMIIndicator.IndicatorValue / Lower) * 75;
+                PositionStar = (BMIIndicator.IndicatorValue / Lower) * 75 + 10;
             }
             else if (BMIIndicator.IndicatorValue >= Lower && BMIIndicator.IndicatorValue < Normal)
             {
@@ -189,32 +184,27 @@ namespace Anka
             double Upper = 8.8;
             double Endvalue = 20.0;
 
-            double PositionStar = 15;
-            FMIIndicator.InputValue1 = 0;
-            FMIIndicator.InputValue2 = 0;
-            FMIIndicator.IndicatorValue = 0;
+            double PositionStar = 10;           
+            FMIIndicator.IndicatorValue = 0;            
 
-            FMIIndicator.InputValue1 = FMIIndicator.ToDouble(this.txFM.Text.ToString());
-            FMIIndicator.InputValue2 = BMIIndicator.InputValue2;
-
-            if (FMIIndicator.InputValue2 > 0 && FMIIndicator.InputValue1 > 0)
+            if (DataAdapter.PhysiqueResult.FM > 0 && DataAdapter.SizeResult.Hight > 0)
             {
-                FMIIndicator.IndicatorValue = FMIIndicator.InputValue1 / (FMIIndicator.InputValue2 * FMIIndicator.InputValue2);               
+                FMIIndicator.IndicatorValue = DataAdapter.PhysiqueResult.FM / (DataAdapter.SizeResult.Hight * DataAdapter.SizeResult.Hight);               
             }
-           
+
             if (FMIIndicator.IndicatorValue < Headvalue)
             {
-                PositionStar = 15;
+                PositionStar = 10;
             }
-            else if (FMIIndicator.IndicatorValue< Lower)
+            else if (FMIIndicator.IndicatorValue >= Headvalue && FMIIndicator.IndicatorValue < Lower)
             {
-                PositionStar = (FMIIndicator.IndicatorValue / Lower) * 75;
+                PositionStar = (FMIIndicator.IndicatorValue / Lower) * 75 + 10;
             }
-            else if(FMIIndicator.IndicatorValue >= Lower&&FMIIndicator.IndicatorValue<Normal)
+            else if (FMIIndicator.IndicatorValue >= Lower && FMIIndicator.IndicatorValue < Normal)
             {
                 PositionStar = 75 + ((FMIIndicator.IndicatorValue - Lower) / (Normal - Lower)) * (155 - 75);
             }
-            else if(FMIIndicator.IndicatorValue >= Normal && FMIIndicator.IndicatorValue < Upper)
+            else if (FMIIndicator.IndicatorValue >= Normal && FMIIndicator.IndicatorValue < Upper)
             {
                 PositionStar = 155 + ((FMIIndicator.IndicatorValue - Normal) / (Upper - Normal)) * (215 - 155);
             }
@@ -287,26 +277,16 @@ namespace Anka
             double Upper = 40.2;
             double Endvalue = 60.0;
 
-            double PositionStar = 0;
-            TBWIndicator.InputValue1 = 0;
-            TBWIndicator.InputValue2 = 0;
-            TBWIndicator.IndicatorValue = 0;
-
-            TBWIndicator.InputValue1 = TBWIndicator.ToDouble(this.txTBW.Text.ToString());
-            TBWIndicator.InputValue2 = BMIIndicator.InputValue1;
-
-            if (TBWIndicator.InputValue2 > 0 && TBWIndicator.InputValue1 > 0)
-            {
-                TBWIndicator.IndicatorValue = TBWIndicator.InputValue1;
-            }
-
+            double PositionStar = 0;            
+            DataAdapter.PhysiqueResult.TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
+            TBWIndicator.IndicatorValue = DataAdapter.PhysiqueResult.TBW;
             if (TBWIndicator.IndicatorValue < Headvalue)
             {
-                PositionStar = 15;
+                PositionStar = 10;
             }
             else if (TBWIndicator.IndicatorValue < Lower)
             {
-                PositionStar = (TBWIndicator.IndicatorValue / Lower) * 75;
+                PositionStar = (TBWIndicator.IndicatorValue / Lower) * 75 + 10;
             }
             else if (TBWIndicator.IndicatorValue >= Lower && TBWIndicator.IndicatorValue < Normal)
             {
@@ -355,25 +335,17 @@ namespace Anka
             double Endvalue = 25.0;
 
             double PositionStar = 0;
-            BCWIndicator.InputValue1 = 0;
-            BCWIndicator.InputValue2 = 0;
             BCWIndicator.IndicatorValue = 0;
 
-            BCWIndicator.InputValue1 = BCWIndicator.ToDouble(this.txBCW.Text.ToString());
-            BCWIndicator.InputValue2 = BMIIndicator.InputValue1;
-
-            if (BCWIndicator.InputValue2 > 0 && BCWIndicator.InputValue1 > 0)
-            {
-                BCWIndicator.IndicatorValue = BCWIndicator.InputValue1;
-            }
-
+            DataAdapter.PhysiqueResult.BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
+            BCWIndicator.IndicatorValue = DataAdapter.PhysiqueResult.BCW;
             if (BCWIndicator.IndicatorValue < Headvalue)
             {
-                PositionStar = 15;
+                PositionStar = 10;
             }
             else if (BCWIndicator.IndicatorValue < Lower)
             {
-                PositionStar = (BCWIndicator.IndicatorValue / Lower) * 75;
+                PositionStar = (BCWIndicator.IndicatorValue / Lower) * 75 + 10;
             }
             else if (BCWIndicator.IndicatorValue >= Lower && BCWIndicator.IndicatorValue < Normal)
             {
@@ -423,25 +395,21 @@ namespace Anka
             double Endvalue = 60.0;
 
             double PositionStar = 0;
-            EBWIndicator.InputValue1 = 0;
-            EBWIndicator.InputValue2 = 0;
+           
             EBWIndicator.IndicatorValue = 0;
 
-            EBWIndicator.InputValue1 = TBWIndicator.InputValue1;
-            EBWIndicator.InputValue2 = BCWIndicator.InputValue1;
-
-            if (EBWIndicator.InputValue2 > 0 && EBWIndicator.InputValue1 > 0)
+            if (DataAdapter.PhysiqueResult.BCW > 0 && DataAdapter.PhysiqueResult.TBW > 0)
             {
-                EBWIndicator.IndicatorValue = (EBWIndicator.InputValue2/ EBWIndicator.InputValue1)*100;
+                EBWIndicator.IndicatorValue = (DataAdapter.PhysiqueResult.BCW / DataAdapter.PhysiqueResult.TBW) * 100;
             }
 
             if (EBWIndicator.IndicatorValue < Headvalue)
             {
-                PositionStar = 15;
+                PositionStar = 10;
             }
             else if (EBWIndicator.IndicatorValue < Lower)
             {
-                PositionStar = (EBWIndicator.IndicatorValue / Lower) * 75;
+                PositionStar = (EBWIndicator.IndicatorValue / Lower) * 75 + 10;
             }
             else if (EBWIndicator.IndicatorValue >= Lower && EBWIndicator.IndicatorValue < Normal)
             {
@@ -489,18 +457,11 @@ namespace Anka
             double Upper = 30.7;
             double Endvalue = 40.0;
 
-            double PositionStar = 0;
-            BodyIndicator.InputValue1 = 0;
-            BodyIndicator.InputValue2 = 0;
+            double PositionStar = 0;            
             BodyIndicator.IndicatorValue = 0;
 
-            BodyIndicator.InputValue1 = BodyIndicator.ToDouble(this.txSMM.Text.ToString()); 
-            
-
-            if (BodyIndicator.InputValue2 >= 0 && BodyIndicator.InputValue1 >= 0)
-            {
-                BodyIndicator.IndicatorValue = BodyIndicator.InputValue1;
-            }
+            DataAdapter.PhysiqueResult.SMMAll = DataAdapter.IsNumber(this.txSMM.Text.Trim()) ? Convert.ToDouble(this.txSMM.Text.Trim()) : 0;
+            BodyIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMAll;     
 
             if (BodyIndicator.IndicatorValue < Headvalue)
             {
@@ -557,18 +518,13 @@ namespace Anka
             double Upper = 2.04;
             double Endvalue = 3.0;
 
-            double PositionStar = 0;
-            LAIndicator.InputValue1 = 0;
-            LAIndicator.InputValue2 = 0;
+            double PositionStar = 0;           
             LAIndicator.IndicatorValue = 0;
 
-            LAIndicator.InputValue1 = LAIndicator.ToDouble(this.txLA.Text.ToString());
+            DataAdapter.PhysiqueResult.SMMArmLeft = DataAdapter.IsNumber(this.txLA.Text.Trim()) ? Convert.ToDouble(this.txLA.Text.Trim()) : 0;
 
+            LAIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMArmLeft;
 
-            if (LAIndicator.InputValue2 >= 0 && LAIndicator.InputValue1 >= 0)
-            {
-                LAIndicator.IndicatorValue = LAIndicator.InputValue1;
-            }
 
             if (LAIndicator.IndicatorValue < Headvalue)
             {
@@ -624,18 +580,13 @@ namespace Anka
             double Upper = 13.9;
             double Endvalue = 20.0;
 
-            double PositionStar = 0;
-            TKIndicator.InputValue1 = 0;
-            TKIndicator.InputValue2 = 0;
+            double PositionStar = 0;            
             TKIndicator.IndicatorValue = 0;
 
-            TKIndicator.InputValue1 = TKIndicator.ToDouble(this.txTK.Text.ToString());
+            DataAdapter.PhysiqueResult.SMMBody = DataAdapter.IsNumber(this.txTK.Text.Trim()) ? Convert.ToDouble(this.txTK.Text.Trim()) : 0;
 
-
-            if (TKIndicator.InputValue2 >= 0 && TKIndicator.InputValue1 >= 0)
-            {
-                TKIndicator.IndicatorValue = TKIndicator.InputValue1;
-            }
+            TKIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMBody;
+            
 
             if (TKIndicator.IndicatorValue < Headvalue)
             {
@@ -691,19 +642,12 @@ namespace Anka
             double Upper = 2.11;
             double Endvalue = 3.0;
 
-            double PositionStar = 0;
-            RAIndicator.InputValue1 = 0;
-            RAIndicator.InputValue2 = 0;
+            double PositionStar = 0;            
             RAIndicator.IndicatorValue = 0;
 
-            RAIndicator.InputValue1 = RAIndicator.ToDouble(this.txRA.Text.ToString());
-
-
-            if (RAIndicator.InputValue2 >= 0 && RAIndicator.InputValue1 >= 0)
-            {
-                RAIndicator.IndicatorValue = RAIndicator.InputValue1;
-            }
-
+            DataAdapter.PhysiqueResult.SMMArmRight = DataAdapter.IsNumber(this.txRA.Text.Trim()) ? Convert.ToDouble(this.txRA.Text.Trim()) : 0;
+            RAIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMArmRight;
+           
             if (RAIndicator.IndicatorValue < Headvalue)
             {
                 PositionStar = 0;
@@ -758,18 +702,11 @@ namespace Anka
             double Upper = 6.55;
             double Endvalue = 10.0;
 
-            double PositionStar = 0;
-            LLIndicator.InputValue1 = 0;
-            LLIndicator.InputValue2 = 0;
+            double PositionStar = 0;            
             LLIndicator.IndicatorValue = 0;
 
-            LLIndicator.InputValue1 = LLIndicator.ToDouble(this.txLL.Text.ToString());
-
-
-            if (LLIndicator.InputValue2 >= 0 && LLIndicator.InputValue1 >= 0)
-            {
-                LLIndicator.IndicatorValue = LLIndicator.InputValue1;
-            }
+            DataAdapter.PhysiqueResult.SMMLegLeft = DataAdapter.IsNumber(this.txLL.Text.Trim()) ? Convert.ToDouble(this.txLL.Text.Trim()) : 0;
+            LLIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMLegLeft;           
 
             if (LLIndicator.IndicatorValue < Headvalue)
             {
@@ -825,18 +762,12 @@ namespace Anka
             double Upper = 6.54;
             double Endvalue = 10.0;
 
-            double PositionStar = 0;
-            RLIndicator.InputValue1 = 0;
-            RLIndicator.InputValue2 = 0;
+            double PositionStar = 0;            
             RLIndicator.IndicatorValue = 0;
 
-            RLIndicator.InputValue1 = RLIndicator.ToDouble(this.txRL.Text.ToString());
-
-
-            if (RLIndicator.InputValue2 >= 0 && RLIndicator.InputValue1 >= 0)
-            {
-                RLIndicator.IndicatorValue = RLIndicator.InputValue1;
-            }
+            DataAdapter.PhysiqueResult.SMMLegRight = DataAdapter.IsNumber(this.txRL.Text.Trim()) ? Convert.ToDouble(this.txRL.Text.Trim()) : 0;
+            RLIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMLegRight;
+           
 
             if (RLIndicator.IndicatorValue < Headvalue)
             {
@@ -891,25 +822,22 @@ namespace Anka
             double Upper = 3.8;
             double Endvalue = 5.0;
 
-            double PositionStar = 0;
-            VATIndicator.InputValue1 = 0;
-            VATIndicator.InputValue2 = 0;
+            double PositionStar = 0;           
             VATIndicator.IndicatorValue = 0;
 
-            VATIndicator.InputValue1 = VATIndicator.ToDouble(this.txVAT.Text.ToString());            
+            DataAdapter.PhysiqueResult.VAT = DataAdapter.IsNumber(this.txVAT.Text.Trim()) ? Convert.ToDouble(this.txVAT.Text.Trim()) : 0;
 
-            if (VATIndicator.InputValue2 >=0 && VATIndicator.InputValue1 >=0)
-            {
-                VATIndicator.IndicatorValue = VATIndicator.InputValue1;
-            }
+
+            VATIndicator.IndicatorValue = DataAdapter.PhysiqueResult.VAT;
+            
 
             if (VATIndicator.IndicatorValue < Headvalue)
             {
-                PositionStar = 15;
+                PositionStar = 10;
             }           
             else if (VATIndicator.IndicatorValue >= Headvalue && VATIndicator.IndicatorValue < Normal)
             {
-                PositionStar = 15 + ((VATIndicator.IndicatorValue - Headvalue) / (Normal - Headvalue)) * (125 - 15);
+                PositionStar = 10 + ((VATIndicator.IndicatorValue - Headvalue) / (Normal - Headvalue)) * (125 - 15);
             }
             else if (VATIndicator.IndicatorValue >= Normal && VATIndicator.IndicatorValue < Upper)
             {
@@ -977,25 +905,21 @@ namespace Anka
             double Normal = 0.9;            
             double Endvalue = 5.0;
 
-            double PositionStar = 0;
-            WCIndicator.InputValue1 = 0;
-            WCIndicator.InputValue2 = 0;
+            double PositionStar = 0;           
             WCIndicator.IndicatorValue = 0;
 
-            WCIndicator.InputValue1 = WCIndicator.ToDouble(this.txWC.Text.ToString());
+            DataAdapter.SizeResult.Waistline = DataAdapter.IsNumber(this.txWC.Text.Trim()) ? Convert.ToDouble(this.txWC.Text.Trim()) : 0;
 
-            if (WCIndicator.InputValue2 >= 0 && WCIndicator.InputValue1 >= 0)
-            {
-                WCIndicator.IndicatorValue = WCIndicator.InputValue1;
-            }
+            WCIndicator.IndicatorValue = DataAdapter.SizeResult.Waistline;
+            
 
             if (WCIndicator.IndicatorValue < Headvalue)
             {
-                PositionStar = 15;
+                PositionStar = 10;
             }
             else if (WCIndicator.IndicatorValue >= Headvalue && WCIndicator.IndicatorValue < Normal)
             {
-                PositionStar = 15 + ((WCIndicator.IndicatorValue - Headvalue) / (Normal - Headvalue)) * (175 - 15);
+                PositionStar = 10 + ((WCIndicator.IndicatorValue - Headvalue) / (Normal - Headvalue)) * (175 - 15);
             }            
             else if (WCIndicator.IndicatorValue >= Normal && WCIndicator.IndicatorValue < Endvalue)
             {
@@ -1044,21 +968,54 @@ namespace Anka
         }
 
 
-        private void OnBMITextChanged(object sender, RoutedEventArgs e)
-        {            
+        private void OnBMIWeightChanged(object sender, RoutedEventArgs e)
+        {
+            DataAdapter.SizeResult.Weight = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            this.txSize2.Text = DataAdapter.SizeResult.Weight.ToString();
+            this.bmiWeight.Text = DataAdapter.SizeResult.Weight.ToString();
+
+            if (DataAdapter.SizeResult.Weight > 0 && DataAdapter.SizeResult.Hight > 0)
+            {
+                this.bmiBMI.Text = (DataAdapter.SizeResult.Weight / (DataAdapter.SizeResult.Hight * DataAdapter.SizeResult.Hight)).ToString("0.0");
+            }
+
             BMIIndicatorBinding();
-            this.txFM2.Content = ((FMIIndicator.InputValue1 / BMIIndicator.InputValue1) * 100.0).ToString("0.0");
+            if (DataAdapter.SizeResult.Weight > 0 && DataAdapter.PhysiqueResult.FM > 0)
+            {
+                this.txFM2.Content = ((DataAdapter.PhysiqueResult.FM / DataAdapter.SizeResult.Weight) * 100.0).ToString("0.0");
+            }
+            
         }
 
         private void OnFMITextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.FM = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             FMIIndicatorBinding();
             this.txFMI.Text = FMIIndicator.IndicatorValue.ToString("0.0");
-            this.txFM2.Content = ((FMIIndicator.InputValue1 / BMIIndicator.InputValue1) * 100.0).ToString("0.0");
+            this.txFM2.Content = ((DataAdapter.PhysiqueResult.FM / DataAdapter.SizeResult.Weight) * 100.0).ToString("0.0");
         }
 
         private void OnBMIHeightChanged(object sender, RoutedEventArgs e)
         {
+            double temp = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+
+            if(temp<10)
+            {
+                DataAdapter.SizeResult.Hight = temp;
+            }
+            else if(temp>=10)
+            {
+                DataAdapter.SizeResult.Hight = temp/100;
+            }
+
+            this.txSize1.Text = (DataAdapter.SizeResult.Hight * 100).ToString();
+            this.bmiHeight.Text = DataAdapter.SizeResult.Hight.ToString();
+
+            if (DataAdapter.SizeResult.Weight > 0 && DataAdapter.SizeResult.Hight > 0)
+            {
+                this.bmiBMI.Text = (DataAdapter.SizeResult.Weight / (DataAdapter.SizeResult.Hight * DataAdapter.SizeResult.Hight)).ToString("0.0");
+            }
+
             BMIIndicatorBinding();
             FMIIndicatorBinding();
             this.txFMI.Text = FMIIndicator.IndicatorValue.ToString("0.0");
@@ -1066,59 +1023,91 @@ namespace Anka
 
         private void OnTBWTextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()):0;
             BMIIndicatorBinding();
             TBWIndicatorBinding();
             EBWIndicatorBinding();
-            this.txTBW2.Content = ((TBWIndicator.InputValue1 / BMIIndicator.InputValue1) * 100.0).ToString("0.0");
-            this.txEBW.Text = ((BCWIndicator.InputValue1 / TBWIndicator.InputValue1) * 100.0).ToString("0.0");
+            this.txTBW2.Content = ((DataAdapter.PhysiqueResult.TBW / DataAdapter.SizeResult.Weight) * 100.0).ToString("0.0");
+            if (DataAdapter.PhysiqueResult.TBW > 0 && DataAdapter.PhysiqueResult.BCW > 0)
+            {
+                this.txEBW.Text = ((DataAdapter.PhysiqueResult.BCW / DataAdapter.PhysiqueResult.TBW) * 100.0).ToString("0.0");
+            }
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.TBW.ToString();
         }
 
         private void OnBCWTextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.BCW = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             BMIIndicatorBinding();
             BCWIndicatorBinding();
             EBWIndicatorBinding();
-            this.txBCW2.Content = ((BCWIndicator.InputValue1 / BMIIndicator.InputValue1) * 100.0).ToString("0.0");
-            this.txEBW.Text = ((BCWIndicator.InputValue1 / TBWIndicator.InputValue1) * 100.0).ToString("0.0");
+            this.txBCW2.Content = ((DataAdapter.PhysiqueResult.BCW / DataAdapter.SizeResult.Weight) * 100.0).ToString("0.0");
+            if(DataAdapter.PhysiqueResult.TBW > 0 && DataAdapter.PhysiqueResult.BCW > 0)
+            {
+                this.txEBW.Text = ((DataAdapter.PhysiqueResult.BCW / DataAdapter.PhysiqueResult.TBW) * 100.0).ToString("0.0");
+            }
+
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.BCW.ToString();
         }
 
         private void OnBodyTextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.SMMAll = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             BodyIndicatorBinding();
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMAll.ToString();
         }
 
         private void OnLATextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.SMMArmLeft = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             LAIndicatorBinding();
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMArmLeft.ToString();
         }
 
         private void OnTKTextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.SMMBody = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             TKIndicatorBinding();
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMBody.ToString();
         }
 
         private void OnBodyRAChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.SMMArmRight = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             RAIndicatorBinding();
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMArmRight.ToString();
         }
 
         private void OnLLTextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.SMMLegLeft = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             LLIndicatorBinding();
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMLegLeft.ToString();
         }        
 
         private void OnRLTextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.SMMLegRight = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             RLIndicatorBinding();
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMLegRight.ToString();
         }
 
         private void OnVATTextChanged(object sender, RoutedEventArgs e)
         {
+            DataAdapter.PhysiqueResult.VAT = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             VATIndicatorBinding();
+            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.VAT.ToString();
         }
 
         private void OnWCTextChanged(object sender, RoutedEventArgs e)
         {
+            double temp = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            if (temp < 10)
+                DataAdapter.SizeResult.Waistline = temp;
+            else if(temp>=10)
+                DataAdapter.SizeResult.Waistline = temp/100.0;            
+            this.txSize3.Text = (DataAdapter.SizeResult.Waistline * 100.0).ToString();
+            this.txWC.Text = DataAdapter.SizeResult.Waistline.ToString("0.00");
             WCIndicatorBinding();
         }
 
@@ -1200,236 +1189,71 @@ namespace Anka
 
         private void BtBasicSave_Click(object sender, RoutedEventArgs e)
         {
-            DataAdapter.Killip = this.txKillip.Text;
-            DataAdapter.EF = this.txEF.Text;
-            DataAdapter.LV = this.txLV.Text;
-            DataAdapter.BasicOther = this.txBasicOther.Text;
-            DataAdapter.BasicRisk = DataAdapter.BasicRisk;
-            DataAdapter.RiskOther = this.txRisk13.Text;    
+            DataAdapter.BasicInfoResult.Killip = this.txKillip.Text;
+            DataAdapter.BasicInfoResult.EF = this.txEF.Text;
+            DataAdapter.BasicInfoResult.LV = this.txLV.Text;
+            DataAdapter.BasicInfoResult.BasicOther = this.txBasicOther.Text;
+            DataAdapter.BasicInfoResult.BasicRisk = CbRiskClick();
+            DataAdapter.BasicInfoResult.RiskOther = this.txRisk13.Text;    
             
             if (DataAdapter.IsNumber(this.txPCI.Text) == true)
-                DataAdapter.PCI = Convert.ToInt32(this.txPCI.Text);
-            else
-                MessageBox.Show("请输入PCI支架个数。");     
+                DataAdapter.BasicInfoResult.PCI = Convert.ToInt32(this.txPCI.Text);
+              
             
             if (DataAdapter.IsNumber(this.txRS.Text) == true)
-                DataAdapter.ResidualStenosis = Convert.ToInt32(this.txRS.Text);
-            else
-                MessageBox.Show("请输入75%残余狭窄数量。");
+                DataAdapter.BasicInfoResult.ResidualStenosis = Convert.ToInt32(this.txRS.Text);
+           
 
             if(this.rbDCL.IsChecked==true)
             {
-                DataAdapter.DominantCoronary = "左优势型";
+                DataAdapter.BasicInfoResult.DominantCoronary = -1;
             }
             else if(this.rbDCB.IsChecked==true)
             {
-                DataAdapter.DominantCoronary = "均衡型";
+                DataAdapter.BasicInfoResult.DominantCoronary = 0;
             }
             else if(this.rbDCR.IsChecked==true)
             {
-                DataAdapter.DominantCoronary = "右优势型";
+                DataAdapter.BasicInfoResult.DominantCoronary = 1;
             }
-            else
-            {
-                MessageBox.Show("请选择优势冠脉类型。");
-            }
+            
 
             if(this.cbCC.IsChecked==true)
             {
-                DataAdapter.CollatCirc = true;
+                DataAdapter.BasicInfoResult.CollatCirc = true;
             }
             else
             {
-                DataAdapter.CollatCirc = false;
+                DataAdapter.BasicInfoResult.CollatCirc = false;
             }
         }
 
+             
+
+        private bool[] CbRiskClick()
+        {
+
+            bool[] tempCheck = new bool[13]{
+                this.cbRisk1.IsChecked==true?true:false,
+                this.cbRisk2.IsChecked==true?true:false,
+                this.cbRisk3.IsChecked==true?true:false,
+                this.cbRisk4.IsChecked==true?true:false,
+                this.cbRisk5.IsChecked==true?true:false,
+                this.cbRisk6.IsChecked==true?true:false,
+                this.cbRisk7.IsChecked==true?true:false,
+                this.cbRisk8.IsChecked==true?true:false,
+                this.cbRisk9.IsChecked==true?true:false,
+                this.cbRisk10.IsChecked==true?true:false,
+                this.cbRisk11.IsChecked==true?true:false,
+                this.cbRisk12.IsChecked==true?true:false,
+                this.cbRisk13.IsChecked==true?true:false
+            };
+
+            return tempCheck;
+
+
+        }
        
-        private void CbRisk13_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b01000000000000;
-            if (this.cbRisk13.IsChecked == true)
-            {
-                this.txRisk13.IsEnabled = true;
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk13.IsChecked == false)
-            {
-                this.txRisk13.Text = "";
-                this.txRisk13.IsEnabled = false;
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }            
-        }
-
-        private void CbRisk1_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000000000001;
-            if(this.cbRisk1.IsChecked==true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if(this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-            
-        }
-
-        private void CbRisk2_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000000000010;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk3_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000000000100;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk4_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000000001000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk5_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000000010000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk6_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000000100000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk7_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000001000000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk8_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000010000000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk9_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00000100000000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk10_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00001000000000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk11_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00010000000000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
-
-        private void CbRisk12_Click(object sender, RoutedEventArgs e)
-        {
-            int Checked = 0b00100000000000;
-            if (this.cbRisk1.IsChecked == true)
-            {
-                DataAdapter.BasicRisk |= Checked;
-            }
-            else if (this.cbRisk1.IsChecked == false)
-            {
-                DataAdapter.BasicRisk |= Checked;
-                DataAdapter.BasicRisk ^= Checked;
-            }
-        }
 
         private void CbCC_Click(object sender, RoutedEventArgs e)
         {
@@ -1453,7 +1277,7 @@ namespace Anka
 
             DataAdapter.ExerciseNumber = DataAdapter.Number +"-"+ this.txExerciseLoop.Text.Trim();
 
-            DataAdapter.Date = new string[9] { this.dpBedup1.Text.Trim(),
+            DataAdapter.ExerciseResult.Date = new string[9] { this.dpBedup1.Text.Trim(),
                 this.dpBedup2.Text.Trim(),
                 this.dpBedup3.Text.Trim(),
                 this.dpBedup4.Text.Trim(),
@@ -1479,8 +1303,8 @@ namespace Anka
             {
                 DataAdapter.GetBloodPressure(txBPUp[i], bpLower[i], bpUpper[i]);
             }
-            DataAdapter.BloodPressureLower = bpLower;
-            DataAdapter.BloodPressureUpper = bpUpper;
+            DataAdapter.ExerciseResult.BloodPressureLower = bpLower;
+            DataAdapter.ExerciseResult.BloodPressureUpper = bpUpper;
 
             int[] HeartRate = new int[9];
             string[] txBMP = new string[9] {this.txBMPBedUp1.Text.Trim(),
@@ -1497,7 +1321,7 @@ namespace Anka
             {
                 HeartRate[i] = DataAdapter.IsNumber(txBMP[i]) ? Convert.ToInt32(txBMP[i]) : 0;
             }
-            DataAdapter.HeartRate = HeartRate;
+            DataAdapter.ExerciseResult.HeartRate = HeartRate;
 
             int[] BloodOxygen = new int[9];
             string[] txBloodOxygen = new string[9] {this.txBOBedUp1.Text.Trim(),
@@ -1514,7 +1338,7 @@ namespace Anka
             {
                 BloodOxygen[i] = DataAdapter.IsNumber(txBloodOxygen[i]) ? Convert.ToInt32(txBloodOxygen[i]) : 0;
             }
-            DataAdapter.BloodOxygen = BloodOxygen;
+            DataAdapter.ExerciseResult.BloodOxygen = BloodOxygen;
 
             int[] BorgIndex = new int[9];
             string[] txBorgIndex = new string[9] {this.txBorgBedUp1.Text.Trim(),
@@ -1531,7 +1355,7 @@ namespace Anka
             {
                 BorgIndex[i] = DataAdapter.IsNumber(txBorgIndex[i]) ? Convert.ToInt32(txBorgIndex[i]) : 0;
             }
-            DataAdapter.BorgIndex = BorgIndex;
+            DataAdapter.ExerciseResult.BorgIndex = BorgIndex;
 
             //string[] Remarks = new string[9];
             string[] Remarks = new string[9] {this.txAddBedUp1.Text.Trim(),
@@ -1544,7 +1368,7 @@ namespace Anka
                 this.txAddOutRoom2.Text.Trim(),
                 this.txAddOutRoom3.Text.Trim()
             };           
-            DataAdapter.Remarks = Remarks;
+            DataAdapter.ExerciseResult.Remarks = Remarks;
 
             string[] ECGs = new string[9] {this.txECGBedUp1.Text.Trim(),
                 this.txECGBedUp2.Text.Trim(),
@@ -1556,7 +1380,7 @@ namespace Anka
                 this.txECGOutRoom2.Text.Trim(),
                 this.txECGOutRoom3.Text.Trim()
             };
-            DataAdapter.ECGs = ECGs;
+            DataAdapter.ExerciseResult.ECGs = ECGs;
 
             RadioButton[] CheckYes = new RadioButton[9]{this.rbBedUpYes1,
                 this.rbBedUpYes2,
@@ -1581,9 +1405,9 @@ namespace Anka
             for(int i=0;i<9;i++)
             {
                 if (CheckYes[i].IsChecked == true)
-                    DataAdapter.Checks[i] = true;
+                    DataAdapter.ExerciseResult.Checks[i] = true;
                 else if (this.rbBedUpNo1.IsChecked == true)
-                    DataAdapter.Checks[i]  = false;
+                    DataAdapter.ExerciseResult.Checks[i]  = false;
             }   
         }
 
@@ -1738,10 +1562,10 @@ namespace Anka
         private void BtOHQSave_Click(object sender, RoutedEventArgs e)
         {
             DataAdapter.OHQNumber = DataAdapter.Number + "-" + this.txOHQLoop.Text.Trim();
-            OHQData();
+            OHQDataSave();
         }
 
-        private void OHQData()
+        private void OHQDataSave()
         {
             RadioButton[] rbOHQ1 = new RadioButton[4] { this.rbOHQ11, this.rbOHQ12, this.rbOHQ13, this.rbOHQ14 };
             RadioButton[] rbOHQ2 = new RadioButton[3] { this.rbOHQ21, this.rbOHQ22, this.rbOHQ23 };
@@ -1880,12 +1704,289 @@ namespace Anka
 
         private void BtSPPBSave_Click(object sender, RoutedEventArgs e)
         {
+            SPPBDataSave();
+            BalanceCapabilitySave();
+            SizeResultSave();
+            VitalsResultSave();
+            GripStrengthResultSave();
+            LapStrengthResultSave();
+        }
+
+        private void SPPBDataSave()
+        {
+            if (this.rbSPPBYes1.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.BalanceTesting1 = "A-0-0";
+            }
+            if (this.rbSPPBNo1.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.BalanceTesting1 = "A-" + this.txSPPB11.Text.Trim() + "-" + this.txSPPB12.Text.Trim();
+            }
+
+            if (this.rbSPPBYes2.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.BalanceTesting2 = "A-0-0";
+            }
+            if (this.rbSPPBNo2.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.BalanceTesting2 = "A-" + this.txSPPB21.Text.Trim() + "-" + this.txSPPB22.Text.Trim();
+            }
+
+            if (this.rbSPPBYes3.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.BalanceTesting3 = "A-0-0";
+            }
+            if (this.rbSPPBNo3.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.BalanceTesting3 = "A-" + this.txSPPB31.Text.Trim() + "-" + this.txSPPB32.Text.Trim();
+            }
+
+            if (this.rbSPPBYes4.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.walkingTesting1 = "A-" + this.txSPPB41.Text.Trim() + "-" + this.txSPPB42.Text.Trim();
+                DataAdapter.SPPBResult.walkingTesting2 = "A-" + this.txSPPB51.Text.Trim() + "-" + this.txSPPB52.Text.Trim();
+            }
+            if (this.rbSPPBNo4.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.walkingTesting1 = "B-" + this.txSPPB41.Text.Trim() + "-" + this.txSPPB42.Text.Trim();
+                DataAdapter.SPPBResult.walkingTesting2 = "B-" + this.txSPPB51.Text.Trim() + "-" + this.txSPPB52.Text.Trim();
+            }
+
+            if (this.rbSPPBYes5.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.SitUpTesting = "A-" + this.txSPPB61.Text.Trim() + "-" + this.txSPPB62.Text.Trim();
+            }
+            if (this.rbSPPBNo5.IsChecked == true)
+            {
+                DataAdapter.SPPBResult.SitUpTesting = "B-0-" + this.txSPPB7.Text.Trim();
+            }
+
+        }
+        private void BalanceCapabilitySave()
+        {
+            if (this.rbBalanceYes.IsChecked == true)
+            {
+                DataAdapter.BalanceCapabilityResult.TUG = "A-" + this.txBalance11.Text.Trim() + "-" + this.txBalance12.Text.Trim();
+            }
+            if (this.rbBalanceNo.IsChecked == true)
+            {
+                DataAdapter.BalanceCapabilityResult.TUG = "B-" + this.txBalance11.Text.Trim() + "-" + this.txBalance12.Text.Trim();
+            }
+            DataAdapter.BalanceCapabilityResult.FRTLeft1 = this.txBalance21.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.FRTLeft2 = this.txBalance22.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.FRTRight1 = this.txBalance31.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.FRTRight2 = this.txBalance32.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.SFO1 = this.txBalance41.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.SFO2 = this.txBalance42.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.OneFootLeft1 = this.txBalance51.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.OneFootLeft2 = this.txBalance52.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.OneFootRight1 = this.txBalance61.Text.Trim();
+            DataAdapter.BalanceCapabilityResult.OneFootRight2 = this.txBalance62.Text.Trim();
+        }
+        private void SizeResultSave()
+        {
+            DataAdapter.SizeResult.Hight = DataAdapter.IsNumber(this.txSize1.Text.Trim()) ? Convert.ToInt32(this.txSize1.Text.Trim()) : 0;
+            DataAdapter.SizeResult.Weight = DataAdapter.IsNumber(this.txSize2.Text.Trim()) ? Convert.ToInt32(this.txSize2.Text.Trim()) : 0;
+            DataAdapter.SizeResult.Waistline = DataAdapter.IsNumber(this.txSize3.Text.Trim()) ? Convert.ToInt32(this.txSize3.Text.Trim()) : 0;
+            DataAdapter.SizeResult.Hipline = DataAdapter.IsNumber(this.txSize4.Text.Trim()) ? Convert.ToInt32(this.txSize4.Text.Trim()) : 0;
+            DataAdapter.SizeResult.ArmlineLeft = DataAdapter.IsNumber(this.txSize5.Text.Trim()) ? Convert.ToInt32(this.txSize5.Text.Trim()) : 0;
+            DataAdapter.SizeResult.ArmlineRight = DataAdapter.IsNumber(this.txSize6.Text.Trim()) ? Convert.ToInt32(this.txSize6.Text.Trim()) : 0;
+            DataAdapter.SizeResult.LeglineLeft = DataAdapter.IsNumber(this.txSize7.Text.Trim()) ? Convert.ToInt32(this.txSize7.Text.Trim()) : 0;
+            DataAdapter.SizeResult.LeglineRight = DataAdapter.IsNumber(this.txSize8.Text.Trim()) ? Convert.ToInt32(this.txSize8.Text.Trim()) : 0;
+        }
+        private void VitalsResultSave()
+        {
+            DataAdapter.VitalsResult.BloodPressureLower = DataAdapter.IsNumber(this.txVitals1.Text.Trim()) ? Convert.ToInt32(this.txVitals1.Text.Trim()) : 0;
+            DataAdapter.VitalsResult.BloodPressureUpper = DataAdapter.IsNumber(this.txVitals2.Text.Trim()) ? Convert.ToInt32(this.txVitals2.Text.Trim()) : 0;
+            DataAdapter.VitalsResult.HeartRate = DataAdapter.IsNumber(this.txVitals3.Text.Trim()) ? Convert.ToInt32(this.txVitals3.Text.Trim()) : 0;
+            DataAdapter.VitalsResult.Temperature = DataAdapter.IsNumber(this.txVitals4.Text.Trim()) ? Convert.ToDouble(this.txVitals4.Text.Trim()) : 0;
+            DataAdapter.VitalsResult.Breathe = DataAdapter.IsNumber(this.txVitals5.Text.Trim()) ? Convert.ToInt32(this.txVitals5.Text.Trim()) : 0;
+        }
+        private void GripStrengthResultSave()
+        {
+            DataAdapter.GripStrengthResult.GripStrengthLeft1 = DataAdapter.IsNumber(this.txGripStrength1.Text.Trim()) ? Convert.ToDouble(this.txGripStrength1.Text.Trim()) : 0;
+            DataAdapter.GripStrengthResult.GripStrengthLeft2 = DataAdapter.IsNumber(this.txGripStrength2.Text.Trim()) ? Convert.ToDouble(this.txGripStrength2.Text.Trim()) : 0;
+            DataAdapter.GripStrengthResult.GripStrengthRight1 = DataAdapter.IsNumber(this.txGripStrength3.Text.Trim()) ? Convert.ToDouble(this.txGripStrength3.Text.Trim()) : 0;
+            DataAdapter.GripStrengthResult.GripStrengthRight2 = DataAdapter.IsNumber(this.txGripStrength4.Text.Trim()) ? Convert.ToDouble(this.txGripStrength4.Text.Trim()) : 0;
+            if(this.rbGripStrengthYes1.IsChecked ==true)
+            {
+                DataAdapter.GripStrengthResult.LeftHandHurt = true;
+            }
+            else if(this.rbGripStrengthNo1.IsChecked == true)
+            {
+                DataAdapter.GripStrengthResult.LeftHandHurt = false;
+            }
+            else
+            {
+                MessageBox.Show("请确定左手外伤情况。");
+            }
+
+            if (this.rbGripStrengthYes2.IsChecked == true)
+            {
+                DataAdapter.GripStrengthResult.RightHandHurt = true;
+            }
+            else if (this.rbGripStrengthNo2.IsChecked == true)
+            {
+                DataAdapter.GripStrengthResult.RightHandHurt = false;
+            }
+            else
+            {
+                MessageBox.Show("请确定右手外伤情况。");
+            }
+
+        }
+        private void LapStrengthResultSave()
+        {
+            DataAdapter.LapStrengthResult.LapStrengthLeft1 = DataAdapter.IsNumber(this.txLapStrength1.Text.Trim()) ? Convert.ToDouble(this.txLapStrength1.Text.Trim()) : 0;
+            DataAdapter.LapStrengthResult.LapStrengthLeft2 = DataAdapter.IsNumber(this.txLapStrength2.Text.Trim()) ? Convert.ToDouble(this.txLapStrength2.Text.Trim()) : 0;
+            DataAdapter.LapStrengthResult.LapStrengthRight1 = DataAdapter.IsNumber(this.txLapStrength3.Text.Trim()) ? Convert.ToDouble(this.txLapStrength3.Text.Trim()) : 0;
+            DataAdapter.LapStrengthResult.LapStrengthRight2 = DataAdapter.IsNumber(this.txLapStrength4.Text.Trim()) ? Convert.ToDouble(this.txLapStrength4.Text.Trim()) : 0;
+            if (this.rbLapStrengthYes1.IsChecked == true)
+            {
+                DataAdapter.LapStrengthResult.LeftLapHurt = true;
+            }
+            else if (this.rbLapStrengthNo1.IsChecked == true)
+            {
+                DataAdapter.LapStrengthResult.LeftLapHurt = false;
+            }
+            else
+            {
+                MessageBox.Show("请确定伸膝力左外伤等情况。");
+            }
+
+            if (this.rbLapStrengthYes2.IsChecked == true)
+            {
+                DataAdapter.LapStrengthResult.RightLapHurt = true;
+            }
+            else if (this.rbLapStrengthNo2.IsChecked == true)
+            {
+                DataAdapter.LapStrengthResult.RightLapHurt = false;
+            }
+            else
+            {
+                MessageBox.Show("请确定伸膝力右外伤情况。");
+            }
 
         }
 
+        private void BtPhysiqueSave_Click(object sender, RoutedEventArgs e)
+        {
+            DataAdapter.PhysiqueNumber = DataAdapter.Number + "-" + this.txPhysiqueLoop.Text.Trim();
+            PhysiqueResultSave();
+        }
+
+        private void PhysiqueResultSave()
+        {
+            DataAdapter.PhysiqueResult.FM = DataAdapter.IsNumber(this.txFM.Text.Trim()) ? Convert.ToDouble(this.txFM.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.PA = DataAdapter.IsNumber(this.txPA.Text.Trim()) ? Convert.ToDouble(this.txPA.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.SMMAll = DataAdapter.IsNumber(this.txSMM.Text.Trim()) ? Convert.ToDouble(this.txSMM.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.SMMArmLeft = DataAdapter.IsNumber(this.txLA.Text.Trim()) ? Convert.ToDouble(this.txLA.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.SMMArmRight = DataAdapter.IsNumber(this.txRA.Text.Trim()) ? Convert.ToDouble(this.txRA.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.SMMBody = DataAdapter.IsNumber(this.txTK.Text.Trim()) ? Convert.ToDouble(this.txTK.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.SMMLegLeft = DataAdapter.IsNumber(this.txLL.Text.Trim()) ? Convert.ToDouble(this.txLL.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.SMMLegRight = DataAdapter.IsNumber(this.txRL.Text.Trim()) ? Convert.ToDouble(this.txRL.Text.Trim()) : 0;
+
+            DataAdapter.PhysiqueResult.BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
+
+            DataAdapter.PhysiqueResult.VAT = DataAdapter.IsNumber(this.txVAT.Text.Trim()) ? Convert.ToDouble(this.txVAT.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.PA = DataAdapter.IsNumber(this.txPA.Text.Trim()) ? Convert.ToDouble(this.txPA.Text.Trim()) : 0;
+            DataAdapter.PhysiqueResult.PAPercent = DataAdapter.IsNumber(this.txPAPercent.Text.Trim()) ? Convert.ToDouble(this.txPAPercent.Text.Trim()) : 0;
+        }
+
+
+
         private void RbSPPB1_Click(object sender, RoutedEventArgs e)
         {
+            if(this.rbSPPBNo1.IsChecked==true)
+            {
+                this.txSPPB11.IsEnabled = true;
+                this.txSPPB12.IsEnabled = true;
+            }
+            else
+            {
+                this.txSPPB11.Text = "";
+                this.txSPPB12.Text = "";
+                this.txSPPB11.IsEnabled = false;
+                this.txSPPB12.IsEnabled = false;
+            }
+        }
 
+        private void RbSPPB2_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.rbSPPBNo2.IsChecked == true)
+            {
+                this.txSPPB21.IsEnabled = true;
+                this.txSPPB22.IsEnabled = true;
+            }
+            else
+            {
+                this.txSPPB21.Text = "";
+                this.txSPPB22.Text = "";
+                this.txSPPB21.IsEnabled = false;
+                this.txSPPB22.IsEnabled = false;
+            }
+        }
+
+        private void RbSPPB3_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.rbSPPBNo3.IsChecked == true)
+            {
+                this.txSPPB31.IsEnabled = true;
+                this.txSPPB32.IsEnabled = true;
+            }
+            else
+            {
+                this.txSPPB31.Text = "";
+                this.txSPPB32.Text = "";
+                this.txSPPB31.IsEnabled = false;
+                this.txSPPB32.IsEnabled = false;
+            }
+        }
+
+        private void RbSPPB5_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.rbSPPBYes5.IsChecked == true)
+            {
+                this.txSPPB61.IsEnabled = true;
+                this.txSPPB62.IsEnabled = true;
+                this.txSPPB7.Text = "";
+                this.txSPPB7.IsEnabled = false;
+            }
+            else
+            {
+                this.txSPPB61.Text = "";
+                this.txSPPB62.Text = "";
+                this.txSPPB61.IsEnabled = false;
+                this.txSPPB62.IsEnabled = false;
+                this.txSPPB7.IsEnabled = true;
+            }
+        }
+
+        
+
+        private void OnPATextChanged(object sender, RoutedEventArgs e)
+        {
+            DataAdapter.PhysiqueResult.PA = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double PA = DataAdapter.PhysiqueResult.PA;
+            int Age = DataAdapter.Age;
+            if(Age < 20)
+            {
+                Age = 20;
+            }
+            else if(Age>65)
+            {
+                Age = 65;
+            }
+            
+            PA = PA < 4.5 ? 4.5 : PA;
+            PA = PA > 8.0 ? 8.0 : PA;
+            double x = 50 + ((Age - 20) / 45.0) * 300.0;
+            double y = 160-((PA - 4.2) / (8 - 4.2)) * 160.0;
+
+            this.PAPoint.StartPoint = new Point(x, y);
+            this.PAMid.Point = new Point(x + 5, y + 5);
+            this.PAEnd.Point = this.PAPoint.StartPoint;
         }
     }
 }

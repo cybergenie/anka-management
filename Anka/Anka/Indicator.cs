@@ -13,30 +13,7 @@ namespace Anka
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private static double _indicatorValue=0;
-        private  double _tbValue1=0;
-        private  double _tbValue2=0;
-        
-        public double InputValue1
-        {
-            get { return _tbValue1; }
-            set
-            {
-                _tbValue1 = value;
-                OnPropertyChanged("InputValue1");
-            }
-        }
-
-        public double InputValue2
-        {
-            get { return _tbValue2; }
-            set
-            {
-                _tbValue2 = value;
-                OnPropertyChanged("InputValue2");
-            }
-        }
-
+        private static double _indicatorValue=0;   
        
         public double IndicatorValue
         {
