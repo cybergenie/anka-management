@@ -51,7 +51,7 @@ namespace Anka
                 AnkaSetting.Default.DataConectionInfoSave = false;
             }
 
-            string connString = "server="+ DatabaseInfo.Sever+";database=anka;uid="+ DatabaseInfo.UserID +";pwd="+DatabaseInfo.PassWord;
+            string connString = "server="+ DatabaseInfo.Sever+";database=anka;uid="+ DatabaseInfo.UserID +";pwd="+DatabaseInfo.PassWord+ ";SslMode = none";
             MySqlConnection conn = new MySqlConnection(connString);
             try
             {
@@ -79,5 +79,7 @@ namespace Anka
             this.Close();
 
         }
+
+        
     }
 }

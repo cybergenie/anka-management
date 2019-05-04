@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anka"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1107" Width="1000">
+        Title="术后康复进程" Height="797" Width="1000">
     <DockPanel>
         <Menu Height="25" DockPanel.Dock="Top" Margin="0" VerticalAlignment="Top">
-            <MenuItem Header="文件">
+            <MenuItem Header="文  件" Width="60" HorizontalContentAlignment="Center">
                 <MenuItem x:Name="DataConnection" Header="连接服务器" Click="DataConnection_Click"/>
                 <MenuItem x:Name="miNewDoc" Header="新建档案" Click="MiNewDoc_Click"/>
             </MenuItem>
-            <MenuItem Header="选项"/>
-            <Button Content="全部保存" HorizontalAlignment="Center" Height="22" VerticalAlignment="Center" Width="50" HorizontalContentAlignment="Center"/>
+            <MenuItem Header="选  项" Width="60"/>
+            <Button Content="全部保存" HorizontalAlignment="Center" Height="22" VerticalAlignment="Center" Width="50" HorizontalContentAlignment="Center" IsEnabled="False"/>
         </Menu>
         <StatusBar Height="20" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
-            <Button x:Name="ConStatus" Height="12" Width="50"/>
+            <Button x:Name="ConStatus" Height="12" Width="50" IsEnabled="False"/>
         </StatusBar>
         <TabControl DockPanel.Dock="Right">
             <TabItem Header="基本信息">
@@ -101,7 +101,7 @@
                                     <CheckBox x:Name="cbRisk12" Content="肝功能异常 ALT" Height="25" VerticalContentAlignment="Center" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
-                                    <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                                    <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" Click="CbRisk13_Click" />
                                     <TextBox x:Name="txRisk13" Width="135" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
                                 </StackPanel>
 
@@ -146,7 +146,7 @@
                             <Label x:Name="lbLoadAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbLoadNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txExerciseLoop" Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txExerciseLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
                             <Button x:Name="btExcerciseSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtExcerciseSave_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
@@ -272,8 +272,8 @@
                             </Border>
                             <Border BorderBrush="Black" BorderThickness="1,1,1,0.5" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="2">
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                                    <RadioButton Content="5" Margin="5,0" />
-                                    <RadioButton Content="10" />
+                                    <RadioButton x:Name="rbInRoomUp5" Content="5" Margin="5,0" />
+                                    <RadioButton x:Name="rbInRoomUp10" Content="10" />
                                 </StackPanel>
                             </Border>
                             <Border BorderBrush="Black" BorderThickness="1,1,0.5,0.5" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="2">
@@ -738,7 +738,7 @@
                             <Label x:Name="lbPHQAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbPHQNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txPHQLoop" Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txPHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
                             <Button x:Name="btPHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Width="45" Click="BtPHQSave_Click" Height="25" VerticalAlignment="Top" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
@@ -1094,7 +1094,7 @@
                             <Label x:Name="lbGADAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbGADNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txGADLoop" Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txGADLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
                             <Button x:Name="btGADSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtGADSave_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
@@ -1363,7 +1363,7 @@
                             <Label x:Name="lbIPAQAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbIPAQNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txIPAQLoop" Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txIPAQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
                             <Button x:Name="btIPAQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtIPAQSave_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
@@ -1527,7 +1527,7 @@
                             <Label x:Name="lbOHQAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbOHQNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txOHQLoop" Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txOHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
                             <Button x:Name="btOHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtOHQSave_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
@@ -1812,7 +1812,7 @@
                             <Label x:Name="lbSPPBAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbSPPBNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txSPPBLoop" Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txSPPBLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
                             <Button x:Name="btSPPBSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtSPPBSave_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
@@ -2190,7 +2190,7 @@
                             <Label x:Name="lbBIAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbBINumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txPhysiqueLoop" Width="45" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txPhysiqueLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
                             <Button x:Name="btPhysiqueSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtPhysiqueSave_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >

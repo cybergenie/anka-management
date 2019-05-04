@@ -16,7 +16,7 @@ namespace Anka
         public static string Name { set; get; }
         public static string Number { set; get; }
         public static int Age { set; get; }
-        public static string Male { set; get; }
+        public static bool Male { set; get; } //true:男   false:女;
 
         /// <summary>
         /// 
@@ -43,7 +43,7 @@ namespace Anka
         public static string ExerciseNumber { set; get; }
         public struct ExerciseData
         {
-            public bool InRoomUp;//true:5  ;false:10;
+            public bool InRoomUp;//true:10  ;false:5;
             public  string[] Date;
             public  int[] BloodPressureLower;
             public  int[] BloodPressureUpper;
@@ -103,6 +103,7 @@ namespace Anka
         }
         public static OHQData OHQResult = new OHQData();
 
+        public static string SPPBNumber { set; get; }
         public struct SPPBData
         {
             public string BalanceTesting1;//A-0-0:是；B-d-d：否 d秒d分秒
@@ -231,10 +232,46 @@ namespace Anka
 
             BPLower = BMPtemp[0];
             BPUpper = BMPtemp[1];
-
-
         }
-            
+
+        public static string ArrayToString(int[] data)
+        {
+            string temp = "";
+
+            foreach (var s in data)
+            {
+                temp += (s.ToString() + "-");
+            }
+
+            return temp;
+        }
+
+        public static string ArrayToString(string[] data)
+        {
+            string temp = "";
+
+            foreach (var s in data)
+            {
+                temp += (s.ToString() + "-");
+            }
+
+            return temp;
+        }
+
+        public static string ArrayToString(bool[] data)
+        {
+            string temp = "";
+
+            foreach (var s in data)
+            {
+                int p = s == true ? 1 : 0;
+                temp += (p.ToString() + "-");
+            }
+
+            return temp;
+        }
+
+
     }
-    
+
 }
