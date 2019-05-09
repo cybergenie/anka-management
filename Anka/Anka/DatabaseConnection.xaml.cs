@@ -57,7 +57,8 @@ namespace Anka
             {
                 conn.Open();                
                 MessageBox.Show("连接成功！", "连接数据库");
-                DatabaseInfo.ConStatus = true;
+                DatabaseInfo.ConStatus = true;                
+                LoadMainWindow();
 
             }
             catch (MySqlException ex)
@@ -67,7 +68,7 @@ namespace Anka
 
             }
             finally
-            {
+            {               
                 this.Close();
 
             }
@@ -80,6 +81,11 @@ namespace Anka
 
         }
 
+        private void LoadMainWindow()
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
         
     }
 }

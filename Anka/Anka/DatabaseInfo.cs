@@ -49,9 +49,10 @@ namespace Anka
             }
             catch(MySqlException ex)
             {
+                DataAdapter.loadNewPerson = false;
                 if (ex.Number == 1062)
                 {
-                    MessageBox.Show("该编号已经存在，请输入新的编号。");
+                    MessageBox.Show("该编号已经存在，请输入新的编号。");                   
                 }
                 else
                 {

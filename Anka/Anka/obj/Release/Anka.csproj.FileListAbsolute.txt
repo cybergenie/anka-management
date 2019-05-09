@@ -12,7 +12,6 @@ E:\Project\Anka\anka-management\Anka\Anka\bin\Release\EntityFramework.SqlServer.
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Google.Protobuf.xml
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\MySql.Data.xml
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\MySql.Data.Entity.EF6.xml
-E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csprojAssemblyReference.cache
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\DatabaseConnection.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\MainWindow.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\NewPerson.g.cs
@@ -30,3 +29,12 @@ E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csproj.CoreCompileInp
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csproj.CopyComplete
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.exe
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.pdb
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.exe.manifest
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.application
+E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.TrustInfo.xml
+E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.exe.manifest
+E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.application
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.mwb
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\anka.pfx
+E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csprojAssemblyReference.cache
+E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka_Content.g.cs

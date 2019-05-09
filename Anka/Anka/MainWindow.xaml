@@ -11,6 +11,7 @@
             <MenuItem Header="文  件" Width="60" HorizontalContentAlignment="Center">
                 <MenuItem x:Name="DataConnection" Header="连接服务器" Click="DataConnection_Click"/>
                 <MenuItem x:Name="miNewDoc" Header="新建档案" Click="MiNewDoc_Click"/>
+                <MenuItem x:Name="miExit" Header="退出" Click="miExit_Click"/>
             </MenuItem>
             <MenuItem Header="选  项" Width="60"/>
             <Button Content="全部保存" HorizontalAlignment="Center" Height="22" VerticalAlignment="Center" Width="50" HorizontalContentAlignment="Center" IsEnabled="False"/>

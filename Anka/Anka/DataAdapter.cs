@@ -18,6 +18,8 @@ namespace Anka
         public static int Age { set; get; }
         public static bool Male { set; get; } //true:男   false:女;
 
+        public static bool loadNewPerson { set; get; } = false;
+
         /// <summary>
         /// 
         /// </summary>

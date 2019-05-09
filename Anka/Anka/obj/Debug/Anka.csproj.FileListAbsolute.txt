@@ -50,3 +50,11 @@ E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\EntityFramework.xml
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\EntityFramework.SqlServer.xml
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Google.Protobuf.xml
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\MySql.Data.Entity.EF6.xml
+E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.mwb
+E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\anka.pfx
+E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.exe.manifest
+E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.application
+E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka_Content.g.cs
+E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.TrustInfo.xml
+E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.exe.manifest
+E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.application

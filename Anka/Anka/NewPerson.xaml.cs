@@ -30,8 +30,9 @@ namespace Anka
         {
             bool isClose = true;
             bool Male = true;
+            DataAdapter.loadNewPerson = true;
 
-            if(this.txName.Text.Trim().Length<=0)
+            if (this.txName.Text.Trim().Length<=0)
             {
                 MessageBox.Show("请确认输入姓名。");
                 isClose = false;
@@ -77,6 +78,9 @@ namespace Anka
 
             if(isClose==true)
             {
+                
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
                 this.Close();
             }
             
@@ -89,6 +93,7 @@ namespace Anka
             this.txAge.IsReadOnly = true;
             this.rbFemale.IsEnabled = false;
             this.rbMale.IsEnabled = false;
+            DataAdapter.loadNewPerson = true;
 
             if (this.txNumber.Text.Trim().Length != 8)
             {
@@ -121,6 +126,7 @@ namespace Anka
                 {
                     MessageBox.Show(ex.Message);
                     DatabaseInfo.ConStatus = false;
+                    DataAdapter.loadNewPerson = false;
 
                 }
 
@@ -129,8 +135,11 @@ namespace Anka
                 try
                 {
                     MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    DataAdapter.loadNewPerson = false;
                     while (dataReader.Read())
                     {
+                        DataAdapter.loadNewPerson = true;
                         DataAdapter.Name = dataReader["Name"].ToString();
                         DataAdapter.Age = Convert.ToInt32(dataReader["Age"].ToString());
                         if (dataReader["Male"].ToString() == "1")
@@ -144,13 +153,14 @@ namespace Anka
                             DataAdapter.Male = true;
                         }
 
-                        }
+                    }
                     dataReader.Close();
                 }
                 catch (MySqlException ex)
                 {                    
                     
                         MessageBox.Show(string.Format("数据查询失败。错误代码:{0}", ex.Number));
+                    DataAdapter.loadNewPerson = false;
                   
                 }
                 finally
@@ -162,6 +172,9 @@ namespace Anka
 
             if (isClose == true)
             {
+                
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
                 this.Close();
             }
 
