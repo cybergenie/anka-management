@@ -30,8 +30,8 @@
     <ProductName>Anka</ProductName>
     <PublisherName>JW.Lee</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.1.1</ApplicationVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -108,7 +108,6 @@
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
@@ -203,7 +202,9 @@
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
-    <None Include="db\anka.db" />
+    <Content Include="db\anka.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Resources\beating_heart.ico" />
     <None Include="Resources\Icon1.ico" />

@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("anka.mwb")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("anka.pfx")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("db/anka.db")]
 
 

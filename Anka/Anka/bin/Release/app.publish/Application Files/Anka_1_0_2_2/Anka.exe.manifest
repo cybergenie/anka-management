@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Anka.exe" version="1.0.2.2" publicKeyToken="0dcac42b6f929b8e" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="Resources\beating_heart.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Anka" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Anka.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC 清单选项
+             如果想要更改 Windows 用户帐户控制级别，请使用
+             以下节点之一替换 requestedExecutionLevel 节点。n
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            指定 requestedExecutionLevel 元素将禁用文件和注册表虚拟化。
+            如果你的应用程序需要此虚拟化来实现向后兼容性，则删除此
+            元素。
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Anka.exe" size="416024">
+      <assemblyIdentity name="Anka" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ToAJf3pMQBk+CQfqy8wAoMQURiB8w7d8R+oTOLUGwBQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Devart.Data.dll" size="287912">
+      <assemblyIdentity name="Devart.Data" version="5.0.2158.0" publicKeyToken="09AF7300EEC23701" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>sNeR/JnSiUDzL3BzdFIZ9F+EW/c2FYgAs3QQdjis1f0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Devart.Data.SQLite.dll" size="468136">
+      <assemblyIdentity name="Devart.Data.SQLite" version="5.12.1366.0" publicKeyToken="09AF7300EEC23701" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>qdR4xQh/XI93ukAvQV9SEjKy9lU8BgO6/onJLEdYAS4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.dll" size="5225168">
+      <assemblyIdentity name="EntityFramework" version="6.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>nCD7KthqdgsMauvZMByQCYkdAq4UcgqTkmwLU1uK0Js=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.SqlServer.dll" size="622288">
+      <assemblyIdentity name="EntityFramework.SqlServer" version="6.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4OEmw7inupUB0D+Z1Upcu9F0vOy2FwCYq0zBIZ8n+TM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Data.SQLite.dll" size="352256">
+      <assemblyIdentity name="System.Data.SQLite" version="1.0.110.0" publicKeyToken="DB937BC2D44FF139" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>PZZn6QaLtVX1ubzLrBh1pusOngBlXeNpvkpkBSKT68s=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Data.SQLite.EF6.dll" size="184832">
+      <assemblyIdentity name="System.Data.SQLite.EF6" version="1.0.110.0" publicKeyToken="DB937BC2D44FF139" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>tBGLA5uKv3w+p6oZNiYaNlCaVhqQ3rS+7Lz14IZ4sHs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Data.SQLite.Linq.dll" size="184832">
+      <assemblyIdentity name="System.Data.SQLite.Linq" version="1.0.110.0" publicKeyToken="DB937BC2D44FF139" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>VCpYbMrcADhyQZa7asuQFfhsXVgwer9xx66pdfRfP50=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Anka.exe.config" size="1591">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Lyy2Iif8SCkpT61e3GzYEV51DTyJY9LtNjsj2v6Zd5k=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="db\anka.db" size="77824">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>uvjc4GQ/4ogeG8LAicv15vv8HShOawey+dR87uZurog=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\beating_heart.ico" size="66622">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>oG4m3180QU8/p2L6oM7EkiYCoPB+mswXgYWWaiIWLhs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- 设计此应用程序与其一起工作且已针对此应用程序进行测试的
+           Windows 版本的列表。取消评论适当的元素，
+           Windows 将自动选择最兼容的环境。 -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=JW.Lee" issuerKeyHash="5244ca7e52a0315d5eb173f8feabd378bdb55c5f" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>Hq2RkRJ3/Ybul6rG7xaLNb3aYwc=</DigestValue></Reference></SignedInfo><SignatureValue>Lnjx3KkgIa9qwTDi8B02KGM1qum5xCwFf9vbCE2NnkCNfwzw+Mlg+tIyw0FPQI7KvV23n6Rl9jMCE3UTVpy4hdYMGy8vo/VbsyIcqmcmtf8dV6leto5RyiNOawwVHltU8jn2nr1onVOD3lj+a0nDuUIiRmo/OL2KS6q6BuhmmeNY085GOSbs4wUbTiIu0YeD94BamtwUquSm3vIT8BxuH/G9OX0yBNaOAdHPE+TQmhRR0BDYUN6QNcilzc/FdrPgCm7htpuk6mChMAWiIaxTVv+1LZmqtykjif/P0vSS3WtQ3yOewOYe45punuqAqLQJ+PW+sqe4xj24eo8T4BfhYg==</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>mL13bVQalvG3AdXGme6NZyI2TvjUt/pJaYg2WRQ4aQivovW/rk1y9ttJN8Cbwr6TLguPUN60hucGi24dpBXUDDF6iEPH2tUe6RUaVY7MmB+kx6guRFrpRPkkzhxoCtFWSD9Pic8Hip7FXRhvTgdcsN/MJtlC6g/vvkmuKpNjdxPm+lpdlQcymM+YwHp0bLBe7MMVPuvlTKwXjeif/1azAc0uXWFIqRiC9jW7llPFjVQ88tS62pC3k/imaLlQAMFKHeQ/VHCf/p4OL5hwjq9twrTEECPs0oGHPgimZaW8F6j95/Avy1vOifqk4VMd6UVRy1sb4y4w73MRY7oxP1ZVzQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="0763dabd358b16efc6aa97ee86fd77129191ad1e" Description="" Url=""><as:assemblyIdentity name="Anka.exe" version="1.0.2.2" publicKeyToken="0dcac42b6f929b8e" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=JW.Lee</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>KW6x4KfIgE6nuiJe5oYi0amUsJs=</DigestValue></Reference></SignedInfo><SignatureValue>CeyAzfOaUwP+Pks3Rfq5TXuYgsU/8ZiiJ5fkRfyxCFji3uZqQjbFjjay3rDeqLZ1fi3JuWNH5gUk7naafbhQbmFZFoMyPVktImNG+YlLKoeDglBl+Qalscw4yhWupvR35TqVdHFZOqCRabFrJ4JmbTp+DieomDZLSy3cwTuFmQn/18aCb32V2OgIdKX244Bmz/Sio/tLtz23sMnYQ6FFhp/ySkxrF2gQIXjkeNui72boagXkWgXhsiFP08ob/sJWpgDiBKFxixkbPpW+Tra6BUg6M1qzlvHQlmKFuu5T2Wlk3ZYpgJjSbTzaxkbSKz9Thun1pdbzP7dCe/TaBUWCNw==</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>mL13bVQalvG3AdXGme6NZyI2TvjUt/pJaYg2WRQ4aQivovW/rk1y9ttJN8Cbwr6TLguPUN60hucGi24dpBXUDDF6iEPH2tUe6RUaVY7MmB+kx6guRFrpRPkkzhxoCtFWSD9Pic8Hip7FXRhvTgdcsN/MJtlC6g/vvkmuKpNjdxPm+lpdlQcymM+YwHp0bLBe7MMVPuvlTKwXjeif/1azAc0uXWFIqRiC9jW7llPFjVQ88tS62pC3k/imaLlQAMFKHeQ/VHCf/p4OL5hwjq9twrTEECPs0oGHPgimZaW8F6j95/Avy1vOifqk4VMd6UVRy1sb4y4w73MRY7oxP1ZVzQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIC6jCCAdagAwIBAgIQ8FbSw1N0XoNBh8C2vCBobjAJBgUrDgMCHQUAMBExDzANBgNVBAMTBkpXLkxlZTAeFw0xODEwMDcxNjAwMDBaFw0yNjA4MTAxNjAwMDBaMBExDzANBgNVBAMTBkpXLkxlZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJi9d21UGpbxtwHVxpnujWciNk741Lf6SWmINlkUOGkIr6L1v65NcvbbSTfAm8K+ky4Lj1DetIbnBotuHaQV1AwxeohDx9rVHukVGlWOzJgfpMeoLkRa6UT5JM4caArRVkg/T4nPB4qexV0Yb04HXLDfzCbZQuoP775JriqTY3cT5vpaXZUHMpjPmMB6dGywXuzDFT7r5UysF43on/9WswHNLl1hSKkYgvY1u5ZTxY1UPPLUutqQt5P4pmi5UADBSh3kP1Rwn/6eDi+YcI6vbcK0xBAj7NKBhz4IpmWlvBeo/efwL8tbzon6pOFTHelFUctbG+MuMO9zEWO6MT9WVc0CAwEAAaNGMEQwQgYDVR0BBDswOYAQIYZjiHUOGj1xks4E8kcb36ETMBExDzANBgNVBAMTBkpXLkxlZYIQ8FbSw1N0XoNBh8C2vCBobjAJBgUrDgMCHQUAA4IBAQBYdNl7So2lCczyc2+XL2L51wK9ck5aqhjso+CRyQUiqbCT923qNzURmyz4szFUmAyO0c370FVmZh+Wq0pCq3MHnv1OUmIurWZrAWGu9ixbLmeJ9vqS2XRe2+zS/tI3nmVtPZQikJhc/5IFxU/gGZ5dFIbem0IHhRpGzniU9Gnb8sjabnqeRppsJFDlFRpk4LrkLv52ay1W+JV1y1V3H4oGjR0UhJpMW5ypz+jxFty3sr7MkJ2YPHkzmOr1C4Aiq3Y1UGvxjuSnhUnbnqorpCGs948Qc7QHnJmCUseOMx7cuYutoOelcR+ARR2CPVWlTKGCcAan9wLatGApBkB0BHDJ</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

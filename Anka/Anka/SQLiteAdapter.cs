@@ -17,7 +17,7 @@ namespace Anka
         /// <summary>
         /// 数据库路径
         /// </summary>
-        private static readonly string m_DataSource = "anka.db";
+        private static readonly string m_DataSource = @"db\anka.db";
 
         private static readonly string m_ConnectionString;
 
