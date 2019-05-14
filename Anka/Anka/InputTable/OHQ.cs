@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -24,20 +25,12 @@ namespace Anka
                 DataAdapter.OHQNumber = DataAdapter.Number + "-" + this.txOHQLoop.Text.Trim();
                 OHQDataSave();
 
-                string sql1 = string.Format("INSERT INTO `anka`.`ohq` (`OHQNumber`, `OHQ1`, `OHQ2`, `OHQ3`, `OHQ4`, `OHQ5`, `OHQ6`, `OHQ7`, `OHQ8`, `OHQ9`, `basicinfo_Number`) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}');",
-                  DataAdapter.OHQNumber,
-                  DataAdapter.OHQResult.OHQ1,
-                  DataAdapter.OHQResult.OHQ2,
-                  DataAdapter.OHQResult.OHQ3,
-                  DataAdapter.OHQResult.OHQ4,
-                  DataAdapter.OHQResult.OHQ5,
-                  DataAdapter.OHQResult.OHQ6,
-                  DataAdapter.OHQResult.OHQ7,
-                  DataAdapter.OHQResult.OHQ8,
-                  DataAdapter.OHQResult.OHQ9,
-                  DataAdapter.Number);
+                string sql = string.Format("SELECT * FROM ohq where OHQNumber='{0}';", DataAdapter.OHQNumber);
+                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
 
-                string sql2 = string.Format("UPDATE `anka`.`ohq` SET `OHQ1` = '{1}', `OHQ2` = '{2}', `OHQ3` = '{3}', `OHQ4` = '{4}', `OHQ5` = '{5}', `OHQ6` = '{6}', `OHQ7` = '{7}', `OHQ8` = '{8}', `OHQ9` = '{9}' WHERE (`OHQNumber` = '{0}') and (`basicinfo_Number` = '{10}');",
+                if (dataReader.StepCount == 0)
+                {
+                    sql = string.Format("INSERT INTO ohq (OHQNumber, OHQ1, OHQ2, OHQ3, OHQ4, OHQ5, OHQ6, OHQ7, OHQ8, OHQ9, basicinfo_Number) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}');",
                   DataAdapter.OHQNumber,
                   DataAdapter.OHQResult.OHQ1,
                   DataAdapter.OHQResult.OHQ2,
@@ -49,7 +42,26 @@ namespace Anka
                   DataAdapter.OHQResult.OHQ8,
                   DataAdapter.OHQResult.OHQ9,
                   DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                }
+                else
+                {
+
+                    sql = string.Format("UPDATE ohq SET OHQ1 = '{1}', OHQ2 = '{2}', OHQ3 = '{3}', OHQ4 = '{4}', OHQ5 = '{5}', OHQ6 = '{6}', OHQ7 = '{7}', OHQ8 = '{8}', OHQ9 = '{9}' WHERE (OHQNumber = '{0}') and (basicinfo_Number = '{10}');",
+                     DataAdapter.OHQNumber,
+                     DataAdapter.OHQResult.OHQ1,
+                     DataAdapter.OHQResult.OHQ2,
+                     DataAdapter.OHQResult.OHQ3,
+                     DataAdapter.OHQResult.OHQ4,
+                     DataAdapter.OHQResult.OHQ5,
+                     DataAdapter.OHQResult.OHQ6,
+                     DataAdapter.OHQResult.OHQ7,
+                     DataAdapter.OHQResult.OHQ8,
+                     DataAdapter.OHQResult.OHQ9,
+                     DataAdapter.Number);
+                }
+                dataReader.Close();
+                SQLiteAdapter.ExecuteNonQuery(sql);
+                
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

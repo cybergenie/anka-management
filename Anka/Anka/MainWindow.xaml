@@ -1846,7 +1846,7 @@
                                 <Label Content="(1) 平衡测试" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                                 <WrapPanel>
                                     <Label Content="①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <Image Source="recourse/SPPB_1.bmp" Height="25" />
+                                    <Image Source="Resources/SPPB_1.bmp" Height="25" />
                                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
                                     <RadioButton x:Name="rbSPPBYes1" Content="是" GroupName="SPPB11" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="RbSPPB1_Click" />
                                     <RadioButton x:Name="rbSPPBNo1"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB11" Click="RbSPPB1_Click" >
@@ -1861,7 +1861,7 @@
                                 </WrapPanel>
                                 <WrapPanel>
                                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <Image Height="25" Source="recourse/SPPB_2.bmp" />
+                                    <Image Height="25" Source="Resources/SPPB_2.bmp" />
                                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
                                     <RadioButton x:Name="rbSPPBYes2" Content="是" GroupName="SPPB12" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="RbSPPB2_Click" />
                                     <RadioButton x:Name="rbSPPBNo2"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB12" Click="RbSPPB2_Click" >
@@ -1876,7 +1876,7 @@
                                 </WrapPanel>
                                 <WrapPanel>
                                     <Label Content="③" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <Image Source="recourse/SPPB_3.bmp" Height="25" />
+                                    <Image Source="Resources/SPPB_3.bmp" Height="25" />
                                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
                                     <RadioButton x:Name="rbSPPBYes3" Content="是" GroupName="SPPB13" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="RbSPPB3_Click" />
                                     <RadioButton x:Name="rbSPPBNo3"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB13" Click="RbSPPB3_Click" >

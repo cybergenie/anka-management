@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
 
 
 namespace Anka

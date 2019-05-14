@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -24,16 +25,27 @@ namespace Anka
                 DataAdapter.PHQNumber = DataAdapter.Number + "-" + this.txPHQLoop.Text.Trim();
                 DataAdapter.PHQResult = PHQData();
 
-                string sql1 = string.Format("INSERT INTO `anka`.`phq` (`PHQNumber`, `PHQResult`, `basicinfo_Number`) VALUES('{0}', '{1}', '{2}');",
-                    DataAdapter.PHQNumber,
-                    DataAdapter.ArrayToString(DataAdapter.PHQResult),
-                    DataAdapter.Number);
+                string sql = string.Format("SELECT * FROM phq where PHQNumber='{0}';", DataAdapter.PHQNumber);
+                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
 
-                string sql2 = string.Format("UPDATE `anka`.`phq` SET `PHQResult` = '{1}' WHERE(`PHQNumber` = '{0}') and(`basicinfo_Number` = '{2}');",
+                if (dataReader.StepCount == 0)
+                {
+                    sql = string.Format("INSERT INTO phq (PHQNumber, PHQResult, basicinfo_Number) VALUES('{0}', '{1}', '{2}');",
                    DataAdapter.PHQNumber,
                    DataAdapter.ArrayToString(DataAdapter.PHQResult),
                    DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                }
+                else
+                {
+                    sql = string.Format("UPDATE phq SET PHQResult = '{1}' WHERE(PHQNumber = '{0}') and(basicinfo_Number = '{2}');",
+                      DataAdapter.PHQNumber,
+                      DataAdapter.ArrayToString(DataAdapter.PHQResult),
+                      DataAdapter.Number);
+                }
+
+                dataReader.Close();
+                SQLiteAdapter.ExecuteNonQuery(sql);
+                // DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

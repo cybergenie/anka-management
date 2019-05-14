@@ -7,14 +7,14 @@
     <framework targetVersion="4.6.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Anka.exe.manifest" size="9932">
+    <dependentAssembly dependencyType="install" codebase="Anka.exe.manifest" size="9849">
       <assemblyIdentity name="Anka.exe" version="1.0.1.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iWQmmGMY8kIt16ahmMkRLRpZFD1G2NeGJbhOcKWbIKw=</dsig:DigestValue>
+        <dsig:DigestValue>6kq4J9RG6DWuboJbeH0elRA8VPJNz7uSwB4HfWyfeHo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

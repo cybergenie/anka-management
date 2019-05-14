@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -39,7 +40,12 @@ namespace Anka
                 DataAdapter.PhysiqueNumber = DataAdapter.Number + "-" + this.txPhysiqueLoop.Text.Trim();
                 PhysiqueResultSave();
 
-                string sql1 = string.Format("INSERT INTO `anka`.`physique` (`idPhysique`, `FM`, `TBW`, `BCW`, `SMMAll`, `SMMArmLeft`, `SMMArmRight`, `SMMBody`, `SMMLegLeft`, `SMMLegRight`, `VAT`, `PA`, `PAPercent`, `basicinfo_Number`) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}');",
+                string sql = string.Format("SELECT * FROM physique where PhysiqueNumber='{0}';", DataAdapter.PhysiqueNumber);
+                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
+
+                if (dataReader.StepCount == 0)
+                {
+                     sql = string.Format("INSERT INTO physique (PhysiqueNumber, FM, TBW, BCW, SMMAll, SMMArmLeft, SMMArmRight, SMMBody, SMMLegLeft, SMMLegRight, VAT, PA, PAPercent, basicinfo_Number) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}');",
                     DataAdapter.PhysiqueNumber,
                     DataAdapter.PhysiqueResult.FM,
                     DataAdapter.PhysiqueResult.TBW,
@@ -54,23 +60,28 @@ namespace Anka
                     DataAdapter.PhysiqueResult.PA,
                     DataAdapter.PhysiqueResult.PAPercent,
                     DataAdapter.Number);
-
-                string sql2 = string.Format("UPDATE `anka`.`physique` SET `FM` = '{1}', `TBW` = '{2}', `BCW` = '{3}', `SMMAll` = '{4}', `SMMArmLeft` = '{5}', `SMMArmRight` = '{6}', `SMMBody` = '{7}', `SMMLegLeft` = '{8}', `SMMLegRight` = '{9}', `VAT` = '{10}', `PA` = '{11}', `PAPercent` = '{12}' WHERE (`idPhysique` = '{0}') and (`basicinfo_Number` = '{13}');",
-                        DataAdapter.PhysiqueNumber,
-                        DataAdapter.PhysiqueResult.FM,
-                        DataAdapter.PhysiqueResult.TBW,
-                        DataAdapter.PhysiqueResult.BCW,
-                        DataAdapter.PhysiqueResult.SMMAll,
-                        DataAdapter.PhysiqueResult.SMMArmLeft,
-                        DataAdapter.PhysiqueResult.SMMArmRight,
-                        DataAdapter.PhysiqueResult.SMMBody,
-                        DataAdapter.PhysiqueResult.SMMLegLeft,
-                        DataAdapter.PhysiqueResult.SMMLegRight,
-                        DataAdapter.PhysiqueResult.VAT,
-                        DataAdapter.PhysiqueResult.PA,
-                        DataAdapter.PhysiqueResult.PAPercent,
-                        DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                }
+                else
+                {
+                     sql = string.Format("UPDATE physique SET FM = '{1}', TBW = '{2}', BCW = '{3}', SMMAll = '{4}', SMMArmLeft = '{5}', SMMArmRight = '{6}', SMMBody = '{7}', SMMLegLeft = '{8}', SMMLegRight = '{9}', VAT = '{10}', PA = '{11}', PAPercent = '{12}' WHERE (PhysiqueNumber = '{0}') and (basicinfo_Number = '{13}');",
+                            DataAdapter.PhysiqueNumber,
+                            DataAdapter.PhysiqueResult.FM,
+                            DataAdapter.PhysiqueResult.TBW,
+                            DataAdapter.PhysiqueResult.BCW,
+                            DataAdapter.PhysiqueResult.SMMAll,
+                            DataAdapter.PhysiqueResult.SMMArmLeft,
+                            DataAdapter.PhysiqueResult.SMMArmRight,
+                            DataAdapter.PhysiqueResult.SMMBody,
+                            DataAdapter.PhysiqueResult.SMMLegLeft,
+                            DataAdapter.PhysiqueResult.SMMLegRight,
+                            DataAdapter.PhysiqueResult.VAT,
+                            DataAdapter.PhysiqueResult.PA,
+                            DataAdapter.PhysiqueResult.PAPercent,
+                            DataAdapter.Number);
+                }
+                dataReader.Close();
+                SQLiteAdapter.ExecuteNonQuery(sql);
+                // DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
 
             }

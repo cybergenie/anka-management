@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Data.SQLite;
+
 namespace Anka
 {
     public partial class MainWindow
@@ -25,8 +27,13 @@ namespace Anka
                 DataAdapter.ExerciseNumber = DataAdapter.Number + "-" + this.txExerciseLoop.Text.Trim();
                 ExcerciseDataSave();
 
-                string sql1 = string.Format("INSERT INTO `anka`.`exercise` (`ExerciseNumber`, `InRoomUp`,`Date`, `BloodPressureLower`, `BloodPressureUpper`" +
-                    ", `HeartRate`, `BloodOxygen`, `BorgIndex`, `Remarks`, `ECGs`, `Checks`, `basicinfo_Number`) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}',{11});",
+                string sql = string.Format("SELECT * FROM exercise where ExerciseNumber='{0}';", DataAdapter.ExerciseNumber);
+                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
+
+                if(dataReader.StepCount==0)
+                {
+                    sql = string.Format("INSERT INTO exercise (ExerciseNumber, InRoomUp,Date, BloodPressureLower, BloodPressureUpper" +
+                    ", HeartRate,BloodOxygen, BorgIndex, Remarks, ECGs, Checks, basicinfo_Number) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}',{11});",
                     DataAdapter.ExerciseNumber,
                     DataAdapter.ExerciseResult.InRoomUp,
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Date),
@@ -38,8 +45,11 @@ namespace Anka
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Remarks),
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.ECGs),
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Checks),
-                    DataAdapter.Number);
-                string sql2 = string.Format("UPDATE `anka`.`exercise` SET `InRoomUp` = {0}, `Date` = '{1}', `BloodPressureLower` = '{2}', `BloodPressureUpper` = '{3}', `HeartRate` = '{4}', `BloodOxygen` = '{5}', `BorgIndex` = '{6}', `Remarks` = '{7}', `ECGs` = '{8}', `Checks` = '{9}' WHERE (`ExerciseNumber` = '{10}') and (`basicinfo_Number` = '{11}');",
+                    DataAdapter.Number);                    
+                }
+                else
+                {
+                    sql = string.Format("UPDATE exercise SET InRoomUp = {0}, Date = '{1}', BloodPressureLower = '{2}', BloodPressureUpper = '{3}', HeartRate = '{4}', BloodOxygen = '{5}', BorgIndex = '{6}', Remarks = '{7}', ECGs = '{8}', Checks = '{9}' WHERE (ExerciseNumber = '{10}') and (basicinfo_Number = '{11}');",
                     DataAdapter.ExerciseResult.InRoomUp,
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Date),
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BloodPressureLower),
@@ -51,8 +61,13 @@ namespace Anka
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.ECGs),
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Checks),
                      DataAdapter.ExerciseNumber, DataAdapter.Number);
+                }
+                dataReader.Close();
 
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                SQLiteAdapter.ExecuteNonQuery(sql);
+
+
+                
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

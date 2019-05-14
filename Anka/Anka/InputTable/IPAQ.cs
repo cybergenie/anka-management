@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -24,17 +25,25 @@ namespace Anka
                 DataAdapter.IPAQNumber = DataAdapter.Number + "-" + this.txIPAQLoop.Text.Trim();
                 IPAQDataSave();
 
-                string sql1 = string.Format("INSERT INTO `anka`.`ipaq` (`IPAQNumber`, `IPAQ0`, `IPAQ1`, `IPAQ2`, `IPAQ3`, `IPAQ4`, `IPAQ5`, `basicinfo_Number`) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');",
-                   DataAdapter.IPAQNumber,
-                   DataAdapter.IPAQResult.IPAQ0,
-                   DataAdapter.IPAQResult.IPAQ1,
-                   DataAdapter.IPAQResult.IPAQ2,
-                   DataAdapter.IPAQResult.IPAQ3,
-                   DataAdapter.IPAQResult.IPAQ4,
-                   DataAdapter.IPAQResult.IPAQ5,
-                   DataAdapter.Number);
+                string sql = string.Format("SELECT * FROM ipaq where IPAQNumber='{0}';", DataAdapter.IPAQNumber);
+                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
 
-                string sql2 = string.Format("UPDATE `anka`.`ipaq` SET `IPAQ0` = {0}, `IPAQ1` = '{1}', `IPAQ2` = '{2}', `IPAQ3` = '{3}', `IPAQ4` = '{4}', `IPAQ5` = '{5}' WHERE (`IPAQNumber` = '{6}') and (`basicinfo_Number` = '{7}');",
+                if (dataReader.StepCount == 0)
+                {
+                    sql = string.Format("INSERT INTO ipaq (IPAQNumber, IPAQ0, IPAQ1, IPAQ2, IPAQ3, IPAQ4, IPAQ5, basicinfo_Number) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');",
+                    DataAdapter.IPAQNumber,
+                    DataAdapter.IPAQResult.IPAQ0,
+                    DataAdapter.IPAQResult.IPAQ1,
+                    DataAdapter.IPAQResult.IPAQ2,
+                    DataAdapter.IPAQResult.IPAQ3,
+                    DataAdapter.IPAQResult.IPAQ4,
+                    DataAdapter.IPAQResult.IPAQ5,
+                    DataAdapter.Number);
+                }
+                else
+                {
+
+                    sql = string.Format("UPDATE ipaq SET IPAQ0 = {0}, IPAQ1 = '{1}', IPAQ2 = '{2}', IPAQ3 = '{3}', IPAQ4 = '{4}', IPAQ5 = '{5}' WHERE (IPAQNumber = '{6}') and (basicinfo_Number = '{7}');",
                    DataAdapter.IPAQResult.IPAQ0,
                    DataAdapter.IPAQResult.IPAQ1,
                    DataAdapter.IPAQResult.IPAQ2,
@@ -43,7 +52,11 @@ namespace Anka
                    DataAdapter.IPAQResult.IPAQ5,
                    DataAdapter.IPAQNumber,
                    DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                }
+
+                dataReader.Close();
+                SQLiteAdapter.ExecuteNonQuery(sql);
+                
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

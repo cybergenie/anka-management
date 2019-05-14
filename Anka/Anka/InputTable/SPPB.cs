@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -29,11 +30,17 @@ namespace Anka
                 GripStrengthResultSave();
                 LapStrengthResultSave();
 
-                string sql1 = string.Format("INSERT INTO `anka`.`sppb` (`SPPBNumber`, `BalanceTesting1`, `BalanceTesting2`, `BalanceTesting3`, `walkingTesting1`, `walkingTesting2`, `SitUpTesting`" +
-                    ", `TUG`, `FRTLeft1`, `FRTLeft2`, `FRTRight1`, `FRTRight2`, `SFO1`, `SFO2`, `OneFootLeft1`, `OneFootLeft2`, `OneFootRight1`, `OneFootRight2`," +
-                    " `Hight`, `Weight`, `Waistline`, `Hipline`, `ArmlineLeft`, `ArmlineRight`, `LeglineLeft`, `LeglineRight`, `BloodPressureUpper`, `BloodPressureLower`, `HeartRate`,`Temperature`, `Breathe`" +
-                    ", `LeftHandHurt`, `RightHandHurt`, `GripStrengthLeft1`, `GripStrengthRight1`, `GripStrengthLeft2`, `GripStrengthRight2`, " +
-                    "`LeftLapHurt`, `RightLapHurt`,`LapStrengthLeft1`, `LapStrengthRight1`, `LapStrengthLeft2`, `LapStrengthRight2`, `basicinfo_Number`) VALUES" +
+                string sql = string.Format("SELECT * FROM sppb where SPPBNumber='{0}';", DataAdapter.SPPBNumber);
+                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
+
+                if (dataReader.StepCount == 0)
+                {
+
+                     sql = string.Format("INSERT INTO sppb (SPPBNumber, BalanceTesting1, BalanceTesting2, BalanceTesting3, walkingTesting1, walkingTesting2, SitUpTesting" +
+                    ", TUG, FRTLeft1, FRTLeft2, FRTRight1, FRTRight2, SFO1, SFO2, OneFootLeft1, OneFootLeft2, OneFootRight1, OneFootRight2," +
+                    " Hight, Weight, Waistline, Hipline, ArmlineLeft, ArmlineRight, LeglineLeft, LeglineRight, BloodPressureUpper, BloodPressureLower, HeartRate,Temperature, Breathe" +
+                    ", LeftHandHurt, RightHandHurt, GripStrengthLeft1, GripStrengthRight1, GripStrengthLeft2, GripStrengthRight2, " +
+                    "LeftLapHurt, RightLapHurt,LapStrengthLeft1, LapStrengthRight1, LapStrengthLeft2, LapStrengthRight2, basicinfo_Number) VALUES" +
                     " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}','{27}','{28}','{29}','{30}',{31},{32},'{33}','{34}','{35}','{36}',{37},{38},'{39}','{40}','{41}','{42}','{43}'); ",
                    DataAdapter.SPPBNumber,
                    DataAdapter.SPPBResult.BalanceTesting1,
@@ -79,58 +86,64 @@ namespace Anka
                    DataAdapter.GripStrengthResult.GripStrengthLeft2,
                    DataAdapter.GripStrengthResult.GripStrengthRight2,
                    DataAdapter.Number);
+                }
+                else
+                {
 
-                string sql2 = string.Format("UPDATE `anka`.`sppb` SET `BalanceTesting1` = '{1}', `BalanceTesting2` = '{2}', `BalanceTesting3` = '{3}', `walkingTesting1` = '{4}', `walkingTesting2` = '{5}', `SitUpTesting` = '{6}'" +
-                    ", `TUG` = '{7}', `FRTLeft1` = '{8}', `FRTLeft2` = '{9}', `FRTRight1` = '{10}', `FRTRight2` = '{11}', `SFO1` = '{12}', `SFO2` = '{13}', `OneFootLeft1` = '{14}', `OneFootLeft2` = '{15}', `OneFootRight1` = '{16}', `OneFootRight2` = '{17}'" +
-                    ", `Hight` = '{18}', `Weight` = '{19}', `Waistline` = '{20}', `Hipline` = '{21}', `ArmlineLeft` = '{22}', `ArmlineRight` = '{23}', `LeglineLeft` = '{24}', `LeglineRight` = '{25}', `BloodPressureUpper` = '{26}', `BloodPressureLower` = '{27}', `HeartRate` = '{28}', `Temperature` = '{29}', `Breathe` = '{30}'" +
-                    ", `LeftHandHurt` = {31}, `RightHandHurt` = {32}, `GripStrengthLeft1` = '{33}', `GripStrengthRight1` = '{34}', `GripStrengthLeft2` = '{35}', `GripStrengthRight2` = '{36}'" +
-                    ", `LeftLapHurt` = {37}, `RightLapHurt` = {38}, `LapStrengthLeft1` = '{39}', `LapStrengthRight1` = '{40}', `LapStrengthLeft2` = '{41}', `LapStrengthRight2` = '{42}'" +
-                    " WHERE (`SPPBNumber` = '{0}') and (`basicinfo_Number` = '{43}');",
-                   DataAdapter.SPPBNumber,
-                   DataAdapter.SPPBResult.BalanceTesting1,
-                   DataAdapter.SPPBResult.BalanceTesting2,
-                   DataAdapter.SPPBResult.BalanceTesting3,
-                   DataAdapter.SPPBResult.walkingTesting1,
-                   DataAdapter.SPPBResult.walkingTesting2,
-                   DataAdapter.SPPBResult.SitUpTesting,
-                   DataAdapter.BalanceCapabilityResult.TUG,
-                   DataAdapter.BalanceCapabilityResult.FRTLeft1,
-                   DataAdapter.BalanceCapabilityResult.FRTLeft2,
-                   DataAdapter.BalanceCapabilityResult.FRTRight1,
-                   DataAdapter.BalanceCapabilityResult.FRTRight2,
-                   DataAdapter.BalanceCapabilityResult.SFO1,
-                   DataAdapter.BalanceCapabilityResult.SFO2,
-                   DataAdapter.BalanceCapabilityResult.OneFootLeft1,
-                   DataAdapter.BalanceCapabilityResult.OneFootLeft2,
-                   DataAdapter.BalanceCapabilityResult.OneFootRight1,
-                   DataAdapter.BalanceCapabilityResult.OneFootRight2,
-                   DataAdapter.SizeResult.Hight,
-                   DataAdapter.SizeResult.Weight,
-                   DataAdapter.SizeResult.Waistline,
-                   DataAdapter.SizeResult.Hipline,
-                   DataAdapter.SizeResult.ArmlineLeft,
-                   DataAdapter.SizeResult.ArmlineRight,
-                   DataAdapter.SizeResult.LeglineLeft,
-                   DataAdapter.SizeResult.LeglineRight,
-                   DataAdapter.VitalsResult.BloodPressureUpper,
-                   DataAdapter.VitalsResult.BloodPressureLower,
-                   DataAdapter.VitalsResult.HeartRate,
-                   DataAdapter.VitalsResult.Temperature,
-                   DataAdapter.VitalsResult.Breathe,
-                   DataAdapter.GripStrengthResult.LeftHandHurt,
-                   DataAdapter.GripStrengthResult.RightHandHurt,
-                   DataAdapter.GripStrengthResult.GripStrengthLeft1,
-                   DataAdapter.GripStrengthResult.GripStrengthRight1,
-                   DataAdapter.GripStrengthResult.GripStrengthLeft2,
-                   DataAdapter.GripStrengthResult.GripStrengthRight2,
-                   DataAdapter.LapStrengthResult.LeftLapHurt,
-                   DataAdapter.GripStrengthResult.RightHandHurt,
-                   DataAdapter.GripStrengthResult.GripStrengthLeft1,
-                   DataAdapter.GripStrengthResult.GripStrengthRight1,
-                   DataAdapter.GripStrengthResult.GripStrengthLeft2,
-                   DataAdapter.GripStrengthResult.GripStrengthRight2,
-                   DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                    sql = string.Format("UPDATE sppb SET BalanceTesting1 = '{1}', BalanceTesting2 = '{2}', BalanceTesting3 = '{3}', walkingTesting1 = '{4}', walkingTesting2 = '{5}', SitUpTesting = '{6}'" +
+                        ", TUG = '{7}', FRTLeft1 = '{8}', FRTLeft2 = '{9}', FRTRight1 = '{10}', FRTRight2 = '{11}', SFO1 = '{12}', SFO2 = '{13}', OneFootLeft1 = '{14}', OneFootLeft2 = '{15}', OneFootRight1 = '{16}', OneFootRight2 = '{17}'" +
+                        ", Hight = '{18}', Weight = '{19}', Waistline = '{20}', Hipline = '{21}', ArmlineLeft = '{22}', ArmlineRight = '{23}', LeglineLeft = '{24}', LeglineRight = '{25}', BloodPressureUpper = '{26}', BloodPressureLower = '{27}', HeartRate = '{28}', Temperature = '{29}', Breathe = '{30}'" +
+                        ", LeftHandHurt = {31}, RightHandHurt = {32}, GripStrengthLeft1 = '{33}', GripStrengthRight1 = '{34}', GripStrengthLeft2 = '{35}', GripStrengthRight2 = '{36}'" +
+                        ", LeftLapHurt = {37}, RightLapHurt = {38}, LapStrengthLeft1 = '{39}', LapStrengthRight1 = '{40}', LapStrengthLeft2 = '{41}', LapStrengthRight2 = '{42}'" +
+                        " WHERE (SPPBNumber = '{0}') and (basicinfo_Number = '{43}');",
+                       DataAdapter.SPPBNumber,
+                       DataAdapter.SPPBResult.BalanceTesting1,
+                       DataAdapter.SPPBResult.BalanceTesting2,
+                       DataAdapter.SPPBResult.BalanceTesting3,
+                       DataAdapter.SPPBResult.walkingTesting1,
+                       DataAdapter.SPPBResult.walkingTesting2,
+                       DataAdapter.SPPBResult.SitUpTesting,
+                       DataAdapter.BalanceCapabilityResult.TUG,
+                       DataAdapter.BalanceCapabilityResult.FRTLeft1,
+                       DataAdapter.BalanceCapabilityResult.FRTLeft2,
+                       DataAdapter.BalanceCapabilityResult.FRTRight1,
+                       DataAdapter.BalanceCapabilityResult.FRTRight2,
+                       DataAdapter.BalanceCapabilityResult.SFO1,
+                       DataAdapter.BalanceCapabilityResult.SFO2,
+                       DataAdapter.BalanceCapabilityResult.OneFootLeft1,
+                       DataAdapter.BalanceCapabilityResult.OneFootLeft2,
+                       DataAdapter.BalanceCapabilityResult.OneFootRight1,
+                       DataAdapter.BalanceCapabilityResult.OneFootRight2,
+                       DataAdapter.SizeResult.Hight,
+                       DataAdapter.SizeResult.Weight,
+                       DataAdapter.SizeResult.Waistline,
+                       DataAdapter.SizeResult.Hipline,
+                       DataAdapter.SizeResult.ArmlineLeft,
+                       DataAdapter.SizeResult.ArmlineRight,
+                       DataAdapter.SizeResult.LeglineLeft,
+                       DataAdapter.SizeResult.LeglineRight,
+                       DataAdapter.VitalsResult.BloodPressureUpper,
+                       DataAdapter.VitalsResult.BloodPressureLower,
+                       DataAdapter.VitalsResult.HeartRate,
+                       DataAdapter.VitalsResult.Temperature,
+                       DataAdapter.VitalsResult.Breathe,
+                       DataAdapter.GripStrengthResult.LeftHandHurt,
+                       DataAdapter.GripStrengthResult.RightHandHurt,
+                       DataAdapter.GripStrengthResult.GripStrengthLeft1,
+                       DataAdapter.GripStrengthResult.GripStrengthRight1,
+                       DataAdapter.GripStrengthResult.GripStrengthLeft2,
+                       DataAdapter.GripStrengthResult.GripStrengthRight2,
+                       DataAdapter.LapStrengthResult.LeftLapHurt,
+                       DataAdapter.GripStrengthResult.RightHandHurt,
+                       DataAdapter.GripStrengthResult.GripStrengthLeft1,
+                       DataAdapter.GripStrengthResult.GripStrengthRight1,
+                       DataAdapter.GripStrengthResult.GripStrengthLeft2,
+                       DataAdapter.GripStrengthResult.GripStrengthRight2,
+                       DataAdapter.Number);
+                }
+                dataReader.Close();
+                SQLiteAdapter.ExecuteNonQuery(sql);
+                // DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

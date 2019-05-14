@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -66,17 +67,27 @@ namespace Anka
                 DataAdapter.GADNumber = DataAdapter.Number + "-" + this.txGADLoop.Text.Trim();
                 DataAdapter.GADResult = GADData();
 
+                string sql = string.Format("SELECT * FROM gad where GADNumber='{0}';", DataAdapter.GADNumber);
+                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
 
-                string sql1 = string.Format("INSERT INTO `anka`.`gad` (`GADNumber`, `GADResult`, `basicinfo_Number`) VALUES('{0}', '{1}', '{2}');",
+                if (dataReader.StepCount == 0)
+                {
+
+                    sql = string.Format("INSERT INTO gad (GADNumber, GADResult, basicinfo_Number) VALUES('{0}', '{1}', '{2}');",
                     DataAdapter.GADNumber,
                     DataAdapter.ArrayToString(DataAdapter.GADResult),
                     DataAdapter.Number);
-
-                string sql2 = string.Format("UPDATE `anka`.`gad` SET `GADResult` = '{1}' WHERE(`GADNumber` = '{0}') and(`basicinfo_Number` = '{2}');",
+                }
+                else
+                {
+                    sql = string.Format("UPDATE gad SET GADResult = '{1}' WHERE(GADNumber = '{0}') and(basicinfo_Number = '{2}');",
                    DataAdapter.GADNumber,
                    DataAdapter.ArrayToString(DataAdapter.GADResult),
                    DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+
+                }
+                dataReader.Close();
+                SQLiteAdapter.ExecuteNonQuery(sql);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

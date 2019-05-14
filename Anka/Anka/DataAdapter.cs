@@ -242,7 +242,7 @@ namespace Anka
 
             foreach (var s in data)
             {
-                temp += (s.ToString() + "-");
+                temp += (s.ToString() + "|");
             }
 
             return temp;
@@ -254,7 +254,7 @@ namespace Anka
 
             foreach (var s in data)
             {
-                temp += (s.ToString() + "-");
+                temp += (s.ToString() + "|");
             }
 
             return temp;
@@ -267,7 +267,7 @@ namespace Anka
             foreach (var s in data)
             {
                 int p = s == true ? 1 : 0;
-                temp += (p.ToString() + "-");
+                temp += (p.ToString() + "|");
             }
 
             return temp;

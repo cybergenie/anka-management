@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using MySql.Data.MySqlClient;
+
 
 namespace Anka
 {
@@ -29,13 +29,13 @@ namespace Anka
                 BasicRisk += (temp == true ? "1" : "0");
             }
 
-            string sql = string.Format("UPDATE `anka`.`basicinfo` SET `Killip` = '{0}', `EF` = '{1}', `LV` = '{2}', `BasicOther` = '{3}'," +
+            string sql = string.Format("UPDATE basicinfo SET `Killip` = '{0}', `EF` = '{1}', `LV` = '{2}', `BasicOther` = '{3}'," +
                 " `BasicRisk` = '{4}',`RiskOther` = '{5}',`PCI` = '{6}',`ResidualStenosis` = '{7}',`CollatCirc` = {8},`DominantCoronary` = '{9}' WHERE (`Number` = '{10}');",
                 DataAdapter.BasicInfoResult.Killip, DataAdapter.BasicInfoResult.EF, DataAdapter.BasicInfoResult.LV, DataAdapter.BasicInfoResult.BasicOther,
                 BasicRisk, DataAdapter.BasicInfoResult.RiskOther, DataAdapter.BasicInfoResult.PCI, DataAdapter.BasicInfoResult.ResidualStenosis,
                 DataAdapter.BasicInfoResult.CollatCirc, DataAdapter.BasicInfoResult.DominantCoronary,DataAdapter.Number);
 
-            DatabaseInfo.ModifyDatabase(sql);
+            SQLiteAdapter.ExecuteNonQuery(sql);
 
             ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
         }
