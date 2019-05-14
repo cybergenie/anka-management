@@ -13,61 +13,23 @@ namespace Anka {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
-    internal sealed partial class AnkaSetting : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class Anka : global::System.Configuration.ApplicationSettingsBase {
         
-        private static AnkaSetting defaultInstance = ((AnkaSetting)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new AnkaSetting())));
+        private static Anka defaultInstance = ((Anka)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Anka())));
         
-        public static AnkaSetting Default {
+        public static Anka Default {
             get {
                 return defaultInstance;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
-        public string Sever {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("anka.db")]
+        public string dataSource {
             get {
-                return ((string)(this["Sever"]));
-            }
-            set {
-                this["Sever"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UID {
-            get {
-                return ((string)(this["UID"]));
-            }
-            set {
-                this["UID"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PW {
-            get {
-                return ((string)(this["PW"]));
-            }
-            set {
-                this["PW"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DataConectionInfoSave {
-            get {
-                return ((bool)(this["DataConectionInfoSave"]));
-            }
-            set {
-                this["DataConectionInfoSave"] = value;
+                return ((string)(this["dataSource"]));
             }
         }
     }

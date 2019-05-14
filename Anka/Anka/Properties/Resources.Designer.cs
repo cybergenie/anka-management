@@ -63,10 +63,40 @@ namespace Anka.Properties {
         /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Icon beating_heart_128px_1214820_easyicon_net {
+        internal static System.Drawing.Icon beating_heart {
             get {
-                object obj = ResourceManager.GetObject("beating_heart_128px_1214820_easyicon_net", resourceCulture);
+                object obj = ResourceManager.GetObject("beating_heart", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SPPB_1 {
+            get {
+                object obj = ResourceManager.GetObject("SPPB_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SPPB_2 {
+            get {
+                object obj = ResourceManager.GetObject("SPPB_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SPPB_3 {
+            get {
+                object obj = ResourceManager.GetObject("SPPB_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

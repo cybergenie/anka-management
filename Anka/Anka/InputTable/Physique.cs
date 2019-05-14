@@ -70,7 +70,7 @@ namespace Anka
                         DataAdapter.PhysiqueResult.PA,
                         DataAdapter.PhysiqueResult.PAPercent,
                         DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+               // DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
 
             }

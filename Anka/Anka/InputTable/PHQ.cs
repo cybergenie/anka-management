@@ -33,7 +33,7 @@ namespace Anka
                    DataAdapter.PHQNumber,
                    DataAdapter.ArrayToString(DataAdapter.PHQResult),
                    DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                //DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

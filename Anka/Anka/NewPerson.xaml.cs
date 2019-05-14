@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using MySql.Data.MySqlClient;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -71,7 +71,7 @@ namespace Anka
                 DataAdapter.Name = this.txName.Text.ToString().Trim(' ');
                 string sql = string.Format("INSERT INTO `anka`.`basicinfo` (`Number`, `Name`, `Age`, `Male`) VALUES({0}, '{1}', {2}, {3})",DataAdapter.Number,DataAdapter.Name,DataAdapter.Age,DataAdapter.Male) ;
 
-                DatabaseInfo.ModifyDatabase(sql);
+                SQLiteAdapter.ExecuteReader(sql);
 
                 isClose = true;
             }
@@ -99,42 +99,22 @@ namespace Anka
             {
                 MessageBox.Show("请确认输入八位数字。");
                 isClose = false;
-            }           
+            }
 
-           
+
             if (isClose == true)
             {
 
 
 
-                DataAdapter.Number = this.txNumber.Text.Trim();                
+                DataAdapter.Number = this.txNumber.Text.Trim();
                 string sql = string.Format("SELECT * FROM anka.basicinfo where Number='{0}';", DataAdapter.Number);
 
 
-                string connString = "server=" + DatabaseInfo.Sever + ";database=anka;uid=" + DatabaseInfo.UserID + ";pwd=" + DatabaseInfo.PassWord + ";SslMode = none";
-                MySqlConnection conn = new MySqlConnection(connString);
-               
-                try
-                {
-                    conn.Open();
-                    DatabaseInfo.ConStatus = true;
-
-
-
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    DatabaseInfo.ConStatus = false;
-                    DataAdapter.loadNewPerson = false;
-
-                }
-
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 try
                 {
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
 
                     DataAdapter.loadNewPerson = false;
                     while (dataReader.Read())
@@ -156,16 +136,12 @@ namespace Anka
                     }
                     dataReader.Close();
                 }
-                catch (MySqlException ex)
-                {                    
-                    
-                        MessageBox.Show(string.Format("数据查询失败。错误代码:{0}", ex.Number));
-                    DataAdapter.loadNewPerson = false;
-                  
-                }
-                finally
+                catch (SQLiteException ex)
                 {
-                    conn.Close();
+
+                    MessageBox.Show(string.Format("数据查询失败。错误代码:{0}", ex.ErrorCode));
+                    DataAdapter.loadNewPerson = false;
+
                 }
 
             }

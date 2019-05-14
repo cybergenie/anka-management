@@ -43,7 +43,7 @@ namespace Anka
                    DataAdapter.IPAQResult.IPAQ5,
                    DataAdapter.IPAQNumber,
                    DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+               // DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

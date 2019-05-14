@@ -1,39 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="ankaDataSet" targetNamespace="http://tempuri.org/ankaDataSet.xsd" xmlns:mstns="http://tempuri.org/ankaDataSet.xsd" xmlns="http://tempuri.org/ankaDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+<xs:schema id="AnkaDataSet" targetNamespace="http://tempuri.org/AnkaDataSet.xsd" xmlns:mstns="http://tempuri.org/AnkaDataSet.xsd" xmlns="http://tempuri.org/AnkaDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ankaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ankaConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Anka.Properties.Settings.GlobalReference.Default.ankaConnectionString" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.Anka.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="Devart.Data.SQLite" />
+          <Connection ConnectionStringObject="Data Source=E:\Project\Anka\anka-management\Anka\db\anka.db" IsAppSettingsProperty="false" Modifier="Assembly" Name="anka.db" Provider="Devart.Data.SQLite" />
         </Connections>
-        <Tables>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="basicinfoTableAdapter" GeneratorDataComponentClassName="basicinfoTableAdapter" Name="basicinfo" UserDataComponentName="basicinfoTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="ankaConnectionString (Settings)" DbObjectName="anka.basicinfo" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT `Number` FROM `basicinfo`</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings />
-            <Sources />
-          </TableAdapter>
-        </Tables>
+        <Tables />
         <Sources />
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="ankaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ankaDataSet" msprop:Generator_UserDSName="ankaDataSet">
+  <xs:element name="AnkaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="AnkaDataSet" msprop:Generator_UserDSName="AnkaDataSet">
     <xs:complexType>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="basicinfo" msprop:Generator_TableClassName="basicinfoDataTable" msprop:Generator_TableVarName="tablebasicinfo" msprop:Generator_TablePropName="basicinfo" msprop:Generator_RowDeletingName="basicinfoRowDeleting" msprop:Generator_RowChangingName="basicinfoRowChanging" msprop:Generator_RowEvHandlerName="basicinfoRowChangeEventHandler" msprop:Generator_RowDeletedName="basicinfoRowDeleted" msprop:Generator_UserTableName="basicinfo" msprop:Generator_RowChangedName="basicinfoRowChanged" msprop:Generator_RowEvArgName="basicinfoRowChangeEvent" msprop:Generator_RowClassName="basicinfoRow">
-          <xs:complexType>
-          </xs:complexType>
-        </xs:element>
-      </xs:choice>
+      <xs:choice minOccurs="0" maxOccurs="unbounded" />
     </xs:complexType>
   </xs:element>
 </xs:schema>

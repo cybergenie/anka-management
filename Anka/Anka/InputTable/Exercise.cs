@@ -52,7 +52,7 @@ namespace Anka
                     DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Checks),
                      DataAdapter.ExerciseNumber, DataAdapter.Number);
 
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                //DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

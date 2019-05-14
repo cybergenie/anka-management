@@ -49,7 +49,7 @@ namespace Anka
                   DataAdapter.OHQResult.OHQ8,
                   DataAdapter.OHQResult.OHQ9,
                   DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+               // DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

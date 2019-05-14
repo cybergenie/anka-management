@@ -130,7 +130,7 @@ namespace Anka
                    DataAdapter.GripStrengthResult.GripStrengthLeft2,
                    DataAdapter.GripStrengthResult.GripStrengthRight2,
                    DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                //DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

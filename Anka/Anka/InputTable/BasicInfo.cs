@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using MySql.Data.MySqlClient;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -35,7 +35,7 @@ namespace Anka
                 BasicRisk, DataAdapter.BasicInfoResult.RiskOther, DataAdapter.BasicInfoResult.PCI, DataAdapter.BasicInfoResult.ResidualStenosis,
                 DataAdapter.BasicInfoResult.CollatCirc, DataAdapter.BasicInfoResult.DominantCoronary,DataAdapter.Number);
 
-            DatabaseInfo.ModifyDatabase(sql);
+            SQLiteAdapter.ExecuteReader(sql);
 
             ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
         }

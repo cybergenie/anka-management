@@ -76,7 +76,7 @@ namespace Anka
                    DataAdapter.GADNumber,
                    DataAdapter.ArrayToString(DataAdapter.GADResult),
                    DataAdapter.Number);
-                DatabaseInfo.ModifyDatabase(sql1, sql2);
+                //DatabaseInfo.ModifyDatabase(sql1, sql2);
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

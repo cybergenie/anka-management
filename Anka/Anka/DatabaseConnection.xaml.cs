@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using MySql.Data.MySqlClient;
+using System.Data.SQLite;
 
 namespace Anka
 {
@@ -23,55 +23,11 @@ namespace Anka
     {
         public DatabaseConnection()
         {
-            InitializeComponent();
-            if(AnkaSetting.Default.DataConectionInfoSave==true)
-            {
-                this.txSever.Text = AnkaSetting.Default.Sever;
-                this.txUID.Text = AnkaSetting.Default.UID;
-                this.txPW.Password = AnkaSetting.Default.PW;
-                this.DatabaseConnectionInfoSave.IsChecked = AnkaSetting.Default.DataConectionInfoSave;
-            }
+            InitializeComponent();            
         }
         
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
-        {
-            DatabaseInfo.Sever = this.txSever.Text;
-            DatabaseInfo.UserID = this.txUID.Text;
-            DatabaseInfo.PassWord = this.txPW.Password;
-
-            if (this.DatabaseConnectionInfoSave.IsChecked == true)
-            {
-                AnkaSetting.Default.Sever = this.txSever.Text;
-                AnkaSetting.Default.UID = this.txUID.Text;
-                AnkaSetting.Default.PW = this.txPW.Password;
-                AnkaSetting.Default.DataConectionInfoSave = true;
-            }
-            else if(this.DatabaseConnectionInfoSave.IsChecked == false)
-            {
-                AnkaSetting.Default.DataConectionInfoSave = false;
-            }
-
-            string connString = "server="+ DatabaseInfo.Sever+";database=anka;uid="+ DatabaseInfo.UserID +";pwd="+DatabaseInfo.PassWord+ ";SslMode = none";
-            MySqlConnection conn = new MySqlConnection(connString);
-            try
-            {
-                conn.Open();                
-                MessageBox.Show("连接成功！", "连接数据库");
-                DatabaseInfo.ConStatus = true;                
-                LoadMainWindow();
-
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                DatabaseInfo.ConStatus = false;
-
-            }
-            finally
-            {               
-                this.Close();
-
-            }
+        {          
 
         }
 

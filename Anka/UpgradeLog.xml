@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?>
+<UpgradeLog>
+<Properties>
+<Property Name="Solution" Value="E:\Project\Anka\anka-management\Anka\Anka.sln"></Property>
+<Property Name="Solution File" Value="E:\Project\Anka\anka-management\Anka"></Property>
+<Property Name="Date" Value="2019/05/09 23:45:43"></Property>
+</Properties>
+<Event ErrorLevel="3" Project="Anka" Source="Anka.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="anka.db" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Anka.settings" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Anka.Designer.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="App.config" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="App.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="App.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="DataAdapter.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="DatabaseConnection.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="DatabaseConnection.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="DatabaseInfo.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Indicator.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="InputTable" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="BasicInfo.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Exercise.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="GAD.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="IPAQ.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="OHQ.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="PHQ.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Physique.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="SPPB.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="MainWindow.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="MainWindow.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="NewPerson.xaml" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="NewPerson.xaml.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="packages.config" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Properties" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="app.manifest" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="AssemblyInfo.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Resources.resx" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Resources.Designer.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Settings.settings" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Settings.Designer.cs" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Resources" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="beating_heart.ico" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="Icon1.ico" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="SPPB_1.bmp" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="SPPB_2.bmp" Description="No need to convert"></Event>
+<Event ErrorLevel="3" Project="Anka" Source="SPPB_3.bmp" Description="No need to convert"></Event>
+
+</UpgradeLog>
