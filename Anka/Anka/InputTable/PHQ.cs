@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SQLite;
+using System.Data;
 
 namespace Anka
 {
@@ -22,30 +23,50 @@ namespace Anka
         {
             if (this.txPHQLoop.Text.Trim().Length > 0)
             {
-                DataAdapter.PHQNumber = DataAdapter.Number + "-" + this.txPHQLoop.Text.Trim();
-                DataAdapter.PHQResult = PHQData();
-
-                string sql = string.Format("SELECT * FROM phq where PHQNumber='{0}';", DataAdapter.PHQNumber);
-                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
-
-                if (dataReader.StepCount == 0)
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
                 {
-                    sql = string.Format("INSERT INTO phq (PHQNumber, PHQResult, basicinfo_Number) VALUES('{0}', '{1}', '{2}');",
-                   DataAdapter.PHQNumber,
-                   DataAdapter.ArrayToString(DataAdapter.PHQResult),
-                   DataAdapter.Number);
-                }
-                else
-                {
-                    sql = string.Format("UPDATE phq SET PHQResult = '{1}' WHERE(PHQNumber = '{0}') and(basicinfo_Number = '{2}');",
-                      DataAdapter.PHQNumber,
-                      DataAdapter.ArrayToString(DataAdapter.PHQResult),
-                      DataAdapter.Number);
-                }
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
 
-                dataReader.Close();
-                SQLiteAdapter.ExecuteNonQuery(sql);
-                // DatabaseInfo.ModifyDatabase(sql1, sql2);
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+                        var dicData = new Dictionary<string, object>();
+
+                        dicData["PHQResult"] = DataAdapter.ArrayToString(PHQData());
+
+                        string PHQNumber = DataAdapter.Number + "-" + this.txPHQLoop.Text.Trim();
+
+                        string sql = string.Format("SELECT * FROM phq where PHQNumber='{0}';", PHQNumber);
+                        DataTable dt = sh.Select(sql);
+                        try
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dicCondition = new Dictionary<string, object>();
+                                dicCondition["basicinfo_Number"] = DataAdapter.Number;
+                                dicCondition["PHQNumber"] = PHQNumber;
+                                sh.Update("phq", dicData, dicCondition);
+                            }
+                            else
+                            {
+                                dicData["PHQNumber"] = PHQNumber;
+                                dicData["basicinfo_Number"] = DataAdapter.Number;
+                                sh.Insert("phq", dicData);
+                            }
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+
+                    }
+                }
+                
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

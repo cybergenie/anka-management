@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SQLite;
+using System.Data;
 
 namespace Anka
 {
@@ -22,41 +23,51 @@ namespace Anka
         {
             if (this.txIPAQLoop.Text.Trim().Length > 0)
             {
-                DataAdapter.IPAQNumber = DataAdapter.Number + "-" + this.txIPAQLoop.Text.Trim();
-                IPAQDataSave();
 
-                string sql = string.Format("SELECT * FROM ipaq where IPAQNumber='{0}';", DataAdapter.IPAQNumber);
-                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
-
-                if (dataReader.StepCount == 0)
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
                 {
-                    sql = string.Format("INSERT INTO ipaq (IPAQNumber, IPAQ0, IPAQ1, IPAQ2, IPAQ3, IPAQ4, IPAQ5, basicinfo_Number) VALUES ('{0}', {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');",
-                    DataAdapter.IPAQNumber,
-                    DataAdapter.IPAQResult.IPAQ0,
-                    DataAdapter.IPAQResult.IPAQ1,
-                    DataAdapter.IPAQResult.IPAQ2,
-                    DataAdapter.IPAQResult.IPAQ3,
-                    DataAdapter.IPAQResult.IPAQ4,
-                    DataAdapter.IPAQResult.IPAQ5,
-                    DataAdapter.Number);
-                }
-                else
-                {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
 
-                    sql = string.Format("UPDATE ipaq SET IPAQ0 = {0}, IPAQ1 = '{1}', IPAQ2 = '{2}', IPAQ3 = '{3}', IPAQ4 = '{4}', IPAQ5 = '{5}' WHERE (IPAQNumber = '{6}') and (basicinfo_Number = '{7}');",
-                   DataAdapter.IPAQResult.IPAQ0,
-                   DataAdapter.IPAQResult.IPAQ1,
-                   DataAdapter.IPAQResult.IPAQ2,
-                   DataAdapter.IPAQResult.IPAQ3,
-                   DataAdapter.IPAQResult.IPAQ4,
-                   DataAdapter.IPAQResult.IPAQ5,
-                   DataAdapter.IPAQNumber,
-                   DataAdapter.Number);
-                }
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+                        var dicData = new Dictionary<string, object>();
 
-                dataReader.Close();
-                SQLiteAdapter.ExecuteNonQuery(sql);
-                
+                        IPAQDataSave(dicData);
+
+                        string IPAQNumber = DataAdapter.Number + "-" + this.txIPAQLoop.Text.Trim();
+
+                        string sql = string.Format("SELECT * FROM ipaq where IPAQNumber='{0}';", IPAQNumber);
+                        DataTable dt = sh.Select(sql);
+                        try
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dicCondition = new Dictionary<string, object>();
+                                dicCondition["basicinfo_Number"] = DataAdapter.Number;
+                                dicCondition["IPAQNumber"] = IPAQNumber;
+                                sh.Update("ipaq", dicData, dicCondition);
+                            }
+                            else
+                            {
+                                dicData["IPAQNumber"] = IPAQNumber;
+                                dicData["basicinfo_Number"] = DataAdapter.Number;
+                                sh.Insert("ipaq", dicData);
+                            }
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+
+                    }
+                }               
+
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else
@@ -73,22 +84,22 @@ namespace Anka
                 this.txIPAQ4.Text = (Convert.ToInt32(this.txIPAQ4.Text.Trim('h')) * 60).ToString();
         }
 
-        private void IPAQDataSave()
+        private void IPAQDataSave(Dictionary<string, object> dic)
         {
             if (this.rbIPAQYes.IsChecked == true)
-                DataAdapter.IPAQResult.IPAQ0 = true;
+                dic["IPAQ0"] = true;
             if (this.rbIPAQNo.IsChecked == false)
-                DataAdapter.IPAQResult.IPAQ0 = false;
-            DataAdapter.IPAQResult.IPAQ1 = DataAdapter.IsNumber(this.txIPAQ1.Text.Trim()) ? Convert.ToInt32(this.txIPAQ1.Text.Trim()) : 0;
-            DataAdapter.IPAQResult.IPAQ2 = DataAdapter.IsNumber(this.txIPAQ2.Text.Trim()) ? Convert.ToInt32(this.txIPAQ2.Text.Trim()) : 0;
-            DataAdapter.IPAQResult.IPAQ3 = DataAdapter.IsNumber(this.txIPAQ3.Text.Trim()) ? Convert.ToInt32(this.txIPAQ3.Text.Trim()) : 0;
-            DataAdapter.IPAQResult.IPAQ4 = DataAdapter.IsNumber(this.txIPAQ4.Text.Trim()) ? Convert.ToInt32(this.txIPAQ4.Text.Trim()) : 0;
+                dic["IPAQ0"] = false;
+            dic["IPAQ1"] = DataAdapter.IsNumber(this.txIPAQ1.Text.Trim()) ? Convert.ToInt32(this.txIPAQ1.Text.Trim()) : 0;
+            dic["IPAQ2"] = DataAdapter.IsNumber(this.txIPAQ2.Text.Trim()) ? Convert.ToInt32(this.txIPAQ2.Text.Trim()) : 0;
+            dic["IPAQ3"] = DataAdapter.IsNumber(this.txIPAQ3.Text.Trim()) ? Convert.ToInt32(this.txIPAQ3.Text.Trim()) : 0;
+            dic["IPAQ4"] = DataAdapter.IsNumber(this.txIPAQ4.Text.Trim()) ? Convert.ToInt32(this.txIPAQ4.Text.Trim()) : 0;
 
             RadioButton[] rbIPAQ5 = new RadioButton[7] { this.rbIPAQ51, this.rbIPAQ52, this.rbIPAQ53, this.rbIPAQ54, this.rbIPAQ55, this.rbIPAQ56, this.rbIPAQ57 };
             for (int i = 0; i < 7; i++)
             {
                 if (rbIPAQ5[i].IsChecked == true)
-                    DataAdapter.IPAQResult.IPAQ5 = i;
+                    dic["IPAQ5"] = i;
             }
 
 

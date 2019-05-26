@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SQLite;
+using System.Data;
 
 namespace Anka
 {
@@ -64,30 +65,50 @@ namespace Anka
         {
             if(this.txGADLoop.Text.Trim().Length>0)
             {
-                DataAdapter.GADNumber = DataAdapter.Number + "-" + this.txGADLoop.Text.Trim();
-                DataAdapter.GADResult = GADData();
-
-                string sql = string.Format("SELECT * FROM gad where GADNumber='{0}';", DataAdapter.GADNumber);
-                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
-
-                if (dataReader.StepCount == 0)
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
                 {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
 
-                    sql = string.Format("INSERT INTO gad (GADNumber, GADResult, basicinfo_Number) VALUES('{0}', '{1}', '{2}');",
-                    DataAdapter.GADNumber,
-                    DataAdapter.ArrayToString(DataAdapter.GADResult),
-                    DataAdapter.Number);
-                }
-                else
-                {
-                    sql = string.Format("UPDATE gad SET GADResult = '{1}' WHERE(GADNumber = '{0}') and(basicinfo_Number = '{2}');",
-                   DataAdapter.GADNumber,
-                   DataAdapter.ArrayToString(DataAdapter.GADResult),
-                   DataAdapter.Number);
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+                        var dicData = new Dictionary<string, object>();
 
+                        dicData["GADResult"] = DataAdapter.ArrayToString(GADData());
+
+                        string GADNumber = DataAdapter.Number + "-" + this.txGADLoop.Text.Trim();
+
+                        string sql = string.Format("SELECT * FROM gad where GADNumber='{0}';", GADNumber);
+                        DataTable dt = sh.Select(sql);
+                        try
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dicCondition = new Dictionary<string, object>();
+                                dicCondition["basicinfo_Number"] = DataAdapter.Number;
+                                dicCondition["GADNumber"] = GADNumber;
+                                sh.Update("gad", dicData, dicCondition);
+                            }
+                            else
+                            {
+                                dicData["GADNumber"] = GADNumber;
+                                dicData["basicinfo_Number"] = DataAdapter.Number;
+                                sh.Insert("gad", dicData);
+                            }
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+
+                    }
                 }
-                dataReader.Close();
-                SQLiteAdapter.ExecuteNonQuery(sql);
+                
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else

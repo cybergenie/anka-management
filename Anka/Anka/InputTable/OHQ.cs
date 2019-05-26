@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SQLite;
+using System.Data;
 
 namespace Anka
 {
@@ -22,46 +23,50 @@ namespace Anka
         {
             if (this.txOHQLoop.Text.Trim().Length > 0)
             {
-                DataAdapter.OHQNumber = DataAdapter.Number + "-" + this.txOHQLoop.Text.Trim();
-                OHQDataSave();
-
-                string sql = string.Format("SELECT * FROM ohq where OHQNumber='{0}';", DataAdapter.OHQNumber);
-                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
-
-                if (dataReader.StepCount == 0)
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
                 {
-                    sql = string.Format("INSERT INTO ohq (OHQNumber, OHQ1, OHQ2, OHQ3, OHQ4, OHQ5, OHQ6, OHQ7, OHQ8, OHQ9, basicinfo_Number) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}');",
-                  DataAdapter.OHQNumber,
-                  DataAdapter.OHQResult.OHQ1,
-                  DataAdapter.OHQResult.OHQ2,
-                  DataAdapter.OHQResult.OHQ3,
-                  DataAdapter.OHQResult.OHQ4,
-                  DataAdapter.OHQResult.OHQ5,
-                  DataAdapter.OHQResult.OHQ6,
-                  DataAdapter.OHQResult.OHQ7,
-                  DataAdapter.OHQResult.OHQ8,
-                  DataAdapter.OHQResult.OHQ9,
-                  DataAdapter.Number);
-                }
-                else
-                {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
 
-                    sql = string.Format("UPDATE ohq SET OHQ1 = '{1}', OHQ2 = '{2}', OHQ3 = '{3}', OHQ4 = '{4}', OHQ5 = '{5}', OHQ6 = '{6}', OHQ7 = '{7}', OHQ8 = '{8}', OHQ9 = '{9}' WHERE (OHQNumber = '{0}') and (basicinfo_Number = '{10}');",
-                     DataAdapter.OHQNumber,
-                     DataAdapter.OHQResult.OHQ1,
-                     DataAdapter.OHQResult.OHQ2,
-                     DataAdapter.OHQResult.OHQ3,
-                     DataAdapter.OHQResult.OHQ4,
-                     DataAdapter.OHQResult.OHQ5,
-                     DataAdapter.OHQResult.OHQ6,
-                     DataAdapter.OHQResult.OHQ7,
-                     DataAdapter.OHQResult.OHQ8,
-                     DataAdapter.OHQResult.OHQ9,
-                     DataAdapter.Number);
-                }
-                dataReader.Close();
-                SQLiteAdapter.ExecuteNonQuery(sql);
-                
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+                        var dicData = new Dictionary<string, object>();
+
+                        OHQDataSave(dicData);
+
+                        string OHQNumber = DataAdapter.Number + "-" + this.txOHQLoop.Text.Trim();
+
+                        string sql = string.Format("SELECT * FROM ohq where OHQNumber='{0}';", OHQNumber);
+                        DataTable dt = sh.Select(sql);
+                        try
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dicCondition = new Dictionary<string, object>();
+                                dicCondition["basicinfo_Number"] = DataAdapter.Number;
+                                dicCondition["OHQNumber"] = OHQNumber;
+                                sh.Update("ohq", dicData, dicCondition);
+                            }
+                            else
+                            {
+                                dicData["OHQNumber"] = OHQNumber;
+                                dicData["basicinfo_Number"] = DataAdapter.Number;
+                                sh.Insert("ohq", dicData);
+                            }
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+
+                    }
+                }               
+
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else
@@ -71,7 +76,7 @@ namespace Anka
            
         }
 
-        private void OHQDataSave()
+        private void OHQDataSave(Dictionary<string, object> dic)
         {
             RadioButton[] rbOHQ1 = new RadioButton[4] { this.rbOHQ11, this.rbOHQ12, this.rbOHQ13, this.rbOHQ14 };
             RadioButton[] rbOHQ2 = new RadioButton[3] { this.rbOHQ21, this.rbOHQ22, this.rbOHQ23 };
@@ -86,19 +91,19 @@ namespace Anka
             for (int i = 0; i < rbOHQ1.Length; i++)
             {
                 if (rbOHQ1[i].IsChecked == true)
-                    DataAdapter.OHQResult.OHQ1 = i.ToString();
+                    dic["OHQ1"] = i.ToString();
             }
 
             for (int i = 0; i < rbOHQ2.Length; i++)
             {
                 if (rbOHQ2[i].IsChecked == true)
-                    DataAdapter.OHQResult.OHQ2 = i.ToString();
+                    dic["OHQ2"] = i.ToString();
             }
 
             for (int i = 0; i < rbOHQ3.Length; i++)
             {
                 if (rbOHQ3[i].IsChecked == true)
-                    DataAdapter.OHQResult.OHQ3 = i.ToString();
+                    dic["OHQ3"] = i.ToString();
             }
 
 
@@ -109,13 +114,13 @@ namespace Anka
                     switch (i)
                     {
                         case 0:
-                            DataAdapter.OHQResult.OHQ4 = "A-" + this.txOHQ41.Text.Trim();
+                            dic["OHQ4"] = "A-" + this.txOHQ41.Text.Trim();
                             break;
                         case 1:
-                            DataAdapter.OHQResult.OHQ4 = "B-" + this.txOHQ42.Text.Trim();
+                            dic["OHQ4"] = "B-" + this.txOHQ42.Text.Trim();
                             break;
                         case 2:
-                            DataAdapter.OHQResult.OHQ4 = "C-0";
+                            dic["OHQ4"] = "C-0";
                             break;
                     }
                 }
@@ -124,7 +129,7 @@ namespace Anka
             for (int i = 0; i < rbOHQ5.Length; i++)
             {
                 if (rbOHQ5[i].IsChecked == true)
-                    DataAdapter.OHQResult.OHQ5 = i.ToString();
+                    dic["OHQ5"] = i.ToString();
             }
 
             for (int i = 0; i < rbOHQ6.Length; i++)
@@ -134,13 +139,13 @@ namespace Anka
                     switch (i)
                     {
                         case 0:
-                            DataAdapter.OHQResult.OHQ6 = "0";
+                            dic["OHQ6"] = "0";
                             break;
                         case 1:
-                            DataAdapter.OHQResult.OHQ6 = this.txOHQ62.Text.Trim();
+                            dic["OHQ6"] = this.txOHQ62.Text.Trim();
                             break;
                         case 2:
-                            DataAdapter.OHQResult.OHQ6 = "99";
+                            dic["OHQ6"] = "99";
                             break;
                     }
                 }
@@ -149,13 +154,13 @@ namespace Anka
             for (int i = 0; i < rbOHQ7.Length; i++)
             {
                 if (rbOHQ7[i].IsChecked == true)
-                    DataAdapter.OHQResult.OHQ7 = i.ToString();
+                    dic["OHQ7"] = i.ToString();
             }
 
             for (int i = 0; i < rbOHQ8.Length; i++)
             {
                 if (rbOHQ8[i].IsChecked == true)
-                    DataAdapter.OHQResult.OHQ8 = i.ToString();
+                    dic["OHQ8"] = i.ToString();
             }
 
             for (int i = 0; i < rbOHQ9.Length; i++)
@@ -165,10 +170,10 @@ namespace Anka
                     switch (i)
                     {
                         case 0:
-                            DataAdapter.OHQResult.OHQ9 = "A-0-0";
+                            dic["OHQ9"] = "A-0-0";
                             break;
                         case 1:
-                            DataAdapter.OHQResult.OHQ9 = "B-" + this.txOHQ91.Text.Trim() + "-" + this.txOHQ92.Text.Trim();
+                            dic["OHQ9"] = "B-" + this.txOHQ91.Text.Trim() + "-" + this.txOHQ92.Text.Trim();
                             break;
                     }
                 }

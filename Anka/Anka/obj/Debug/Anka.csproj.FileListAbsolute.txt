@@ -40,7 +40,6 @@ E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\System.Data.SQLite.dll.confi
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\MainWindow.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\NewPerson.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\App.g.cs
-E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka_Content.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka_MarkupCompile.cache
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka_MarkupCompile.lref
@@ -56,3 +55,4 @@ E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.application
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.csproj.CopyComplete
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.exe
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.pdb
+E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.csprojAssemblyReference.cache

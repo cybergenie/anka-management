@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Data.SQLite;
+using System.Data;
 
 
 namespace Anka
@@ -20,24 +22,39 @@ namespace Anka
     public partial class MainWindow 
     {
         private void BtBasicSave_Click(object sender, RoutedEventArgs e)
-        {
-            BasicDataSave();
-
-            string BasicRisk="";
-            foreach (bool temp in DataAdapter.BasicInfoResult.BasicRisk)
+        {   
+            using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
             {
-                BasicRisk += (temp == true ? "1" : "0");
+                using (SQLiteCommand cmd = new SQLiteCommand())
+                {
+                    cmd.Connection = conn;
+                    conn.Open();
+
+                    SQLiteHelper sh = new SQLiteHelper(cmd);
+                    var dicData = new Dictionary<string, object>();
+                    BasicDataSave(dicData);
+                    var dicCondition = new Dictionary<string, object>();
+                    dicCondition["Number"] = DataAdapter.Number;
+                    
+                    try
+                    {
+                        sh.Update("basicinfo", dicData, dicCondition);
+                    }
+                    catch(SQLiteException ex)
+                    {
+                        MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
             }
 
-            string sql = string.Format("UPDATE basicinfo SET `Killip` = '{0}', `EF` = '{1}', `LV` = '{2}', `BasicOther` = '{3}'," +
-                " `BasicRisk` = '{4}',`RiskOther` = '{5}',`PCI` = '{6}',`ResidualStenosis` = '{7}',`CollatCirc` = {8},`DominantCoronary` = '{9}' WHERE (`Number` = '{10}');",
-                DataAdapter.BasicInfoResult.Killip, DataAdapter.BasicInfoResult.EF, DataAdapter.BasicInfoResult.LV, DataAdapter.BasicInfoResult.BasicOther,
-                BasicRisk, DataAdapter.BasicInfoResult.RiskOther, DataAdapter.BasicInfoResult.PCI, DataAdapter.BasicInfoResult.ResidualStenosis,
-                DataAdapter.BasicInfoResult.CollatCirc, DataAdapter.BasicInfoResult.DominantCoronary,DataAdapter.Number);
 
-            SQLiteAdapter.ExecuteNonQuery(sql);
+                    // SQLiteAdapter.ExecuteNonQuery(sql);
 
-            ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
+                    ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
         }
 
         private void CbCC_Click(object sender, RoutedEventArgs e)
@@ -76,45 +93,88 @@ namespace Anka
 
         }
 
-        private void BasicDataSave()
+        private void BasicDataSave(Dictionary<string, object> dic)
         {
-            DataAdapter.BasicInfoResult.Killip = this.txKillip.Text;
-            DataAdapter.BasicInfoResult.EF = this.txEF.Text;
-            DataAdapter.BasicInfoResult.LV = this.txLV.Text;
-            DataAdapter.BasicInfoResult.BasicOther = this.txBasicOther.Text;
-            DataAdapter.BasicInfoResult.BasicRisk = CbRiskClick();
-            DataAdapter.BasicInfoResult.RiskOther = this.txRisk13.Text;
+            
+            dic["Killip"] = txKillip.Text;
+            dic["EF"] = txEF.Text;
+            dic["LV"] = txLV.Text;
+            dic["BasicOther"] = txBasicOther.Text;
+
+            string BasicRisk = "";
+            foreach (bool temp in CbRiskClick())
+            {
+                BasicRisk += (temp == true ? "1" : "0");
+            }
+
+            dic["BasicRisk"] = BasicRisk;
+            dic["RiskOther"] = txRisk13.Text;
 
             if (DataAdapter.IsNumber(this.txPCI.Text) == true)
-                DataAdapter.BasicInfoResult.PCI = Convert.ToInt32(this.txPCI.Text);
-
+                dic["PCI"] = Convert.ToInt32(this.txPCI.Text);
 
             if (DataAdapter.IsNumber(this.txRS.Text) == true)
-                DataAdapter.BasicInfoResult.ResidualStenosis = Convert.ToInt32(this.txRS.Text);
-
+                dic["ResidualStenosis"] = Convert.ToInt32(this.txRS.Text);
 
             if (this.rbDCL.IsChecked == true)
             {
-                DataAdapter.BasicInfoResult.DominantCoronary = -1;
+                dic["DominantCoronary"] = -1;
             }
             else if (this.rbDCB.IsChecked == true)
             {
-                DataAdapter.BasicInfoResult.DominantCoronary = 0;
+                dic["DominantCoronary"] = 0;
             }
             else if (this.rbDCR.IsChecked == true)
             {
-                DataAdapter.BasicInfoResult.DominantCoronary = 1;
+                dic["DominantCoronary"] = 1;
             }
-
 
             if (this.cbCC.IsChecked == true)
             {
-                DataAdapter.BasicInfoResult.CollatCirc = true;
+                dic["CollatCirc"] = true;
             }
             else
             {
-                DataAdapter.BasicInfoResult.CollatCirc = false;
+                dic["CollatCirc"] = false;
             }
+
+            //DataAdapter.BasicInfoResult.Killip = this.txKillip.Text;
+            //DataAdapter.BasicInfoResult.EF = this.txEF.Text;
+            //DataAdapter.BasicInfoResult.LV = this.txLV.Text;
+            //DataAdapter.BasicInfoResult.BasicOther = this.txBasicOther.Text;
+            //DataAdapter.BasicInfoResult.BasicRisk = CbRiskClick();
+            //DataAdapter.BasicInfoResult.RiskOther = this.txRisk13.Text;
+
+            //if (DataAdapter.IsNumber(this.txPCI.Text) == true)
+            //    DataAdapter.BasicInfoResult.PCI = Convert.ToInt32(this.txPCI.Text);
+
+
+            //if (DataAdapter.IsNumber(this.txRS.Text) == true)
+            //    DataAdapter.BasicInfoResult.ResidualStenosis = Convert.ToInt32(this.txRS.Text);
+
+
+            //if (this.rbDCL.IsChecked == true)
+            //{
+            //    DataAdapter.BasicInfoResult.DominantCoronary = -1;
+            //}
+            //else if (this.rbDCB.IsChecked == true)
+            //{
+            //    DataAdapter.BasicInfoResult.DominantCoronary = 0;
+            //}
+            //else if (this.rbDCR.IsChecked == true)
+            //{
+            //    DataAdapter.BasicInfoResult.DominantCoronary = 1;
+            //}
+
+
+            //if (this.cbCC.IsChecked == true)
+            //{
+            //    DataAdapter.BasicInfoResult.CollatCirc = true;
+            //}
+            //else
+            //{
+            //    DataAdapter.BasicInfoResult.CollatCirc = false;
+            //}
 
         }
 

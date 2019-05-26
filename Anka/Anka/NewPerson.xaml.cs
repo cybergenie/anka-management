@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using System.Data.SQLite;
+using System.Data;
 
 namespace Anka
 {
@@ -65,14 +66,54 @@ namespace Anka
             }
             if (isClose == true)
             {
-                DataAdapter.Number = this.txNumber.Text;
-                DataAdapter.Age = Convert.ToInt32(this.txAge.Text);
-                DataAdapter.Male = Male;
-                DataAdapter.Name = this.txName.Text.ToString().Trim(' ');
-                string sql = string.Format("INSERT INTO basicinfo (Number, Name, Age, Male) VALUES({0}, '{1}', {2}, {3})",DataAdapter.Number,DataAdapter.Name,DataAdapter.Age,DataAdapter.Male) ;
 
-                //DatabaseInfo.ModifyDatabase(sql);
-                SQLiteAdapter.ExecuteNonQuery(sql);
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+
+                        var dic = new Dictionary<string, object>();
+                        dic["Number"] = txNumber.Text;
+                        dic["Name"] = txName.Text;
+                        dic["Age"] = txAge.Text;
+                        dic["Male"] = Male;
+                        try
+                        {
+                            sh.Insert("basicinfo", dic);
+                            DataAdapter.Number = this.txNumber.Text;
+                            DataAdapter.Age = Convert.ToInt32(this.txAge.Text);
+                            DataAdapter.Male = Male;
+                            DataAdapter.Name = this.txName.Text.ToString().Trim();
+                        }
+                        catch(SQLiteException ex)
+                        {
+                            DataAdapter.loadNewPerson = false;
+                            if (ex.ErrorCode == 19)
+                            {
+                                MessageBox.Show("该档案号已存在，请重新输入。", "档案建立错误");
+                            }
+                            else
+                            {
+                                MessageBox.Show(string.Format("档案建立错误。错误代码为:{0}", ex.ErrorCode), "档案建立错误");
+                            }
+                            
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }                       
+
+                        
+                    }
+                }               
+                //string sql = string.Format("INSERT INTO basicinfo (Number, Name, Age, Male) VALUES({0}, '{1}', {2}, {3})",DataAdapter.Number,DataAdapter.Name,DataAdapter.Age,DataAdapter.Male) ;
+
+                ////DatabaseInfo.ModifyDatabase(sql);
+                //SQLiteAdapter.ExecuteNonQuery(sql);
 
                 isClose = true;
             }
@@ -105,44 +146,89 @@ namespace Anka
            
             if (isClose == true)
             {
-
-
-
-                DataAdapter.Number = this.txNumber.Text.Trim();                
-                string sql = string.Format("SELECT * FROM basicinfo where Number='{0}';", DataAdapter.Number);
-                try
+                string sql = string.Format("SELECT * FROM basicinfo where Number='{0}';", txNumber.Text.ToString().Trim());
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
                 {
-                    SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql); 
-
-                    DataAdapter.loadNewPerson = false;
-                    while (dataReader.Read())
+                    using (SQLiteCommand cmd = new SQLiteCommand())
                     {
-                        DataAdapter.loadNewPerson = true;
-                        DataAdapter.Name = dataReader["Name"].ToString();
-                        DataAdapter.Age = Convert.ToInt32(dataReader["Age"].ToString());
-                        if (dataReader["Male"].ToString() == "1")
+                        conn.Open();
+                        cmd.Connection = conn;
+
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+                        try
                         {
-                            this.rbMale.IsChecked = true;
-                            DataAdapter.Male = true;
+                            DataTable dt = sh.Select(sql);
+                            DataRow dr = dt.Rows[0];
+                            if(dr["Name"]!= System.DBNull.Value)
+                            {
+                                DataAdapter.Name = dr["Name"].ToString();
+                            }
+                            if (dr["Age"] != System.DBNull.Value)
+                            {
+                                DataAdapter.Age = Convert.ToInt32( dr["Age"]);
+                            }
+                            if (dr["Number"] != System.DBNull.Value)
+                            {
+                                DataAdapter.Number = Convert.ToString(dr["Number"]);
+                            }
+                            if (dr["Male"] != System.DBNull.Value)
+                            {
+                                DataAdapter.Male = Convert.ToBoolean(dr["Male"]);
+                            }
+
+
                         }
-                        else
+                        catch (SQLiteException ex)
                         {
-                            this.rbFemale.IsChecked = true;
-                            DataAdapter.Male = true;
+                            DataAdapter.loadNewPerson = false;
+                            MessageBox.Show(string.Format("数据查找错误。错误代码为:{0}", ex.ErrorCode), "档案建立错误");
                         }
+                        finally
+                        {
+                            conn.Close();
+                        }
+
+                        
 
                     }
-                    dataReader.Close();
                 }
-                catch (SQLiteException ex)
-                {
 
-                    MessageBox.Show(string.Format("数据查询失败。错误代码:{0}", ex.ErrorCode));
-                    DataAdapter.loadNewPerson = false;
+
+                    //DataAdapter.Number = this.txNumber.Text.Trim();                
+                    //string sql = string.Format("SELECT * FROM basicinfo where Number='{0}';", DataAdapter.Number);
+                    //try
+                    //{
+                    //    SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql); 
+
+                    //    DataAdapter.loadNewPerson = false;
+                    //    while (dataReader.Read())
+                    //    {
+                    //        DataAdapter.loadNewPerson = true;
+                    //        DataAdapter.Name = dataReader["Name"].ToString();
+                    //        DataAdapter.Age = Convert.ToInt32(dataReader["Age"].ToString());
+                    //        if (dataReader["Male"].ToString() == "1")
+                    //        {
+                    //            this.rbMale.IsChecked = true;
+                    //            DataAdapter.Male = true;
+                    //        }
+                    //        else
+                    //        {
+                    //            this.rbFemale.IsChecked = true;
+                    //            DataAdapter.Male = true;
+                    //        }
+
+                    //    }
+                    //    dataReader.Close();
+                    //}
+                    //catch (SQLiteException ex)
+                    //{
+
+                    //    MessageBox.Show(string.Format("数据查询失败。错误代码:{0}", ex.ErrorCode));
+                    //    DataAdapter.loadNewPerson = false;
+                    //}
+
+
                 }
-                
-
-            }
 
             if (isClose == true)
             {

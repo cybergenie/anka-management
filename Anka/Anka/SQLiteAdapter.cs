@@ -17,7 +17,7 @@ namespace Anka
         /// <summary>
         /// 数据库路径
         /// </summary>
-        private static readonly string m_DataSource = @"db\anka.db";
+        private static readonly string m_DataSource = config.DataSource;
 
         private static readonly string m_ConnectionString;
 
@@ -38,7 +38,7 @@ namespace Anka
                     DataSource = m_DataSource
                 };
                 m_ConnectionString = connectionStringBuilder.ConnectionString;
-                using (SQLiteConnection conn = new SQLiteConnection(m_ConnectionString))
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
                 {
                     conn.Open();
                 }
@@ -54,7 +54,7 @@ namespace Anka
         /// <returns></returns>
         private static SQLiteConnection GetSQLiteConnection()
         {
-            return new SQLiteConnection(m_ConnectionString);
+            return new SQLiteConnection(config.DataSource);
         }
 
         /// <summary>

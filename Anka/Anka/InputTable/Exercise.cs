@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using System.Data.SQLite;
+using System.Data;
 
 namespace Anka
 {
@@ -21,69 +22,72 @@ namespace Anka
     {
         private void BtExcerciseSave_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (txExerciseLoop.Text.Trim().Length > 0)
             {
-                DataAdapter.ExerciseNumber = DataAdapter.Number + "-" + this.txExerciseLoop.Text.Trim();
-                ExcerciseDataSave();
-
-                string sql = string.Format("SELECT * FROM exercise where ExerciseNumber='{0}';", DataAdapter.ExerciseNumber);
-                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
-
-                if(dataReader.StepCount==0)
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
                 {
-                    sql = string.Format("INSERT INTO exercise (ExerciseNumber, InRoomUp,Date, BloodPressureLower, BloodPressureUpper" +
-                    ", HeartRate,BloodOxygen, BorgIndex, Remarks, ECGs, Checks, basicinfo_Number) VALUES('{0}', {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}',{11});",
-                    DataAdapter.ExerciseNumber,
-                    DataAdapter.ExerciseResult.InRoomUp,
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Date),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BloodPressureLower),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BloodPressureUpper),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.HeartRate),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BloodOxygen),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BorgIndex),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Remarks),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.ECGs),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Checks),
-                    DataAdapter.Number);                    
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+                        var dicData = new Dictionary<string, object>();
+                        
+                        ExcerciseDataSave(dicData);
+
+                        string ExerciseNumber = DataAdapter.Number + "-" + this.txExerciseLoop.Text.Trim();
+
+                        string sql = string.Format("SELECT * FROM exercise where ExerciseNumber='{0}';", ExerciseNumber);
+                        DataTable dt = sh.Select(sql);
+                        try
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dicCondition = new Dictionary<string, object>();
+                                dicCondition["basicinfo_Number"] = DataAdapter.Number;
+                                dicCondition["ExerciseNumber"] = ExerciseNumber;
+                                sh.Update("exercise", dicData, dicCondition);
+                            }
+                            else
+                            {
+                                dicData["ExerciseNumber"] = ExerciseNumber;
+                                dicData["basicinfo_Number"] = DataAdapter.Number;
+                                sh.Insert("exercise", dicData);
+                            }                            
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }                      
+
+                    }
                 }
-                else
-                {
-                    sql = string.Format("UPDATE exercise SET InRoomUp = {0}, Date = '{1}', BloodPressureLower = '{2}', BloodPressureUpper = '{3}', HeartRate = '{4}', BloodOxygen = '{5}', BorgIndex = '{6}', Remarks = '{7}', ECGs = '{8}', Checks = '{9}' WHERE (ExerciseNumber = '{10}') and (basicinfo_Number = '{11}');",
-                    DataAdapter.ExerciseResult.InRoomUp,
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Date),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BloodPressureLower),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BloodPressureUpper),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.HeartRate),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BloodOxygen),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.BorgIndex),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Remarks),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.ECGs),
-                    DataAdapter.ArrayToString(DataAdapter.ExerciseResult.Checks),
-                     DataAdapter.ExerciseNumber, DataAdapter.Number);
-                }
-                dataReader.Close();
 
-                SQLiteAdapter.ExecuteNonQuery(sql);
-
-
-                
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
+
             else
             {
-                
+
                 MessageBox.Show("请输入运动负荷记录表编号。");
             }
 
-           
 
-        }
 
-        private void ExcerciseDataSave()
-        {            
 
-            DataAdapter.ExerciseResult.Date = new string[9] { this.dpBedup1.Text.Trim(),
+                }
+
+        private void ExcerciseDataSave(Dictionary<string, object> dic)
+        {
+            
+
+            string[] Date = new string[9] { this.dpBedup1.Text.Trim(),
                 this.dpBedup2.Text.Trim(),
                 this.dpBedup3.Text.Trim(),
                 this.dpBedup4.Text.Trim(),
@@ -93,7 +97,7 @@ namespace Anka
                 this.dpOutRoom2.Text.Trim(),
                 this.dpOutRoom3.Text.Trim()
             };
-
+            dic["Date"] = DataAdapter.ArrayToString(Date);
             int[] bpLower = new int[9]; int[] bpUpper = new int[9];
             string[] txBPUp = new string[9]{this.txBPBedUp1.Text.ToString(),
                 this.txBPBedUp2.Text.ToString(),
@@ -109,8 +113,8 @@ namespace Anka
             {
                 DataAdapter.GetBloodPressure(txBPUp[i], bpLower[i], bpUpper[i]);
             }
-            DataAdapter.ExerciseResult.BloodPressureLower = bpLower;
-            DataAdapter.ExerciseResult.BloodPressureUpper = bpUpper;
+            dic["BloodPressureLower"] = DataAdapter.ArrayToString(bpLower);
+            dic["BloodPressureUpper"] = DataAdapter.ArrayToString(bpUpper);
 
             int[] HeartRate = new int[9];
             string[] txBMP = new string[9] {this.txBMPBedUp1.Text.Trim(),
@@ -127,7 +131,7 @@ namespace Anka
             {
                 HeartRate[i] = DataAdapter.IsNumber(txBMP[i]) ? Convert.ToInt32(txBMP[i]) : 0;
             }
-            DataAdapter.ExerciseResult.HeartRate = HeartRate;
+            dic["HeartRate"] = DataAdapter.ArrayToString(HeartRate);
 
             int[] BloodOxygen = new int[9];
             string[] txBloodOxygen = new string[9] {this.txBOBedUp1.Text.Trim(),
@@ -144,7 +148,7 @@ namespace Anka
             {
                 BloodOxygen[i] = DataAdapter.IsNumber(txBloodOxygen[i]) ? Convert.ToInt32(txBloodOxygen[i]) : 0;
             }
-            DataAdapter.ExerciseResult.BloodOxygen = BloodOxygen;
+            dic["BloodOxygen"] = DataAdapter.ArrayToString(BloodOxygen);
 
             int[] BorgIndex = new int[9];
             string[] txBorgIndex = new string[9] {this.txBorgBedUp1.Text.Trim(),
@@ -161,7 +165,7 @@ namespace Anka
             {
                 BorgIndex[i] = DataAdapter.IsNumber(txBorgIndex[i]) ? Convert.ToInt32(txBorgIndex[i]) : 0;
             }
-            DataAdapter.ExerciseResult.BorgIndex = BorgIndex;
+            dic["BorgIndex"] = DataAdapter.ArrayToString(BorgIndex);
 
             //string[] Remarks = new string[9];
             string[] Remarks = new string[9] {this.txAddBedUp1.Text.Trim(),
@@ -174,7 +178,7 @@ namespace Anka
                 this.txAddOutRoom2.Text.Trim(),
                 this.txAddOutRoom3.Text.Trim()
             };
-            DataAdapter.ExerciseResult.Remarks = Remarks;
+            dic["Remarks"] = DataAdapter.ArrayToString(Remarks);
 
             string[] ECGs = new string[9] {this.txECGBedUp1.Text.Trim(),
                 this.txECGBedUp2.Text.Trim(),
@@ -186,7 +190,7 @@ namespace Anka
                 this.txECGOutRoom2.Text.Trim(),
                 this.txECGOutRoom3.Text.Trim()
             };
-            DataAdapter.ExerciseResult.ECGs = ECGs;
+            dic["ECGs"] = DataAdapter.ArrayToString(ECGs);
 
             RadioButton[] CheckYes = new RadioButton[9]{this.rbBedUpYes1,
                 this.rbBedUpYes2,
@@ -208,22 +212,24 @@ namespace Anka
                 this.rbOutRoomNo2,
                 this.rbOutRoomNo3
             };
-            DataAdapter.ExerciseResult.Checks = new bool[9];
+            bool[] Checks = new bool[9];
             for (int i = 0; i < 9; i++)
             {
                 if (CheckYes[i].IsChecked == true)
-                    DataAdapter.ExerciseResult.Checks[i] = true;
+                    Checks[i] = true;
                 else if (CheckNo[i].IsChecked == true)
-                    DataAdapter.ExerciseResult.Checks[i] = false;
+                    Checks[i] = false;
             }
+
+            dic["Checks"] = DataAdapter.ArrayToString(Checks);
 
             if (this.rbInRoomUp5.IsChecked == true)
             {
-                DataAdapter.ExerciseResult.InRoomUp = false;
+                dic["InRoomUp"] = false;
             }
             else if (this.rbInRoomUp10.IsChecked == true)
             {
-                DataAdapter.ExerciseResult.InRoomUp = true;
+                dic["InRoomUp"] = true;
             }
 
         }

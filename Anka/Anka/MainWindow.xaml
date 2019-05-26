@@ -11,6 +11,7 @@
             <MenuItem Header="文  件" Width="60" HorizontalContentAlignment="Center">
                 <MenuItem x:Name="DataConnection" Header="连接服务器" Click="DataConnection_Click"/>
                 <MenuItem x:Name="miNewDoc" Header="新建档案" Click="MiNewDoc_Click"/>
+                <Separator/>
                 <MenuItem x:Name="miExit" Header="退出" Click="miExit_Click"/>
             </MenuItem>
             <MenuItem Header="选  项" Width="60"/>
@@ -2019,17 +2020,17 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Margin="15,0" Width="120">
                                         <Label Content="身高：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txSize1" Width="45" Height="25" VerticalContentAlignment="Center" LostFocus="OnBMIHeightChanged" />
+                                        <TextBox x:Name="txSize1" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="体重：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txSize2" Width="45" Height="25" VerticalContentAlignment="Center" LostFocus="OnBMIWeightChanged" />
+                                        <TextBox x:Name="txSize2" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="腰围：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txSize3" Width="45" Height="25" VerticalContentAlignment="Center" LostFocus="OnWCTextChanged" />
+                                        <TextBox x:Name="txSize3" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
@@ -2218,7 +2219,7 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="120">
                                             <Label Content="身高:"/>
-                                            <TextBox x:Name="bmiHeight" Width="60" Height="25" VerticalContentAlignment="Center" Text="{Binding InputValue2, Mode=OneWayToSource, Source={StaticResource bmiIndicator}}" LostFocus="OnBMIHeightChanged" />
+                                            <TextBox x:Name="bmiHight" Width="60" Height="25" VerticalContentAlignment="Center" Text="{Binding InputValue2, Mode=OneWayToSource, Source={StaticResource bmiIndicator}}" LostFocus="OnBMIHeightChanged" />
                                             <Label Content="m"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="135">
@@ -3338,8 +3339,8 @@
                                                 </Path.Data>
                                             </Path>
 
-                                            
-                                            
+
+
 
                                             <Grid Width="50" Height="160">
                                                 <Grid.ColumnDefinitions>

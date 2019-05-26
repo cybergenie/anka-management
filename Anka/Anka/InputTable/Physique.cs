@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SQLite;
+using System.Data;
 
 namespace Anka
 {
@@ -37,51 +38,50 @@ namespace Anka
         {
             if (this.txPhysiqueLoop.Text.Trim().Length > 0)
             {
-                DataAdapter.PhysiqueNumber = DataAdapter.Number + "-" + this.txPhysiqueLoop.Text.Trim();
-                PhysiqueResultSave();
-
-                string sql = string.Format("SELECT * FROM physique where PhysiqueNumber='{0}';", DataAdapter.PhysiqueNumber);
-                SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
-
-                if (dataReader.StepCount == 0)
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
                 {
-                     sql = string.Format("INSERT INTO physique (PhysiqueNumber, FM, TBW, BCW, SMMAll, SMMArmLeft, SMMArmRight, SMMBody, SMMLegLeft, SMMLegRight, VAT, PA, PAPercent, basicinfo_Number) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}');",
-                    DataAdapter.PhysiqueNumber,
-                    DataAdapter.PhysiqueResult.FM,
-                    DataAdapter.PhysiqueResult.TBW,
-                    DataAdapter.PhysiqueResult.BCW,
-                    DataAdapter.PhysiqueResult.SMMAll,
-                    DataAdapter.PhysiqueResult.SMMArmLeft,
-                    DataAdapter.PhysiqueResult.SMMArmRight,
-                    DataAdapter.PhysiqueResult.SMMBody,
-                    DataAdapter.PhysiqueResult.SMMLegLeft,
-                    DataAdapter.PhysiqueResult.SMMLegRight,
-                    DataAdapter.PhysiqueResult.VAT,
-                    DataAdapter.PhysiqueResult.PA,
-                    DataAdapter.PhysiqueResult.PAPercent,
-                    DataAdapter.Number);
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+                        var dicData = new Dictionary<string, object>();
+
+                        PhysiqueResultSave(dicData);
+
+                        string PhysiqueNumber = DataAdapter.Number + "-" + this.txPhysiqueLoop.Text.Trim();
+
+                        string sql = string.Format("SELECT * FROM physique where PhysiqueNumber='{0}';", PhysiqueNumber);
+                        DataTable dt = sh.Select(sql);
+                        try
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                var dicCondition = new Dictionary<string, object>();
+                                dicCondition["basicinfo_Number"] = DataAdapter.Number;
+                                dicCondition["PhysiqueNumber"] = PhysiqueNumber;
+                                sh.Update("physique", dicData, dicCondition);
+                            }
+                            else
+                            {
+                                dicData["PhysiqueNumber"] = PhysiqueNumber;
+                                dicData["basicinfo_Number"] = DataAdapter.Number;
+                                sh.Insert("physique", dicData);
+                            }
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+
+                    }
                 }
-                else
-                {
-                     sql = string.Format("UPDATE physique SET FM = '{1}', TBW = '{2}', BCW = '{3}', SMMAll = '{4}', SMMArmLeft = '{5}', SMMArmRight = '{6}', SMMBody = '{7}', SMMLegLeft = '{8}', SMMLegRight = '{9}', VAT = '{10}', PA = '{11}', PAPercent = '{12}' WHERE (PhysiqueNumber = '{0}') and (basicinfo_Number = '{13}');",
-                            DataAdapter.PhysiqueNumber,
-                            DataAdapter.PhysiqueResult.FM,
-                            DataAdapter.PhysiqueResult.TBW,
-                            DataAdapter.PhysiqueResult.BCW,
-                            DataAdapter.PhysiqueResult.SMMAll,
-                            DataAdapter.PhysiqueResult.SMMArmLeft,
-                            DataAdapter.PhysiqueResult.SMMArmRight,
-                            DataAdapter.PhysiqueResult.SMMBody,
-                            DataAdapter.PhysiqueResult.SMMLegLeft,
-                            DataAdapter.PhysiqueResult.SMMLegRight,
-                            DataAdapter.PhysiqueResult.VAT,
-                            DataAdapter.PhysiqueResult.PA,
-                            DataAdapter.PhysiqueResult.PAPercent,
-                            DataAdapter.Number);
-                }
-                dataReader.Close();
-                SQLiteAdapter.ExecuteNonQuery(sql);
-                // DatabaseInfo.ModifyDatabase(sql1, sql2);
+               
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
 
             }
@@ -91,6 +91,28 @@ namespace Anka
             }
            
 
+        }
+
+        private void PhysiqueResultSave(Dictionary<string, object> dic)
+        {
+            dic["Weight"]= DataAdapter.IsNumber(this.bmiWeight.Text.Trim()) ? Convert.ToDouble(this.bmiWeight.Text.Trim()) : 0;
+            dic["Hight"] = DataAdapter.IsNumber(this.bmiHight.Text.Trim()) ? Convert.ToDouble(this.bmiHight.Text.Trim()) : 0;
+            dic["FM"] = DataAdapter.IsNumber(this.txFM.Text.Trim()) ? Convert.ToDouble(this.txFM.Text.Trim()) : 0;
+            dic["PA"] = DataAdapter.IsNumber(this.txPA.Text.Trim()) ? Convert.ToDouble(this.txPA.Text.Trim()) : 0;
+            dic["SMMAll"] = DataAdapter.IsNumber(this.txSMM.Text.Trim()) ? Convert.ToDouble(this.txSMM.Text.Trim()) : 0;
+            dic["SMMArmLeft"] = DataAdapter.IsNumber(this.txLA.Text.Trim()) ? Convert.ToDouble(this.txLA.Text.Trim()) : 0;
+            dic["SMMArmRight"] = DataAdapter.IsNumber(this.txRA.Text.Trim()) ? Convert.ToDouble(this.txRA.Text.Trim()) : 0;
+            dic["SMMBody"] = DataAdapter.IsNumber(this.txTK.Text.Trim()) ? Convert.ToDouble(this.txTK.Text.Trim()) : 0;
+            dic["SMMLegLeft"] = DataAdapter.IsNumber(this.txLL.Text.Trim()) ? Convert.ToDouble(this.txLL.Text.Trim()) : 0;
+            dic["SMMLegRight"] = DataAdapter.IsNumber(this.txRL.Text.Trim()) ? Convert.ToDouble(this.txRL.Text.Trim()) : 0;
+
+            dic["BCW"] = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
+            dic["TBW"] = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
+
+            dic["VAT"] = DataAdapter.IsNumber(this.txVAT.Text.Trim()) ? Convert.ToDouble(this.txVAT.Text.Trim()) : 0;
+            dic["Waistline"] = DataAdapter.IsNumber(txWC.Text.Trim()) ? Convert.ToDouble(txWC.Text.Trim()) : 0;
+            dic["PA"] = DataAdapter.IsNumber(this.txPA.Text.Trim()) ? Convert.ToDouble(this.txPA.Text.Trim()) : 0;
+            dic["PAPercent"] = DataAdapter.IsNumber(this.txPAPercent.Text.Trim()) ? Convert.ToDouble(this.txPAPercent.Text.Trim()) : 0;
         }
 
         private void InitBMI()
@@ -110,9 +132,14 @@ namespace Anka
             double PositionStar = 0;
             BMIIndicator.IndicatorValue = 0;
 
-            if (DataAdapter.SizeResult.Hight > 0 && DataAdapter.SizeResult.Hight > 0)
+            double Hight = DataAdapter.IsNumber(this.bmiHight.Text.Trim()) ? Convert.ToDouble(this.bmiHight.Text.Trim()) : 0;
+            double Weight = DataAdapter.IsNumber(this.bmiWeight.Text.Trim()) ? Convert.ToDouble(this.bmiWeight.Text.Trim()) : 0;
+
+
+
+            if (Hight > 0 && Hight > 0)
             {
-                BMIIndicator.IndicatorValue = DataAdapter.SizeResult.Weight / (DataAdapter.SizeResult.Hight * DataAdapter.SizeResult.Hight);
+                BMIIndicator.IndicatorValue = Weight / (Hight * Hight);
             }
 
             if (BMIIndicator.IndicatorValue < Headvalue)
@@ -201,10 +228,12 @@ namespace Anka
 
             double PositionStar = 10;
             FMIIndicator.IndicatorValue = 0;
+            double FM = DataAdapter.IsNumber(this.txFM.Text.Trim()) ? Convert.ToDouble(this.txFM.Text.Trim()) : 0;
+            double Hight = DataAdapter.IsNumber(this.bmiHight.Text.Trim()) ? Convert.ToDouble(this.bmiHight.Text.Trim()) : 0;
 
-            if (DataAdapter.PhysiqueResult.FM > 0 && DataAdapter.SizeResult.Hight > 0)
+            if (FM > 0 && Hight > 0)
             {
-                FMIIndicator.IndicatorValue = DataAdapter.PhysiqueResult.FM / (DataAdapter.SizeResult.Hight * DataAdapter.SizeResult.Hight);
+                FMIIndicator.IndicatorValue = FM / (Hight * Hight);
             }
 
             if (FMIIndicator.IndicatorValue < Headvalue)
@@ -293,8 +322,8 @@ namespace Anka
             double Endvalue = 60.0;
 
             double PositionStar = 0;
-            DataAdapter.PhysiqueResult.TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
-            TBWIndicator.IndicatorValue = DataAdapter.PhysiqueResult.TBW;
+            double TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
+            TBWIndicator.IndicatorValue = TBW;
             if (TBWIndicator.IndicatorValue < Headvalue)
             {
                 PositionStar = 10;
@@ -352,8 +381,8 @@ namespace Anka
             double PositionStar = 0;
             BCWIndicator.IndicatorValue = 0;
 
-            DataAdapter.PhysiqueResult.BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
-            BCWIndicator.IndicatorValue = DataAdapter.PhysiqueResult.BCW;
+            double BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
+            BCWIndicator.IndicatorValue = BCW;
             if (BCWIndicator.IndicatorValue < Headvalue)
             {
                 PositionStar = 10;
@@ -411,11 +440,13 @@ namespace Anka
 
             double PositionStar = 0;
 
+            double BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
+            double TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
             EBWIndicator.IndicatorValue = 0;
 
-            if (DataAdapter.PhysiqueResult.BCW > 0 && DataAdapter.PhysiqueResult.TBW > 0)
+            if (BCW > 0 && TBW > 0)
             {
-                EBWIndicator.IndicatorValue = (DataAdapter.PhysiqueResult.BCW / DataAdapter.PhysiqueResult.TBW) * 100;
+                EBWIndicator.IndicatorValue = (BCW / TBW) * 100;
             }
 
             if (EBWIndicator.IndicatorValue < Headvalue)
@@ -475,8 +506,8 @@ namespace Anka
             double PositionStar = 0;
             BodyIndicator.IndicatorValue = 0;
 
-            DataAdapter.PhysiqueResult.SMMAll = DataAdapter.IsNumber(this.txSMM.Text.Trim()) ? Convert.ToDouble(this.txSMM.Text.Trim()) : 0;
-            BodyIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMAll;
+            double SMMAll = DataAdapter.IsNumber(this.txSMM.Text.Trim()) ? Convert.ToDouble(this.txSMM.Text.Trim()) : 0;
+            BodyIndicator.IndicatorValue = SMMAll;
 
             if (BodyIndicator.IndicatorValue < Headvalue)
             {
@@ -536,9 +567,9 @@ namespace Anka
             double PositionStar = 0;
             LAIndicator.IndicatorValue = 0;
 
-            DataAdapter.PhysiqueResult.SMMArmLeft = DataAdapter.IsNumber(this.txLA.Text.Trim()) ? Convert.ToDouble(this.txLA.Text.Trim()) : 0;
+            double SMMArmLeft = DataAdapter.IsNumber(this.txLA.Text.Trim()) ? Convert.ToDouble(this.txLA.Text.Trim()) : 0;
 
-            LAIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMArmLeft;
+            LAIndicator.IndicatorValue = SMMArmLeft;
 
 
             if (LAIndicator.IndicatorValue < Headvalue)
@@ -598,9 +629,9 @@ namespace Anka
             double PositionStar = 0;
             TKIndicator.IndicatorValue = 0;
 
-            DataAdapter.PhysiqueResult.SMMBody = DataAdapter.IsNumber(this.txTK.Text.Trim()) ? Convert.ToDouble(this.txTK.Text.Trim()) : 0;
+            double SMMBody = DataAdapter.IsNumber(this.txTK.Text.Trim()) ? Convert.ToDouble(this.txTK.Text.Trim()) : 0;
 
-            TKIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMBody;
+            TKIndicator.IndicatorValue = SMMBody;
 
 
             if (TKIndicator.IndicatorValue < Headvalue)
@@ -660,8 +691,8 @@ namespace Anka
             double PositionStar = 0;
             RAIndicator.IndicatorValue = 0;
 
-            DataAdapter.PhysiqueResult.SMMArmRight = DataAdapter.IsNumber(this.txRA.Text.Trim()) ? Convert.ToDouble(this.txRA.Text.Trim()) : 0;
-            RAIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMArmRight;
+            double SMMArmRight = DataAdapter.IsNumber(this.txRA.Text.Trim()) ? Convert.ToDouble(this.txRA.Text.Trim()) : 0;
+            RAIndicator.IndicatorValue = SMMArmRight;
 
             if (RAIndicator.IndicatorValue < Headvalue)
             {
@@ -720,8 +751,8 @@ namespace Anka
             double PositionStar = 0;
             LLIndicator.IndicatorValue = 0;
 
-            DataAdapter.PhysiqueResult.SMMLegLeft = DataAdapter.IsNumber(this.txLL.Text.Trim()) ? Convert.ToDouble(this.txLL.Text.Trim()) : 0;
-            LLIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMLegLeft;
+            double SMMLegLeft = DataAdapter.IsNumber(this.txLL.Text.Trim()) ? Convert.ToDouble(this.txLL.Text.Trim()) : 0;
+            LLIndicator.IndicatorValue = SMMLegLeft;
 
             if (LLIndicator.IndicatorValue < Headvalue)
             {
@@ -780,8 +811,8 @@ namespace Anka
             double PositionStar = 0;
             RLIndicator.IndicatorValue = 0;
 
-            DataAdapter.PhysiqueResult.SMMLegRight = DataAdapter.IsNumber(this.txRL.Text.Trim()) ? Convert.ToDouble(this.txRL.Text.Trim()) : 0;
-            RLIndicator.IndicatorValue = DataAdapter.PhysiqueResult.SMMLegRight;
+            double SMMLegRight = DataAdapter.IsNumber(this.txRL.Text.Trim()) ? Convert.ToDouble(this.txRL.Text.Trim()) : 0;
+            RLIndicator.IndicatorValue = SMMLegRight;
 
 
             if (RLIndicator.IndicatorValue < Headvalue)
@@ -840,10 +871,10 @@ namespace Anka
             double PositionStar = 0;
             VATIndicator.IndicatorValue = 0;
 
-            DataAdapter.PhysiqueResult.VAT = DataAdapter.IsNumber(this.txVAT.Text.Trim()) ? Convert.ToDouble(this.txVAT.Text.Trim()) : 0;
+            double VAT = DataAdapter.IsNumber(this.txVAT.Text.Trim()) ? Convert.ToDouble(this.txVAT.Text.Trim()) : 0;
 
 
-            VATIndicator.IndicatorValue = DataAdapter.PhysiqueResult.VAT;
+            VATIndicator.IndicatorValue = VAT;
 
 
             if (VATIndicator.IndicatorValue < Headvalue)
@@ -923,9 +954,9 @@ namespace Anka
             double PositionStar = 0;
             WCIndicator.IndicatorValue = 0;
 
-            DataAdapter.SizeResult.Waistline = DataAdapter.IsNumber(this.txWC.Text.Trim()) ? Convert.ToDouble(this.txWC.Text.Trim()) : 0;
+            double Waistline = DataAdapter.IsNumber(this.txWC.Text.Trim()) ? Convert.ToDouble(this.txWC.Text.Trim()) : 0;
 
-            WCIndicator.IndicatorValue = DataAdapter.SizeResult.Waistline;
+            WCIndicator.IndicatorValue = Waistline;
 
 
             if (WCIndicator.IndicatorValue < Headvalue)
@@ -985,50 +1016,50 @@ namespace Anka
 
         private void OnBMIWeightChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.SizeResult.Weight = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
-            this.txSize2.Text = DataAdapter.SizeResult.Weight.ToString();
-            this.bmiWeight.Text = DataAdapter.SizeResult.Weight.ToString();
-
-            if (DataAdapter.SizeResult.Weight > 0 && DataAdapter.SizeResult.Hight > 0)
+            double Weight = DataAdapter.IsNumber(bmiWeight.Text.Trim()) ? Convert.ToDouble(bmiWeight.Text.Trim()) : 0;
+            double Hight = DataAdapter.IsNumber(bmiHight.Text.Trim()) ? Convert.ToDouble(bmiHight.Text.Trim()) : 0;
+            double FM = DataAdapter.IsNumber(txFM.Text.Trim()) ? Convert.ToDouble(txFM.Text.Trim()) : 0;
+            if (Hight >= 10)
             {
-                this.bmiBMI.Text = (DataAdapter.SizeResult.Weight / (DataAdapter.SizeResult.Hight * DataAdapter.SizeResult.Hight)).ToString("0.0");
+                Hight = Hight / 100;
+            }
+
+
+            if (Weight > 0 && Hight > 0)
+            {
+                this.bmiBMI.Text = (Weight / (Hight * Hight)).ToString("0.0");
             }
 
             BMIIndicatorBinding();
-            if (DataAdapter.SizeResult.Weight > 0 && DataAdapter.PhysiqueResult.FM > 0)
+            if (Weight > 0 && FM > 0)
             {
-                this.txFM2.Content = ((DataAdapter.PhysiqueResult.FM / DataAdapter.SizeResult.Weight) * 100.0).ToString("0.0");
+                this.txFM2.Content = ((FM / Weight) * 100.0).ToString("0.0");
             }
 
         }
 
         private void OnFMITextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.FM = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double FM = DataAdapter.IsNumber(txFM.Text.Trim()) ? Convert.ToDouble(txFM.Text.Trim()) : 0;
+            double Weight = DataAdapter.IsNumber(bmiWeight.Text.Trim()) ? Convert.ToDouble(bmiWeight.Text.Trim()) : 0;
             FMIIndicatorBinding();
             this.txFMI.Text = FMIIndicator.IndicatorValue.ToString("0.0");
-            this.txFM2.Content = ((DataAdapter.PhysiqueResult.FM / DataAdapter.SizeResult.Weight) * 100.0).ToString("0.0");
+            this.txFM2.Content = ((FM /Weight) * 100.0).ToString("0.0");
         }
 
         private void OnBMIHeightChanged(object sender, RoutedEventArgs e)
         {
-            double temp = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double Hight = DataAdapter.IsNumber(bmiHight.Text.Trim()) ? Convert.ToDouble(bmiHight.Text.Trim()) : 0;
+            double Weight = DataAdapter.IsNumber(bmiWeight.Text.Trim()) ? Convert.ToDouble(bmiWeight.Text.Trim()) : 0;
 
-            if (temp < 10)
+            if (Hight >= 10)
             {
-                DataAdapter.SizeResult.Hight = temp;
-            }
-            else if (temp >= 10)
-            {
-                DataAdapter.SizeResult.Hight = temp / 100;
-            }
+                Hight = Hight / 100;
+            }           
 
-            this.txSize1.Text = (DataAdapter.SizeResult.Hight * 100).ToString();
-            this.bmiHeight.Text = DataAdapter.SizeResult.Hight.ToString();
-
-            if (DataAdapter.SizeResult.Weight > 0 && DataAdapter.SizeResult.Hight > 0)
+            if (Weight > 0 && Hight > 0)
             {
-                this.bmiBMI.Text = (DataAdapter.SizeResult.Weight / (DataAdapter.SizeResult.Hight * DataAdapter.SizeResult.Hight)).ToString("0.0");
+                this.bmiBMI.Text = (Weight / (Hight * Hight)).ToString("0.0");
             }
 
             BMIIndicatorBinding();
@@ -1038,118 +1069,101 @@ namespace Anka
 
         private void OnTBWTextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
+            double TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
+            double Weight = DataAdapter.IsNumber(bmiWeight.Text.Trim()) ? Convert.ToDouble(bmiWeight.Text.Trim()) : 0;
+            double BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
             BMIIndicatorBinding();
             TBWIndicatorBinding();
             EBWIndicatorBinding();
-            this.txTBW2.Content = ((DataAdapter.PhysiqueResult.TBW / DataAdapter.SizeResult.Weight) * 100.0).ToString("0.0");
-            if (DataAdapter.PhysiqueResult.TBW > 0 && DataAdapter.PhysiqueResult.BCW > 0)
+            this.txTBW2.Content = ((TBW / Weight) * 100.0).ToString("0.0");
+            if (TBW > 0 && BCW > 0)
             {
-                this.txEBW.Text = ((DataAdapter.PhysiqueResult.BCW / DataAdapter.PhysiqueResult.TBW) * 100.0).ToString("0.0");
+                this.txEBW.Text = ((BCW / TBW) * 100.0).ToString("0.0");
             }
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.TBW.ToString();
+            ((TextBox)sender).Text = TBW.ToString();
         }
 
         private void OnBCWTextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.BCW = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
+            double TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
+            double Weight = DataAdapter.IsNumber(bmiWeight.Text.Trim()) ? Convert.ToDouble(bmiWeight.Text.Trim()) : 0;
             BMIIndicatorBinding();
             BCWIndicatorBinding();
             EBWIndicatorBinding();
-            this.txBCW2.Content = ((DataAdapter.PhysiqueResult.BCW / DataAdapter.SizeResult.Weight) * 100.0).ToString("0.0");
-            if (DataAdapter.PhysiqueResult.TBW > 0 && DataAdapter.PhysiqueResult.BCW > 0)
+            this.txBCW2.Content = ((BCW / Weight) * 100.0).ToString("0.0");
+            if (TBW > 0 && BCW > 0)
             {
-                this.txEBW.Text = ((DataAdapter.PhysiqueResult.BCW / DataAdapter.PhysiqueResult.TBW) * 100.0).ToString("0.0");
+                this.txEBW.Text = ((BCW / TBW) * 100.0).ToString("0.0");
             }
 
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.BCW.ToString();
+            ((TextBox)sender).Text = BCW.ToString();
         }
 
         private void OnBodyTextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.SMMAll = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double SMMAll = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             BodyIndicatorBinding();
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMAll.ToString();
+            ((TextBox)sender).Text = SMMAll.ToString();
         }
 
         private void OnLATextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.SMMArmLeft = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double SMMArmLeft = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             LAIndicatorBinding();
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMArmLeft.ToString();
+            ((TextBox)sender).Text = SMMArmLeft.ToString();
         }
 
         private void OnTKTextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.SMMBody = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double SMMBody = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             TKIndicatorBinding();
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMBody.ToString();
+            ((TextBox)sender).Text = SMMBody.ToString();
         }
 
         private void OnBodyRAChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.SMMArmRight = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double SMMArmRight = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             RAIndicatorBinding();
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMArmRight.ToString();
+            ((TextBox)sender).Text = SMMArmRight.ToString();
         }
 
         private void OnLLTextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.SMMLegLeft = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double SMMLegLeft = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             LLIndicatorBinding();
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMLegLeft.ToString();
+            ((TextBox)sender).Text = SMMLegLeft.ToString();
         }
 
         private void OnRLTextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.SMMLegRight = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double SMMLegRight = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             RLIndicatorBinding();
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.SMMLegRight.ToString();
+            ((TextBox)sender).Text = SMMLegRight.ToString();
         }
 
         private void OnVATTextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.VAT = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            double VAT = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
             VATIndicatorBinding();
-            ((TextBox)sender).Text = DataAdapter.PhysiqueResult.VAT.ToString();
+            ((TextBox)sender).Text = VAT.ToString();
         }
 
         private void OnWCTextChanged(object sender, RoutedEventArgs e)
         {
-            double temp = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
-            if (temp < 10)
-                DataAdapter.SizeResult.Waistline = temp;
-            else if (temp >= 10)
-                DataAdapter.SizeResult.Waistline = temp / 100.0;
-            this.txSize3.Text = (DataAdapter.SizeResult.Waistline * 100.0).ToString();
-            this.txWC.Text = DataAdapter.SizeResult.Waistline.ToString("0.00");
+            double Waistline = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
+            if (Waistline >= 10)
+                Waistline = Waistline / 100.0;            
+            this.txWC.Text = Waistline.ToString("0.00");
             WCIndicatorBinding();
         }
 
 
 
-        private void PhysiqueResultSave()
-        {
-            DataAdapter.PhysiqueResult.FM = DataAdapter.IsNumber(this.txFM.Text.Trim()) ? Convert.ToDouble(this.txFM.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.PA = DataAdapter.IsNumber(this.txPA.Text.Trim()) ? Convert.ToDouble(this.txPA.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.SMMAll = DataAdapter.IsNumber(this.txSMM.Text.Trim()) ? Convert.ToDouble(this.txSMM.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.SMMArmLeft = DataAdapter.IsNumber(this.txLA.Text.Trim()) ? Convert.ToDouble(this.txLA.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.SMMArmRight = DataAdapter.IsNumber(this.txRA.Text.Trim()) ? Convert.ToDouble(this.txRA.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.SMMBody = DataAdapter.IsNumber(this.txTK.Text.Trim()) ? Convert.ToDouble(this.txTK.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.SMMLegLeft = DataAdapter.IsNumber(this.txLL.Text.Trim()) ? Convert.ToDouble(this.txLL.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.SMMLegRight = DataAdapter.IsNumber(this.txRL.Text.Trim()) ? Convert.ToDouble(this.txRL.Text.Trim()) : 0;
-
-            DataAdapter.PhysiqueResult.BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
-
-            DataAdapter.PhysiqueResult.VAT = DataAdapter.IsNumber(this.txVAT.Text.Trim()) ? Convert.ToDouble(this.txVAT.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.PA = DataAdapter.IsNumber(this.txPA.Text.Trim()) ? Convert.ToDouble(this.txPA.Text.Trim()) : 0;
-            DataAdapter.PhysiqueResult.PAPercent = DataAdapter.IsNumber(this.txPAPercent.Text.Trim()) ? Convert.ToDouble(this.txPAPercent.Text.Trim()) : 0;
-        }
+       
         private void OnPATextChanged(object sender, RoutedEventArgs e)
         {
-            DataAdapter.PhysiqueResult.PA = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;
-            double PA = DataAdapter.PhysiqueResult.PA;
+            double PA = DataAdapter.IsNumber(((TextBox)sender).Text.Trim()) ? Convert.ToDouble(((TextBox)sender).Text.Trim()) : 0;            
             int Age = DataAdapter.Age;
             if (Age < 20)
             {
