@@ -34,28 +34,84 @@ namespace Anka
 
                         SQLiteHelper sh = new SQLiteHelper(cmd);
                         var dicData = new Dictionary<string, object>();
-                        
+
                         ExcerciseDataSave(dicData);
+                        if(this.txExerciseLoop.Text.Trim().Length>0)
+                        {
+                            string ExerciseNumber = DataAdapter.Number + "-" + this.txExerciseLoop.Text.Trim();
+                            string sql = string.Format("SELECT * FROM exercise where ExerciseNumber='{0}';", ExerciseNumber);
+                            DataTable dt = sh.Select(sql);
+                            try
+                            {
+                                if (dt.Rows.Count > 0)
+                                {
+                                    var dicCondition = new Dictionary<string, object>();
+                                    dicCondition["basicinfo_Number"] = DataAdapter.Number;
+                                    dicCondition["ExerciseNumber"] = ExerciseNumber;
+                                    sh.Update("exercise", dicData, dicCondition);
+                                }
+                                else
+                                {
+                                    dicData["ExerciseNumber"] = ExerciseNumber;
+                                    dicData["basicinfo_Number"] = DataAdapter.Number;
+                                    sh.Insert("exercise", dicData);
+                                }
+                            }
+                            catch (SQLiteException ex)
+                            {
+                                MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                            }
+                            finally
+                            {
+                                conn.Close();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("请输入项目编号。");
+                        }
+                        
 
-                        string ExerciseNumber = DataAdapter.Number + "-" + this.txExerciseLoop.Text.Trim();
+                       
 
-                        string sql = string.Format("SELECT * FROM exercise where ExerciseNumber='{0}';", ExerciseNumber);
-                        DataTable dt = sh.Select(sql);
+                    }
+                }
+
+                ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
+            }
+            else
+            {
+
+                MessageBox.Show("请输入运动负荷记录表编号。");
+            }
+        }
+
+        private void BtExcerciseLoad_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.txExerciseLoop.Text.Trim().Length > 0)
+            {
+                string ExerciseNumber = DataAdapter.Number + "-" + this.txExerciseLoop.Text.Trim();
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+
                         try
                         {
-                            if (dt.Rows.Count > 0)
+                            DataTable dt = sh.Select(string.Format("select * from exercise where ExerciseNumber=\"{0}\";", ExerciseNumber));
+                            if(dt.Rows.Count>0)
                             {
-                                var dicCondition = new Dictionary<string, object>();
-                                dicCondition["basicinfo_Number"] = DataAdapter.Number;
-                                dicCondition["ExerciseNumber"] = ExerciseNumber;
-                                sh.Update("exercise", dicData, dicCondition);
+                                ExcerciseDataLoad(dt);
                             }
                             else
                             {
-                                dicData["ExerciseNumber"] = ExerciseNumber;
-                                dicData["basicinfo_Number"] = DataAdapter.Number;
-                                sh.Insert("exercise", dicData);
-                            }                            
+                                MessageBox.Show("该编号数据不存在。");
+                            }
+                            
                         }
                         catch (SQLiteException ex)
                         {
@@ -64,24 +120,16 @@ namespace Anka
                         finally
                         {
                             conn.Close();
-                        }                      
-
+                        }
                     }
                 }
-
-                ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
-
             else
             {
-
-                MessageBox.Show("请输入运动负荷记录表编号。");
+                MessageBox.Show("请输入项目编号。");
             }
 
-
-
-
-                }
+        }
 
         private void ExcerciseDataSave(Dictionary<string, object> dic)
         {
@@ -109,10 +157,8 @@ namespace Anka
                 this.txBPOutRoom2.Text.ToString(),
                 this.txBPOutRoom3.Text.ToString()
             };
-            for (int i = 0; i < 9; i++)
-            {
-                DataAdapter.GetBloodPressure(txBPUp[i], bpLower[i], bpUpper[i]);
-            }
+            DataAdapter.GetBloodPressure(txBPUp, bpLower, bpUpper);
+            
             dic["BloodPressureLower"] = DataAdapter.ArrayToString(bpLower);
             dic["BloodPressureUpper"] = DataAdapter.ArrayToString(bpUpper);
 
@@ -212,16 +258,17 @@ namespace Anka
                 this.rbOutRoomNo2,
                 this.rbOutRoomNo3
             };
-            bool[] Checks = new bool[9];
+            string Checks="" ;
             for (int i = 0; i < 9; i++)
             {
                 if (CheckYes[i].IsChecked == true)
-                    Checks[i] = true;
+                    Checks += "1";
                 else if (CheckNo[i].IsChecked == true)
-                    Checks[i] = false;
+                    Checks += "0";
+                Checks += "|";
             }
 
-            dic["Checks"] = DataAdapter.ArrayToString(Checks);
+            dic["Checks"] = Checks;
 
             if (this.rbInRoomUp5.IsChecked == true)
             {
@@ -233,6 +280,196 @@ namespace Anka
             }
 
         }
+
+        private void ExcerciseDataLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+
+            DatePicker[] Date = new DatePicker[9] { this.dpBedup1,
+                this.dpBedup2,
+                this.dpBedup3,
+                this.dpBedup4,
+                this.dpInRoom1,
+                this.dpInRoom2,
+                this.dpOutRoom1,
+                this.dpOutRoom2,
+                this.dpOutRoom3
+            };
+
+            string sDate = dr["Date"] == System.DBNull.Value ? "" : dr["Date"].ToString();
+            string[] DateArray = sDate.Split('|');
+            for (int i = 0; i < 9; i++)
+            {
+                DateArray[i] = DateArray[i] == "0" ? "" : DateArray[i];
+                Date[i].Text = DateArray[i];
+            }
+                                   
+            TextBox[] txBPUp = new TextBox[9]{this.txBPBedUp1,
+                this.txBPBedUp2,
+                this.txBPBedUp3,
+                this.txBPBedUp4,
+                this.txBPInRoom1,
+                this.txBPInRoom2,
+                this.txBPOutRoom1,
+                this.txBPOutRoom2,
+                this.txBPOutRoom3
+            };
+            string sBloodPressureLower = dr["BloodPressureLower"] == System.DBNull.Value ? "" : dr["BloodPressureLower"].ToString();
+            string sBloodPressureUpper = dr["BloodPressureUpper"] == System.DBNull.Value ? "" : dr["BloodPressureUpper"].ToString();
+            string[] bpLowerArray = sBloodPressureLower.Split('|');
+            string[] bpUpperArray = sBloodPressureUpper.Split('|');
+
+            for (int i = 0; i < 9; i++)
+            {
+                bpLowerArray[i] = bpLowerArray[i] == "0" ? "" : bpLowerArray[i];
+                bpUpperArray[i] = bpUpperArray[i] == "0" ? "" : bpUpperArray[i];
+                txBPUp[i].Text = bpLowerArray[i] + "/" + bpUpperArray[i];
+            }
+            
+
+            
+            TextBox[] txBMP = new TextBox[9] {this.txBMPBedUp1,
+                this.txBMPBedUp2,
+                this.txBMPBedUp3,
+                this.txBMPBedUp4,
+                this.txBMPInRoom1,
+                this.txBMPInRoom2,
+                this.txBMPOutRoom1,
+                this.txBMPOutRoom2,
+                this.txBMPOutRoom3
+            };
+            string sHeartRate = dr["HeartRate"] == System.DBNull.Value ? "" : dr["HeartRate"].ToString();
+            string[] HeartRateArray = sHeartRate.Split('|');
+            for (int i = 0; i < 9; i++)
+            {
+                HeartRateArray[i] = HeartRateArray[i] == "0" ? "" : HeartRateArray[i];
+                txBMP[i].Text = HeartRateArray[i];
+            }
+            
+
+            
+            TextBox[] txBloodOxygen = new TextBox[9] {this.txBOBedUp1,
+                this.txBOBedUp2,
+                this.txBOBedUp3,
+                this.txBOBedUp4,
+                this.txBOInRoom1,
+                this.txBOInRoom2,
+                this.txBOOutRoom1,
+                this.txBOOutRoom2,
+                this.txBOOutRoom3
+            };
+            string sBloodOxygen = dr["BloodOxygen"] == System.DBNull.Value ? "" : dr["BloodOxygen"].ToString();
+            string[] BloodOxygenArray = sBloodOxygen.Split('|');
+            for (int i = 0; i < 9; i++)
+            {
+                BloodOxygenArray[i] = BloodOxygenArray[i] == "0" ? "" : BloodOxygenArray[i];
+                txBloodOxygen[i].Text = BloodOxygenArray[i];
+            }
+            
+
+            
+            TextBox[] txBorgIndex = new TextBox[9] {this.txBorgBedUp1,
+                this.txBorgBedUp2,
+                this.txBorgBedUp3,
+                this.txBorgBedUp4,
+                this.txBorgInRoom1,
+                this.txBorgInRoom2,
+                this.txBorgOutRoom1,
+                this.txBorgOutRoom2,
+                this.txBorgOutRoom3
+            };
+            string sBorgIndex = dr["BorgIndex"] == System.DBNull.Value ? "" : dr["BorgIndex"].ToString();
+            string[] BorgIndexArray = sBorgIndex.Split('|');
+            for (int i = 0; i < 9; i++)
+            {
+                BorgIndexArray[i] = BorgIndexArray[i] == "0" ? "" : BorgIndexArray[i];
+                txBorgIndex[i].Text = BorgIndexArray[i];
+            }
+
+
+            TextBox[] Remarks = new TextBox[9] {this.txAddBedUp1,
+                this.txAddBedUp2,
+                this.txAddBedUp3,
+                this.txAddBedUp4,
+                this.txAddInRoom1,
+                this.txAddInRoom2,
+                this.txAddOutRoom1,
+                this.txAddOutRoom2,
+                this.txAddOutRoom3
+            };
+            string sRemarks = dr["Remarks"] == System.DBNull.Value ? "" : dr["Remarks"].ToString();
+            string[] RemarksArray = sRemarks.Split('|');
+            for (int i = 0; i < 9; i++)
+            {
+                RemarksArray[i] = RemarksArray[i] == "0" ? "" : RemarksArray[i];
+                Remarks[i].Text = RemarksArray[i];
+            }
+
+
+            TextBox[] ECGs = new TextBox[9] {this.txECGBedUp1,
+                this.txECGBedUp2,
+                this.txECGBedUp3,
+                this.txECGBedUp4,
+                this.txECGInRoom1,
+                this.txECGInRoom2,
+                this.txECGOutRoom1,
+                this.txECGOutRoom2,
+                this.txECGOutRoom3
+            };
+            string sECGs = dr["ECGs"] == System.DBNull.Value ? "" : dr["ECGs"].ToString();
+            string[] ECGsArray = sECGs.Split('|');
+            for (int i = 0; i < 9; i++)
+            {
+                ECGsArray[i] = ECGsArray[i] == "0" ? "" : ECGsArray[i];
+                ECGs[i].Text = ECGsArray[i];
+            }
+
+            RadioButton[] CheckYes = new RadioButton[9]{this.rbBedUpYes1,
+                this.rbBedUpYes2,
+                this.rbBedUpYes3,
+                this.rbBedUpYes4,
+                this.rbInRoomYes1,
+                this.rbInRoomYes2,
+                this.rbOutRoomYes1,
+                this.rbOutRoomYes2,
+                this.rbOutRoomYes3
+            };
+            RadioButton[] CheckNo = new RadioButton[9]{this.rbBedUpNo1,
+                this.rbBedUpNo2,
+                this.rbBedUpNo3,
+                this.rbBedUpNo4,
+                this.rbInRoomNo1,
+                this.rbInRoomNo2,
+                this.rbOutRoomNo1,
+                this.rbOutRoomNo2,
+                this.rbOutRoomNo3
+            };
+            string sChecks = dr["Checks"] == System.DBNull.Value ? "" : dr["Checks"].ToString();
+            string[] ChecksArray = sChecks.Split('|');
+            for (int i = 0; i < 9; i++)
+            {
+                if (ChecksArray[i] == "1")
+                    CheckYes[i].IsChecked = true;
+                else if (ChecksArray[i] == "0")
+                    CheckNo[i].IsChecked = true; ;
+            }
+
+            if (dr["InRoomUp"] != System.DBNull.Value)
+            {
+
+                if (Convert.ToBoolean(dr["InRoomUp"]) == true)
+                {
+                    rbInRoomUp10.IsChecked = true;
+                }
+                else if (Convert.ToBoolean(dr["InRoomUp"]) == false)
+                {
+                    rbInRoomUp5.IsChecked = true;
+                }
+            }
+
+        }
+
+
 
         private void TxBloodPressure_GotFocus(object sender, RoutedEventArgs e)
         {

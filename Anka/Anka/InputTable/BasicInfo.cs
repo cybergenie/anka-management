@@ -56,6 +56,34 @@ namespace Anka
 
                     ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
         }
+        private void BtBasicLoad_Click(object sender, RoutedEventArgs e)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand())
+                {
+                    cmd.Connection = conn;
+                    conn.Open();
+
+                    SQLiteHelper sh = new SQLiteHelper(cmd);                   
+
+                    try
+                    {
+                        DataTable dt = sh.Select(string.Format("select * from basicinfo where Number={0};", DataAdapter.Number));
+                        BasicDataLoad(dt);
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+
+        }
 
         private void CbCC_Click(object sender, RoutedEventArgs e)
         {
@@ -69,23 +97,23 @@ namespace Anka
             }
         }
 
-        private bool[] CbRiskClick()
+        private CheckBox[] CbRiskClick()
         {
 
-            bool[] tempCheck = new bool[13]{
-                this.cbRisk1.IsChecked==true?true:false,
-                this.cbRisk2.IsChecked==true?true:false,
-                this.cbRisk3.IsChecked==true?true:false,
-                this.cbRisk4.IsChecked==true?true:false,
-                this.cbRisk5.IsChecked==true?true:false,
-                this.cbRisk6.IsChecked==true?true:false,
-                this.cbRisk7.IsChecked==true?true:false,
-                this.cbRisk8.IsChecked==true?true:false,
-                this.cbRisk9.IsChecked==true?true:false,
-                this.cbRisk10.IsChecked==true?true:false,
-                this.cbRisk11.IsChecked==true?true:false,
-                this.cbRisk12.IsChecked==true?true:false,
-                this.cbRisk13.IsChecked==true?true:false
+            CheckBox[] tempCheck = new CheckBox[13]{
+                this.cbRisk1,
+                this.cbRisk2,
+                this.cbRisk3,
+                this.cbRisk4,
+                this.cbRisk5,
+                this.cbRisk6,
+                this.cbRisk7,
+                this.cbRisk8,
+                this.cbRisk9,
+                this.cbRisk10,
+                this.cbRisk11,
+                this.cbRisk12,
+                this.cbRisk13
             };
 
             return tempCheck;
@@ -102,9 +130,9 @@ namespace Anka
             dic["BasicOther"] = txBasicOther.Text;
 
             string BasicRisk = "";
-            foreach (bool temp in CbRiskClick())
+            foreach (CheckBox temp in CbRiskClick())
             {
-                BasicRisk += (temp == true ? "1" : "0");
+                BasicRisk += (temp.IsChecked == true ? "1" : "0");
             }
 
             dic["BasicRisk"] = BasicRisk;
@@ -136,45 +164,61 @@ namespace Anka
             else
             {
                 dic["CollatCirc"] = false;
+            }           
+
+        }
+
+        private void BasicDataLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+            txKillip.Text = dr["Killip"] == System.DBNull.Value ? "": dr["Killip"].ToString();
+            txEF.Text = dr["EF"] == System.DBNull.Value ? "" : dr["EF"].ToString();
+            txLV.Text = dr["LV"] == System.DBNull.Value ? "" : dr["LV"].ToString();
+            txBasicOther.Text = dr["BasicOther"] == System.DBNull.Value ? "" : dr["BasicOther"].ToString();
+            
+
+            string BasicRisk = dr["BasicRisk"] == System.DBNull.Value ? "" : dr["BasicRisk"].ToString();
+            int i = 0;
+            foreach (char temp in BasicRisk)
+            {
+                CbRiskClick()[i].IsChecked=temp == '1' ? true:false;
+                i++;
             }
 
-            //DataAdapter.BasicInfoResult.Killip = this.txKillip.Text;
-            //DataAdapter.BasicInfoResult.EF = this.txEF.Text;
-            //DataAdapter.BasicInfoResult.LV = this.txLV.Text;
-            //DataAdapter.BasicInfoResult.BasicOther = this.txBasicOther.Text;
-            //DataAdapter.BasicInfoResult.BasicRisk = CbRiskClick();
-            //DataAdapter.BasicInfoResult.RiskOther = this.txRisk13.Text;
+            txRisk13.Text = dr["RiskOther"] == System.DBNull.Value ? "" : dr["RiskOther"].ToString();
+            txPCI.Text = dr["PCI"] == System.DBNull.Value ? "" : dr["PCI"].ToString();
+            txRS.Text = dr["ResidualStenosis"] == System.DBNull.Value ? "" : dr["ResidualStenosis"].ToString();
 
-            //if (DataAdapter.IsNumber(this.txPCI.Text) == true)
-            //    DataAdapter.BasicInfoResult.PCI = Convert.ToInt32(this.txPCI.Text);
+            if(dr["DominantCoronary"] != System.DBNull.Value)
+            {
+                switch (Convert.ToInt32( dr["DominantCoronary"]))
+                {
+                    case -1:
+                        rbDCL.IsChecked = true;
+                        break;
+                    case 0:
+                        rbDCB.IsChecked = true;
+                        break;
+                    case 1:
+                        rbDCR.IsChecked = true;
+                        break;
+                }
+                    
+            }
 
+            if (Convert.ToBoolean(dr["CollatCirc"]) == true)
+            {
+                cbCC.IsChecked = true;
+                cbCC.Content = "侧枝循环：有";
+            }
+            else
+            {
+                cbCC.IsChecked = false;
+                cbCC.Content = "侧枝循环：无";
+            }
+           
 
-            //if (DataAdapter.IsNumber(this.txRS.Text) == true)
-            //    DataAdapter.BasicInfoResult.ResidualStenosis = Convert.ToInt32(this.txRS.Text);
-
-
-            //if (this.rbDCL.IsChecked == true)
-            //{
-            //    DataAdapter.BasicInfoResult.DominantCoronary = -1;
-            //}
-            //else if (this.rbDCB.IsChecked == true)
-            //{
-            //    DataAdapter.BasicInfoResult.DominantCoronary = 0;
-            //}
-            //else if (this.rbDCR.IsChecked == true)
-            //{
-            //    DataAdapter.BasicInfoResult.DominantCoronary = 1;
-            //}
-
-
-            //if (this.cbCC.IsChecked == true)
-            //{
-            //    DataAdapter.BasicInfoResult.CollatCirc = true;
-            //}
-            //else
-            //{
-            //    DataAdapter.BasicInfoResult.CollatCirc = false;
-            //}
+            
 
         }
 

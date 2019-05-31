@@ -34,6 +34,7 @@
                             <Label Content="病案号：" Height="25" Width="45" />
                             <Label x:Name="lbBasicNumber" Content="" Height="25" Width="80" />
                             <Button x:Name="btBasicSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtBasicSave_Click" />
+                            <Button x:Name="btBasicLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtBasicLoad_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5">
                             <Grid.RowDefinitions>
@@ -150,6 +151,7 @@
                             <Label x:Name="lbLoadNumber" Content="" Height="25" Width="80" />
                             <TextBox x:Name="txExerciseLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
                             <Button x:Name="btExcerciseSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtExcerciseSave_Click" />
+                            <Button x:Name="btExcerciseLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtExcerciseLoad_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
                             <Grid.RowDefinitions>

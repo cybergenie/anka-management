@@ -18,7 +18,6 @@ E:\Project\Anka\Anka\Anka\obj\Debug\Anka.csproj.CoreCompileInputs.cache
 E:\Project\Anka\Anka\Anka\obj\Debug\Anka.csproj.CopyComplete
 E:\Project\Anka\Anka\Anka\obj\Debug\Anka.exe
 E:\Project\Anka\Anka\Anka\obj\Debug\Anka.pdb
-E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\db\anka.db
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.exe.config
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.exe.manifest
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.application
@@ -56,3 +55,4 @@ E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.csproj.CopyComplete
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.exe
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.pdb
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.csprojAssemblyReference.cache
+E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka_Content.g.cs

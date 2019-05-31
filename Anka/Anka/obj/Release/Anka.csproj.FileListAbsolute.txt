@@ -1,7 +1,6 @@
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\MainWindow.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\NewPerson.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\App.g.cs
-E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka_Content.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\GeneratedInternalTypeHelper.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka_MarkupCompile.cache
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka_MarkupCompile.lref
@@ -13,7 +12,6 @@ E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csproj.GenerateResour
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csproj.CoreCompileInputs.cache
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.TrustInfo.xml
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.pdb
-E:\Project\Anka\anka-management\Anka\Anka\bin\Release\db\anka.db
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.exe.config
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.exe.manifest
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.application
@@ -37,3 +35,5 @@ E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.application
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csproj.CopyComplete
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.exe
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csprojAssemblyReference.cache
+E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka_Content.g.cs
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\db\anka.db

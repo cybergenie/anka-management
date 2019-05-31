@@ -191,42 +191,7 @@ namespace Anka
                         
 
                     }
-                }
-
-
-                    //DataAdapter.Number = this.txNumber.Text.Trim();                
-                    //string sql = string.Format("SELECT * FROM basicinfo where Number='{0}';", DataAdapter.Number);
-                    //try
-                    //{
-                    //    SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql); 
-
-                    //    DataAdapter.loadNewPerson = false;
-                    //    while (dataReader.Read())
-                    //    {
-                    //        DataAdapter.loadNewPerson = true;
-                    //        DataAdapter.Name = dataReader["Name"].ToString();
-                    //        DataAdapter.Age = Convert.ToInt32(dataReader["Age"].ToString());
-                    //        if (dataReader["Male"].ToString() == "1")
-                    //        {
-                    //            this.rbMale.IsChecked = true;
-                    //            DataAdapter.Male = true;
-                    //        }
-                    //        else
-                    //        {
-                    //            this.rbFemale.IsChecked = true;
-                    //            DataAdapter.Male = true;
-                    //        }
-
-                    //    }
-                    //    dataReader.Close();
-                    //}
-                    //catch (SQLiteException ex)
-                    //{
-
-                    //    MessageBox.Show(string.Format("数据查询失败。错误代码:{0}", ex.ErrorCode));
-                    //    DataAdapter.loadNewPerson = false;
-                    //}
-
+                }                  
 
                 }
 

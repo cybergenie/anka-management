@@ -81,7 +81,15 @@ namespace Anka
         private void TxIPAQ4_LostFocus(object sender, RoutedEventArgs e)
         {
             if (this.txIPAQ4.Text.Contains('h') || this.txIPAQ4.Text.Contains('H'))
-                this.txIPAQ4.Text = (Convert.ToInt32(this.txIPAQ4.Text.Trim('h')) * 60).ToString();
+                if(DataAdapter.IsNumber(this.txIPAQ4.Text.Trim('h'))==true)
+                {
+                    this.txIPAQ4.Text = (Convert.ToInt32(this.txIPAQ4.Text.Trim('h')) * 60).ToString();
+                }
+            else
+                {
+                    this.txIPAQ4.Text = "";
+                }
+                
         }
 
         private void IPAQDataSave(Dictionary<string, object> dic)
