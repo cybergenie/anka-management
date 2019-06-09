@@ -56,3 +56,4 @@ E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.exe
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.pdb
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka.csprojAssemblyReference.cache
 E:\Project\Anka\anka-management\Anka\Anka\obj\Debug\Anka_Content.g.cs
+E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\db\anka.db

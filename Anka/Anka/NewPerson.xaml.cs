@@ -77,9 +77,9 @@ namespace Anka
                         SQLiteHelper sh = new SQLiteHelper(cmd);
 
                         var dic = new Dictionary<string, object>();
-                        dic["Number"] = txNumber.Text;
-                        dic["Name"] = txName.Text;
-                        dic["Age"] = txAge.Text;
+                        dic["Number"] = txNumber.Text.ToString().Trim();
+                        dic["Name"] = txName.Text.ToString().Trim();
+                        dic["Age"] = txAge.Text.ToString().Trim();
                         dic["Male"] = Male;
                         try
                         {
@@ -158,23 +158,32 @@ namespace Anka
                         try
                         {
                             DataTable dt = sh.Select(sql);
-                            DataRow dr = dt.Rows[0];
-                            if(dr["Name"]!= System.DBNull.Value)
+                            if (dt.Rows.Count > 0)
                             {
-                                DataAdapter.Name = dr["Name"].ToString();
+                                DataRow dr = dt.Rows[0];
+                                if (dr["Name"] != System.DBNull.Value)
+                                {
+                                    DataAdapter.Name = dr["Name"].ToString();
+                                }
+                                if (dr["Age"] != System.DBNull.Value)
+                                {
+                                    DataAdapter.Age = Convert.ToInt32(dr["Age"]);
+                                }
+                                if (dr["Number"] != System.DBNull.Value)
+                                {
+                                    DataAdapter.Number = Convert.ToString(dr["Number"]);
+                                }
+                                if (dr["Male"] != System.DBNull.Value)
+                                {
+                                    DataAdapter.Male = Convert.ToBoolean(dr["Male"]);
+                                }
                             }
-                            if (dr["Age"] != System.DBNull.Value)
+                            else
                             {
-                                DataAdapter.Age = Convert.ToInt32( dr["Age"]);
+                                MessageBox.Show(string.Format("该档案号不存在。"));
+                                isClose = false;
                             }
-                            if (dr["Number"] != System.DBNull.Value)
-                            {
-                                DataAdapter.Number = Convert.ToString(dr["Number"]);
-                            }
-                            if (dr["Male"] != System.DBNull.Value)
-                            {
-                                DataAdapter.Male = Convert.ToBoolean(dr["Male"]);
-                            }
+                            
 
 
                         }
@@ -182,6 +191,7 @@ namespace Anka
                         {
                             DataAdapter.loadNewPerson = false;
                             MessageBox.Show(string.Format("数据查找错误。错误代码为:{0}", ex.ErrorCode), "档案建立错误");
+                            isClose = false;
                         }
                         finally
                         {

@@ -59,6 +59,7 @@ namespace Anka
                                 dicData["SPPBNumber"] = SPPBNumber;
                                 dicData["basicinfo_Number"] = DataAdapter.Number;
                                 sh.Insert("sppb", dicData);
+                                txSPPBLoop.Items.Add(this.txSPPBLoop.Text.Trim());
                             }
                         }
                         catch (SQLiteException ex)
@@ -71,129 +72,7 @@ namespace Anka
                         }
 
                     }
-                }
-                //DataAdapter.SPPBNumber = DataAdapter.Number + "-" + this.txSPPBLoop.Text.Trim();
-                //SPPBDataSave();
-                //BalanceCapabilitySave();
-                //SizeResultSave();
-                //VitalsResultSave();
-                //GripStrengthResultSave();
-                //LapStrengthResultSave();
-
-                //string sql = string.Format("SELECT * FROM sppb where SPPBNumber='{0}';", DataAdapter.SPPBNumber);
-                //SQLiteDataReader dataReader = SQLiteAdapter.ExecuteReader(sql);
-
-                //if (dataReader.StepCount == 0)
-                //{
-
-                //     sql = string.Format("INSERT INTO sppb (SPPBNumber, BalanceTesting1, BalanceTesting2, BalanceTesting3, walkingTesting1, walkingTesting2, SitUpTesting" +
-                //    ", TUG, FRTLeft1, FRTLeft2, FRTRight1, FRTRight2, SFO1, SFO2, OneFootLeft1, OneFootLeft2, OneFootRight1, OneFootRight2," +
-                //    " Hight, Weight, Waistline, Hipline, ArmlineLeft, ArmlineRight, LeglineLeft, LeglineRight, BloodPressureUpper, BloodPressureLower, HeartRate,Temperature, Breathe" +
-                //    ", LeftHandHurt, RightHandHurt, GripStrengthLeft1, GripStrengthRight1, GripStrengthLeft2, GripStrengthRight2, " +
-                //    "LeftLapHurt, RightLapHurt,LapStrengthLeft1, LapStrengthRight1, LapStrengthLeft2, LapStrengthRight2, basicinfo_Number) VALUES" +
-                //    " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}','{27}','{28}','{29}','{30}',{31},{32},'{33}','{34}','{35}','{36}',{37},{38},'{39}','{40}','{41}','{42}','{43}'); ",
-                //   DataAdapter.SPPBNumber,
-                //   DataAdapter.SPPBResult.BalanceTesting1,
-                //   DataAdapter.SPPBResult.BalanceTesting2,
-                //   DataAdapter.SPPBResult.BalanceTesting3,
-                //   DataAdapter.SPPBResult.walkingTesting1,
-                //   DataAdapter.SPPBResult.walkingTesting2,
-                //   DataAdapter.SPPBResult.SitUpTesting,
-                //   DataAdapter.BalanceCapabilityResult.TUG,
-                //   DataAdapter.BalanceCapabilityResult.FRTLeft1,
-                //   DataAdapter.BalanceCapabilityResult.FRTLeft2,
-                //   DataAdapter.BalanceCapabilityResult.FRTRight1,
-                //   DataAdapter.BalanceCapabilityResult.FRTRight2,
-                //   DataAdapter.BalanceCapabilityResult.SFO1,
-                //   DataAdapter.BalanceCapabilityResult.SFO2,
-                //   DataAdapter.BalanceCapabilityResult.OneFootLeft1,
-                //   DataAdapter.BalanceCapabilityResult.OneFootLeft2,
-                //   DataAdapter.BalanceCapabilityResult.OneFootRight1,
-                //   DataAdapter.BalanceCapabilityResult.OneFootRight2,
-                //   DataAdapter.SizeResult.Hight,
-                //   DataAdapter.SizeResult.Weight,
-                //   DataAdapter.SizeResult.Waistline,
-                //   DataAdapter.SizeResult.Hipline,
-                //   DataAdapter.SizeResult.ArmlineLeft,
-                //   DataAdapter.SizeResult.ArmlineRight,
-                //   DataAdapter.SizeResult.LeglineLeft,
-                //   DataAdapter.SizeResult.LeglineRight,
-                //   DataAdapter.VitalsResult.BloodPressureUpper,
-                //   DataAdapter.VitalsResult.BloodPressureLower,
-                //   DataAdapter.VitalsResult.HeartRate,
-                //   DataAdapter.VitalsResult.Temperature,
-                //   DataAdapter.VitalsResult.Breathe,
-                //   DataAdapter.GripStrengthResult.LeftHandHurt,
-                //   DataAdapter.GripStrengthResult.RightHandHurt,
-                //   DataAdapter.GripStrengthResult.GripStrengthLeft1,
-                //   DataAdapter.GripStrengthResult.GripStrengthRight1,
-                //   DataAdapter.GripStrengthResult.GripStrengthLeft2,
-                //   DataAdapter.GripStrengthResult.GripStrengthRight2,
-                //   DataAdapter.LapStrengthResult.LeftLapHurt,
-                //   DataAdapter.GripStrengthResult.RightHandHurt,
-                //   DataAdapter.GripStrengthResult.GripStrengthLeft1,
-                //   DataAdapter.GripStrengthResult.GripStrengthRight1,
-                //   DataAdapter.GripStrengthResult.GripStrengthLeft2,
-                //   DataAdapter.GripStrengthResult.GripStrengthRight2,
-                //   DataAdapter.Number);
-                //}
-                //else
-                //{
-
-                //    sql = string.Format("UPDATE sppb SET BalanceTesting1 = '{1}', BalanceTesting2 = '{2}', BalanceTesting3 = '{3}', walkingTesting1 = '{4}', walkingTesting2 = '{5}', SitUpTesting = '{6}'" +
-                //        ", TUG = '{7}', FRTLeft1 = '{8}', FRTLeft2 = '{9}', FRTRight1 = '{10}', FRTRight2 = '{11}', SFO1 = '{12}', SFO2 = '{13}', OneFootLeft1 = '{14}', OneFootLeft2 = '{15}', OneFootRight1 = '{16}', OneFootRight2 = '{17}'" +
-                //        ", Hight = '{18}', Weight = '{19}', Waistline = '{20}', Hipline = '{21}', ArmlineLeft = '{22}', ArmlineRight = '{23}', LeglineLeft = '{24}', LeglineRight = '{25}', BloodPressureUpper = '{26}', BloodPressureLower = '{27}', HeartRate = '{28}', Temperature = '{29}', Breathe = '{30}'" +
-                //        ", LeftHandHurt = {31}, RightHandHurt = {32}, GripStrengthLeft1 = '{33}', GripStrengthRight1 = '{34}', GripStrengthLeft2 = '{35}', GripStrengthRight2 = '{36}'" +
-                //        ", LeftLapHurt = {37}, RightLapHurt = {38}, LapStrengthLeft1 = '{39}', LapStrengthRight1 = '{40}', LapStrengthLeft2 = '{41}', LapStrengthRight2 = '{42}'" +
-                //        " WHERE (SPPBNumber = '{0}') and (basicinfo_Number = '{43}');",
-                //       DataAdapter.SPPBNumber,
-                //       DataAdapter.SPPBResult.BalanceTesting1,
-                //       DataAdapter.SPPBResult.BalanceTesting2,
-                //       DataAdapter.SPPBResult.BalanceTesting3,
-                //       DataAdapter.SPPBResult.walkingTesting1,
-                //       DataAdapter.SPPBResult.walkingTesting2,
-                //       DataAdapter.SPPBResult.SitUpTesting,
-                //       DataAdapter.BalanceCapabilityResult.TUG,
-                //       DataAdapter.BalanceCapabilityResult.FRTLeft1,
-                //       DataAdapter.BalanceCapabilityResult.FRTLeft2,
-                //       DataAdapter.BalanceCapabilityResult.FRTRight1,
-                //       DataAdapter.BalanceCapabilityResult.FRTRight2,
-                //       DataAdapter.BalanceCapabilityResult.SFO1,
-                //       DataAdapter.BalanceCapabilityResult.SFO2,
-                //       DataAdapter.BalanceCapabilityResult.OneFootLeft1,
-                //       DataAdapter.BalanceCapabilityResult.OneFootLeft2,
-                //       DataAdapter.BalanceCapabilityResult.OneFootRight1,
-                //       DataAdapter.BalanceCapabilityResult.OneFootRight2,
-                //       DataAdapter.SizeResult.Hight,
-                //       DataAdapter.SizeResult.Weight,
-                //       DataAdapter.SizeResult.Waistline,
-                //       DataAdapter.SizeResult.Hipline,
-                //       DataAdapter.SizeResult.ArmlineLeft,
-                //       DataAdapter.SizeResult.ArmlineRight,
-                //       DataAdapter.SizeResult.LeglineLeft,
-                //       DataAdapter.SizeResult.LeglineRight,
-                //       DataAdapter.VitalsResult.BloodPressureUpper,
-                //       DataAdapter.VitalsResult.BloodPressureLower,
-                //       DataAdapter.VitalsResult.HeartRate,
-                //       DataAdapter.VitalsResult.Temperature,
-                //       DataAdapter.VitalsResult.Breathe,
-                //       DataAdapter.GripStrengthResult.LeftHandHurt,
-                //       DataAdapter.GripStrengthResult.RightHandHurt,
-                //       DataAdapter.GripStrengthResult.GripStrengthLeft1,
-                //       DataAdapter.GripStrengthResult.GripStrengthRight1,
-                //       DataAdapter.GripStrengthResult.GripStrengthLeft2,
-                //       DataAdapter.GripStrengthResult.GripStrengthRight2,
-                //       DataAdapter.LapStrengthResult.LeftLapHurt,
-                //       DataAdapter.GripStrengthResult.RightHandHurt,
-                //       DataAdapter.GripStrengthResult.GripStrengthLeft1,
-                //       DataAdapter.GripStrengthResult.GripStrengthRight1,
-                //       DataAdapter.GripStrengthResult.GripStrengthLeft2,
-                //       DataAdapter.GripStrengthResult.GripStrengthRight2,
-                //       DataAdapter.Number);
-                //}
-                //dataReader.Close();
-                //SQLiteAdapter.ExecuteNonQuery(sql);
-                // DatabaseInfo.ModifyDatabase(sql1, sql2);
+                }                
                 ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
             }
             else
@@ -201,6 +80,56 @@ namespace Anka
                 MessageBox.Show("请输入测试编号。");
             }
             
+        }
+
+        private void BtSPPBLoad_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.txSPPBLoop.Text.Trim().Length > 0)
+            {
+                string SPPBNumber = DataAdapter.Number + "-" + this.txSPPBLoop.Text.Trim();
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+
+                        try
+                        {
+                            DataTable dt = sh.Select(string.Format("select * from sppb where SPPBNumber='{0}';", SPPBNumber));
+                            if (dt.Rows.Count > 0)
+                            {
+                                SPPBDataLoad(dt);
+                                BalanceCapabilityLoad(dt);
+                                SizeResultLoad(dt);
+                                VitalsResultLoad(dt);
+                                GripStrengthResultLoad(dt);
+                                LapStrengthResultLoad(dt);
+                            }
+                            else
+                            {
+                                MessageBox.Show("该编号数据不存在。");
+                            }
+
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请输入项目编号。");
+            }
+
         }
 
         private void SPPBDataSave(Dictionary<string, object> dic)
@@ -211,47 +140,191 @@ namespace Anka
             }
             if (this.rbSPPBNo1.IsChecked == true)
             {
-                dic["BalanceTesting1"] = "A -" + this.txSPPB11.Text.Trim() + "-" + this.txSPPB12.Text.Trim();
+                dic["BalanceTesting1"] = "B-" + this.txSPPB11.Text.Trim() + "-" + this.txSPPB12.Text.Trim();
             }
 
             if (this.rbSPPBYes2.IsChecked == true)
             {
-                dic["BalanceTesting2"] = "A -0-0";
+                dic["BalanceTesting2"] = "A-0-0";
             }
             if (this.rbSPPBNo2.IsChecked == true)
             {
-                dic["BalanceTesting2"] = "A -" + this.txSPPB21.Text.Trim() + "-" + this.txSPPB22.Text.Trim();
+                dic["BalanceTesting2"] = "B-" + this.txSPPB21.Text.Trim() + "-" + this.txSPPB22.Text.Trim();
             }
 
             if (this.rbSPPBYes3.IsChecked == true)
             {
-                dic["BalanceTesting3"] = "A -0-0";
+                dic["BalanceTesting3"] = "A-0-0";
             }
             if (this.rbSPPBNo3.IsChecked == true)
             {
-                dic["BalanceTesting3"] = "A -" + this.txSPPB31.Text.Trim() + "-" + this.txSPPB32.Text.Trim();
+                dic["BalanceTesting3"] = "B-" + this.txSPPB31.Text.Trim() + "-" + this.txSPPB32.Text.Trim();
             }
 
             if (this.rbSPPBYes4.IsChecked == true)
             {
-                dic["walkingTesting1"] = "A -" + this.txSPPB41.Text.Trim() + "-" + this.txSPPB42.Text.Trim();
-                dic["walkingTesting2"] = "A -" + this.txSPPB51.Text.Trim() + "-" + this.txSPPB52.Text.Trim();
+                dic["walkingTesting1"] = "A-" + this.txSPPB41.Text.Trim() + "-" + this.txSPPB42.Text.Trim();
+                dic["walkingTesting2"] = "A-" + this.txSPPB51.Text.Trim() + "-" + this.txSPPB52.Text.Trim();
             }
             if (this.rbSPPBNo4.IsChecked == true)
             {
-                dic["walkingTesting1"] = "B -" + this.txSPPB41.Text.Trim() + "-" + this.txSPPB42.Text.Trim();
-                dic["walkingTesting2"] = "B -" + this.txSPPB51.Text.Trim() + "-" + this.txSPPB52.Text.Trim();
+                dic["walkingTesting1"] = "B-" + this.txSPPB41.Text.Trim() + "-" + this.txSPPB42.Text.Trim();
+                dic["walkingTesting2"] = "B-" + this.txSPPB51.Text.Trim() + "-" + this.txSPPB52.Text.Trim();
             }
 
             if (this.rbSPPBYes5.IsChecked == true)
             {
-                dic["SitUpTesting"] = "A -" + this.txSPPB61.Text.Trim() + "-" + this.txSPPB62.Text.Trim();
+                dic["SitUpTesting"] = "A-" + this.txSPPB61.Text.Trim() + "-" + this.txSPPB62.Text.Trim();
             }
             if (this.rbSPPBNo5.IsChecked == true)
             {
-                dic["SitUpTesting"] = "B -0-" + this.txSPPB7.Text.Trim();
+                dic["SitUpTesting"] = "B-0-" + this.txSPPB7.Text.Trim();
             }
 
+        }
+
+        private void SPPBDataLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+            rbSPPBYes1.IsChecked = false; rbSPPBNo1.IsChecked = false;
+            if (dr["BalanceTesting1"] != System.DBNull.Value)
+            {
+                txSPPB11.Text = ""; txSPPB12.Text = "";
+                string sBalanceTesting1 = dr["BalanceTesting1"] == System.DBNull.Value ? "" : dr["BalanceTesting1"].ToString();
+                string[] BalanceTesting1Array = sBalanceTesting1.Split('-');
+                switch (BalanceTesting1Array[0])
+                {
+                    case "A":
+                        rbSPPBYes1.IsChecked = true;                       
+                        break;
+                    case "B":
+                        rbSPPBNo1.IsChecked = true;
+                        if (BalanceTesting1Array.Length > 1)
+                            txSPPB11.Text = BalanceTesting1Array[1];
+                        else
+                            txSPPB11.Text = "";
+                        if (BalanceTesting1Array.Length > 2)
+                            txSPPB12.Text = BalanceTesting1Array[2];
+                        else
+                            txSPPB12.Text = "";
+                        break;                  
+                }
+            }
+            rbSPPBYes2.IsChecked = false; rbSPPBNo2.IsChecked = false;
+            if (dr["BalanceTesting2"] != System.DBNull.Value)
+            {
+                txSPPB21.Text = ""; txSPPB22.Text = "";
+                string sBalanceTesting2 = dr["BalanceTesting2"] == System.DBNull.Value ? "" : dr["BalanceTesting2"].ToString();
+                string[] BalanceTesting2Array = sBalanceTesting2.Split('-');
+                switch (BalanceTesting2Array[0])
+                {
+                    case "A":
+                        rbSPPBYes2.IsChecked = true;
+                        break;
+                    case "B":
+                        rbSPPBNo2.IsChecked = true;
+                        if (BalanceTesting2Array.Length > 1)
+                            txSPPB21.Text = BalanceTesting2Array[1];
+                        else
+                            txSPPB21.Text = "";
+                        if (BalanceTesting2Array.Length > 2)
+                            txSPPB22.Text = BalanceTesting2Array[2];
+                        else
+                            txSPPB22.Text = "";
+                        break;
+                }
+            }
+            rbSPPBYes3.IsChecked = false; rbSPPBNo3.IsChecked = false;
+            if (dr["BalanceTesting3"] != System.DBNull.Value)
+            {
+                txSPPB31.Text = ""; txSPPB32.Text = "";
+                string sBalanceTesting3 = dr["BalanceTesting3"] == System.DBNull.Value ? "" : dr["BalanceTesting3"].ToString();
+                string[] BalanceTesting3Array = sBalanceTesting3.Split('-');
+                switch (BalanceTesting3Array[0])
+                {
+                    case "A":
+                        rbSPPBYes3.IsChecked = true;
+                        break;
+                    case "B":
+                        rbSPPBNo3.IsChecked = true;
+                        if (BalanceTesting3Array.Length > 1)
+                            txSPPB31.Text = BalanceTesting3Array[1];
+                        else
+                            txSPPB31.Text = "";
+                        if (BalanceTesting3Array.Length > 2)
+                            txSPPB32.Text = BalanceTesting3Array[2];
+                        else
+                            txSPPB32.Text = "";
+                        break;
+                }
+            }
+            rbSPPBYes4.IsChecked = false; rbSPPBNo4.IsChecked = false;
+            if (dr["walkingTesting1"] != System.DBNull.Value)
+            {
+                txSPPB41.Text = ""; txSPPB42.Text = ""; txSPPB51.Text = ""; txSPPB52.Text = "";
+                string swalkingTesting1 = dr["walkingTesting1"] == System.DBNull.Value ? "" : dr["walkingTesting1"].ToString();
+                string swalkingTesting2 = dr["walkingTesting2"] == System.DBNull.Value ? "" : dr["walkingTesting2"].ToString();
+                string[] walkingTesting1Array = swalkingTesting1.Split('-');
+                string[] walkingTesting2Array = swalkingTesting2.Split('-');
+                switch (walkingTesting1Array[0])
+                {
+                    case "A":
+                        rbSPPBYes4.IsChecked = true;                       
+                        break;
+                    case "B":
+                        rbSPPBNo4.IsChecked = true;                       
+                        break;
+                }
+
+                if (walkingTesting1Array.Length > 1)
+                    txSPPB41.Text = walkingTesting1Array[1];
+                else
+                    txSPPB41.Text = "";
+                if (walkingTesting1Array.Length > 2)
+                    txSPPB42.Text = walkingTesting1Array[2];
+                else
+                    txSPPB42.Text = "";
+
+                if (walkingTesting2Array.Length > 1)
+                    txSPPB51.Text = walkingTesting2Array[1];
+                else
+                    txSPPB51.Text = "";
+                if (walkingTesting2Array.Length > 2)
+                    txSPPB52.Text = walkingTesting2Array[2];
+                else
+                    txSPPB52.Text = "";
+            }
+
+            rbSPPBYes5.IsChecked = false; rbSPPBNo5.IsChecked = false;
+            if (dr["SitUpTesting"] != System.DBNull.Value)
+            {
+                txSPPB61.Text = ""; txSPPB62.Text = ""; txSPPB7.Text = ""; 
+                string sSitUpTesting = dr["SitUpTesting"] == System.DBNull.Value ? "" : dr["SitUpTesting"].ToString();                
+                string[] SitUpTestingArray = sSitUpTesting.Split('-');                
+                switch (SitUpTestingArray[0])
+                {
+                    case "A":
+                        rbSPPBYes5.IsChecked = true;
+                        if (SitUpTestingArray.Length > 1)
+                            txSPPB61.Text = SitUpTestingArray[1];
+                        else
+                            txSPPB61.Text = "";
+                        if (SitUpTestingArray.Length > 2)
+                            txSPPB62.Text = SitUpTestingArray[2];
+                        else
+                            txSPPB62.Text = "";
+                        break;
+                    case "B":
+                        rbSPPBNo5.IsChecked = true;
+                        if (SitUpTestingArray.Length > 2)
+                            txSPPB7.Text = SitUpTestingArray[2];
+                        else
+                            txSPPB7.Text = "";
+                        break;
+                }
+
+               
+            }
         }
         private void BalanceCapabilitySave(Dictionary<string, object> dic)
         {
@@ -261,7 +334,7 @@ namespace Anka
             }
             if (this.rbBalanceNo.IsChecked == true)
             {
-                dic["TUG"] = "B -" + this.txBalance11.Text.Trim() + "-" + this.txBalance12.Text.Trim();
+                dic["TUG"] = "B-" + this.txBalance11.Text.Trim() + "-" + this.txBalance12.Text.Trim();
             }
             dic["FRTLeft1"] = this.txBalance21.Text.Trim();
             dic["FRTLeft2"] = this.txBalance22.Text.Trim();
@@ -274,31 +347,96 @@ namespace Anka
             dic["OneFootRight1"] = this.txBalance61.Text.Trim();
             dic["OneFootRight2"] = this.txBalance62.Text.Trim();
         }
+
+        private void BalanceCapabilityLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+
+            rbBalanceYes.IsChecked = false; rbBalanceNo.IsChecked = false;
+            if (dr["TUG"] != System.DBNull.Value)
+            {
+                txBalance11.Text = ""; txBalance12.Text = "";
+                string sTUG = dr["TUG"] == System.DBNull.Value ? "" : dr["TUG"].ToString();
+                string[] TUGArray = sTUG.Split('-');
+                switch (TUGArray[0])
+                {
+                    case "A":
+                        rbBalanceYes.IsChecked = true;
+                        break;
+                    case "B":
+                        rbBalanceNo.IsChecked = true;                        
+                        break;
+                }
+                if (TUGArray.Length > 1)
+                    txBalance11.Text = TUGArray[1];
+                else
+                    txBalance11.Text = "";
+                if (TUGArray.Length > 2)
+                    txBalance12.Text = TUGArray[2];
+                else
+                    txBalance12.Text = "";
+            }
+
+            txBalance21.Text = dr["FRTLeft1"] == System.DBNull.Value ? "" : dr["FRTLeft1"].ToString();
+            txBalance22.Text = dr["FRTLeft2"] == System.DBNull.Value ? "" : dr["FRTLeft2"].ToString();
+            txBalance31.Text = dr["FRTRight1"] == System.DBNull.Value ? "" : dr["FRTRight1"].ToString();
+            txBalance32.Text = dr["FRTRight2"] == System.DBNull.Value ? "" : dr["FRTRight2"].ToString();
+            txBalance41.Text = dr["SFO1"] == System.DBNull.Value ? "" : dr["SFO1"].ToString();
+            txBalance42.Text = dr["SFO2"] == System.DBNull.Value ? "" : dr["SFO2"].ToString();
+            txBalance51.Text = dr["OneFootLeft1"] == System.DBNull.Value ? "" : dr["OneFootLeft1"].ToString();
+            txBalance52.Text = dr["OneFootLeft2"] == System.DBNull.Value ? "" : dr["OneFootLeft2"].ToString();
+            txBalance61.Text = dr["OneFootRight1"] == System.DBNull.Value ? "" : dr["OneFootRight1"].ToString();
+            txBalance62.Text = dr["OneFootRight2"] == System.DBNull.Value ? "" : dr["OneFootRight2"].ToString();
+
+        }
         private void SizeResultSave(Dictionary<string, object> dic)
         {
-            dic["Hight"] = DataAdapter.IsNumber(this.txSize1.Text.Trim()) ? Convert.ToInt32(this.txSize1.Text.Trim()) : 0;
-            dic["Weight"] = DataAdapter.IsNumber(this.txSize2.Text.Trim()) ? Convert.ToInt32(this.txSize2.Text.Trim()) : 0;
-            dic["Waistline"] = DataAdapter.IsNumber(this.txSize3.Text.Trim()) ? Convert.ToInt32(this.txSize3.Text.Trim()) : 0;
-            dic["Hipline"] = DataAdapter.IsNumber(this.txSize4.Text.Trim()) ? Convert.ToInt32(this.txSize4.Text.Trim()) : 0;
-            dic["ArmlineLeft"] = DataAdapter.IsNumber(this.txSize5.Text.Trim()) ? Convert.ToInt32(this.txSize5.Text.Trim()) : 0;
-            dic["ArmlineRight"] = DataAdapter.IsNumber(this.txSize6.Text.Trim()) ? Convert.ToInt32(this.txSize6.Text.Trim()) : 0;
-            dic["LeglineLeft"] = DataAdapter.IsNumber(this.txSize7.Text.Trim()) ? Convert.ToInt32(this.txSize7.Text.Trim()) : 0;
-            dic["LeglineRight"] = DataAdapter.IsNumber(this.txSize8.Text.Trim()) ? Convert.ToInt32(this.txSize8.Text.Trim()) : 0;
+            dic["Hight"] = this.txSize1.Text.Trim();
+            dic["Weight"] = this.txSize2.Text.Trim();
+            dic["Waistline"] = this.txSize3.Text.Trim();
+            dic["Hipline"] = this.txSize4.Text.Trim();
+            dic["ArmlineLeft"] = this.txSize5.Text.Trim();
+            dic["ArmlineRight"] = this.txSize6.Text.Trim();
+            dic["LeglineLeft"] = this.txSize7.Text.Trim();
+            dic["LeglineRight"] = this.txSize8.Text.Trim();
         }
+        private void SizeResultLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+            txSize1.Text = dr["Hight"] == System.DBNull.Value ? "" : dr["Hight"].ToString();
+            txSize2.Text = dr["Weight"] == System.DBNull.Value ? "" : dr["Weight"].ToString();
+            txSize3.Text = dr["Waistline"] == System.DBNull.Value ? "" : dr["Waistline"].ToString();
+            txSize4.Text = dr["Hipline"] == System.DBNull.Value ? "" : dr["Hipline"].ToString();
+            txSize5.Text = dr["ArmlineLeft"] == System.DBNull.Value ? "" : dr["ArmlineLeft"].ToString();
+            txSize6.Text = dr["ArmlineRight"] == System.DBNull.Value ? "" : dr["ArmlineRight"].ToString();
+            txSize7.Text = dr["LeglineLeft"] == System.DBNull.Value ? "" : dr["LeglineLeft"].ToString();
+            txSize8.Text = dr["LeglineRight"] == System.DBNull.Value ? "" : dr["LeglineRight"].ToString();
+
+        }
+
         private void VitalsResultSave(Dictionary<string, object> dic)
         {
-            dic["BloodPressureLower"] = DataAdapter.IsNumber(this.txVitals1.Text.Trim()) ? Convert.ToInt32(this.txVitals1.Text.Trim()) : 0;
-            dic["BloodPressureUpper"] = DataAdapter.IsNumber(this.txVitals2.Text.Trim()) ? Convert.ToInt32(this.txVitals2.Text.Trim()) : 0;
-            dic["HeartRate"] = DataAdapter.IsNumber(this.txVitals3.Text.Trim()) ? Convert.ToInt32(this.txVitals3.Text.Trim()) : 0;
-            dic["Temperature"] = DataAdapter.IsNumber(this.txVitals4.Text.Trim()) ? Convert.ToDouble(this.txVitals4.Text.Trim()) : 0;
-            dic["Breathe"] = DataAdapter.IsNumber(this.txVitals5.Text.Trim()) ? Convert.ToInt32(this.txVitals5.Text.Trim()) : 0;
+            dic["BloodPressureLower"] = this.txVitals1.Text.Trim();
+            dic["BloodPressureUpper"] = this.txVitals2.Text.Trim();
+            dic["HeartRate"] = this.txVitals3.Text.Trim();
+            dic["Temperature"] = this.txVitals4.Text.Trim();
+            dic["Breathe"] = this.txVitals5.Text.Trim();
+        }
+        private void VitalsResultLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+            txVitals1.Text = dr["BloodPressureLower"] == System.DBNull.Value ? "" : dr["BloodPressureLower"].ToString();
+            txVitals2.Text = dr["BloodPressureUpper"] == System.DBNull.Value ? "" : dr["BloodPressureUpper"].ToString();
+            txVitals3.Text = dr["HeartRate"] == System.DBNull.Value ? "" : dr["HeartRate"].ToString();
+            txVitals4.Text = dr["Temperature"] == System.DBNull.Value ? "" : dr["Temperature"].ToString();
+            txVitals5.Text = dr["Breathe"] == System.DBNull.Value ? "" : dr["Breathe"].ToString();
         }
         private void GripStrengthResultSave(Dictionary<string, object> dic)
         {
-            dic["GripStrengthLeft1"] = DataAdapter.IsNumber(this.txGripStrength1.Text.Trim()) ? Convert.ToDouble(this.txGripStrength1.Text.Trim()) : 0;
-            dic["GripStrengthLeft2"] = DataAdapter.IsNumber(this.txGripStrength2.Text.Trim()) ? Convert.ToDouble(this.txGripStrength2.Text.Trim()) : 0;
-            dic["GripStrengthRight1"] = DataAdapter.IsNumber(this.txGripStrength3.Text.Trim()) ? Convert.ToDouble(this.txGripStrength3.Text.Trim()) : 0;
-            dic["GripStrengthRight2"] = DataAdapter.IsNumber(this.txGripStrength4.Text.Trim()) ? Convert.ToDouble(this.txGripStrength4.Text.Trim()) : 0;
+            dic["GripStrengthLeft1"] = this.txGripStrength1.Text.Trim();
+            dic["GripStrengthLeft2"] = this.txGripStrength2.Text.Trim();
+            dic["GripStrengthRight1"] = this.txGripStrength3.Text.Trim();
+            dic["GripStrengthRight2"] = this.txGripStrength4.Text.Trim();
             if (this.rbGripStrengthYes1.IsChecked == true)
             {
                 dic["LeftHandHurt"] = true;
@@ -326,12 +464,57 @@ namespace Anka
             }
 
         }
+        private void GripStrengthResultLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+            txGripStrength1.Text = dr["GripStrengthLeft1"] == System.DBNull.Value ? "" : dr["GripStrengthLeft1"].ToString();
+            txGripStrength2.Text = dr["GripStrengthLeft2"] == System.DBNull.Value ? "" : dr["GripStrengthLeft2"].ToString();
+            txGripStrength3.Text = dr["GripStrengthRight1"] == System.DBNull.Value ? "" : dr["GripStrengthRight1"].ToString();
+            txGripStrength4.Text = dr["GripStrengthRight2"] == System.DBNull.Value ? "" : dr["GripStrengthRight2"].ToString();
+            if (dr["LeftHandHurt"]!= System.DBNull.Value)
+            {
+                switch(Convert.ToBoolean(dr["LeftHandHurt"]))
+                {
+                    case true:
+                        rbGripStrengthYes1.IsChecked = true;
+                        rbGripStrengthNo1.IsChecked = false;
+                        break;
+                    case false:
+                        rbGripStrengthYes1.IsChecked = false;
+                        rbGripStrengthNo1.IsChecked = true;
+                        break;
+                    default:
+                        rbGripStrengthYes1.IsChecked = false;
+                        rbGripStrengthNo1.IsChecked = false;
+                        break;
+                }
+            }
+            if (dr["RightHandHurt"] != System.DBNull.Value)
+            {
+                switch (Convert.ToBoolean(dr["RightHandHurt"]))
+                {
+                    case true:
+                        rbGripStrengthYes2.IsChecked = true;
+                        rbGripStrengthNo2.IsChecked = false;
+                        break;
+                    case false:
+                        rbGripStrengthYes2.IsChecked = false;
+                        rbGripStrengthNo2.IsChecked = true;
+                        break;
+                    default:
+                        rbGripStrengthYes2.IsChecked = false;
+                        rbGripStrengthNo2.IsChecked = false;
+                        break;
+                }
+            }
+
+        }
         private void LapStrengthResultSave(Dictionary<string, object> dic)
         {
-            dic["LapStrengthLeft1"] = DataAdapter.IsNumber(this.txLapStrength1.Text.Trim()) ? Convert.ToDouble(this.txLapStrength1.Text.Trim()) : 0;
-            dic["LapStrengthLeft2"] = DataAdapter.IsNumber(this.txLapStrength2.Text.Trim()) ? Convert.ToDouble(this.txLapStrength2.Text.Trim()) : 0;
-            dic["LapStrengthRight1"] = DataAdapter.IsNumber(this.txLapStrength3.Text.Trim()) ? Convert.ToDouble(this.txLapStrength3.Text.Trim()) : 0;
-            dic["LapStrengthRight2"] = DataAdapter.IsNumber(this.txLapStrength4.Text.Trim()) ? Convert.ToDouble(this.txLapStrength4.Text.Trim()) : 0;
+            dic["LapStrengthLeft1"] = this.txLapStrength1.Text.Trim();
+            dic["LapStrengthLeft2"] = this.txLapStrength2.Text.Trim();
+            dic["LapStrengthRight1"] = this.txLapStrength3.Text.Trim();
+            dic["LapStrengthRight2"] = this.txLapStrength4.Text.Trim();
             if (this.rbLapStrengthYes1.IsChecked == true)
             {
                 dic["LeftLapHurt"] = true;
@@ -356,6 +539,51 @@ namespace Anka
             else
             {
                // MessageBox.Show("请确定伸膝力右外伤情况。");
+            }
+
+        }
+        private void LapStrengthResultLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+            txLapStrength1.Text = dr["LapStrengthLeft1"] == System.DBNull.Value ? "" : dr["LapStrengthLeft1"].ToString();
+            txLapStrength2.Text = dr["LapStrengthLeft2"] == System.DBNull.Value ? "" : dr["LapStrengthLeft2"].ToString();
+            txLapStrength3.Text = dr["LapStrengthRight1"] == System.DBNull.Value ? "" : dr["LapStrengthRight1"].ToString();
+            txLapStrength4.Text = dr["LapStrengthRight1"] == System.DBNull.Value ? "" : dr["LapStrengthRight1"].ToString();
+            if (dr["LeftLapHurt"] != System.DBNull.Value)
+            {
+                switch (Convert.ToBoolean(dr["LeftLapHurt"]))
+                {
+                    case true:
+                        rbLapStrengthYes1.IsChecked = true;
+                        rbLapStrengthNo1.IsChecked = false;
+                        break;
+                    case false:
+                        rbLapStrengthYes1.IsChecked = false;
+                        rbLapStrengthNo1.IsChecked = true;
+                        break;
+                    default:
+                        rbLapStrengthYes1.IsChecked = false;
+                        rbLapStrengthNo1.IsChecked = false;
+                        break;
+                }
+            }
+            if (dr["RightLapHurt"] != System.DBNull.Value)
+            {
+                switch (Convert.ToBoolean(dr["RightLapHurt"]))
+                {
+                    case true:
+                        rbLapStrengthYes2.IsChecked = true;
+                        rbLapStrengthNo2.IsChecked = false;
+                        break;
+                    case false:
+                        rbLapStrengthYes2.IsChecked = false;
+                        rbLapStrengthNo2.IsChecked = true;
+                        break;
+                    default:
+                        rbLapStrengthYes2.IsChecked = false;
+                        rbLapStrengthNo2.IsChecked = false;
+                        break;
+                }
             }
 
         }

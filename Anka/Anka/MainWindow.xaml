@@ -8,14 +8,13 @@
         Title="术后康复进程" Height="797" Width="1000">
     <DockPanel>
         <Menu Height="25" DockPanel.Dock="Top" Margin="0" VerticalAlignment="Top">
-            <MenuItem Header="文  件" Width="60" HorizontalContentAlignment="Center">
+            <MenuItem Header="文  件" Width="60" HorizontalContentAlignment="Center" Height="25">
                 <MenuItem x:Name="DataConnection" Header="连接服务器" Click="DataConnection_Click"/>
                 <MenuItem x:Name="miNewDoc" Header="新建档案" Click="MiNewDoc_Click"/>
                 <Separator/>
                 <MenuItem x:Name="miExit" Header="退出" Click="miExit_Click"/>
             </MenuItem>
             <MenuItem Header="选  项" Width="60"/>
-            <Button Content="全部保存" HorizontalAlignment="Center" Height="22" VerticalAlignment="Center" Width="50" HorizontalContentAlignment="Center" IsEnabled="False"/>
         </Menu>
         <StatusBar Height="20" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
             <Button x:Name="ConStatus" Height="12" Width="50" IsEnabled="False"/>
@@ -149,8 +148,8 @@
                             <Label x:Name="lbLoadAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbLoadNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txExerciseLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
-                            <Button x:Name="btExcerciseSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtExcerciseSave_Click" />
+                            <ComboBox x:Name="txExerciseLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
+                            <Button x:Name="btExcerciseSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Width="45" Click="BtExcerciseSave_Click" />
                             <Button x:Name="btExcerciseLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtExcerciseLoad_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
@@ -742,8 +741,9 @@
                             <Label x:Name="lbPHQAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbPHQNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txPHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <ComboBox x:Name="txPHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
                             <Button x:Name="btPHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Width="45" Click="BtPHQSave_Click" Height="25" VerticalAlignment="Top" />
+                            <Button x:Name="btPHQLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtPHQLoad_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
                             <Grid.RowDefinitions>
@@ -1098,8 +1098,9 @@
                             <Label x:Name="lbGADAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbGADNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txGADLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <ComboBox x:Name="txGADLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
                             <Button x:Name="btGADSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtGADSave_Click" />
+                            <Button x:Name="btGADLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtGADLoad_Click"  />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
                             <Grid.RowDefinitions>
@@ -1367,8 +1368,9 @@
                             <Label x:Name="lbIPAQAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbIPAQNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txIPAQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <ComboBox x:Name="txIPAQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
                             <Button x:Name="btIPAQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtIPAQSave_Click" />
+                            <Button x:Name="btIPAQLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtIPAQLoad_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
                             <Grid.RowDefinitions>
@@ -1531,8 +1533,9 @@
                             <Label x:Name="lbOHQAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbOHQNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txOHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <ComboBox x:Name="txOHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
                             <Button x:Name="btOHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtOHQSave_Click" />
+                            <Button x:Name="btOHQLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtOHQLoad_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
                             <Grid.RowDefinitions>
@@ -1816,8 +1819,9 @@
                             <Label x:Name="lbSPPBAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbSPPBNumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txSPPBLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <ComboBox x:Name="txSPPBLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
                             <Button x:Name="btSPPBSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtSPPBSave_Click" />
+                            <Button x:Name="btSPPBLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtSPPBLoad_Click" />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
                             <Grid.RowDefinitions>
@@ -1897,16 +1901,16 @@
                                 <Label Content="(2) 4米通常步行速度测试" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                                 <WrapPanel>
                                     <Label Content="① 时间：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txSPPB41" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txSPPB41" Width="45" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                                    <TextBox x:Name="txSPPB42" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txSPPB42" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                                 </WrapPanel>
                                 <WrapPanel>
                                     <Label Content="② 时间：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txSPPB51" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txSPPB51" Width="45" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                                    <TextBox x:Name="txSPPB52" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txSPPB52" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                                 </WrapPanel>
                                 <WrapPanel>
@@ -1920,9 +1924,9 @@
                                 <RadioButton x:Name="rbSPPBYes5"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" HorizontalAlignment="Left" GroupName="SPPB31" Click="RbSPPB5_Click" >
                                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="时间" />
-                                        <TextBox x:Name="txSPPB61" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
+                                        <TextBox x:Name="txSPPB61" Width="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                                        <TextBox x:Name="txSPPB62" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                                        <TextBox x:Name="txSPPB62" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                                     </StackPanel>
                                 </RadioButton>
@@ -1930,7 +1934,7 @@
                                 <RadioButton x:Name="rbSPPBNo5"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB31" Click="RbSPPB5_Click" >
                                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="不能完成5次，可完成" />
-                                        <TextBox x:Name="txSPPB7" Width="25" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
+                                        <TextBox x:Name="txSPPB7" Width="45" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次" />
 
                                     </StackPanel>
@@ -1948,9 +1952,9 @@
                                 <Label Content="(1) 3米往返步行（TUG）" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left" Margin="15,0,0,0" >
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="时间：" />
-                                    <TextBox x:Name="txBalance11" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance11" Width="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                                    <TextBox x:Name="txBalance12" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance12" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                                 </StackPanel>
                                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left" Margin="15,0,0,0" >
@@ -1964,18 +1968,18 @@
                                 <Label Content="(2) 体前屈（FRT）" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="左：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance21" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance21" Width="45" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance22" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance22" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="右：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance31" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance31" Width="45" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance32" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance32" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                                 </StackPanel>
 
@@ -1984,12 +1988,12 @@
                                 <Label Content="(3) 座位双脚开闭" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance41" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance41" Width="45" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="个/10秒" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance42" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance42" Width="45" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="个/10秒" />
                                 </StackPanel>
                             </StackPanel>
@@ -1998,18 +2002,18 @@
                                 <Label Content="(4) 单脚站立" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="左：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance51" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance51" Width="45" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance52" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance52" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="右：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance61" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance61" Width="45" Height="25" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                    <TextBox x:Name="txBalance62" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                    <TextBox x:Name="txBalance62" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                                 </StackPanel>
                             </StackPanel>
@@ -2073,26 +2077,26 @@
                             </Border>
                             <StackPanel Grid.Row="8" Grid.ColumnSpan="3">
                                 <WrapPanel Orientation="Horizontal">
-                                    <StackPanel Orientation="Horizontal" Margin="15,0" Width="180">
+                                    <StackPanel Orientation="Horizontal" Margin="15,0" Width="200">
                                         <Label Content="血压：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txVitals1" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals1" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="/" />
-                                        <TextBox x:Name="txVitals2" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals2" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="mmHg" />
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
+                                    <StackPanel Orientation="Horizontal" Width="140" Margin="15,0">
                                         <Label Content="心率：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txVitals3" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals3" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="bmp" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="体温：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txVitals4" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals4" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="℃" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                                         <Label Content="呼吸：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txVitals5" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txVitals5" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次" />
                                     </StackPanel>
                                 </WrapPanel>
@@ -2107,10 +2111,10 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="左手：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txGripStrength1" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txGripStrength1" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                        <TextBox x:Name="txGripStrength2" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txGripStrength2" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
@@ -2123,10 +2127,10 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="右手：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txGripStrength3" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txGripStrength3" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                        <TextBox x:Name="txGripStrength4" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txGripStrength4" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
@@ -2146,10 +2150,10 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="左：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txLapStrength1" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txLapStrength1" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                        <TextBox x:Name="txLapStrength2" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txLapStrength2" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
@@ -2162,10 +2166,10 @@
                                 <WrapPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                                         <Label Content="右：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                                        <TextBox x:Name="txLapStrength3" Width="25" Height="25" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txLapStrength3" Width="45" Height="25" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                                        <TextBox x:Name="txLapStrength4" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                                        <TextBox x:Name="txLapStrength4" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
                                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
@@ -2194,8 +2198,9 @@
                             <Label x:Name="lbBIAge" Content="" Height="25" Width="65" />
                             <Label Content="编号：" Height="25" Width="45" />
                             <Label x:Name="lbBINumber" Content="" Height="25" Width="80" />
-                            <TextBox x:Name="txPhysiqueLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" />
+                            <ComboBox x:Name="txPhysiqueLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
                             <Button x:Name="btPhysiqueSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtPhysiqueSave_Click" />
+                            <Button x:Name="btPhysiqueLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" Click="BtPhysiqueLoad_Click"  />
                         </StackPanel>
                         <Grid DockPanel.Dock="Top" Margin="5" >
                             <Grid.RowDefinitions>

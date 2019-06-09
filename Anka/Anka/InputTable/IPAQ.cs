@@ -54,6 +54,7 @@ namespace Anka
                                 dicData["IPAQNumber"] = IPAQNumber;
                                 dicData["basicinfo_Number"] = DataAdapter.Number;
                                 sh.Insert("ipaq", dicData);
+                                txIPAQLoop.Items.Add(this.txIPAQLoop.Text.Trim());
                             }
                         }
                         catch (SQLiteException ex)
@@ -75,6 +76,50 @@ namespace Anka
                 MessageBox.Show("请输入国际标准化身体活动调查问卷编号。");
             }
            
+
+        }
+        private void BtIPAQLoad_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.txIPAQLoop.Text.Trim().Length > 0)
+            {
+                string IPAQNumber = DataAdapter.Number + "-" + this.txIPAQLoop.Text.Trim();
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+
+                        try
+                        {
+                            DataTable dt = sh.Select(string.Format("select * from ipaq where IPAQNumber='{0}';", IPAQNumber));
+                            if (dt.Rows.Count > 0)
+                            {
+                                IPAQDataLoad(dt);
+                            }
+                            else
+                            {
+                                MessageBox.Show("该编号数据不存在。");
+                            }
+
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请输入项目编号。");
+            }
 
         }
 
@@ -109,6 +154,43 @@ namespace Anka
                 if (rbIPAQ5[i].IsChecked == true)
                     dic["IPAQ5"] = i;
             }
+
+
+        }
+
+        private void IPAQDataLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+            rbIPAQYes.IsChecked = false; rbIPAQNo.IsChecked = false;
+            if (dr["IPAQ0"] != System.DBNull.Value)
+            {
+
+                if (Convert.ToBoolean(dr["IPAQ0"]) == true)
+                {
+                    rbIPAQYes.IsChecked = true;                    
+                }
+                else if (Convert.ToBoolean(dr["IPAQ0"]) == false)
+                {                   
+                    rbIPAQNo.IsChecked = true;
+                }
+            }
+
+            txIPAQ1.Text = dr["IPAQ1"] == System.DBNull.Value ? "" : dr["IPAQ1"].ToString();
+            txIPAQ2.Text = dr["IPAQ2"] == System.DBNull.Value ? "" : dr["IPAQ2"].ToString();
+            txIPAQ3.Text = dr["IPAQ3"] == System.DBNull.Value ? "" : dr["IPAQ3"].ToString();
+            txIPAQ4.Text = dr["IPAQ4"] == System.DBNull.Value ? "" : dr["IPAQ4"].ToString();
+            
+            RadioButton[] rbIPAQ5 = new RadioButton[7] { this.rbIPAQ51, this.rbIPAQ52, this.rbIPAQ53, this.rbIPAQ54, this.rbIPAQ55, this.rbIPAQ56, this.rbIPAQ57 };
+            foreach (RadioButton rbIPAQ in rbIPAQ5)
+            {
+                rbIPAQ.IsChecked = false;
+            }
+            if (dr["IPAQ5"] != System.DBNull.Value)
+            {
+                int i = Convert.ToInt32(dr["IPAQ5"]);
+                rbIPAQ5[i].IsChecked = true;
+            }
+
 
 
         }

@@ -68,6 +68,7 @@ namespace Anka
                                 dicData["PhysiqueNumber"] = PhysiqueNumber;
                                 dicData["basicinfo_Number"] = DataAdapter.Number;
                                 sh.Insert("physique", dicData);
+                                txPhysiqueLoop.Items.Add(this.txPhysiqueLoop.Text.Trim());
                             }
                         }
                         catch (SQLiteException ex)
@@ -92,6 +93,49 @@ namespace Anka
            
 
         }
+        private void BtPhysiqueLoad_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.txPhysiqueLoop.Text.Trim().Length > 0)
+            {
+                string PhysiqueNumber = DataAdapter.Number + "-" + this.txPhysiqueLoop.Text.Trim();
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+
+                        try
+                        {
+                            DataTable dt = sh.Select(string.Format("select * from physique where PhysiqueNumber='{0}';", PhysiqueNumber));
+                            if (dt.Rows.Count > 0)
+                            {
+                                PhysiqueDataLoad(dt);                                
+                            }
+                            else
+                            {
+                                MessageBox.Show("该编号数据不存在。");
+                            }
+
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请输入项目编号。");
+            }
+        }
 
         private void PhysiqueResultSave(Dictionary<string, object> dic)
         {
@@ -114,6 +158,67 @@ namespace Anka
             dic["PA"] = DataAdapter.IsNumber(this.txPA.Text.Trim()) ? Convert.ToDouble(this.txPA.Text.Trim()) : 0;
             dic["PAPercent"] = DataAdapter.IsNumber(this.txPAPercent.Text.Trim()) ? Convert.ToDouble(this.txPAPercent.Text.Trim()) : 0;
         }
+        private void PhysiqueDataLoad(DataTable dt)
+        {
+            DataRow dr = dt.Rows[0];
+            bmiWeight.Text = dr["Weight"] == System.DBNull.Value ? "" : dr["Weight"].ToString();
+            bmiHight.Text = dr["Hight"] == System.DBNull.Value ? "" : dr["Hight"].ToString();
+            txFM.Text = dr["FM"] == System.DBNull.Value ? "" : dr["FM"].ToString();
+            txPA.Text = dr["PA"] == System.DBNull.Value ? "" : dr["PA"].ToString();
+            txSMM.Text = dr["SMMAll"] == System.DBNull.Value ? "" : dr["SMMAll"].ToString();
+            txLA.Text = dr["SMMArmLeft"] == System.DBNull.Value ? "" : dr["SMMArmLeft"].ToString();
+            txRA.Text = dr["SMMArmRight"] == System.DBNull.Value ? "" : dr["SMMArmRight"].ToString();
+            txTK.Text = dr["SMMBody"] == System.DBNull.Value ? "" : dr["SMMBody"].ToString();
+            txLL.Text = dr["SMMLegLeft"] == System.DBNull.Value ? "" : dr["SMMLegLeft"].ToString();
+            txRL.Text = dr["SMMLegRight"] == System.DBNull.Value ? "" : dr["SMMLegRight"].ToString();
+
+            txBCW.Text = dr["BCW"] == System.DBNull.Value ? "" : dr["BCW"].ToString();
+            txTBW.Text = dr["TBW"] == System.DBNull.Value ? "" : dr["TBW"].ToString();
+
+            txVAT.Text = dr["VAT"] == System.DBNull.Value ? "" : dr["VAT"].ToString();
+            txWC.Text = dr["Waistline"] == System.DBNull.Value ? "" : dr["Waistline"].ToString();
+            txPA.Text = dr["PA"] == System.DBNull.Value ? "" : dr["PA"].ToString();
+            txPAPercent.Text = dr["PAPercent"] == System.DBNull.Value ? "" : dr["PAPercent"].ToString();
+
+            double Weight = DataAdapter.IsNumber(bmiWeight.Text.Trim()) ? Convert.ToDouble(bmiWeight.Text.Trim()) : 0;
+            double Hight = DataAdapter.IsNumber(bmiHight.Text.Trim()) ? Convert.ToDouble(bmiHight.Text.Trim()) : 0;
+            double FM = DataAdapter.IsNumber(txFM.Text.Trim()) ? Convert.ToDouble(txFM.Text.Trim()) : 0;
+            double TBW = DataAdapter.IsNumber(this.txTBW.Text.Trim()) ? Convert.ToDouble(this.txTBW.Text.Trim()) : 0;
+            double BCW = DataAdapter.IsNumber(this.txBCW.Text.Trim()) ? Convert.ToDouble(this.txBCW.Text.Trim()) : 0;
+
+            if (Weight > 0 && Hight > 0)
+            {
+                this.bmiBMI.Text = (Weight / (Hight * Hight)).ToString("0.0");
+            }
+            if (Weight > 0 && FM > 0)
+            {
+                this.txFM2.Content = ((FM / Weight) * 100.0).ToString("0.0");
+            }
+            if (TBW > 0 && BCW > 0)
+            {
+                this.txEBW.Text = ((BCW / TBW) * 100.0).ToString("0.0");
+            }
+            if (Weight > 0 && Hight > 0)
+            {
+                this.txFMI.Text = (FM / (Hight * Hight)).ToString("0.0");
+            }
+            
+
+            BMIIndicatorBinding();
+            FMIIndicatorBinding();
+            TBWIndicatorBinding();
+            BCWIndicatorBinding();
+            EBWIndicatorBinding();
+            BodyIndicatorBinding();
+            LAIndicatorBinding();
+            TKIndicatorBinding();
+            RAIndicatorBinding();
+            LLIndicatorBinding();
+            RLIndicatorBinding();
+            VATIndicatorBinding();
+            WCIndicatorBinding();
+        }
+
 
         private void InitBMI()
         {
@@ -1157,9 +1262,6 @@ namespace Anka
             this.txWC.Text = Waistline.ToString("0.00");
             WCIndicatorBinding();
         }
-
-
-
        
         private void OnPATextChanged(object sender, RoutedEventArgs e)
         {

@@ -55,6 +55,7 @@ namespace Anka
                                     dicData["ExerciseNumber"] = ExerciseNumber;
                                     dicData["basicinfo_Number"] = DataAdapter.Number;
                                     sh.Insert("exercise", dicData);
+                                    txExerciseLoop.Items.Add(this.txExerciseLoop.Text.Trim());
                                 }
                             }
                             catch (SQLiteException ex)
@@ -102,7 +103,7 @@ namespace Anka
 
                         try
                         {
-                            DataTable dt = sh.Select(string.Format("select * from exercise where ExerciseNumber=\"{0}\";", ExerciseNumber));
+                            DataTable dt = sh.Select(string.Format("select * from exercise where ExerciseNumber='{0}';", ExerciseNumber));
                             if(dt.Rows.Count>0)
                             {
                                 ExcerciseDataLoad(dt);

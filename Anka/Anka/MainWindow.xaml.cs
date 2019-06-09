@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
@@ -136,7 +137,133 @@ namespace Anka
             }
 
 
+            using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand())
+                {
+                    cmd.Connection = conn;
+                    conn.Open();
 
+                    SQLiteHelper sh = new SQLiteHelper(cmd);
+
+                    try
+                    {
+                        DataTable dt = sh.Select(string.Format("select ExerciseNumber from exercise where basicinfo_Number='{0}';", DataAdapter.Number));
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach(DataRow dr in dt.Rows)
+                            {
+                                string[] ExerciseNumber = dr["ExerciseNumber"].ToString().Split('-');
+                                txExerciseLoop.Items.Add(ExerciseNumber[1]);
+                            }                          
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("该编号数据不存在。");
+                        }
+
+                        dt = sh.Select(string.Format("select GADNumber from gad where basicinfo_Number='{0}';", DataAdapter.Number));
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                string[] GADNumber = dr["GADNumber"].ToString().Split('-');
+                                txGADLoop.Items.Add(GADNumber[1]);
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("该编号数据不存在。");
+                        }
+
+                        dt = sh.Select(string.Format("select IPAQNumber from ipaq where basicinfo_Number='{0}';", DataAdapter.Number));
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                string[] IPAQNumber = dr["IPAQNumber"].ToString().Split('-');
+                                txIPAQLoop.Items.Add(IPAQNumber[1]);
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("该编号数据不存在。");
+                        }
+
+                        dt = sh.Select(string.Format("select OHQNumber from ohq where basicinfo_Number='{0}';", DataAdapter.Number));
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                string[] OHQNumber = dr["OHQNumber"].ToString().Split('-');
+                                txOHQLoop.Items.Add(OHQNumber[1]);
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("该编号数据不存在。");
+                        }
+
+                        dt = sh.Select(string.Format("select PHQNumber from phq where basicinfo_Number='{0}';", DataAdapter.Number));
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                string[] PHQNumber = dr["PHQNumber"].ToString().Split('-');
+                                txPHQLoop.Items.Add(PHQNumber[1]);
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("该编号数据不存在。");
+                        }
+
+                        dt = sh.Select(string.Format("select PhysiqueNumber from physique where basicinfo_Number='{0}';", DataAdapter.Number));
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                string[] PhysiqueNumber = dr["PhysiqueNumber"].ToString().Split('-');
+                                txPhysiqueLoop.Items.Add(PhysiqueNumber[1]);
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("该编号数据不存在。");
+                        }
+
+                        dt = sh.Select(string.Format("select SPPBNumber from sppb where basicinfo_Number='{0}';", DataAdapter.Number));
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                string[] SPPBNumber = dr["SPPBNumber"].ToString().Split('-');
+                                txSPPBLoop.Items.Add(SPPBNumber[1]);
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("该编号数据不存在。");
+                        }
+
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
         }
 
 
@@ -163,6 +290,8 @@ namespace Anka
             }
         }
 
-       
+        
+
+        
     }
 }

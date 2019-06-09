@@ -69,7 +69,7 @@ namespace Anka
 
                     try
                     {
-                        DataTable dt = sh.Select(string.Format("select * from basicinfo where Number={0};", DataAdapter.Number));
+                        DataTable dt = sh.Select(string.Format("select * from basicinfo where Number='{0}';", DataAdapter.Number));
                         BasicDataLoad(dt);
                     }
                     catch (SQLiteException ex)
