@@ -414,6 +414,22 @@ namespace Anka
                 this.txOHQ42.IsEnabled = false;
             }
         }
+        private void RbOHQ9_Click(object sender, RoutedEventArgs e)
+        {
+            if(rbOHQ91.IsChecked==true)
+            {
+                this.txOHQ91.Text = "";
+                this.txOHQ91.IsEnabled = false;
+                this.txOHQ92.Text = "";
+                this.txOHQ92.IsEnabled = false;
+            }
+            else if(rbOHQ92.IsChecked == true)
+            {
+                this.txOHQ91.IsEnabled = true;
+                this.txOHQ92.IsEnabled = true;
+            }
+
+        }
 
     }
 }

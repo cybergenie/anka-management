@@ -1783,8 +1783,8 @@
                             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="9" >
                                 <StackPanel>
                                     <WrapPanel Margin="0" VerticalAlignment="Center" >
-                                        <RadioButton x:Name="rbOHQ91" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                                        <RadioButton x:Name="rbOHQ92" Content="是（选择原因如下）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                                        <RadioButton x:Name="rbOHQ91" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" Click="RbOHQ9_Click" />
+                                        <RadioButton x:Name="rbOHQ92" Content="是（选择原因如下）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" Click="RbOHQ9_Click" />
                                     </WrapPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <StackPanel Margin="15,0" VerticalAlignment="Center" Orientation="Horizontal" >
@@ -2678,7 +2678,7 @@
 
                                         </StackPanel>
                                         <StackPanel Margin="0,0,15,0">
-                                            <Label Content="上臂肌肉质量:" HorizontalAlignment="Left"/>
+                                            <Label Content="左臂肌肉质量:" HorizontalAlignment="Left"/>
                                             <TextBox x:Name="txLA" Width="45" Height="25" VerticalContentAlignment="Center" Text="{Binding InputValue1, Mode=OneWayToSource, Source={StaticResource SMMIndicator}}" LostFocus="OnLATextChanged" HorizontalAlignment="Left" Margin="15,0,0,0"  />
 
                                         </StackPanel>
