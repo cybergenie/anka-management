@@ -17,8 +17,6 @@ E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.exe.manifest
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.application
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.exe
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Anka.pdb
-E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Devart.Data.dll
-E:\Project\Anka\anka-management\Anka\Anka\bin\Release\Devart.Data.SQLite.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\EntityFramework.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\EntityFramework.SqlServer.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\System.Data.SQLite.dll

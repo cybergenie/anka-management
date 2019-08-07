@@ -23,8 +23,6 @@ E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.exe.manifest
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.application
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.exe
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Anka.pdb
-E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Devart.Data.dll
-E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\Devart.Data.SQLite.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\EntityFramework.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\EntityFramework.SqlServer.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\System.Data.SQLite.dll

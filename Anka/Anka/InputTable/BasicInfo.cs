@@ -205,16 +205,18 @@ namespace Anka
                 }
                     
             }
-
-            if (Convert.ToBoolean(dr["CollatCirc"]) == true)
+            if (dr["CollatCirc"] != System.DBNull.Value)
             {
-                cbCC.IsChecked = true;
-                cbCC.Content = "侧枝循环：有";
-            }
-            else
-            {
-                cbCC.IsChecked = false;
-                cbCC.Content = "侧枝循环：无";
+                if (Convert.ToBoolean(dr["CollatCirc"]) == true)
+                {
+                    cbCC.IsChecked = true;
+                    cbCC.Content = "侧枝循环：有";
+                }
+                else
+                {
+                    cbCC.IsChecked = false;
+                    cbCC.Content = "侧枝循环：无";
+                }
             }
            
 

@@ -58,9 +58,9 @@ namespace Anka
                                     txExerciseLoop.Items.Add(this.txExerciseLoop.Text.Trim());
                                 }
                             }
-                            catch (SQLiteException ex)
+                            catch (Exception ex)
                             {
-                                MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                                MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.Message), "数据更新错误");
                             }
                             finally
                             {
@@ -147,7 +147,7 @@ namespace Anka
                 this.dpOutRoom3.Text.Trim()
             };
             dic["Date"] = DataAdapter.ArrayToString(Date);
-            int[] bpLower = new int[9]; int[] bpUpper = new int[9];
+            string[] bpLower = new string[9]; string[] bpUpper = new string[9];
             string[] txBPUp = new string[9]{this.txBPBedUp1.Text.ToString(),
                 this.txBPBedUp2.Text.ToString(),
                 this.txBPBedUp3.Text.ToString(),
@@ -158,7 +158,22 @@ namespace Anka
                 this.txBPOutRoom2.Text.ToString(),
                 this.txBPOutRoom3.Text.ToString()
             };
-            DataAdapter.GetBloodPressure(txBPUp, bpLower, bpUpper);
+            for (int i = 0; i < txBPUp.Length; i++)
+            {
+                string[] temp;
+                char[] Spliter = { '/', '\\'};
+                temp = txBPUp[i].Split(Spliter);
+                if (temp.Length == 2)
+                {
+                    bpLower[i] = temp[0];
+                    bpUpper[i] = temp[1];
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("心率{0}格式不正确。", i.ToString()));
+                }
+
+            }           
             
             dic["BloodPressureLower"] = DataAdapter.ArrayToString(bpLower);
             dic["BloodPressureUpper"] = DataAdapter.ArrayToString(bpUpper);

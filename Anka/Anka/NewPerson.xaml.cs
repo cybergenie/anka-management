@@ -87,7 +87,7 @@ namespace Anka
                             DataAdapter.Number = this.txNumber.Text;
                             DataAdapter.Age = Convert.ToInt32(this.txAge.Text);
                             DataAdapter.Male = Male;
-                            DataAdapter.Name = this.txName.Text.ToString().Trim();
+                            DataAdapter.Name = this.txName.Text.ToString().Trim();                            
                         }
                         catch(SQLiteException ex)
                         {

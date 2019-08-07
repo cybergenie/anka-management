@@ -41,29 +41,7 @@ namespace Anka
             
             return result;
         } 
-
-        public static void GetBloodPressure(string[] strBloodPressure, int[] BPLower,int[] BPUpper)
-        {
-            for (int i = 0; i < strBloodPressure.Length; i++)
-            {
-                int[] BMPtemp = { 0, 0 };
-                int j = 0;
-                char[] Spliter = { '/', '\\', ' ' };
-                foreach (string ctemp in strBloodPressure[i].Split(Spliter))
-                {
-                    if (DataAdapter.IsNumber(ctemp) == true)
-                    {
-                        if (Convert.ToInt32(ctemp) > 0)
-                            BMPtemp[j] = Convert.ToInt32(ctemp);
-                    }
-
-                    j++;
-                }
-
-                BPLower[i] = BMPtemp[0];
-                BPUpper[i] = BMPtemp[1];
-            }
-        }
+       
 
         public static string ArrayToString(int[] data)
         {
@@ -83,7 +61,15 @@ namespace Anka
 
             foreach (var s in data)
             {
-                temp += (s.ToString() + "|");
+                if(s!=null)
+                {
+                    temp += (s.ToString() + "|");
+                }
+                else
+                {
+                    temp += ("" + "|");
+                }
+                
             }
 
             return temp;

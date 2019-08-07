@@ -157,11 +157,7 @@ namespace Anka
                                 txExerciseLoop.Items.Add(ExerciseNumber[1]);
                             }                          
 
-                        }
-                        else
-                        {
-                            MessageBox.Show("该编号数据不存在。");
-                        }
+                        }                       
 
                         dt = sh.Select(string.Format("select GADNumber from gad where basicinfo_Number='{0}';", DataAdapter.Number));
                         if (dt.Rows.Count > 0)
@@ -172,11 +168,7 @@ namespace Anka
                                 txGADLoop.Items.Add(GADNumber[1]);
                             }
 
-                        }
-                        else
-                        {
-                            MessageBox.Show("该编号数据不存在。");
-                        }
+                        }                        
 
                         dt = sh.Select(string.Format("select IPAQNumber from ipaq where basicinfo_Number='{0}';", DataAdapter.Number));
                         if (dt.Rows.Count > 0)
@@ -187,11 +179,7 @@ namespace Anka
                                 txIPAQLoop.Items.Add(IPAQNumber[1]);
                             }
 
-                        }
-                        else
-                        {
-                            MessageBox.Show("该编号数据不存在。");
-                        }
+                        }                       
 
                         dt = sh.Select(string.Format("select OHQNumber from ohq where basicinfo_Number='{0}';", DataAdapter.Number));
                         if (dt.Rows.Count > 0)
@@ -202,11 +190,7 @@ namespace Anka
                                 txOHQLoop.Items.Add(OHQNumber[1]);
                             }
 
-                        }
-                        else
-                        {
-                            MessageBox.Show("该编号数据不存在。");
-                        }
+                        }                       
 
                         dt = sh.Select(string.Format("select PHQNumber from phq where basicinfo_Number='{0}';", DataAdapter.Number));
                         if (dt.Rows.Count > 0)
@@ -217,11 +201,7 @@ namespace Anka
                                 txPHQLoop.Items.Add(PHQNumber[1]);
                             }
 
-                        }
-                        else
-                        {
-                            MessageBox.Show("该编号数据不存在。");
-                        }
+                        }                       
 
                         dt = sh.Select(string.Format("select PhysiqueNumber from physique where basicinfo_Number='{0}';", DataAdapter.Number));
                         if (dt.Rows.Count > 0)
@@ -232,11 +212,7 @@ namespace Anka
                                 txPhysiqueLoop.Items.Add(PhysiqueNumber[1]);
                             }
 
-                        }
-                        else
-                        {
-                            MessageBox.Show("该编号数据不存在。");
-                        }
+                        }                        
 
                         dt = sh.Select(string.Format("select SPPBNumber from sppb where basicinfo_Number='{0}';", DataAdapter.Number));
                         if (dt.Rows.Count > 0)
@@ -247,11 +223,7 @@ namespace Anka
                                 txSPPBLoop.Items.Add(SPPBNumber[1]);
                             }
 
-                        }
-                        else
-                        {
-                            MessageBox.Show("该编号数据不存在。");
-                        }
+                        }                        
 
                     }
                     catch (SQLiteException ex)
