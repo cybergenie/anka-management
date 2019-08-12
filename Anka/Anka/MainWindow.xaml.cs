@@ -262,6 +262,10 @@ namespace Anka
             }
         }
 
-       
+        private void Select_Click(object sender, RoutedEventArgs e)
+        {
+            Select select = new Select();
+            select.Show();
+        }
     }
 }

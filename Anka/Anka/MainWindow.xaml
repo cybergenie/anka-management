@@ -14,7 +14,9 @@
                 <Separator/>
                 <MenuItem x:Name="miExit" Header="退出" Click="miExit_Click"/>
             </MenuItem>
-            <MenuItem Header="选  项" Width="60"/>
+            <MenuItem Header="选  项" Width="60">
+                <MenuItem Header="查  询" Click="Select_Click"/>
+            </MenuItem>
         </Menu>
         <StatusBar Height="20" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
             <Button x:Name="ConStatus" Height="12" Width="50" IsEnabled="False"/>

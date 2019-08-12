@@ -147,6 +147,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Select.xaml.cs">
+      <DependentUpon>Select.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SQLiteAdapter.cs" />
     <Compile Include="SQLiteHelper\SQLiteColumn.cs" />
     <Compile Include="SQLiteHelper\SQLiteColumnList.cs" />
@@ -174,6 +177,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Select.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
