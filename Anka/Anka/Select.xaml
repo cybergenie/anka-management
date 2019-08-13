@@ -16,14 +16,22 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
-            <TextBox Text="12" VerticalContentAlignment="Center" />
+            <ComboBox x:Name="cbSelect"  VerticalContentAlignment="Center" >
+                <ComboBoxItem Content="01-基本信息"/>
+                <ComboBoxItem Content="02-运动负荷记录表"/>
+                <ComboBoxItem Content="03-PHQ评估量表"/>
+                <ComboBoxItem Content="05-IPAQ调查问卷"/>
+                <ComboBoxItem Content="06-口腔卫生调查问卷"/>
+                <ComboBoxItem Content="07-SPPB/平衡能力"/>
+                <ComboBoxItem Content="08-体质成分"/>
+            </ComboBox>
             <StackPanel Grid.Column="1" Orientation="Horizontal" >
                 <Button x:Name="btSelect" Grid.Column="1" Width="45" Margin="10,0,14,0" Content="查 询" Click="BtSelect_Click" />
                 <Button x:Name="btOutput" Grid.Column="1" Width="45" Margin="10,0,5,0" Content="导 出" />
             </StackPanel>
-            <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5"/>
+            <DataGrid x:Name="dgSelect" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5" />
         </Grid>
         <StatusBar Height="25" VerticalAlignment="Bottom"></StatusBar>
     </Grid>
-    
+
 </Window>

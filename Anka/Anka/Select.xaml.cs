@@ -21,14 +21,15 @@ namespace Anka
     /// </summary>
     public partial class Select : Window
     {
+        
         public Select()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void BtSelect_Click(object sender, RoutedEventArgs e)
         {
-            
+            PerformSelect();
         }
 
         private void PerformSelect()
@@ -44,19 +45,32 @@ namespace Anka
 
                     try
                     {
-                        DataTable dt = sh.Select(textBox1.Text);
-                        dataGridView1.DataSource = dt;
+                        string DataSelect = cbSelect.Text.Trim();
+                        if (cbSelect.SelectedIndex != -1)
+                        {
+                            MessageBox.Show(cbSelect.SelectedItem.ToString());
+                        }
+                        //if (DataSelect.Length <= 0)
+                        //{
+                        //    DataSelect = "select * from basicinfo" +
+                        //        " left  join exercise on basicinfo.Number = exercise.basicinfo_number" +
+                        //        " left  join gad on basicinfo.Number = gad.basicinfo_number" +
+                        //        " left  join ipaq on basicinfo.Number = ipaq.basicinfo_number" +
+                        //        " left  join ohq on basicinfo.Number = ohq.basicinfo_number" +
+                        //        " left  join phq on basicinfo.Number = phq.basicinfo_number" +
+                        //        " left  join physique on basicinfo.Number = physique.basicinfo_number" +
+                        //        " inner join sppb on basicinfo.Number = sppb.basicinfo_number";
+                        //}
+                        DataTable dt = sh.Select(DataSelect);
+                        dgSelect.ItemsSource = dt.DefaultView;  
                     }
                     catch (Exception ex)
                     {
                         DataTable dt = new DataTable();
                         dt.Columns.Add("Error");
-                        dt.Rows.Add(ex.ToString());
-                        dataGridView1.DataSource = dt;
+                        dt.Rows.Add(ex.ToString());                        
                     }
-
                     conn.Close();
-
                 }
             }
         }
