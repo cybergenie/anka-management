@@ -267,7 +267,7 @@ namespace Anka
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
                 return false;
@@ -294,7 +294,7 @@ namespace Anka
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

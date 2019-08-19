@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Anka.exe" size="434688">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Anka.exe" size="438784">
       <assemblyIdentity name="Anka" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>czW5XArJnhyTZUKecRx7BMMgN2X5BcWbGdcSsDZHUMk=</dsig:DigestValue>
+        <dsig:DigestValue>Zv0Av/mmf0XcXtesn7YzgKVidxx/3jLo6swSgsX+Tlg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -35,3 +35,5 @@ E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.exe
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka.csprojAssemblyReference.cache
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka_Content.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\db\anka.db
+E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Select.g.cs
+E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Select.baml
