@@ -55,7 +55,7 @@ namespace Anka
             var buf = stream.ToArray();
 
             //保存为Excel文件  
-            using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+            using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 fs.Write(buf, 0, buf.Length);
                 fs.Flush();

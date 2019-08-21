@@ -142,6 +142,7 @@ namespace Anka
             dtOutput.Columns["Name"].ColumnName = "姓名";
             dtOutput.Columns["Age"].ColumnName = "年龄";
             dtOutput.Columns.Add("性别", typeof(String));
+            dtOutput.Columns["性别"].SetOrdinal(3);
             dtOutput.Columns["Killip"].ColumnName = "Killip";
             dtOutput.Columns["EF"].ColumnName = "EF";
             dtOutput.Columns["LV"].ColumnName = "LV";
@@ -151,8 +152,6 @@ namespace Anka
             dtOutput.Columns["ResidualStenosis"].ColumnName = "75%以上残余狭窄";
             dtOutput.Columns.Add("侧枝循环", typeof(String));
             dtOutput.Columns.Add("优势冠脉", typeof(String));
-
-
 
             foreach (DataRow dRow in dtOutput.Rows)
             {
@@ -169,46 +168,56 @@ namespace Anka
                 }
                 dRow["危险因素"] = tempRisk + dRow["RiskOther"];
 
+                
 
-                if ((bool)dRow["Male"] == true)
+                switch (dRow["Male"].ToString())
                 {
-                    dRow["性别"] = "男";
+                    case "True":
+                        dRow["性别"] = "男";
+                        break;
+                    case "False":
+                        dRow["性别"] = "女";
+                        break;
+                    default:
+                        dRow["性别"] = "";
+                        break;
                 }
-                else
-                {
-                    dRow["性别"] = "女";
-                }
+                
 
-                if ((bool)dRow["CollatCirc"] == true)
+                switch (dRow["CollatCirc"].ToString())
                 {
-                    dRow["侧枝循环"] = "有";
+                    case "True":
+                        dRow["侧枝循环"] = "有";
+                        break;
+                    case "False":
+                        dRow["侧枝循环"] = "无";
+                        break;
+                    default:
+                        dRow["侧枝循环"] = "";
+                        break;
                 }
-                else
-                {
-                    dRow["侧枝循环"] = "无";
-                }
+                
 
-                //switch ((int)dRow["DominantCoronary"])
-                //{
-                //    case -1:
-                //        dRow["优势冠脉"] = "左优势型";
-                //        break;
-                //    case 0:
-                //        dRow["优势冠脉"] = "均衡型";
-                //        break;
-                //    case 1:
-                //        dRow["优势冠脉"] = "右优势型";
-                //        break;
-                //    default:
-                //        dRow["优势冠脉"] = "";
-                //        break;
-                //}              
+                switch (dRow["DominantCoronary"].ToString())
+                {
+                    case "-1":
+                        dRow["优势冠脉"] = "左优势型";
+                        break;
+                    case "0":
+                        dRow["优势冠脉"] = "均衡型";
+                        break;
+                    case "1":
+                        dRow["优势冠脉"] = "右优势型";
+                        break;
+                    default:
+                        dRow["优势冠脉"] = "";
+                        break;
+                }   
             }
-
-
-
-
-
+            dtOutput.Columns.Remove("DominantCoronary");
+            dtOutput.Columns.Remove("Male");
+            dtOutput.Columns.Remove("RiskOther");
+            dtOutput.Columns.Remove("CollatCirc");
             return dtOutput;
         }
         private static DataTable ExerciseConverter(DataTable dt)

@@ -96,8 +96,9 @@ namespace Anka
                         Debug.WriteLine(cbSelect.SelectedIndex + " : " + cbSelect.Text);
 #endif
                         DataTable dt = sh.Select(DataSelect);                       
-                        dgSelect.ItemsSource = dt.DefaultView;
+                        
                         DataTable dtOutput = DataAdapter.DataTableConverter(dt, cbSelect.SelectedIndex);
+                        dgSelect.ItemsSource = dtOutput.DefaultView;
 
                         string strName=null;
                         SaveFileDialog dlg = new SaveFileDialog();
@@ -117,9 +118,7 @@ namespace Anka
                     }
                     catch (Exception ex)
                     {
-                        DataTable dt = new DataTable();
-                        dt.Columns.Add("Error");
-                        dt.Rows.Add(ex.ToString()); 
+                        MessageBox.Show(ex.Message);
                         
                     }
                     conn.Close();
