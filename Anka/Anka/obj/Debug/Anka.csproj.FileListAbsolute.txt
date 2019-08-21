@@ -102,3 +102,9 @@ E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\NPOI.OOXML.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\NPOI.OpenXml4Net.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\NPOI.OpenXmlFormats.dll
 E:\Project\Anka\anka-management\Anka\Anka\bin\Debug\ICSharpCode.SharpZipLib.xml
+C:\Users\JLU_Lee\source\repos\cybergenie\anka-management\Anka\Anka\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\JLU_Lee\source\repos\cybergenie\anka-management\Anka\Anka\bin\Debug\NPOI.dll
+C:\Users\JLU_Lee\source\repos\cybergenie\anka-management\Anka\Anka\bin\Debug\NPOI.OOXML.dll
+C:\Users\JLU_Lee\source\repos\cybergenie\anka-management\Anka\Anka\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\JLU_Lee\source\repos\cybergenie\anka-management\Anka\Anka\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\JLU_Lee\source\repos\cybergenie\anka-management\Anka\Anka\bin\Debug\ICSharpCode.SharpZipLib.xml

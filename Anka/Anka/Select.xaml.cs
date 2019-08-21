@@ -97,16 +97,23 @@ namespace Anka
 #endif
                         DataTable dt = sh.Select(DataSelect);                       
                         dgSelect.ItemsSource = dt.DefaultView;
+                        DataTable dtOutput = DataAdapter.DataTableConverter(dt, cbSelect.SelectedIndex);
 
                         string strName=null;
-                        OpenFileDialog dlg = new OpenFileDialog();
+                        SaveFileDialog dlg = new SaveFileDialog();
+                        dlg.RestoreDirectory = true;
                         dlg.DefaultExt = "xls";
-                        dlg.Filter = "Excle 文件|*.xls";
+                        dlg.Filter = "Excle工作簿|*.xlsx|Excle97-2003工作簿|*.xls";
                         if (dlg.ShowDialog() == true)
+                        {
                             strName = dlg.FileName;
+#if DEBUG
+                            Debug.WriteLine(strName);
+#endif
+                        }
                         if (strName == null)
                             return;
-                        NPOIHelper.TableToExcel(dt, strName);
+                        NPOIHelper.TableToExcel(dtOutput, strName);
                     }
                     catch (Exception ex)
                     {
