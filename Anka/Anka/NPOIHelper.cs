@@ -14,7 +14,7 @@ namespace Anka
 {
     class NPOIHelper
     {
-        public static void TableToExcel(DataTable dt, string file)
+        public static void TableToExcel(DataTable[] dt, string file)
         {
             IWorkbook workbook;
             string fileExt = Path.GetExtension(file).ToLower();
@@ -28,24 +28,28 @@ namespace Anka
             }
             else { workbook = null; }
             if (workbook == null) { return; }
-            ISheet sheet = string.IsNullOrEmpty(dt.TableName) ? workbook.CreateSheet("Sheet1") : workbook.CreateSheet(dt.TableName);
 
-            //表头  
-            IRow row = sheet.CreateRow(0);
-            for (int i = 0; i < dt.Columns.Count; i++)
+            for (int k = 0; k < dt.Length; k++)
             {
-                ICell cell = row.CreateCell(i);
-                cell.SetCellValue(dt.Columns[i].ColumnName);
-            }
+                ISheet sheet = string.IsNullOrEmpty(dt[k].TableName) ? workbook.CreateSheet("Sheet"+k.ToString()) : workbook.CreateSheet(dt[k].TableName);
 
-            //数据  
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                IRow row1 = sheet.CreateRow(i + 1);
-                for (int j = 0; j < dt.Columns.Count; j++)
+                //表头  
+                IRow row = sheet.CreateRow(0);
+                for (int i = 0; i < dt[k].Columns.Count; i++)
                 {
-                    ICell cell = row1.CreateCell(j);
-                    cell.SetCellValue(dt.Rows[i][j].ToString());
+                    ICell cell = row.CreateCell(i);
+                    cell.SetCellValue(dt[k].Columns[i].ColumnName);
+                }
+
+                //数据  
+                for (int i = 0; i < dt[k].Rows.Count; i++)
+                {
+                    IRow row1 = sheet.CreateRow(i + 1);
+                    for (int j = 0; j < dt[k].Columns.Count; j++)
+                    {
+                        ICell cell = row1.CreateCell(j);
+                        cell.SetCellValue(dt[k].Rows[i][j].ToString());
+                    }
                 }
             }
 
