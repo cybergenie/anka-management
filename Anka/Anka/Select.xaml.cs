@@ -91,6 +91,7 @@ namespace Anka
                 if (strName == null)
                     return;
                 NPOIHelper.TableToExcel(dtOutputs, strName);
+                MessageBox.Show("数据导出已完成");
             }
 
             catch (Exception ex)
