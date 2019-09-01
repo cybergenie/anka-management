@@ -615,7 +615,10 @@ namespace Anka
             dtOutput.TableName = "04-口腔卫生和体质";
 
             dtOutput.Columns.Add("性别", typeof(String));
-            
+            dtOutput.Columns.Add("BMI", typeof(Double));
+            dtOutput.Columns.Add("脂肪重量指数", typeof(Double));
+            dtOutput.Columns.Add("BCW-TBW", typeof(Double));
+
 
             foreach (DataRow dRow in dtOutput.Rows)
             {
@@ -633,14 +636,14 @@ namespace Anka
 
                 }
 
-                switch(dRow["OHQ1"].ToString())
+                switch (dRow["OHQ1"].ToString())
                 {
                     case "0":
                         dRow["OHQ1"] = "3次以上";
-                    break;
+                        break;
                     case "1":
                         dRow["OHQ1"] = "2次";
-                    break;
+                        break;
                     case "2":
                         dRow["OHQ1"] = "1次";
                         break;
@@ -649,23 +652,179 @@ namespace Anka
                         break;
                     default:
                         dRow["OHQ1"] = "";
-                    break;
+                        break;
                 }
-                switch (dRow["OHQ1"].ToString())
+                switch (dRow["OHQ2"].ToString())
                 {
                     case "0":
-                        dRow["OHQ1"] = "每天";
+                        dRow["OHQ2"] = "每天";
                         break;
                     case "1":
-                        dRow["OHQ1"] = "有时使用";
+                        dRow["OHQ2"] = "有时使用";
                         break;
                     case "2":
-                        dRow["OHQ1"] = "不使用";
-                        break;                    
+                        dRow["OHQ2"] = "不使用";
+                        break;
                     default:
-                        dRow["OHQ1"] = "";
+                        dRow["OHQ2"] = "";
                         break;
                 }
+                switch (dRow["OHQ3"].ToString())
+                {
+                    case "0":
+                        dRow["OHQ3"] = "1个";
+                        break;
+                    case "1":
+                        dRow["OHQ3"] = "2个";
+                        break;
+                    case "2":
+                        dRow["OHQ3"] = "3-5个";
+                        break;
+                    case "3":
+                        dRow["OHQ3"] = "6-9个";
+                        break;
+                    case "4":
+                        dRow["OHQ3"] = "10个及以上";
+                        break;
+                    case "5":
+                        dRow["OHQ3"] = "0个（没掉）";
+                        break;
+                    default:
+                        dRow["OHQ3"] = "";
+                        break;
+                }
+                if (dRow["OHQ4"].ToString().Length > 0)
+                {
+                    string[] OHQ4 = (dRow["OHQ4"].ToString()).Split('-');
+                    switch (OHQ4[0])
+                    {
+                        case "A":
+                            {
+                                if (OHQ4[1].Trim().Length > 0)
+                                    dRow["OHQ4"] = "经常(每周" + OHQ4[1] + "次";
+                                else
+                                    dRow["OHQ4"] = "经常";
+                            }
+                            break;
+                        case "B":
+                            {
+                                if (OHQ4[1].Trim().Length > 0)
+                                    dRow["OHQ4"] = "偶尔(每周" + OHQ4[1] + "次";
+                                else
+                                    dRow["OHQ4"] = "偶尔";
+                            }
+                            break;
+                        case "C":
+                            dRow["OHQ4"] = "无(不出血)";
+                            break;
+                        default:
+                            dRow["OHQ4"] = "";
+                            break;
+                    }
+                }
+                switch (dRow["OHQ5"].ToString())
+                {
+                    case "0":
+                        dRow["OHQ5"] = "从来没有";
+                        break;
+                    case "1":
+                        dRow["OHQ5"] = "现在有";
+                        break;
+                    case "2":
+                        dRow["OHQ5"] = "现在没有，但有时复发";
+                        break;
+                    case "3":
+                        dRow["OHQ5"] = "以前有，现在好了";
+                        break;
+                    default:
+                        dRow["OHQ5"] = "";
+                        break;
+                }
+
+                if (dRow["OHQ6"].ToString().Trim().Length > 0)
+                {
+                    switch (Convert.ToInt32(dRow["OHQ6"].ToString()))
+                    {
+                        case 0:
+                            dRow["OHQ6"] = "否";
+                            break;
+                        case 99:
+                            dRow["OHQ6"] = "全部替换";
+                            break;
+                        default:
+                            dRow["OHQ6"] = "部分是（共" + Convert.ToInt32(dRow["OHQ6"].ToString()) + "颗假牙";
+                            break;
+                    }
+                }
+                else
+                    dRow["OHQ6"] = "";
+
+                switch (dRow["OHQ7"].ToString())
+                {
+                    case "0":
+                        dRow["OHQ7"] = "清水浸泡";
+                        break;
+                    case "1":
+                        dRow["OHQ7"] = "假牙清洁剂浸泡";
+                        break;
+                    case "2":
+                        dRow["OHQ7"] = "用牙膏刷";
+                        break;
+                    default:
+                        dRow["OHQ7"] = "";
+                        break;
+                }
+
+                switch (dRow["OHQ8"].ToString())
+                {
+                    case "0":
+                        dRow["OHQ8"] = "<1分钟";
+                        break;
+                    case "1":
+                        dRow["OHQ8"] = "1-2分钟";
+                        break;
+                    case "2":
+                        dRow["OHQ8"] = "2分钟以上";
+                        break;
+                    default:
+                        dRow["OHQ8"] = "";
+                        break;
+                }
+                if (dRow["OHQ9"].ToString().Length > 0)
+                {
+                    string[] OHQ9 = (dRow["OHQ9"].ToString()).Split('-');
+                    switch (OHQ9[0])
+                    {
+                        case "A":
+                            dRow["OHQ9"] = "否";
+                            break;
+                        case "B":
+                            dRow["OHQ9"] = "是（选择原因:";
+                            if (OHQ9[1].Trim().Length > 0)
+                                dRow["OHQ9"] += "常规检查" + Convert.ToInt32(OHQ9[1]) + "次/年;";
+                            if (OHQ9[2].Trim().Length > 0)
+                                dRow["OHQ9"] += "生病" + Convert.ToInt32(OHQ9[2]) + "次/年;";
+                            dRow["OHQ9"] += ")";
+                            break;
+                        default:
+                            dRow["OHQ9"] = "";
+                            break;
+                    }
+                }
+                else
+                    dRow["OHQ9"] = "";
+                if (dRow["Weight"].ToString().Trim().Length > 0 && dRow["Hight"].ToString().Trim().Length > 0)
+                    dRow["BMI"] = Math.Round((double)dRow["Weight"] / ((double)dRow["Hight"] * (double)dRow["Hight"]), 2);
+                else
+                    dRow["BMI"] = DBNull.Value;
+                if (dRow["FM"].ToString().Trim().Length > 0 && dRow["Hight"].ToString().Trim().Length > 0)
+                    dRow["脂肪重量指数"] = Math.Round((double)dRow["FM"] / ((double)dRow["Hight"] * (double)dRow["Hight"]), 2);
+                else
+                    dRow["脂肪重量指数"] = DBNull.Value;
+                if (dRow["BCW"].ToString().Trim().Length > 0 && dRow["TBW"].ToString().Trim().Length > 0)
+                    dRow["BCW-TBW"] = Math.Round((double)dRow["BCW"] / (double)dRow["TBW"], 2);
+                else
+                    dRow["BCW-TBW"] = DBNull.Value;
 
             }
 
@@ -681,6 +840,35 @@ namespace Anka
             dtOutput.Columns["Age"].ColumnName = "年龄";
             dtOutput.Columns["性别"].SetOrdinal(3);
             dtOutput.Columns["OHQNumber"].ColumnName = "口腔卫生调查编号";
+            dtOutput.Columns["口腔卫生调查编号"].SetOrdinal(4);
+            dtOutput.Columns["OHQ1"].ColumnName = "O-1";
+            dtOutput.Columns["OHQ2"].ColumnName = "O-2";
+            dtOutput.Columns["OHQ3"].ColumnName = "O-3";
+            dtOutput.Columns["OHQ4"].ColumnName = "O-4";
+            dtOutput.Columns["OHQ5"].ColumnName = "O-5";
+            dtOutput.Columns["OHQ6"].ColumnName = "O-6";
+            dtOutput.Columns["OHQ7"].ColumnName = "O-7";
+            dtOutput.Columns["OHQ8"].ColumnName = "O-8";
+            dtOutput.Columns["OHQ9"].ColumnName = "O-9";
+            dtOutput.Columns["PhysiqueNumber"].ColumnName = "体质成分检测编号";
+            dtOutput.Columns["Weight"].ColumnName = "体重";
+            dtOutput.Columns["Hight"].ColumnName = "身高";
+            dtOutput.Columns["BMI"].SetOrdinal(17);            
+            dtOutput.Columns["FM"].ColumnName = "脂肪重量";
+            dtOutput.Columns["脂肪重量指数"].SetOrdinal(19);
+            dtOutput.Columns["TBW"].ColumnName = "体液总量(TBW)";
+            dtOutput.Columns["BCW"].ColumnName = "细胞外液(BCW)";
+            dtOutput.Columns["BCW-TBW"].SetOrdinal(22);
+            dtOutput.Columns["SMMAll"].ColumnName = "骨骼肌肉质量(SMM)";
+            dtOutput.Columns["SMMArmLeft"].ColumnName = "左臂";
+            dtOutput.Columns["SMMArmRight"].ColumnName = "右臂";
+            dtOutput.Columns["SMMBody"].ColumnName = "躯干";
+            dtOutput.Columns["SMMLegLeft"].ColumnName = "左腿";
+            dtOutput.Columns["SMMLegRight"].ColumnName = "右腿";
+            dtOutput.Columns["VAT"].ColumnName = "内脏脂肪(VAT)";
+            dtOutput.Columns["Waistline"].ColumnName = "腰围(WC)";
+            dtOutput.Columns["PA"].ColumnName = "相角";
+            dtOutput.Columns["PAPercent"].ColumnName = "百分位";
 
             return dtOutput;
         }       
