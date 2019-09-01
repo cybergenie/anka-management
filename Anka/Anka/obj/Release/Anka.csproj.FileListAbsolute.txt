@@ -37,3 +37,9 @@ E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Anka_Content.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\bin\Release\db\anka.db
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Select.g.cs
 E:\Project\Anka\anka-management\Anka\Anka\obj\Release\Select.baml
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\NPOI.dll
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\NPOI.OOXML.dll
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\NPOI.OpenXml4Net.dll
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\NPOI.OpenXmlFormats.dll
+E:\Project\Anka\anka-management\Anka\Anka\bin\Release\ICSharpCode.SharpZipLib.xml
