@@ -1,0 +1,34 @@
+﻿<Window x:Class="Anka.Select"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Anka"
+        mc:Ignorable="d"
+        Title="查询" Height="450" Width="800">
+    <Grid>
+        <Grid Margin="5,5,5,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="140"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="cbSelect"  VerticalContentAlignment="Center" IsEditable="True" >
+                <ComboBoxItem Content="01-基本信息"/>
+                <ComboBoxItem Content="02-运动负荷记录表"/>
+                <ComboBoxItem Content="03-身体活动水平"/>
+                <ComboBoxItem Content="04-口腔卫生和体质"/>                
+            </ComboBox>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" >
+                <Button x:Name="btSelect" Grid.Column="1" Width="45" Margin="10,0,14,0" Content="查 询" Click="BtSelect_Click" />
+                <Button x:Name="btOutput" Grid.Column="1" Width="45" Margin="10,0,5,0" Content="导 出" Click="BtOutput_Click" />
+            </StackPanel>
+            <DataGrid x:Name="dgSelect" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5" />
+        </Grid>
+        <StatusBar Height="25" VerticalAlignment="Bottom"></StatusBar>
+    </Grid>
+
+</Window>
