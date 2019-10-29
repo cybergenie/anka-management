@@ -109,13 +109,13 @@ namespace Anka
         private DataTable[] GetTables()
         {
             string[] DataSelect = { "select * from basicinfo",
-           "select * from basicinfo left join exercise on basicinfo.Number = exercise.basicinfo_number",
-           "select * from basicinfo left join phq on basicinfo.Number = phq.basicinfo_number"+
-            " inner join gad on basicinfo.Number = gad.basicinfo_number"+
-            " inner join ipaq on basicinfo.Number = ipaq.basicinfo_number"+
-           "  inner join sppb on basicinfo.Number = sppb.basicinfo_number",
-            "select * from basicinfo left join ohq on basicinfo.Number = ohq.basicinfo_number"+
-            " left join physique on basicinfo.Number = physique.basicinfo_number"
+            "select * from basicinfo left join exercise on basicinfo.Number = exercise.basicinfo_number"+
+            " left join gad on basicinfo.Number = gad.basicinfo_number"+
+            " left join ipaq on basicinfo.Number = ipaq.basicinfo_number"+
+            " left join phq on basicinfo.Number = phq.basicinfo_number"+
+            " left join ohq on basicinfo.Number = ohq.basicinfo_number",
+            "select * from basicinfo left join sppb on basicinfo.Number = sppb.basicinfo_number",
+            "select * from basicinfo left join physique on basicinfo.Number = physique.basicinfo_number"
             };
 
             DataTable[] dataTables = new DataTable[DataSelect.Length];
