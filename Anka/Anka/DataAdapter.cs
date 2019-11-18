@@ -139,6 +139,7 @@ namespace Anka
             dtOutput.Columns["BasicRisk"].ColumnName = "危险因素";
             dtOutput.Columns["PCI"].ColumnName = "PCI支架数";
             dtOutput.Columns["ResidualStenosis"].ColumnName = "75%以上残余狭窄";
+            dtOutput.Columns["D2"].ColumnName = "D-二聚体";
             dtOutput.Columns.Add("侧枝循环", typeof(String));
             dtOutput.Columns.Add("优势冠脉", typeof(String));
             if(dtOutput.Columns.Contains("Description")==true)

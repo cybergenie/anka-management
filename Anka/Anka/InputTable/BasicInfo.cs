@@ -129,7 +129,22 @@ namespace Anka
             dic["LV"] = txLV.Text;
             dic["BasicOther"] = txBasicOther.Text;
             dic["Description"] = txDescription.Text;
-
+            dic["Hb"] = txHb.Text;
+            dic["Alb"] = txAlb.Text;
+            dic["Cre"] = txCre.Text;
+            dic["BUN"] = txBUN.Text;
+            dic["Glu"] = txGlu.Text;
+            dic["HbAlc"] = txHbAlc.Text;
+            dic["BNP"] = txBNP.Text;
+            dic["D2"] = txD2.Text;
+            dic["Tchol"] = txTchol.Text;
+            dic["TG"] = txTG.Text;
+            dic["HDLC"] = txHDLC.Text;
+            dic["LDLC"] = txLDLC.Text;
+            dic["UA"] = txUA.Text;
+            dic["ABI"] = txABI.Text;
+            dic["cTnT"] = txcTnT.Text;
+            dic["LY"] = txLY.Text;
 
             string BasicRisk = "";
             foreach (CheckBox temp in CbRiskClick())
@@ -177,6 +192,22 @@ namespace Anka
             txEF.Text = dr["EF"] == System.DBNull.Value ? "" : dr["EF"].ToString();
             txLV.Text = dr["LV"] == System.DBNull.Value ? "" : dr["LV"].ToString();
             txBasicOther.Text = dr["BasicOther"] == System.DBNull.Value ? "" : dr["BasicOther"].ToString();
+            txHb.Text = dr["Hb"] == System.DBNull.Value ? "" : dr["Hb"].ToString();
+            txAlb.Text = dr["Alb"] == System.DBNull.Value ? "" : dr["Alb"].ToString();
+            txCre.Text = dr["Cre"] == System.DBNull.Value ? "" : dr["Cre"].ToString();
+            txBUN.Text = dr["BUN"] == System.DBNull.Value ? "" : dr["BUN"].ToString();
+            txGlu.Text = dr["Glu"] == System.DBNull.Value ? "" : dr["Glu"].ToString();
+            txHbAlc.Text = dr["HbAlc"] == System.DBNull.Value ? "" : dr["HbAlc"].ToString();
+            txBNP.Text = dr["BNP"] == System.DBNull.Value ? "" : dr["BNP"].ToString();
+            txD2.Text = dr["D2"] == System.DBNull.Value ? "" : dr["D2"].ToString();
+            txTchol.Text = dr["Tchol"] == System.DBNull.Value ? "" : dr["Tchol"].ToString();
+            txTG.Text = dr["TG"] == System.DBNull.Value ? "" : dr["TG"].ToString();
+            txHDLC.Text = dr["HDLC"] == System.DBNull.Value ? "" : dr["HDLC"].ToString();
+            txLDLC.Text = dr["LDLC"] == System.DBNull.Value ? "" : dr["LDLC"].ToString();
+            txUA.Text = dr["UA"] == System.DBNull.Value ? "" : dr["UA"].ToString();
+            txABI.Text = dr["ABI"] == System.DBNull.Value ? "" : dr["ABI"].ToString();
+            txcTnT.Text = dr["cTnT"] == System.DBNull.Value ? "" : dr["cTnT"].ToString();
+            txLY.Text = dr["LY"] == System.DBNull.Value ? "" : dr["LY"].ToString();
 
             if (dt.Columns.Contains("Description") == true)
             {
