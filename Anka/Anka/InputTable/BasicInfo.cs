@@ -22,39 +22,64 @@ namespace Anka
     public partial class MainWindow 
     {
         private void BtBasicSave_Click(object sender, RoutedEventArgs e)
-        {   
-            using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
-            {
-                using (SQLiteCommand cmd = new SQLiteCommand())
-                {
-                    cmd.Connection = conn;
-                    conn.Open();
+        {
+            bool SaveCheck = true;
 
-                    SQLiteHelper sh = new SQLiteHelper(cmd);
-                    var dicData = new Dictionary<string, object>();
-                    BasicDataSave(dicData);
-                    var dicCondition = new Dictionary<string, object>();
-                    dicCondition["Number"] = DataAdapter.Number;
-                    
-                    try
-                    {
-                        sh.Update("basicinfo", dicData, dicCondition);
-                    }
-                    catch(SQLiteException ex)
-                    {
-                        MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
-                    }
-                    finally
-                    {
-                        conn.Close();
-                    }
-                }
+            if (config.IsInt(txRS.Text)==false)
+            {
+                txRS.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txRS.Background = new SolidColorBrush(Colors.White);
             }
 
+            if (config.IsInt(txPCI.Text) == false)
+            {
+                txPCI.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txPCI.Background = new SolidColorBrush(Colors.White);
+            }
+            if (SaveCheck == true)
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(config.DataSource))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand())
+                    {
+                        cmd.Connection = conn;
+                        conn.Open();
 
-                    // SQLiteAdapter.ExecuteNonQuery(sql);
+                        SQLiteHelper sh = new SQLiteHelper(cmd);
+                        var dicData = new Dictionary<string, object>();
+                        BasicDataSave(dicData);
+                        var dicCondition = new Dictionary<string, object>();
+                        dicCondition["Number"] = DataAdapter.Number;
+
+                        try
+                        {
+                            sh.Update("basicinfo", dicData, dicCondition);
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            MessageBox.Show(string.Format("数据更新错误。错误代码为:{0}", ex.ErrorCode), "数据更新错误");
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+                    }
+                }  // SQLiteAdapter.ExecuteNonQuery(sql);
 
                     ((Button)sender).Background = new SolidColorBrush(Colors.LightGreen);
+            }
+            else
+            {
+                ((Button)sender).Background = new SolidColorBrush(Colors.Red);
+            }
         }
         private void BtBasicLoad_Click(object sender, RoutedEventArgs e)
         {

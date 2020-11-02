@@ -147,67 +147,73 @@ namespace Anka
                 dtOutput.Columns["Description"].ColumnName = "诊断";
                 dtOutput.Columns["诊断"].SetOrdinal(4);
             }
-
-            foreach (DataRow dRow in dtOutput.Rows)
+            try
             {
-
-                string tempRisk = null;
-                string risk = dRow["危险因素"].ToString();
-                for (int i = 0; i < risk.Length; i++)
+                foreach (DataRow dRow in dtOutput.Rows)
                 {
-                    if (risk[i] == '1')
+
+                    string tempRisk = null;
+                    string risk = dRow["危险因素"].ToString();
+                    for (int i = 0; i < risk.Length; i++)
                     {
-                        tempRisk += (Risks[i] + ";");
+                        if (risk[i] == '1')
+                        {
+                            tempRisk += (Risks[i] + ";");
+                        }
+
+                    }
+                    dRow["危险因素"] = tempRisk + dRow["RiskOther"];
+
+
+
+                    switch (dRow["Male"].ToString())
+                    {
+                        case "True":
+                            dRow["性别"] = "男";
+                            break;
+                        case "False":
+                            dRow["性别"] = "女";
+                            break;
+                        default:
+                            dRow["性别"] = "";
+                            break;
                     }
 
+
+                    switch (dRow["CollatCirc"].ToString())
+                    {
+                        case "True":
+                            dRow["侧枝循环"] = "有";
+                            break;
+                        case "False":
+                            dRow["侧枝循环"] = "无";
+                            break;
+                        default:
+                            dRow["侧枝循环"] = "";
+                            break;
+                    }
+
+
+                    switch (dRow["DominantCoronary"].ToString())
+                    {
+                        case "-1":
+                            dRow["优势冠脉"] = "左优势型";
+                            break;
+                        case "0":
+                            dRow["优势冠脉"] = "均衡型";
+                            break;
+                        case "1":
+                            dRow["优势冠脉"] = "右优势型";
+                            break;
+                        default:
+                            dRow["优势冠脉"] = "";
+                            break;
+                    }
                 }
-                dRow["危险因素"] = tempRisk + dRow["RiskOther"];
-
-                
-
-                switch (dRow["Male"].ToString())
-                {
-                    case "True":
-                        dRow["性别"] = "男";
-                        break;
-                    case "False":
-                        dRow["性别"] = "女";
-                        break;
-                    default:
-                        dRow["性别"] = "";
-                        break;
-                }
-                
-
-                switch (dRow["CollatCirc"].ToString())
-                {
-                    case "True":
-                        dRow["侧枝循环"] = "有";
-                        break;
-                    case "False":
-                        dRow["侧枝循环"] = "无";
-                        break;
-                    default:
-                        dRow["侧枝循环"] = "";
-                        break;
-                }
-                
-
-                switch (dRow["DominantCoronary"].ToString())
-                {
-                    case "-1":
-                        dRow["优势冠脉"] = "左优势型";
-                        break;
-                    case "0":
-                        dRow["优势冠脉"] = "均衡型";
-                        break;
-                    case "1":
-                        dRow["优势冠脉"] = "右优势型";
-                        break;
-                    default:
-                        dRow["优势冠脉"] = "";
-                        break;
-                }   
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("基本信息"+ex.Message);
             }
             dtOutput.Columns.Remove("DominantCoronary");
             dtOutput.Columns.Remove("Male");
@@ -236,9 +242,13 @@ namespace Anka
             dtOutput.Columns.Add("PHQ-9", typeof(String));
             dtOutput.Columns.Add("IPAQ-0是否知道", typeof(String));
 
-
+            
             foreach (DataRow dRow in dtOutput.Rows)
             {
+                try
+                {
+
+              
                 switch (dRow["Male"].ToString())
                 {
                     case "True":
@@ -489,16 +499,16 @@ namespace Anka
 
                 if (dRow["OHQ6"].ToString().Trim().Length > 0)
                 {
-                    switch (Convert.ToInt32(dRow["OHQ6"].ToString()))
+                    switch (dRow["OHQ6"].ToString())
                     {
-                        case 0:
+                        case "0":
                             dRow["OHQ6"] = "否";
                             break;
-                        case 99:
+                        case "99":
                             dRow["OHQ6"] = "全部替换";
                             break;
                         default:
-                            dRow["OHQ6"] = "部分是（共" + Convert.ToInt32(dRow["OHQ6"].ToString()) + "颗假牙";
+                            dRow["OHQ6"] = "部分是（共" + dRow["OHQ6"].ToString() + "颗假牙";
                             break;
                     }
                 }
@@ -547,9 +557,9 @@ namespace Anka
                         case "B":
                             dRow["OHQ9"] = "是（选择原因:";
                             if (OHQ9[1].Trim().Length > 0)
-                                dRow["OHQ9"] += "常规检查" + Convert.ToInt32(OHQ9[1]) + "次/年;";
+                                dRow["OHQ9"] += "常规检查" + OHQ9[1].ToString() + "次/年;";
                             if (OHQ9[2].Trim().Length > 0)
-                                dRow["OHQ9"] += "生病" + Convert.ToInt32(OHQ9[2]) + "次/年;";
+                                dRow["OHQ9"] += "生病" + OHQ9[2].ToString() + "次/年;";
                             dRow["OHQ9"] += ")";
                             break;
                         default:
@@ -560,7 +570,11 @@ namespace Anka
                 else
                     dRow["OHQ9"] = "";
 
-
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("ExerciseConverter" + ex.Message+ex.ToString()+"\n" +dRow["OHQ6"].ToString());
+                }
 
             }
 

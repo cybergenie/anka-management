@@ -21,6 +21,234 @@ namespace Anka
     {
         private void BtSPPBSave_Click(object sender, RoutedEventArgs e)
         {
+            bool SaveCheck = true;
+
+            if(config.IsNumeric(txSPPB41.Text)==false)
+            {
+                txSPPB41.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSPPB41.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txSPPB42.Text) == false)
+            {
+                txSPPB42.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSPPB42.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txSPPB51.Text) == false)
+            {
+                txSPPB51.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSPPB51.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txSPPB52.Text) == false)
+            {
+                txSPPB52.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSPPB52.Background = new SolidColorBrush(Colors.White);
+            }
+
+            if (config.IsNumeric(txSize1.Text) == false)
+            {
+                txSize1.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSize1.Background = new SolidColorBrush(Colors.White);
+            }
+
+            if (config.IsNumeric(txSize2.Text) == false)
+            {
+                txSize2.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSize2.Background = new SolidColorBrush(Colors.White);
+            }
+
+            if (config.IsNumeric(txSize3.Text) == false)
+            {
+                txSize3.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSize3.Background = new SolidColorBrush(Colors.White);
+            }
+
+            if (config.IsNumeric(txSize5.Text) == false)
+            {
+                txSize5.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSize5.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txSize6.Text) == false)
+            {
+                txSize6.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSize6.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txSize7.Text) == false)
+            {
+                txSize7.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSize7.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txSize8.Text) == false)
+            {
+                txSize8.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txSize8.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txVitals1.Text) == false)
+            {
+                txVitals1.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txVitals1.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txVitals2.Text) == false)
+            {
+                txVitals2.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txVitals2.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txVitals3.Text) == false)
+            {
+                txVitals3.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txVitals3.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txVitals4.Text) == false)
+            {
+                txVitals4.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txVitals4.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txVitals5.Text) == false)
+            {
+                txVitals5.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txVitals5.Background = new SolidColorBrush(Colors.White);
+            }
+
+            if (config.IsNumeric(txGripStrength1.Text) == false)
+            {
+                txGripStrength1.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txGripStrength1.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txGripStrength2.Text) == false)
+            {
+                txGripStrength2.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txGripStrength2.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txGripStrength3.Text) == false)
+            {
+                txGripStrength3.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txGripStrength3.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txGripStrength4.Text) == false)
+            {
+                txGripStrength4.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txGripStrength4.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txLapStrength1.Text) == false)
+            {
+                txLapStrength1.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txLapStrength1.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txLapStrength2.Text) == false)
+            {
+                txLapStrength2.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txLapStrength2.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txLapStrength3.Text) == false)
+            {
+                txLapStrength3.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txLapStrength3.Background = new SolidColorBrush(Colors.White);
+            }
+            if (config.IsNumeric(txLapStrength4.Text) == false)
+            {
+                txLapStrength4.Background = new SolidColorBrush(Colors.Yellow);
+                SaveCheck = false;
+            }
+            else
+            {
+                txLapStrength4.Background = new SolidColorBrush(Colors.White);
+            }
+
+
+            if (SaveCheck==true)
+            {
+
             if (this.txSPPBLoop.Text.Trim().Length > 0)
             {
 
@@ -79,7 +307,12 @@ namespace Anka
             {
                 MessageBox.Show("请输入测试编号。");
             }
-            
+            }
+            else
+            {
+                ((Button)sender).Background = new SolidColorBrush(Colors.Red);
+            }
+
         }
 
         private void BtSPPBLoad_Click(object sender, RoutedEventArgs e)
