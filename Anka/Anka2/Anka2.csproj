@@ -2,8 +2,159 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\AlignObjectsBottom.png" />
+    <None Remove="Resources\Images\AlignObjectsCenteredHorizontal.png" />
+    <None Remove="Resources\Images\AlignObjectsCenteredVertical.png" />
+    <None Remove="Resources\Images\AlignObjectsLeft.png" />
+    <None Remove="Resources\Images\AlignObjectsRight.png" />
+    <None Remove="Resources\Images\AlignObjectsTop.png" />
+    <None Remove="Resources\Images\BringForward.png" />
+    <None Remove="Resources\Images\BringForwardBig.png" />
+    <None Remove="Resources\Images\BringToFront.png" />
+    <None Remove="Resources\Images\Buffer.png" />
+    <None Remove="Resources\Images\Copy.png" />
+    <None Remove="Resources\Images\Cut.png" />
+    <None Remove="Resources\Images\Delete.png" />
+    <None Remove="Resources\Images\DistributeObjectsHorizontal.png" />
+    <None Remove="Resources\Images\DistributeObjectsVertical.png" />
+    <None Remove="Resources\Images\End.png" />
+    <None Remove="Resources\Images\GenericDocument.png" />
+    <None Remove="Resources\Images\Group.png" />
+    <None Remove="Resources\Images\GroupBig.png" />
+    <None Remove="Resources\Images\OpenFolder.png" />
+    <None Remove="Resources\Images\Paste.png" />
+    <None Remove="Resources\Images\PasteBig.png" />
+    <None Remove="Resources\Images\Print.png" />
+    <None Remove="Resources\Images\Process.png" />
+    <None Remove="Resources\Images\Save.png" />
+    <None Remove="Resources\Images\SendBackward.png" />
+    <None Remove="Resources\Images\SendBackwardBig.png" />
+    <None Remove="Resources\Images\SendToBack.png" />
+    <None Remove="Resources\Images\Start.png" />
+    <None Remove="Resources\Images\Ungroup.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.50.0" />
+    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.50.0" />
+    <PackageReference Include="Fluent.Ribbon" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
+    <PackageReference Include="NPOI" Version="2.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\AlignObjectsBottom.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AlignObjectsCenteredHorizontal.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AlignObjectsCenteredVertical.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AlignObjectsLeft.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AlignObjectsRight.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\AlignObjectsTop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\BringForward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\BringForwardBig.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\BringToFront.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Buffer.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Cut.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\DistributeObjectsHorizontal.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\DistributeObjectsVertical.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\End.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\GenericDocument.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Group.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\GroupBig.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\OpenFolder.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Paste.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\PasteBig.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Print.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Process.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Save.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\SendBackward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\SendBackwardBig.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\SendToBack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Start.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Ungroup.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>
