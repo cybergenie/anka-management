@@ -6489,19 +6489,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lijw\\.nuget\\packages\\": {}
+    "C:\\Users\\jinwe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Project\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj",
+      "projectUniqueName": "C:\\Users\\jinwe\\source\\repos\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj",
       "projectName": "EFCoreTest",
-      "projectPath": "E:\\Project\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj",
-      "packagesPath": "C:\\Users\\lijw\\.nuget\\packages\\",
-      "outputPath": "E:\\Project\\cybergenie\\anka-management\\Anka\\EFCoreTest\\obj\\",
+      "projectPath": "C:\\Users\\jinwe\\source\\repos\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj",
+      "packagesPath": "C:\\Users\\jinwe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jinwe\\source\\repos\\cybergenie\\anka-management\\Anka\\EFCoreTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lijw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jinwe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

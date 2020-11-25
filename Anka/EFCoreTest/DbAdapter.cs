@@ -87,7 +87,7 @@ namespace EFCoreTest
     public class Exercise
     {
         [Key]
-        public string? ExerciseNumber { get; set; }
+        public string ExerciseNumber { get; set; }
         public bool? InRoomUp { get; set; }
         public string Date { get; set; }
         public string BloodPressureLower { get; set; }
@@ -105,7 +105,7 @@ namespace EFCoreTest
     public class BasicInfo
     {
         [Key]
-        public string? Number { get; set; }
+        public string Number { get; set; }
         public string Name { get; set; }
         public int? Age { get; set; }
         public bool? Male { get; set; }
@@ -128,6 +128,41 @@ namespace EFCoreTest
         public string HbAlc { get; set; }
         public string BNP { get; set; }
         public string D2 { get; set; }
+        public string Tchol { get; set; }
+        public string TG { get; set; }
+        public string HDLC { get; set; }
+        public string LDLC { get; set; }
+        public string UA { get; set; }
+        public string ABI { get; set; }
+        public string cTnT { get; set; }
+        public string LY { get; set; }
+    }
+
+    public class BasicInfoTable
+    {
+        [Key]
+        public string 病案号 { get; set; }
+        public string 姓名 { get; set; }
+        public int? 年龄 { get; set; }
+        public string 性别 { get; set; }
+        public string Killip { get; set; }
+        public string EF { get; set; }
+        public string LV { get; set; }
+        public string 其他 { get; set; }
+        public string 危险因素 { get; set; }        
+        public int? PCI支架数 { get; set; }
+        public int? _75以上残余狭窄 { get; set; }
+        public string 侧枝循环 { get; set; }
+        public string 优势冠脉 { get; set; }
+        public string 诊断 { get; set; }
+        public string Hb { get; set; }
+        public string Alb { get; set; }
+        public string Cre { get; set; }
+        public string BUN { get; set; }
+        public string Glu { get; set; }
+        public string HbAlc { get; set; }
+        public string BNP { get; set; }
+        public string D_二聚体 { get; set; }
         public string Tchol { get; set; }
         public string TG { get; set; }
         public string HDLC { get; set; }

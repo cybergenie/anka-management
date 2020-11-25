@@ -1,29 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Text;
 using System.Windows;
+using System.Windows.Data;
 
 namespace EFCoreTest.TableAdapter
 {
     public class  DataAdapter
     {
-        public List<T> GetDataList<T>(List<T> data)
+        private DataTable _collectionView = null;
+        public DataTable CollectionView => _collectionView;
+        public object GetDataList<T>(List<T> data)
         {
-            var list = new List<T>();
-            var dataTable = DbTools.ToDataTable(data);            
+            object collectionView = null;
+            var dataTable = DbTools.ToDataTable(data);
+            DataTable dataCoventer = null;
             switch (typeof(T).Name)
             {
 
                 case "BasicInfo": {
-                        var dataCoventer = BasicinfoConverter(dataTable);
-                        list = DbTools.ToDataList<T>(dataCoventer);
+                        dataCoventer = BasicinfoConverter(dataTable);
+                        _collectionView = dataCoventer;
+                        var list = DbTools.ToDataList<BasicInfoTable>(dataCoventer);
+                        collectionView = new ObservableCollection<BasicInfoTable>(list);
                     }
                     break;
                 default:break;
-            } 
-            //list = (List<T>)data;
-            return list;
+            }            
+            return collectionView;
         }
 
         private static DataTable BasicinfoConverter(DataTable dt)

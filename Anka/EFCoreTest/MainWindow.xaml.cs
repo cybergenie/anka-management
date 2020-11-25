@@ -1,10 +1,12 @@
 ﻿using EFCoreTest.TableAdapter;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +28,8 @@ namespace EFCoreTest
     public partial class MainWindow : Window
     {
         private readonly DbAdapter _context =
-            new DbAdapter();        
+            new DbAdapter();
+        DataAdapter InfoAdapter;
 
         private CollectionViewSource categoryViewSource;
         public MainWindow()
@@ -40,28 +43,60 @@ namespace EFCoreTest
         {
             _context.Database.EnsureCreated();
             _context.basicinfo.Load();
+            _context.Exercise.Load();
             var BasicInfoData = _context.basicinfo.Local.ToList();
+            var ExerciseData = _context.Exercise.Local.ToList();
 
-            DataAdapter basicInfoAdapter = new DataAdapter();
+            InfoAdapter = new DataAdapter();
 
-            var BasicInfoDataList = basicInfoAdapter.GetDataList(BasicInfoData);
+            var CollectionView = InfoAdapter.GetDataList(BasicInfoData);
+            
 
-            categoryViewSource.Source = new ObservableCollection<BasicInfo>(BasicInfoData);
+            categoryViewSource.Source = CollectionView;
             
         }
                     
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btSave_Click(object sender, RoutedEventArgs e)
         {
             _context.SaveChanges();
-            categoryDataGrid.Items.Refresh();
-            productsDataGrid.Items.Refresh();
+            categoryDataGrid.Items.Refresh();           
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             _context.Dispose();
             base.OnClosing(e);
+        }
+
+        private void btOutPut_Click(object sender, RoutedEventArgs e)
+        {
+            DataTable[] dtOutputs = { InfoAdapter.CollectionView };
+            try
+            {
+                string strName = null;
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.RestoreDirectory = true;
+                dlg.DefaultExt = "xls";
+                dlg.Filter = "Excle工作簿|*.xlsx|Excle97-2003工作簿|*.xls";
+                if (dlg.ShowDialog() == true)
+                {
+                    strName = dlg.FileName;
+#if DEBUG
+                    Debug.WriteLine(strName);
+#endif
+                }
+                if (strName == null)
+                    return;
+                NPOIHelper.TableToExcel(dtOutputs, strName);
+                MessageBox.Show("数据导出已完成");
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
         }
     }
 }

@@ -13,21 +13,15 @@
                               Source="{Binding Exercise, Source={StaticResource categoryViewSource}}"/>
     </Window.Resources>
     <Grid>
-
         <DataGrid x:Name="categoryDataGrid" 
           EnableRowVirtualization="True" 
           ItemsSource="{Binding Source={StaticResource categoryViewSource}}" 
-          Margin="13,13,43,229" RowDetailsVisibilityMode="VisibleWhenSelected">            
+          Margin="13,13,43,108" RowDetailsVisibilityMode="VisibleWhenSelected">
         </DataGrid>
-
-        <DataGrid x:Name="productsDataGrid" 
-          EnableRowVirtualization="True" 
-          ItemsSource="{Binding Source={StaticResource categoryProductsViewSource}}" 
-          Margin="13,205,43,108" RowDetailsVisibilityMode="VisibleWhenSelected" 
-          RenderTransformOrigin="0.488,0.251">           
-        </DataGrid>
-        <Button Content="Save" HorizontalAlignment="Center" Margin="0,240,0,0" 
-        Click="Button_Click" Height="20" Width="123"/>
+        <StackPanel Orientation="Horizontal"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,60">
+            <Button Content="Save"  Click="btSave_Click" Height="20" Width="124" Margin="0,0,20,0"/>
+            <Button Content="OutPut"  Click="btOutPut_Click" Height="20" Width="124" Margin="20,0,0,0"/>
+        </StackPanel>
 
     </Grid>
 </Window>
