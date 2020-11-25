@@ -47,6 +47,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.5.1, )"
             }
           },
           "imports": [

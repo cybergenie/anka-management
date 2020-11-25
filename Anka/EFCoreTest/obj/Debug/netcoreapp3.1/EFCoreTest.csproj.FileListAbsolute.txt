@@ -58,3 +58,9 @@ E:\Project\cybergenie\anka-management\Anka\EFCoreTest\obj\Debug\netcoreapp3.1\EF
 E:\Project\cybergenie\anka-management\Anka\EFCoreTest\obj\Debug\netcoreapp3.1\EFCoreTest.dll
 E:\Project\cybergenie\anka-management\Anka\EFCoreTest\obj\Debug\netcoreapp3.1\EFCoreTest.pdb
 E:\Project\cybergenie\anka-management\Anka\EFCoreTest\obj\Debug\netcoreapp3.1\EFCoreTest.genruntimeconfig.cache
+E:\Project\cybergenie\anka-management\Anka\EFCoreTest\bin\Debug\netcoreapp3.1\NPOI.OOXML.dll
+E:\Project\cybergenie\anka-management\Anka\EFCoreTest\bin\Debug\netcoreapp3.1\NPOI.OpenXml4Net.dll
+E:\Project\cybergenie\anka-management\Anka\EFCoreTest\bin\Debug\netcoreapp3.1\NPOI.OpenXmlFormats.dll
+E:\Project\cybergenie\anka-management\Anka\EFCoreTest\bin\Debug\netcoreapp3.1\NPOI.dll
+E:\Project\cybergenie\anka-management\Anka\EFCoreTest\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+E:\Project\cybergenie\anka-management\Anka\EFCoreTest\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll

@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EFCoreTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <CollectionViewSource x:Key="categoryViewSource"/>
+        <CollectionViewSource x:Key="categoryProductsViewSource" 
+                              Source="{Binding Exercise, Source={StaticResource categoryViewSource}}"/>
+    </Window.Resources>
     <Grid>
+
+        <DataGrid x:Name="categoryDataGrid" 
+          EnableRowVirtualization="True" 
+          ItemsSource="{Binding Source={StaticResource categoryViewSource}}" 
+          Margin="13,13,43,229" RowDetailsVisibilityMode="VisibleWhenSelected">            
+        </DataGrid>
+
+        <DataGrid x:Name="productsDataGrid" 
+          EnableRowVirtualization="True" 
+          ItemsSource="{Binding Source={StaticResource categoryProductsViewSource}}" 
+          Margin="13,205,43,108" RowDetailsVisibilityMode="VisibleWhenSelected" 
+          RenderTransformOrigin="0.488,0.251">           
+        </DataGrid>
+        <Button Content="Save" HorizontalAlignment="Center" Margin="0,240,0,0" 
+        Click="Button_Click" Height="20" Width="123"/>
 
     </Grid>
 </Window>
