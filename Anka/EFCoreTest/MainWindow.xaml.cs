@@ -26,9 +26,7 @@ namespace EFCoreTest
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        private readonly DbAdapter _context =
-            new DbAdapter();
+    {       
         DataAdapter InfoAdapter;
 
         private CollectionViewSource categoryViewSource;
@@ -40,32 +38,27 @@ namespace EFCoreTest
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            _context.Database.EnsureCreated();
-            _context.basicinfo.Load();
-            _context.Exercise.Load();
-            var BasicInfoData = _context.basicinfo.Local.ToList();
-            var ExerciseData = _context.Exercise.Local.ToList();
-
-            InfoAdapter = new DataAdapter();
-
-            var CollectionView = InfoAdapter.GetDataList(BasicInfoData);
-            
-
-            categoryViewSource.Source = CollectionView;
-            
+        {            
+            using (var _context = new DbAdapter())
+            {
+                //var BasicInfoData = _context.basicinfo.ToList();
+                var ExerciseData = (_context.Exercise
+                    .Join(_context.basicinfo,a=>a.basicinfoNumber,b=>b.Number,(a, b)=>new {  病案号=b.Number,姓名=b.Name,性别=b.Male, 记录编号 = a.ExerciseNumber , 床上负荷 =a.Checks, 室内负荷 =a.Checks, 室外负荷 =a.Checks, 院外负荷 =a.Checks} ))                    
+                    .ToList();
+                InfoAdapter = new DataAdapter();
+                var CollectionView = InfoAdapter.GetDataList(ExerciseData);
+                categoryViewSource.Source = ExerciseData;
+            }     
         }
                     
 
         private void btSave_Click(object sender, RoutedEventArgs e)
-        {
-            _context.SaveChanges();
+        {           
             categoryDataGrid.Items.Refresh();           
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            _context.Dispose();
             base.OnClosing(e);
         }
 

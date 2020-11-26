@@ -130,3 +130,4 @@ C:\Users\jinwe\source\repos\cybergenie\anka-management\Anka\EFCoreTest\obj\Debug
 C:\Users\jinwe\source\repos\cybergenie\anka-management\Anka\EFCoreTest\obj\Debug\netcoreapp3.1\EFCoreTest.dll
 C:\Users\jinwe\source\repos\cybergenie\anka-management\Anka\EFCoreTest\obj\Debug\netcoreapp3.1\EFCoreTest.pdb
 C:\Users\jinwe\source\repos\cybergenie\anka-management\Anka\EFCoreTest\obj\Debug\netcoreapp3.1\EFCoreTest.genruntimeconfig.cache
+E:\Project\cybergenie\anka-management\Anka\EFCoreTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Debug.dll

@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,18 +14,22 @@ namespace EFCoreTest
 {
     public class DbAdapter: DbContext
     {
+        public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] {
+            new DebugLoggerProvider()
+        });
         public DbSet<BasicInfo> basicinfo { get; set; }
         public DbSet<Exercise> Exercise { get; set; }
 
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(
-                "Data Source=anka.db");
-            optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlite(
+                "Data Source=anka.db");           
             base.OnConfiguring(optionsBuilder);
         }
     }
+
+
 
     public static class DbTools
     {
@@ -97,8 +103,9 @@ namespace EFCoreTest
         public string BorgIndex { get; set; }
         public string Remarks { get; set; }
         public string ECGs { get; set; }
-        public string Checks { get; set; }        
-        public virtual BasicInfo basicinfo { get; set; }
+        public string Checks { get; set; }    
+        public string basicinfoNumber { set; get; }
+        public BasicInfo basicinfo { get; set; }
         
     }
 
@@ -136,6 +143,7 @@ namespace EFCoreTest
         public string ABI { get; set; }
         public string cTnT { get; set; }
         public string LY { get; set; }
+        public List<Exercise> Exercise { get;set; }
     }
 
     public class BasicInfoTable

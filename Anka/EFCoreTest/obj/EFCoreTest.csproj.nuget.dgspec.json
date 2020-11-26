@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jinwe\\source\\repos\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj": {}
+    "E:\\Project\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jinwe\\source\\repos\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj": {
+    "E:\\Project\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jinwe\\source\\repos\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj",
+        "projectUniqueName": "E:\\Project\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj",
         "projectName": "EFCoreTest",
-        "projectPath": "C:\\Users\\jinwe\\source\\repos\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj",
-        "packagesPath": "C:\\Users\\jinwe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jinwe\\source\\repos\\cybergenie\\anka-management\\Anka\\EFCoreTest\\obj\\",
+        "projectPath": "E:\\Project\\cybergenie\\anka-management\\Anka\\EFCoreTest\\EFCoreTest.csproj",
+        "packagesPath": "C:\\Users\\lijw\\.nuget\\packages\\",
+        "outputPath": "E:\\Project\\cybergenie\\anka-management\\Anka\\EFCoreTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jinwe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lijw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,6 +45,10 @@
               "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
