@@ -630,12 +630,8 @@ namespace Anka
             //dtOutput.Columns["ExerciseNumber"].ColumnName = "记录编号";
 
             dtOutput.Columns.Add("性别", typeof(String));
-            dtOutput.Columns["性别"].SetOrdinal(3);            
-            
-
-            
-
-            
+            dtOutput.Columns["性别"].SetOrdinal(3);  
+                        
             foreach (DataRow dRow in dtOutput.Rows)
             {
                 switch (dRow["Male"].ToString())
@@ -830,6 +826,8 @@ namespace Anka
 
             return dtOutput;
         }
+
+
         private static DataTable PhysiqueConverter(DataTable dt)
         {
             DataTable dtOutput = dt.Copy();

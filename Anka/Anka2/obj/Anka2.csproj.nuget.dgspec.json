@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Project\\cybergenie\\anka-management\\Anka\\Anka2\\Anka2.csproj": {}
+    "C:\\Users\\jinwe\\Source\\Repos\\cybergenie\\anka-management\\Anka\\Anka2\\Anka2.csproj": {}
   },
   "projects": {
-    "E:\\Project\\cybergenie\\anka-management\\Anka\\Anka2\\Anka2.csproj": {
+    "C:\\Users\\jinwe\\Source\\Repos\\cybergenie\\anka-management\\Anka\\Anka2\\Anka2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Project\\cybergenie\\anka-management\\Anka\\Anka2\\Anka2.csproj",
+        "projectUniqueName": "C:\\Users\\jinwe\\Source\\Repos\\cybergenie\\anka-management\\Anka\\Anka2\\Anka2.csproj",
         "projectName": "Anka2",
-        "projectPath": "E:\\Project\\cybergenie\\anka-management\\Anka\\Anka2\\Anka2.csproj",
-        "packagesPath": "C:\\Users\\lijw\\.nuget\\packages\\",
-        "outputPath": "E:\\Project\\cybergenie\\anka-management\\Anka\\Anka2\\obj\\",
+        "projectPath": "C:\\Users\\jinwe\\Source\\Repos\\cybergenie\\anka-management\\Anka\\Anka2\\Anka2.csproj",
+        "packagesPath": "C:\\Users\\jinwe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jinwe\\Source\\Repos\\cybergenie\\anka-management\\Anka\\Anka2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lijw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jinwe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
