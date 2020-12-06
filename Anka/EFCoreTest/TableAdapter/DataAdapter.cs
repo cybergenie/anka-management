@@ -60,6 +60,14 @@ namespace EFCoreTest.TableAdapter
                         collectionView = new ObservableCollection<OHQTable>(list);
                     }
                     break;
+                case "PHQ":
+                    {
+                        dataCoventer = DbTools.PHQConverter(dataTable);
+                        _collectionView = dataCoventer;
+                        var list = DbTools.ToDataList<PHQTable>(dataCoventer);
+                        collectionView = new ObservableCollection<PHQTable>(list);
+                    }
+                    break;
                 default: break;
             }
             return collectionView;

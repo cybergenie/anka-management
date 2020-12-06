@@ -51,12 +51,12 @@ namespace EFCoreTest
                 //InfoAdapter = new DataAdapter();
                 //var CollectionView = InfoAdapter.GetDataList(GADData, "GAD");
                 //categoryViewSource.Source = CollectionView;
-                var IPAQData = (_context.ipaq
-    .Join(_context.basicinfo, a => a.basicinfoNumber, b => b.Number, (a, b) => new { Number = b.Number, Name = b.Name, Age = b.Age, Male = b.Male, IPAQNumber = a.IPAQNumber, IPAQ0 = a.IPAQ0, IPAQ1 = a.IPAQ1, IPAQ2 = a.IPAQ2, IPAQ3 = a.IPAQ3, IPAQ4 = a.IPAQ4, IPAQ5 = a.IPAQ5 }))
-    .ToList();
-                InfoAdapter = new DataAdapter();
-                var CollectionView = InfoAdapter.GetDataList(IPAQData, "IPAQ");
-                categoryViewSource.Source = CollectionView;
+                //            var IPAQData = (_context.ipaq
+                //.Join(_context.basicinfo, a => a.basicinfoNumber, b => b.Number, (a, b) => new { Number = b.Number, Name = b.Name, Age = b.Age, Male = b.Male, IPAQNumber = a.IPAQNumber, IPAQ0 = a.IPAQ0, IPAQ1 = a.IPAQ1, IPAQ2 = a.IPAQ2, IPAQ3 = a.IPAQ3, IPAQ4 = a.IPAQ4, IPAQ5 = a.IPAQ5 }))
+                //.ToList();
+                //            InfoAdapter = new DataAdapter();
+                //            var CollectionView = InfoAdapter.GetDataList(IPAQData, "IPAQ");
+                //            categoryViewSource.Source = CollectionView;
 
                 //                var OHQData = (_context.OHQ
                 //.Join(_context.basicinfo, a => a.basicinfoNumber, b => b.Number, (a, b) => new { Number = b.Number, Name = b.Name, Age = b.Age, Male = b.Male, OHQNumber = a.OHQNumber, OHQ1 = a.OHQ1, OHQ2 = a.OHQ2, OHQ3 = a.OHQ3, OHQ4 = a.OHQ4, OHQ5 = a.OHQ5, OHQ6 = a.OHQ6, OHQ7 = a.OHQ7, OHQ8 = a.OHQ8, OHQ9 = a.OHQ9 }))
@@ -64,7 +64,14 @@ namespace EFCoreTest
                 //                InfoAdapter = new DataAdapter();
                 //                var CollectionView = InfoAdapter.GetDataList(OHQData, "OHQ");
                 //                categoryViewSource.Source = CollectionView;
-            }     
+
+                var PHQData = (_context.phq
+                    .Join(_context.basicinfo, a => a.basicinfoNumber, b => b.Number, (a, b) => new { Number = b.Number, Name = b.Name, Age = b.Age, Male = b.Male, PHQNumber = a.PHQNumber, Checks = a.PHQResult }))
+                    .ToList();
+                InfoAdapter = new DataAdapter();
+                var CollectionView = InfoAdapter.GetDataList(PHQData, "PHQ");
+                categoryViewSource.Source = CollectionView;
+            }
         }
                     
 

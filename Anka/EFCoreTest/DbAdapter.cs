@@ -23,6 +23,7 @@ namespace EFCoreTest
         public DbSet<GAD> GAD { get; set; }
         public DbSet<IPAQ> ipaq { get; set; }
         public DbSet<OHQ> OHQ { get; set; }
+        public DbSet<PHQ> phq { get; set; }
 
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
@@ -654,6 +655,58 @@ namespace EFCoreTest
             return dtOutput;
         }
 
+        public static DataTable PHQConverter(DataTable dt)
+        {
+            DataTable dtOutput = dt.Copy();
+            dtOutput.TableName = "06-PHQ";
+
+            dtOutput.Columns["Number"].ColumnName = "病案号";
+            dtOutput.Columns["Name"].ColumnName = "姓名";
+            dtOutput.Columns["Age"].ColumnName = "年龄";
+            dtOutput.Columns["PHQNumber"].ColumnName = "记录编号";
+            dtOutput.Columns.Add("性别", typeof(String));
+            dtOutput.Columns["性别"].SetOrdinal(3);
+            dtOutput.Columns.Add("PHQ_7", typeof(String));
+
+            foreach (DataRow dRow in dtOutput.Rows)
+            {
+                switch (dRow["Male"].ToString())
+                {
+                    case "True":
+                        dRow["性别"] = "男";
+                        break;
+                    case "False":
+                        dRow["性别"] = "女";
+                        break;
+                    default:
+                        dRow["性别"] = "";
+                        break;
+                }
+
+                string[] strPHQs = (dRow["PHQResult"].ToString()).Split('|');
+                int PHQ_7 = 0;
+                foreach (string strPHQ in strPHQs)
+                {
+                    if (strPHQ.Length > 0)
+                    {
+
+
+                        int nPHQ = Convert.ToInt32(strPHQ);
+                        if (nPHQ > 0)
+                        {
+                            PHQ_7 += nPHQ;
+                        }
+                    }
+                }
+                dRow["PHQ_7"] = PHQ_7.ToString();
+            }
+
+            dtOutput.Columns.Remove("PHQResult");
+            dtOutput.Columns.Remove("Male");
+
+            return dtOutput;
+        }
+
 
     }
 
@@ -850,6 +903,24 @@ namespace EFCoreTest
         public string OHQ7 { get; set; }
         public string OHQ8 { get; set; }
         public string OHQ9 { get; set; }        
+    }
+    public class PHQ
+    {
+        [Key]
+        public string PHQNumber { get; set; }
+        public string PHQResult { get; set; }
+        public string basicinfoNumber { set; get; }
+        public BasicInfo basicinfo { get; set; }
+    }
+    public class PHQTable
+    {
+        [Key]
+        public string 病案号 { get; set; }
+        public string 姓名 { get; set; }
+        public string 性别 { get; set; }
+        public string 年龄 { get; set; }
+        public string PHQ_7 { get; set; }
+
     }
 
 
