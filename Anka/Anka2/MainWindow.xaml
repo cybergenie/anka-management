@@ -13,6 +13,51 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ContentControl Grid.Row="0" Content="{Binding Mode=OneWay, Source={StaticResource RibbonBar}}"/>
-       
+        <avalonDock:DockingManager Grid.Row="1" x:Name="DockManager">
+            <avalonDock:DockingManager.Theme>
+                <avalonDock:Vs2013LightTheme/>
+            </avalonDock:DockingManager.Theme>
+            <avalonDock:LayoutRoot x:Name="Root">
+                <avalonDock:LayoutPanel x:Name="Panel" >
+                    <avalonDock:LayoutAnchorablePaneGroup x:Name="LeftAnchorableGroup" DockWidth="250">
+                        <avalonDock:LayoutAnchorablePane x:Name="LeftPane">
+                            <avalonDock:LayoutAnchorable x:Name="SheetItems" Title="表单" ContentId="sheetItems" CanFloat="False" CanMove="True" CanClose="False" CanHide="False" CanDockAsTabbedDocument="False">
+                                <Grid x:Name="grid" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height ="24"/>
+                                        <RowDefinition Height ="24"/>
+                                        <RowDefinition Height ="24"/>
+                                        <RowDefinition Height ="24"/>
+                                    </Grid.RowDefinitions>
+                                    <!--<Image Grid.Column="0" Source="/Resources/Images/Start.png" Style="{StaticResource StationImageStyle}"/>-->
+                                    <Label Grid.Row="0" Style="{StaticResource StationPanelStyle}"    
+                                               x:Name="basicInfo"
+                                               Content="基本信息" 
+                                               MouseDown="SheetItem_MouseDown"/>
+                                    <Label Grid.Row="1" Style="{StaticResource StationPanelStyle}"
+                                           x:Name="exercise"
+                                               Content="基本信息" 
+                                               MouseDown="SheetItem_MouseDown"/>
+
+                                </Grid>
+                            </avalonDock:LayoutAnchorable>
+                        </avalonDock:LayoutAnchorablePane>
+                    </avalonDock:LayoutAnchorablePaneGroup>
+                    <avalonDock:LayoutDocumentPaneGroup x:Name="DocumentGroup" Orientation="Vertical" DockHeight="Auto">
+                        <avalonDock:LayoutDocumentPane x:Name="DocumentPane" DockHeight="4*">
+                            <avalonDock:LayoutDocument x:Name="DocumentSheet" Title="新建表单" ContentId="project" CanClose="False" CanFloat="False">
+                            </avalonDock:LayoutDocument>
+                        </avalonDock:LayoutDocumentPane>
+                    </avalonDock:LayoutDocumentPaneGroup>
+                </avalonDock:LayoutPanel>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
+
+
+        <StatusBar VerticalAlignment="Bottom" Height="25" Grid.Row="2" >
+            <StatusBarItem VerticalContentAlignment="Center">
+                <TextBlock x:Name="TxtMessage" FontWeight="Bold" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

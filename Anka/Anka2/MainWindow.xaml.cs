@@ -24,5 +24,13 @@ namespace Anka2
         {
             InitializeComponent();
         }
+
+        private void SheetItem_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show(((Label)sender).Name.ToString());
+            
+            ((Label)sender).Background = Brushes.Red;
+
+        }       
     }
 }
