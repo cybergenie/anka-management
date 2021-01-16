@@ -21,31 +21,31 @@
                 <avalonDock:LayoutPanel x:Name="Panel" >
                     <avalonDock:LayoutAnchorablePaneGroup x:Name="LeftAnchorableGroup" DockWidth="250">
                         <avalonDock:LayoutAnchorablePane x:Name="LeftPane">
-                            <avalonDock:LayoutAnchorable x:Name="SheetItems" Title="表单" ContentId="sheetItems" CanFloat="False" CanMove="True" CanClose="False" CanHide="False" CanDockAsTabbedDocument="False">
-                                <Grid x:Name="grid" >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height ="24"/>
-                                        <RowDefinition Height ="24"/>
-                                        <RowDefinition Height ="24"/>
-                                        <RowDefinition Height ="24"/>
-                                    </Grid.RowDefinitions>
-                                    <!--<Image Grid.Column="0" Source="/Resources/Images/Start.png" Style="{StaticResource StationImageStyle}"/>-->
-                                    <Label Grid.Row="0" Style="{StaticResource StationPanelStyle}"    
-                                               x:Name="basicInfo"
-                                               Content="基本信息" 
-                                               MouseDown="SheetItem_MouseDown"/>
-                                    <Label Grid.Row="1" Style="{StaticResource StationPanelStyle}"
-                                           x:Name="exercise"
-                                               Content="基本信息" 
-                                               MouseDown="SheetItem_MouseDown"/>
-
-                                </Grid>
+                            <avalonDock:LayoutAnchorable x:Name="SheetItems" Title="导航" ContentId="sheetItems" CanFloat="False" CanMove="True" CanClose="False" CanHide="False" CanDockAsTabbedDocument="False">
+                                <ContentControl Content="{StaticResource SheetItems}" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
                             </avalonDock:LayoutAnchorable>
                         </avalonDock:LayoutAnchorablePane>
                     </avalonDock:LayoutAnchorablePaneGroup>
                     <avalonDock:LayoutDocumentPaneGroup x:Name="DocumentGroup" Orientation="Vertical" DockHeight="Auto">
-                        <avalonDock:LayoutDocumentPane x:Name="DocumentPane" DockHeight="4*">
-                            <avalonDock:LayoutDocument x:Name="DocumentSheet" Title="新建表单" ContentId="project" CanClose="False" CanFloat="False">
+                        <avalonDock:LayoutDocumentPane x:Name="DocumentPane" DockHeight="4*" DockWidth="*" CanRepositionItems="True" AllowDuplicateContent="False">
+                            <avalonDock:LayoutDocument x:Name="BasicInfo" Title="基本信息"  CanClose="False" CanFloat="False" IsSelectedChanged="SheetSelectedChanged" CanMove="True" ContentId="BasicInfo"  >
+                                <ScrollViewer>
+                                    <ContentControl Content="{StaticResource BasicInfo}"/>
+                                </ScrollViewer>
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument x:Name="Exercise" Title="运动负荷"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Exercise" >
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument x:Name="PHQ" Title="PHQ评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="PHQ" >
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument x:Name="GAD" Title="GAD评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="GAD" >
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument x:Name="IPAQ" Title="IPAQ评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="IPAQ" >
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument x:Name="OHQ" Title="口腔卫生评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="OHQ" >
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument x:Name="SPPB" Title="SPPB/平衡能力"  CanClose="False" CanFloat="False" CanMove="True" ContentId="SPPB" >
+                            </avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument x:Name="Physique" Title="体质成分"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Physique" >
                             </avalonDock:LayoutDocument>
                         </avalonDock:LayoutDocumentPane>
                     </avalonDock:LayoutDocumentPaneGroup>

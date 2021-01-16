@@ -9,53 +9,71 @@ namespace Anka2
 {
     public class SheetItem : ContentControl
     {
-        private Point? dragStartPoint = null;
-
-        static SheetItem()
+        private static SheetItems selectedSheet;
+        protected override void OnMouseDown( MouseButtonEventArgs e)
         {
-            FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(SheetItem), new FrameworkPropertyMetadata(typeof(SheetItem)));
+            base.OnMouseDown(e);
+            Label lb = this.Content as Label;
+            selectedSheet = SheetItems.BasicInfo;
+
+            SheetItemSelectedChanged(lb);
+
+
+            SelectedSheetChanged(this);
+
         }
 
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
-        {
-            base.OnPreviewMouseDown(e);
-            this.dragStartPoint = new Point?(e.GetPosition(this));
-        }
+        public static SheetItems SelectedSheet { set => selectedSheet= value; get=> selectedSheet; }
 
-        protected override void OnMouseMove(MouseEventArgs e)
+        private bool SheetItemSelectedChanged(Label lb)
         {
-            base.OnMouseMove(e);
-            if (e.LeftButton != MouseButtonState.Pressed)
-                this.dragStartPoint = null;
-
-            if (this.dragStartPoint.HasValue)
+            foreach (Label s in ((Sheetbox)lb.Parent).Items)
             {
-                // XamlWriter.Save() has limitations in exactly what is serialized,
-                // see SDK documentation; short term solution only;
-                string xamlString = XamlWriter.Save(this.Content);
-                DragObject dataObject = new DragObject();
-                dataObject.Xaml = xamlString;
-
-                StackPanel panel = VisualTreeHelper.GetParent(this) as StackPanel;
-                if (panel != null)
-                {
-                    // desired size for DesignerCanvas is the stretched Toolbox item size                    
-                    dataObject.DesiredSize = new Size(50,50);
-                }
-
-                DragDrop.DoDragDrop(this, dataObject, DragDropEffects.Copy);
-
-                e.Handled = true;
+                s.Background = ((Sheetbox)lb.Parent).Background;
             }
+            lb.Background = Brushes.LightGray;
+
+            return true;
+        }
+
+        private bool SelectedSheetChanged(SheetItem item)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(item);
+            while (parent != null)
+            {
+                if (parent is AvalonDock.DockingManager)
+                {
+                    break;
+                }
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            AvalonDock.Controls.LayoutDocumentPaneGroupControl layoutPanelControl = ((AvalonDock.DockingManager)parent).LayoutRootPanel.Children[2] 
+                as AvalonDock.Controls.LayoutDocumentPaneGroupControl;
+            AvalonDock.Controls.LayoutDocumentPaneControl layoutDocumentPane = layoutPanelControl.Children[0]
+                as AvalonDock.Controls.LayoutDocumentPaneControl;
+            SheetItems selectedSheet = (SheetItems)Enum.Parse(typeof(SheetItems),((Label)item.Content).Name.ToString());
+
+            foreach(AvalonDock.Layout.LayoutDocument layoutDocument in layoutDocumentPane.Items)
+            {
+                if(layoutDocument.ContentId == selectedSheet.ToString())
+                {
+                    layoutDocument.IsSelected = true;
+                }
+            }              
+
+            return true;
         }
     }
-
-    public class DragObject
+    public enum SheetItems
     {
-        // 序列化组件内容
-        public String Xaml { get; set; }
-
-        // 拖拽组件的尺寸
-        public Size? DesiredSize { get; set; }
-    }
+        BasicInfo,
+        Exercise,
+        PHQ,
+        GAD,
+        IPAQ,
+        OHQ,
+        SPPB,
+        Physique
+    };
 }

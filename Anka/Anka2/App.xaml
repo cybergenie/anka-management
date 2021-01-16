@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml"/>
                 <ResourceDictionary Source="/Resources/Styles/RibbonBar.xaml"/>
                 <ResourceDictionary Source="/Resources/SheetBox.xaml"/>
+                <ResourceDictionary Source="/Resources/BasicInfoSheet.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

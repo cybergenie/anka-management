@@ -10,6 +10,9 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\BasicInfoSheet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Resources\SheetBox.xaml">
       <SubType>Designer</SubType>
     </Page>

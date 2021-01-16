@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:Anka2">
-
     <Style TargetType="{x:Type s:SheetItem}">
         <Setter Property="Control.Padding" Value="2" />
         <Setter Property="ContentControl.HorizontalContentAlignment" Value="Stretch" />
@@ -32,18 +31,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
-    <s:Sheetbox x:Key="SheetItems">
-        <ItemsControl.Items>
-            <Label Name="BasicInfo"  Content="基本信息" />
-            <Label Name="Exercise"  Content="运动负荷"/>
-            <Label Name="PHQ"  Content="PHQ评估量表"/>
-            <Label Name="GAD" Content="GAD评估量表"/>
-            <Label Name="IPAQ" Content="IPAQ评估量表"/>
-            <Label Name="OHQ" Content="口腔卫生评估量表"/>
-            <Label Name="SPPB" Content="SPPB/平衡能力"/>
-            <Label Name="Physique" Content="体质成分"/>
-        </ItemsControl.Items>
-    </s:Sheetbox>
 </ResourceDictionary>

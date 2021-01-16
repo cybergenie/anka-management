@@ -41,6 +41,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Resources\SheetItem.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dirkster.AvalonDock" Version="4.50.0" />
     <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.50.0" />
     <PackageReference Include="Fluent.Ribbon" Version="8.0.1" />

@@ -1,14 +1,22 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Anka2
 {
-    public class Sheetbox 
+    public class Sheetbox : ItemsControl
     {
-        private void basicInfoItem_MouseDown(object sender, MouseButtonEventArgs e)
+        protected override DependencyObject GetContainerForItemOverride()
         {
-
+            return new SheetItem();
         }
+
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return (item is SheetItem);            
+        }
+
+        
     }
+
+   
 }

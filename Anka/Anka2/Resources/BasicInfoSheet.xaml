@@ -1,0 +1,210 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:s="clr-namespace:Anka2">
+
+    <Style TargetType="TextBox">
+        <Setter Property="BorderThickness" Value="0,0,0,1" />        
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsFocused" Value="True"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="#C4D5FF" />
+            </MultiTrigger> 
+        </Style.Triggers>
+
+    </Style>
+
+    <s:BasicInfoSheet x:Key="BasicInfo">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="姓名：" Height="25" Width="45" />
+                <Label x:Name="lbBasicName" Content="" Height="25" Width="65" />
+                <Label Content="性别：" Height="25" Width="45" />
+                <Label x:Name="lbBasicMale" Content="" Height="25" Width="65" />
+                <Label Content="年龄：" Height="25" Width="45" />
+                <Label x:Name="lbBasicAge" Content="" Height="25" Width="65" />
+                <Label Content="病案号：" Height="25" Width="45" />
+                <Label x:Name="lbBasicNumber" Content="" Height="25" Width="80" />
+                <Button x:Name="btBasicSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
+                <Button x:Name="btBasicLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
+            </StackPanel>
+            <Grid DockPanel.Dock="Top" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="95"/>
+                    <RowDefinition Height="210"/>
+                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="Black" Grid.ColumnSpan="4" BorderThickness="0,1">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Margin="5" >
+                    </StackPanel>
+                </Border>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.ColumnSpan="2">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Column="3">
+                        <Label Content="诊断：" Height="25" Width="85" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <TextBox x:Name="txDescription" Height="25" TextWrapping="Wrap" VerticalContentAlignment="Center" Width="315"/>
+                    </StackPanel>
+                    <Label Content="心功能：" Height="25" Width="75" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Column="3">
+                        <Label Content="Killip/NYHA：" Height="25" Width="85" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="txKillip" Height="25" TextWrapping="Wrap" VerticalContentAlignment="Center" Width="85"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <Label Content="EF：" Height="25" Width="75" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="txEF" Height="25" TextWrapping="Wrap" Width="85" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                    <Label Content="LV：" Height="25" Width="75" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="txLV" Height="25" TextWrapping="Wrap" Width="85" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="3" Orientation="Horizontal">
+                    <Label Content="其  他：" Height="25" Width="75" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="txBasicOther" Height="25" TextWrapping="Wrap" Width="85" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                    <Label Content="危险因素：" Height="25" Width="75" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Margin="5,12,5,5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                        <CheckBox x:Name="cbRisk1" Content="高血压" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <CheckBox x:Name="cbRisk2" Content="糖尿病" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <CheckBox x:Name="cbRisk3" Content="脑卒中" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal" >
+                        <CheckBox x:Name="cbRisk4" Content="吸  烟" Height="25" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                        <CheckBox x:Name="cbRisk5" Content="高LDL-C" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="120" Height="25" />
+                        <CheckBox x:Name="cbRisk6" Content="高  TG" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" />
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal" >
+                        <CheckBox x:Name="cbRisk7" Content="肥  胖" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <CheckBox x:Name="cbRisk8" Content="痛  风" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                        <CheckBox x:Name="cbRisk9" Content="运动不足" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <CheckBox x:Name="cbRisk10" Content="周围动脉硬化闭塞" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" >
+                        <CheckBox x:Name="cbRisk11" Content="肾功能不全 CRE" VerticalContentAlignment="Center" Height="25" />
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" >
+                        <CheckBox x:Name="cbRisk12" Content="肝功能异常 ALT" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txRisk13" Width="135" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                    <Label Content="生化检查：" Height="25" Width="75" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Grid.Row="3" Grid.Column="1" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="Hb:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txHb" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="Alb:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txAlb" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="Cre:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txCre" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="BUN:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txBUN" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="Glu:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txGlu" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="HbAlc:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txHbAlc" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Grid.Row="3" Grid.Column="2" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="BNP:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txBNP" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="D-二聚体:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txD2" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="Tchol:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txTchol" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="TG:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txTG" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="HDL-C:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txHDLC" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="LDL-C:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txLDLC" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Grid.Row="3" Grid.Column="3" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="UA:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txUA" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="ABI:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txABI" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="cTnT:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txcTnT" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="LY:" Height="25" Width="65" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txLY" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="4">
+                    <Label Content="冠脉情况：" Height="25" Width="75" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <Label Content="PCI支架数：" Height="25" HorizontalAlignment="Left" Width="89"/>
+                        <TextBox x:Name="txPCI" Height="25" TextWrapping="Wrap" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <Label Content="个" Height="25" Width="75" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+                    <Label Content="75%以上残余狭窄" Height="25" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="txRS" Height="25" TextWrapping="Wrap" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Label Content="个" Height="25" Width="75" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
+                    <CheckBox x:Name="cbCC" Content="侧枝循环：无" Height="25" VerticalContentAlignment="Center"  />
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5" Grid.Row="4" Grid.Column="3">
+                    <Label Content="优势冠脉：" Height="25" Width="75" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" Height="25">
+                        <RadioButton x:Name="rbDCR" Content="右优势型" VerticalContentAlignment="Center" />
+                        <RadioButton x:Name="rbDCB" Content="均衡型" VerticalContentAlignment="Center" />
+                        <RadioButton x:Name="rbDCL" Content="左优势型" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+    </s:BasicInfoSheet>
+    
+    
+</ResourceDictionary>
