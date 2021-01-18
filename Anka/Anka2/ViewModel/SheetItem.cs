@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 
-namespace Anka2
+namespace Anka2.ViewModel
 {
     public class SheetItem : ContentControl
     {

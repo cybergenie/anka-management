@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Anka2
+namespace Anka2.ViewModel
 {
     public class Sheetbox : ItemsControl
     {

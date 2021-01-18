@@ -7,13 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Resources\BasicInfoSheet.xaml">
+    <Page Update="View\BasicInfoSheet.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Resources\SheetBox.xaml">
+    <Page Update="View\SheetBox.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\Styles\RibbonBar.xaml">
