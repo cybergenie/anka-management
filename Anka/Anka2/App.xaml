@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="/View/SheetBox.xaml"/>
                 <ResourceDictionary Source="/View/BasicInfoSheet.xaml"/>
                 <ResourceDictionary Source="/View/ExerciseSheet.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/ValidationTextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

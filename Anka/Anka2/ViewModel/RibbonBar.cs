@@ -1,4 +1,5 @@
 ﻿using Anka2.MVVM;
+using Anka2.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace Anka2.ViewModel
                     _new_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            MessageBox.Show("NEW");
+                            NewPerson newPerson = new NewPerson();
+                            newPerson.ShowDialog();
                         }));
                 return _new_Executed;
             }

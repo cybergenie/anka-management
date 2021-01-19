@@ -18,14 +18,15 @@
     <None Remove="Resources\Images\BringForwardBig.png" />
     <None Remove="Resources\Images\BringToFront.png" />
     <None Remove="Resources\Images\Buffer.png" />
+    <None Remove="Resources\Images\ConnectBig.png" />
     <None Remove="Resources\Images\Connection.png" />
-    <None Remove="Resources\Images\ConnectionBig.png" />
     <None Remove="Resources\Images\Copy.png" />
     <None Remove="Resources\Images\Cut.png" />
     <None Remove="Resources\Images\Delete.png" />
     <None Remove="Resources\Images\DistributeObjectsHorizontal.png" />
     <None Remove="Resources\Images\DistributeObjectsVertical.png" />
     <None Remove="Resources\Images\End.png" />
+    <None Remove="Resources\Images\ExportBig.png" />
     <None Remove="Resources\Images\GenericDocument.png" />
     <None Remove="Resources\Images\Group.png" />
     <None Remove="Resources\Images\GroupBig.png" />
@@ -34,7 +35,6 @@
     <None Remove="Resources\Images\Paste.png" />
     <None Remove="Resources\Images\PasteBig.png" />
     <None Remove="Resources\Images\Print.png" />
-    <None Remove="Resources\Images\PrintBig.png" />
     <None Remove="Resources\Images\Process.png" />
     <None Remove="Resources\Images\Save.png" />
     <None Remove="Resources\Images\SaveBig.png" />
@@ -91,7 +91,7 @@
     <Resource Include="Resources\Images\Buffer.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\ConnectionBig.png" />
+    <Resource Include="Resources\Images\ConnectBig.png" />
     <Resource Include="Resources\Images\Copy.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -132,7 +132,7 @@
     <Resource Include="Resources\Images\Print.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\PrintBig.png" />
+    <Resource Include="Resources\Images\ExportBig.png" />
     <Resource Include="Resources\Images\Process.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -174,6 +174,12 @@
 
   <ItemGroup>
     <Folder Include="Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="anka.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

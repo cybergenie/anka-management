@@ -16,7 +16,7 @@ namespace Anka2.Model
         public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] {
             new DebugLoggerProvider()
         });
-        public DbSet<BasicInfo> Person { get; set; }
+        public DbSet<BasicInfo> DbPerson { get; set; }
         //public DbSet<Exercise> DbExercise { get; set; }
         //public DbSet<GAD> DbGAD { get; set; }
         //public DbSet<IPAQ> DbIPAQ { get; set; }

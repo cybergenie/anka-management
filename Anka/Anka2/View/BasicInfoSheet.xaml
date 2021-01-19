@@ -5,29 +5,7 @@
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
                     xmlns:cmd="clr-namespace:Anka2.MVVM">
 
-    <Style TargetType="TextBox">
-        <Setter Property="BorderThickness" Value="0,0,0,1" />
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="Margin" Value="5,0,5,0"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
-
-        <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsFocused" Value="True"/>
-                    <Condition Property="IsMouseOver" Value="True"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="#C4D5FF" />
-            </MultiTrigger>
-            <Trigger Property="Validation.HasError" Value="true">
-                <Setter Property="ToolTip"
-                        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                        Path=(Validation.Errors)[0].ErrorContent}"/>
-                <Setter Property="Background" Value="LightGoldenrodYellow"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
+    
     
     <ControlTemplate x:Key="validationTemplate">
         <DockPanel>
@@ -217,7 +195,7 @@
                 <Label Content="冠脉情况：" Height="25" Width="75" HorizontalAlignment="Left" FontWeight="Bold"/>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal">
                     <Label Content="PCI支架数：" Height="25" HorizontalAlignment="Left" Width="89"/>
-                    <TextBox x:Name="txPCI" Width="50" Validation.ErrorTemplate="{StaticResource validationTemplate}">
+                    <TextBox x:Name="txPCI"  Width="50" Validation.ErrorTemplate="{StaticResource validationTemplate}">
                         <TextBox.Text>
                             <Binding Path="PCI">
                                 <Binding.ValidationRules>
