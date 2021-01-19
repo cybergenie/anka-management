@@ -29,7 +29,7 @@ namespace Anka2.MVVM
             {
                 if (!emailReg.IsMatch(value.ToString()))
                 {
-                    return new ValidationResult(false, "输入不是数字！");
+                    return new ValidationResult(false, "请输入数字");
                 }
             }
             return new ValidationResult(true, null);
@@ -45,7 +45,25 @@ namespace Anka2.MVVM
             {
                 if (!emailReg.IsMatch(value.ToString()))
                 {
-                    return new ValidationResult(false, "输入不是整数！");
+                    return new ValidationResult(false, "请输入整数");
+                }
+            }
+            return new ValidationResult(true, null);
+        }
+    }
+
+    public class PersonIdRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            Regex emailReg = new Regex("^(\\d{8})$");
+            if (value == null)
+                return new ValidationResult(false, "该字段不能为空值！");
+            if (!String.IsNullOrEmpty(value.ToString()))
+            {
+                if (!emailReg.IsMatch(value.ToString()))
+                {
+                    return new ValidationResult(false, "请输入8位数字");
                 }
             }
             return new ValidationResult(true, null);

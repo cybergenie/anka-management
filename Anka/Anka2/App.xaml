@@ -7,9 +7,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml"/>
-                <ResourceDictionary Source="/Resources/Styles/RibbonBar.xaml"/>
+                <ResourceDictionary Source="/View/RibbonBar.xaml"/>
                 <ResourceDictionary Source="/View/SheetBox.xaml"/>
                 <ResourceDictionary Source="/View/BasicInfoSheet.xaml"/>
+                <ResourceDictionary Source="/View/ExerciseSheet.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

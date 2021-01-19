@@ -14,74 +14,6 @@ namespace Anka2.ViewModel
 {
     public class BasicInfoSheet : NotifyObject
     {
-        private string _description;
-        /// <summary>
-        /// Description:基本信息诊断
-        /// </summary>
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                if(_description!=value)
-                {
-                    _description = value;                    
-                    RaisePropertyChanged("Description");                   
-                }
-            }
-        }
-        /// <summary>
-        /// 危险状态其他项激活状态
-        /// </summary>
-        private bool _risk13Actived = false;
-        public bool Risk13Actived
-        {
-            get => _risk13Actived;
-            set
-            {
-                if (_risk13Actived != value)
-                {
-                    _risk13Actived = value;
-                    if(_risk13Actived == false)
-                    {
-                        Risk13 = "";
-                    }
-                    RaisePropertyChanged("Risk13Actived");
-                }
-            }
-        }
-        /// <summary>
-        /// 心功能Killip/NYHA项文本
-        /// </summary>
-        private string _killip;
-        public string Killip
-        {
-            get => _killip;
-            set
-            {
-                if (_killip != value)
-                {
-                    _killip = value;
-                    RaisePropertyChanged("Killip");
-                }
-            }
-        }
-        /// <summary>
-        /// 危险状态其他项文本
-        /// </summary>
-        private string _risk13;        
-        public string Risk13
-        {
-            get => _risk13;
-            set
-            {
-                if (_risk13 != value)
-                {
-                    _risk13 = value;
-                    RaisePropertyChanged("Risk13");
-                }
-            }
-        }
         /// <summary>
         /// Enter键改变选框状态
         /// </summary>
@@ -103,10 +35,85 @@ namespace Anka2.ViewModel
                                 }
 
                             }
-                        }));                       
+
+                            if (e.Key == Key.Escape)
+                            {
+                                IInputElement focusedElement = Keyboard.FocusedElement;
+                                ((Control)focusedElement).MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
+                            }                          
+
+                        }));
                 return _keyDownCommand;
             }
         }
+        /// <summary>
+        /// Description:基本信息诊断
+        /// </summary>
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if(_description!=value)
+                {
+                    _description = value;                    
+                    RaisePropertyChanged(nameof(Description));                   
+                }
+            }
+        }
+        /// <summary>
+        /// 危险状态其他项激活状态
+        /// </summary>
+        private bool _risk13Actived = false;
+        public bool Risk13Actived
+        {
+            get => _risk13Actived;
+            set
+            {
+                if (_risk13Actived != value)
+                {
+                    _risk13Actived = value;
+                    if(_risk13Actived == false)
+                    {
+                        Risk13 = "";
+                    }
+                    RaisePropertyChanged(nameof(Risk13Actived));
+                }
+            }
+        }
+        /// <summary>
+        /// 心功能Killip/NYHA项文本
+        /// </summary>
+        private string _killip;
+        public string Killip
+        {
+            get => _killip;
+            set
+            {
+                if (_killip != value)
+                {
+                    _killip = value;
+                    RaisePropertyChanged(nameof(Killip));
+                }
+            }
+        }
+        /// <summary>
+        /// 危险状态其他项文本
+        /// </summary>
+        private string _risk13;        
+        public string Risk13
+        {
+            get => _risk13;
+            set
+            {
+                if (_risk13 != value)
+                {
+                    _risk13 = value;
+                    RaisePropertyChanged(nameof(Risk13));
+                }
+            }
+        }        
         /// <summary>
         /// 危险状态其他项选中，激活输入框
         /// </summary>
@@ -159,7 +166,7 @@ namespace Anka2.ViewModel
             }
         }
         /// <summary>
-        /// 危险状态其他项取消选中，冻结输入框
+        /// 侧枝循环项取消选中，冻结输入框
         /// </summary>
         private CommandObject<RoutedEventArgs> _cCUnchecked;
         public CommandObject<RoutedEventArgs> CCUnchecked
@@ -173,6 +180,22 @@ namespace Anka2.ViewModel
                             ((CheckBox)e.Source).Content = "侧枝循环：无";
                         }));
                 return _cCUnchecked;
+            }
+        }
+        /// <summary>
+        /// 危险状态其他项文本
+        /// </summary>
+        private string _pCI;
+        public string PCI
+        {
+            get => _pCI;
+            set
+            {
+                if (_pCI != value)
+                {
+                    _pCI = value;
+                    RaisePropertyChanged(nameof(PCI));
+                }
             }
         }
 

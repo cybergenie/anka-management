@@ -34,6 +34,9 @@
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="Exercise" Title="运动负荷"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Exercise" >
+                                <ScrollViewer>
+                                    <ContentControl Content="{StaticResource Exercise}"/>
+                                </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="PHQ" Title="PHQ评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="PHQ" >
                             </avalonDock:LayoutDocument>

@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Resources\Styles\ValidationTextBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ExerciseSheet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -16,7 +22,7 @@
     <Page Update="View\SheetBox.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Resources\Styles\RibbonBar.xaml">
+    <Page Update="View\RibbonBar.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

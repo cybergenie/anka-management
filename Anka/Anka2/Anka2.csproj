@@ -18,6 +18,8 @@
     <None Remove="Resources\Images\BringForwardBig.png" />
     <None Remove="Resources\Images\BringToFront.png" />
     <None Remove="Resources\Images\Buffer.png" />
+    <None Remove="Resources\Images\Connection.png" />
+    <None Remove="Resources\Images\ConnectionBig.png" />
     <None Remove="Resources\Images\Copy.png" />
     <None Remove="Resources\Images\Cut.png" />
     <None Remove="Resources\Images\Delete.png" />
@@ -27,12 +29,15 @@
     <None Remove="Resources\Images\GenericDocument.png" />
     <None Remove="Resources\Images\Group.png" />
     <None Remove="Resources\Images\GroupBig.png" />
+    <None Remove="Resources\Images\NewBig.png" />
     <None Remove="Resources\Images\OpenFolder.png" />
     <None Remove="Resources\Images\Paste.png" />
     <None Remove="Resources\Images\PasteBig.png" />
     <None Remove="Resources\Images\Print.png" />
+    <None Remove="Resources\Images\PrintBig.png" />
     <None Remove="Resources\Images\Process.png" />
     <None Remove="Resources\Images\Save.png" />
+    <None Remove="Resources\Images\SaveBig.png" />
     <None Remove="Resources\Images\SendBackward.png" />
     <None Remove="Resources\Images\SendBackwardBig.png" />
     <None Remove="Resources\Images\SendToBack.png" />
@@ -50,6 +55,7 @@
     <PackageReference Include="Fluent.Ribbon" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="NPOI" Version="2.5.1" />
   </ItemGroup>
@@ -85,6 +91,7 @@
     <Resource Include="Resources\Images\Buffer.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\ConnectionBig.png" />
     <Resource Include="Resources\Images\Copy.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -112,6 +119,7 @@
     <Resource Include="Resources\Images\GroupBig.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\NewBig.png" />
     <Resource Include="Resources\Images\OpenFolder.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -124,12 +132,14 @@
     <Resource Include="Resources\Images\Print.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\PrintBig.png" />
     <Resource Include="Resources\Images\Process.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Save.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\SaveBig.png" />
     <Resource Include="Resources\Images\SendBackward.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
