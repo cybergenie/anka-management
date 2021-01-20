@@ -9,7 +9,7 @@
         Title="新建档案" Height="400" Width="600" WindowStyle="None" ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" BorderThickness="1,1,1,1">
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
         <StackPanel.DataContext>
-            <s:NewPersonDoc/>
+            <s:NewPersonViewModel/>
         </StackPanel.DataContext>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
             <Label Content="病 案 号：" HorizontalAlignment="Left" Width="75" VerticalAlignment="Top" />

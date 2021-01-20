@@ -3,9 +3,7 @@
                     xmlns:s="clr-namespace:Anka2.ViewModel" 
                     xmlns:m="clr-namespace:Anka2.MVVM" 
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
-                    xmlns:cmd="clr-namespace:Anka2.MVVM">
-
-    
+                    xmlns:cmd="clr-namespace:Anka2.MVVM">  
     
     <ControlTemplate x:Key="validationTemplate">
         <DockPanel>

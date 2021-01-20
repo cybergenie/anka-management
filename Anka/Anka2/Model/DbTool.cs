@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace Anka2.Model
 {
-    public static class DbTool
+    public class DbTool
     {
-        public static bool  AddPerson( BasicInfo newPerson)
+        public bool AddPerson( BasicInfo newPerson)
         {
             string personId = newPerson.Number;
             using(var context = new DbAdapter())

@@ -19,7 +19,7 @@
         </Fluent:Ribbon.InputBindings>
 
         <Fluent:Ribbon.DataContext>
-            <s:RibbonBar/>
+            <s:MainWindowViewModel/>
         </Fluent:Ribbon.DataContext>
 
         <Fluent:Ribbon.Menu>

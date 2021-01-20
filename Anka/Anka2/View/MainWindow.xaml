@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
-        xmlns:s="clr-namespace:Anka2"
+        xmlns:s="clr-namespace:Anka2.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <s:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -55,11 +58,9 @@
                 </avalonDock:LayoutPanel>
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
-
-
         <StatusBar VerticalAlignment="Bottom" Height="25" Grid.Row="2" >
-            <StatusBarItem VerticalContentAlignment="Center">
-                <TextBlock x:Name="TxtMessage" FontWeight="Bold" />
+            <StatusBarItem VerticalContentAlignment="Center">                
+                <TextBlock x:Name="TxtMessage" FontWeight="Bold"  Text="{Binding StatusBar.TipInfo}"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

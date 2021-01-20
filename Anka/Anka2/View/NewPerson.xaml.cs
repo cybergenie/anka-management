@@ -21,8 +21,8 @@ namespace Anka2.View
     {
         public NewPerson()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
-    }
+}
 }
