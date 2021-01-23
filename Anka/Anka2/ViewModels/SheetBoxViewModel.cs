@@ -1,18 +1,18 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Anka2.ViewModel
+namespace Anka2.ViewModels
 {
-    public class Sheetbox : ItemsControl
+    public class SheetBoxViewModel : ItemsControl
     {
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new SheetItem();
+            return new SheetItemViewModel();
         }
 
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
-            return (item is SheetItem);            
+            return (item is SheetItemViewModel);            
         }
 
         

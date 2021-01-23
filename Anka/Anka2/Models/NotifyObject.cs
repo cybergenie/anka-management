@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Anka2.MVVM
+namespace Anka2.Models
 {
     
     public class NotifyObject : INotifyPropertyChanged

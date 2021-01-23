@@ -1,13 +1,9 @@
-﻿using Anka2.MVVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Anka2.Models;
+using System.Windows;
 
-namespace Anka2.ViewModel
+namespace Anka2.ViewModels
 {
-    class StatusBar:NotifyObject
+    class StatusBarViewModel : NotifyObject
     {
         private string _connectedDataBase;
         public string ConnectedDataBase 
@@ -37,6 +33,13 @@ namespace Anka2.ViewModel
             }
 
         }
+
+        public void SetTipInfo(string Value)
+        {
+            TipInfo = Value;
+            MessageBox.Show("SetTipInfo");
+        }
+
 
     }
 }

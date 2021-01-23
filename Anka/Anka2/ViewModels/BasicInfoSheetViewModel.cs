@@ -1,18 +1,13 @@
-﻿using Anka2.MVVM;
+﻿using Anka2.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 
-namespace Anka2.ViewModel
+namespace Anka2.ViewModels
 {
-    public class BasicInfoSheet : NotifyObject
+    public class BasicInfoSheetViewModel : NotifyObject
     {
         /// <summary>
         /// Enter键改变选框状态

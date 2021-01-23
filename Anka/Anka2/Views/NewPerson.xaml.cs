@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Anka2.View
+namespace Anka2.Views
 {
     /// <summary>
     /// NewPerson.xaml 的交互逻辑

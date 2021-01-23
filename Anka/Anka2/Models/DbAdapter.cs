@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anka2.Model
+namespace Anka2.Models
 {
     class DbAdapter: DbContext
     {
@@ -39,7 +39,7 @@ namespace Anka2.Model
         [Key]
         public string Number { get; set; }
         public string? Name { get; set; }
-        public int? Age { get; set; }
+        public string? Age { get; set; }
         public bool? Male { get; set; }
         public string? Killip { get; set; }
         public string? EF { get; set; }

@@ -2,15 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Anka2"
-             StartupUri="/View/MainWindow.xaml">
+             StartupUri="/Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml"/>
-                <ResourceDictionary Source="/View/RibbonBar.xaml"/>
-                <ResourceDictionary Source="/View/SheetBox.xaml"/>
-                <ResourceDictionary Source="/View/BasicInfoSheet.xaml"/>
-                <ResourceDictionary Source="/View/ExerciseSheet.xaml"/>
+                <ResourceDictionary Source="/Views/RibbonBar.xaml"/>
+                <ResourceDictionary Source="/Views/SheetBox.xaml"/>
+                <ResourceDictionary Source="/Views/BasicInfoSheet.xaml"/>
+                <ResourceDictionary Source="/Views/ExerciseSheet.xaml"/>
                 <ResourceDictionary Source="/Resources/Styles/ValidationTextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

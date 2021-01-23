@@ -1,18 +1,14 @@
-﻿using Anka2.Model;
-using Anka2.MVVM;
+﻿using Anka2.Models;
+using Anka2.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Anka2.ViewModel
+namespace Anka2.ViewModels
 {
-    class NewPersonViewModel : NotifyObject
-    {       
+    public class NewPersonViewModel : NotifyObject
+    {        
+        public event SendNewPerson SendNewPerson;
 
         /// <summary>
         /// 档案号
@@ -49,8 +45,8 @@ namespace Anka2.ViewModel
 
         }
 
-        private int _personAge;
-        public int PersonAge
+        private string _personAge;
+        public string PersonAge
         {
             get => _personAge;
             set
@@ -63,6 +59,8 @@ namespace Anka2.ViewModel
             }
 
         }
+
+       
 
         /// <summary>
         /// 新建档案事件
@@ -77,8 +75,8 @@ namespace Anka2.ViewModel
                         new Action<RoutedEventArgs>(e =>
                         {
                             BasicInfo newPerson = new BasicInfo { Number = PersonId, Name = PersonName, Age = PersonAge };
-                            DbTool dbTool = new DbTool();
-                            bool addInfo = dbTool.AddPerson(newPerson);
+                            IDataService dataService = new DataService(); 
+                            bool addInfo = dataService.AddPerson(newPerson);
                             if (addInfo == true)
                             {
                                 DependencyObject parent = VisualTreeHelper.GetParent((DependencyObject)e.Source);
@@ -89,8 +87,8 @@ namespace Anka2.ViewModel
                                         break;
                                     }
                                     parent = VisualTreeHelper.GetParent(parent);
-                                }
-                                
+                                }                                
+                                SendNewPerson(newPerson);
                                 ((Window)parent).Close();
                             }
                         }));

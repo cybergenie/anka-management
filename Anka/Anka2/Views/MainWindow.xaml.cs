@@ -1,4 +1,4 @@
-﻿using Anka2.ViewModel;
+﻿using Anka2.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +14,7 @@ namespace Anka2
     {        
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void SheetItem_MouseDown(object sender, MouseButtonEventArgs e)
@@ -30,7 +30,7 @@ namespace Anka2
         }
 
 
-        private bool SelectedSheetChanged(SheetItem item)
+        private bool SelectedSheetChanged(SheetItemViewModel item)
         {
             DependencyObject parent = VisualTreeHelper.GetParent(item);
             while (parent != null)

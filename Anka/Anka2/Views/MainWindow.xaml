@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
-        xmlns:s="clr-namespace:Anka2.ViewModel"
+        xmlns:s="clr-namespace:Anka2.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
@@ -31,14 +31,14 @@
                     </avalonDock:LayoutAnchorablePaneGroup>
                     <avalonDock:LayoutDocumentPaneGroup x:Name="DocumentGroup" Orientation="Vertical" DockHeight="Auto">
                         <avalonDock:LayoutDocumentPane x:Name="DocumentPane" DockHeight="4*" DockWidth="*" CanRepositionItems="True" AllowDuplicateContent="False">
-                            <avalonDock:LayoutDocument x:Name="BasicInfo" Title="基本信息"  CanClose="False" CanFloat="False" IsSelectedChanged="SheetSelectedChanged" CanMove="True" ContentId="BasicInfo"  >
+                            <avalonDock:LayoutDocument x:Name="BasicInfoPane" Title="基本信息"  CanClose="False" CanFloat="False" IsSelectedChanged="SheetSelectedChanged" CanMove="True" ContentId="BasicInfo"  >
                                 <ScrollViewer>
-                                    <ContentControl Content="{StaticResource BasicInfo}"/>
+                                    <ContentControl x:Name="BasicInfoSheet" Content="{StaticResource BasicInfo}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>
-                            <avalonDock:LayoutDocument x:Name="Exercise" Title="运动负荷"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Exercise" >
+                            <avalonDock:LayoutDocument x:Name="ExercisePane" Title="运动负荷"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Exercise" >
                                 <ScrollViewer>
-                                    <ContentControl Content="{StaticResource Exercise}"/>
+                                    <ContentControl x:Name="ExerciseSheet" Content="{StaticResource Exercise}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="PHQ" Title="PHQ评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="PHQ" >
@@ -58,9 +58,12 @@
                 </avalonDock:LayoutPanel>
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
-        <StatusBar VerticalAlignment="Bottom" Height="25" Grid.Row="2" >
+        <StatusBar x:Name="StatusBar" VerticalAlignment="Bottom" Height="25" Grid.Row="2" >
+            <StatusBar.DataContext>
+                <s:StatusBarViewModel/>
+            </StatusBar.DataContext>
             <StatusBarItem VerticalContentAlignment="Center">                
-                <TextBlock x:Name="TxtMessage" FontWeight="Bold"  Text="{Binding StatusBar.TipInfo}"/>
+                <TextBlock x:Name="TxtMessage" FontWeight="Bold"  Text="{Binding TipInfo}"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>
