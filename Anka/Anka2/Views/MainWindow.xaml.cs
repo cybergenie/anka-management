@@ -1,4 +1,5 @@
-﻿using Anka2.ViewModels;
+﻿using Anka2.Services;
+using Anka2.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +15,7 @@ namespace Anka2
     {        
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent(); 
         }
 
         private void SheetItem_MouseDown(object sender, MouseButtonEventArgs e)

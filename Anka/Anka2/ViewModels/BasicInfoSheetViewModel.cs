@@ -1,4 +1,5 @@
 ﻿using Anka2.Models;
+using Anka2.Services;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,8 +8,13 @@ using System.Windows.Input;
 
 namespace Anka2.ViewModels
 {
-    public class BasicInfoSheetViewModel : NotifyObject
+    public class BasicInfoSheetViewModel : NotifyObject, IStatusInfoService
     {
+
+        public NotifyStatusInfoHandler NotifyStatusInfo;
+        
+
+
         /// <summary>
         /// Enter键改变选框状态
         /// </summary>
@@ -52,7 +58,8 @@ namespace Anka2.ViewModels
             {
                 if(_description!=value)
                 {
-                    _description = value;                    
+                    _description = value;
+                    NotifyStatusInfo(InfoType.Success, "基本信息-诊断为："+value);
                     RaisePropertyChanged(nameof(Description));                   
                 }
             }
@@ -189,11 +196,15 @@ namespace Anka2.ViewModels
                 if (_pCI != value)
                 {
                     _pCI = value;
+
                     RaisePropertyChanged(nameof(PCI));
                 }
             }
         }
 
-
+        public void UpDateStatusInfo(NotifyStatusInfoHandler notify)
+        {
+            NotifyStatusInfo += notify;
+        }
     }
 }

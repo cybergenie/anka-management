@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Anka2.Services;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -68,15 +69,5 @@ namespace Anka2.ViewModels
             return true;
         }
     }
-    public enum SheetItems
-    {
-        BasicInfo,
-        Exercise,
-        PHQ,
-        GAD,
-        IPAQ,
-        OHQ,
-        SPPB,
-        Physique
-    };
+    
 }

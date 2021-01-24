@@ -32,8 +32,11 @@
                     <avalonDock:LayoutDocumentPaneGroup x:Name="DocumentGroup" Orientation="Vertical" DockHeight="Auto">
                         <avalonDock:LayoutDocumentPane x:Name="DocumentPane" DockHeight="4*" DockWidth="*" CanRepositionItems="True" AllowDuplicateContent="False">
                             <avalonDock:LayoutDocument x:Name="BasicInfoPane" Title="基本信息"  CanClose="False" CanFloat="False" IsSelectedChanged="SheetSelectedChanged" CanMove="True" ContentId="BasicInfo"  >
-                                <ScrollViewer>
-                                    <ContentControl x:Name="BasicInfoSheet" Content="{StaticResource BasicInfo}"/>
+                                <ScrollViewer x:Name="BasicInfoSheet">
+                                    <ScrollViewer.DataContext>
+                                        <s:BasicInfoSheetViewModel/>
+                                    </ScrollViewer.DataContext>
+                                    <ContentControl  Content="{StaticResource BasicInfo}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="ExercisePane" Title="运动负荷"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Exercise" >
@@ -62,8 +65,8 @@
             <StatusBar.DataContext>
                 <s:StatusBarViewModel/>
             </StatusBar.DataContext>
-            <StatusBarItem VerticalContentAlignment="Center">                
-                <TextBlock x:Name="TxtMessage" FontWeight="Bold"  Text="{Binding TipInfo}"/>
+            <StatusBarItem VerticalContentAlignment="Center">
+                <TextBlock x:Name="txStatusInfo" FontWeight="Bold"  Text="{Binding TipInfo, Mode=TwoWay}"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

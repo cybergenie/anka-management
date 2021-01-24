@@ -48,20 +48,8 @@
             </TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,45,0,20">
-            <Button x:Name="btNewPerson" Content="新 建" Width="65" Margin="20,0,35,0" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <m:EventCommand Command="{Binding NewPerson_Click}"/>
-                    </i:EventTrigger>                    
-                </i:Interaction.Triggers>
-            </Button>
-            <Button x:Name="btCancel"  Content="取 消" Width="65" Margin="35,0,20,0" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <m:EventCommand Command="{Binding Cancel_Click}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+            <Button x:Name="btNewPerson" Content="新 建" Width="65" Margin="20,0,35,0" Click="NewPerson_Click" />
+            <Button x:Name="btCancel"  Content="取 消" Width="65" Margin="35,0,20,0" Click="Cancel_Click"/>             
         </StackPanel>       
 
     </StackPanel>

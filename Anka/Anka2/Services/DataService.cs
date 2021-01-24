@@ -2,12 +2,13 @@
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Anka2.Services
 {
-    public class DataService: IDataService
+    public class DataService : IDataService
     {
-        public bool AddPerson( BasicInfo newPerson)
+        public bool AddPerson(BasicInfo newPerson)
         {
             string personId = newPerson.Number;
             try
@@ -29,11 +30,28 @@ namespace Anka2.Services
                     context.SaveChanges();
                 }
             }
-            catch (Exception)
-            {                
-                return false;                
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message);
+                return false;
             }
             return true;
-        }    
+        }
+
+
+        public Window GetParentWindow(DependencyObject Source)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(Source);
+            while (parent != null)
+            {
+                if (parent is Window)
+                {
+                    break;
+                }
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            return (Window)parent;
+        }
     }
 }

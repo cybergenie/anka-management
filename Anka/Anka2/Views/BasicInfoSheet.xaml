@@ -12,9 +12,9 @@
     </ControlTemplate>
     
     <StackPanel x:Key="BasicInfo">       
-        <StackPanel.DataContext>
+        <!--<StackPanel.DataContext>
             <s:BasicInfoSheetViewModel />
-        </StackPanel.DataContext>
+        </StackPanel.DataContext>-->
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="KeyDown">
                 <m:EventCommand Command="{Binding KeyDownCommand}"/>
