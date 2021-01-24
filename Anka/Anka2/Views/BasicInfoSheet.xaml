@@ -11,10 +11,7 @@
         </DockPanel>
     </ControlTemplate>
     
-    <StackPanel x:Key="BasicInfo">       
-        <!--<StackPanel.DataContext>
-            <s:BasicInfoSheetViewModel />
-        </StackPanel.DataContext>-->
+    <StackPanel x:Key="BasicInfo">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="KeyDown">
                 <m:EventCommand Command="{Binding KeyDownCommand}"/>
@@ -32,7 +29,7 @@
             <Button x:Name="btBasicSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
             <Button x:Name="btBasicLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
         </StackPanel>
-        <Grid DockPanel.Dock="Top" Margin="5">
+        <Grid x:Name="BasicInfoContent"  DockPanel.Dock="Top" Margin="5" IsEnabled="{Binding BasicInfoContentEnable}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1"/>
                 <RowDefinition Height="95"/>

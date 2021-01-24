@@ -78,16 +78,16 @@ namespace Anka2.Models
         [Key]
         public string ExerciseNumber { get; set; }
         public bool? InRoomUp { get; set; }
-        public string Date { get; set; }
-        public string BloodPressureLower { get; set; }
-        public string BloodPressureUpper { get; set; }
-        public string HeartRate { get; set; }
-        public string BloodOxygen { get; set; }
-        public string BorgIndex { get; set; }
-        public string Remarks { get; set; }
-        public string ECGs { get; set; }
-        public string Checks { get; set; }
-        public string basicinfoNumber { set; get; }
+        public string? Date { get; set; }
+        public string? BloodPressureLower { get; set; }
+        public string? BloodPressureUpper { get; set; }
+        public string? HeartRate { get; set; }
+        public string? BloodOxygen { get; set; }
+        public string? BorgIndex { get; set; }
+        public string? Remarks { get; set; }
+        public string? ECGs { get; set; }
+        public string? Checks { get; set; }
+        public string? basicinfoNumber { set; get; }
         public BasicInfo basicinfo { get; set; }
 
     }

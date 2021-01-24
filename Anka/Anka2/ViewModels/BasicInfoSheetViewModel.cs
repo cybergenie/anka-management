@@ -10,11 +10,7 @@ namespace Anka2.ViewModels
 {
     public class BasicInfoSheetViewModel : NotifyObject, IStatusInfoService
     {
-
-        public NotifyStatusInfoHandler NotifyStatusInfo;
-        
-
-
+        public NotifyStatusInfoHandler NotifyStatusInfo; 
         /// <summary>
         /// Enter键改变选框状态
         /// </summary>
@@ -45,6 +41,20 @@ namespace Anka2.ViewModels
 
                         }));
                 return _keyDownCommand;
+            }
+        }
+
+        private bool _basicInfoContentEnable = false;
+        public bool BasicInfoContentEnable
+        {
+            get => _basicInfoContentEnable;
+            set
+            {
+                if (_basicInfoContentEnable != value)
+                {
+                    _basicInfoContentEnable = value;                   
+                    RaisePropertyChanged(nameof(BasicInfoContentEnable));
+                }
             }
         }
         /// <summary>

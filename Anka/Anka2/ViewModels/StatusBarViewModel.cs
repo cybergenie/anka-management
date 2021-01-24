@@ -32,14 +32,11 @@ namespace Anka2.ViewModels
                     RaisePropertyChanged(nameof(TipInfo));
                 }
             }
-
         }
 
         public void SetTipInfo(InfoType Type,string Value)
         {
             TipInfo = Value;            
         }
-
-
     }
 }

@@ -9,8 +9,9 @@ namespace Anka2.ViewModels
     public delegate void NotifyNewPersonHandler(BasicInfo newPerson);
     public delegate void NotifyStatusInfoHandler(InfoType Type, string Info);
 
-    class MainWindowViewModel : NotifyObject
+    class MainWindowViewModel : NotifyObject, IStatusInfoService
     {
+        public NotifyStatusInfoHandler NotifyStatusInfo;
         public BasicInfo NewPersonInfo { set; get; }
         private Window RootSource { set; get; }
 
@@ -26,6 +27,7 @@ namespace Anka2.ViewModels
                             IDataService dataService = new DataService();
                             RootSource = dataService.GetParentWindow((DependencyObject)e.Source);
                             NewPerson newPerson = new NewPerson();
+                            SheetsActived();
                             newPerson.AddNewPerson(this.GetNewPersonInfo);                            
                             newPerson.Show();
                         }));
@@ -35,11 +37,26 @@ namespace Anka2.ViewModels
 
         private void GetNewPersonInfo(BasicInfo value)
         {
-            NewPersonInfo = value;
+            NewPersonInfo = value;           
+            NotifyStatusInfo(InfoType.Success, "新建档案成功。");
+        }
+
+        private void SheetsActived()
+        {
             StatusBarViewModel statusBarContext = ((MainWindow)RootSource).StatusBar.DataContext as StatusBarViewModel;
+
+            this.UpDateStatusInfo(statusBarContext.SetTipInfo);
+
             BasicInfoSheetViewModel basicInfoSheetContext = ((MainWindow)RootSource).BasicInfoSheet.DataContext as BasicInfoSheetViewModel;
             basicInfoSheetContext.UpDateStatusInfo(statusBarContext.SetTipInfo);
-            ((MainWindow)RootSource).txStatusInfo.Text = "新建档案成功"; 
+            basicInfoSheetContext.BasicInfoContentEnable = true;
+            
+            
+        }
+
+        public void UpDateStatusInfo(NotifyStatusInfoHandler notify)
+        {
+            NotifyStatusInfo += notify;
         }
     }
 }
