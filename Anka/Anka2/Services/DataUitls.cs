@@ -10,7 +10,7 @@ namespace Anka2.Services
     {
         public bool AddPerson(BasicInfo newPerson)
         {
-            string personId = newPerson.Number;
+            string personId = newPerson.Number; 
             try
             {
                 using (var context = new DbAdapter())

@@ -15,7 +15,11 @@
         <StackPanel.Resources>
             <m:GenderConverter x:Key="GenderConverter"/>
             <m:CollatCircContentConverter x:Key="CollatCircContentConverter"/>
-            <m:Risk13CheckedConverter x:Key="Risk13CheckedConverter"/>
+            <m:RiskOtherCheckedConverter x:Key="Risk13CheckedConverter"/>
+            <m:DCLCheckedConverter x:Key="DCLCheckedConverter"/>
+            <m:DCBCheckedConverter x:Key="DCBCheckedConverter"/>
+            <m:DCRCheckedConverter x:Key="DCRCheckedConverter"/>
+            <m:RisksConverter x:Key="RisksConverter"/>
         </StackPanel.Resources>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="KeyDown">
@@ -78,8 +82,8 @@
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
                 <Label Content="危险因素：" Height="25" Width="65" VerticalContentAlignment="Center" FontWeight="Bold"/>
             </StackPanel>
-            <StackPanel Margin="5,12,5,5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+            <StackPanel Margin="5,12,5,5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" >               
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <CheckBox x:Name="cbRisk1" Content="高血压" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                     <CheckBox x:Name="cbRisk2" Content="糖尿病" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                     <CheckBox x:Name="cbRisk3" Content="脑卒中" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
@@ -117,71 +121,71 @@
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Grid.Row="3" Grid.Column="1" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Hb:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txHb" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    <TextBox x:Name="txHb" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.Hb}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Alb:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txAlb" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txAlb" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.Alb}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Cre:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txCre" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    <TextBox x:Name="txCre" Width="135" Height="25" VerticalContentAlignment="Center"  Text="{Binding BasicInfo.Cre}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="BUN:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txBUN" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    <TextBox x:Name="txBUN" Width="135" Height="25" VerticalContentAlignment="Center"  Text="{Binding BasicInfo.BUN}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Glu:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txGlu" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txGlu" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.Glu}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="HbAlc:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txHbAlc" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    <TextBox x:Name="txHbAlc" Width="135" Height="25" VerticalContentAlignment="Center"  Text="{Binding BasicInfo.HbAlc}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Grid.Row="3" Grid.Column="2" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="BNP:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txBNP" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    <TextBox x:Name="txBNP" Width="135" Height="25" VerticalContentAlignment="Center"  Text="{Binding BasicInfo.BNP}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="D-二聚体:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txD2" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    <TextBox x:Name="txD2" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.D2}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Tchol:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txTchol" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txTchol" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.Tchol}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="TG:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txTG" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txTG" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.TG}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="HDL-C:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txHDLC" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txHDLC" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.HDLC}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="LDL-C:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txLDLC" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txLDLC" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.LDLC}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Grid.Row="3" Grid.Column="3" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="UA:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txUA" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txUA" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.UA}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="ABI:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txABI" Width="135" Height="25" VerticalContentAlignment="Center"  />
+                    <TextBox x:Name="txABI" Width="135" Height="25" VerticalContentAlignment="Center"  Text="{Binding BasicInfo.ABI}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="cTnT:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txcTnT" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txcTnT" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.cTnT}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="LY:" Height="25" Width="65" VerticalContentAlignment="Center" />
-                    <TextBox x:Name="txLY" Width="135" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txLY" Width="135" Height="25" VerticalContentAlignment="Center" Text="{Binding BasicInfo.LY}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="4">
@@ -190,7 +194,7 @@
                     <Label Content="PCI支架数：" Height="25" HorizontalAlignment="Left" Width="89"/>
                     <TextBox x:Name="txPCI"  Width="50" Validation.ErrorTemplate="{StaticResource validationTemplate}">
                         <TextBox.Text>
-                            <Binding Path="PCI">
+                            <Binding Path="BasicInfo.PCI">
                                 <Binding.ValidationRules>
                                     <m:IntRule />
                                 </Binding.ValidationRules>
@@ -202,7 +206,8 @@
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
                 <Label Content="75%以上残余狭窄" Height="25" HorizontalAlignment="Left"/>
-                <TextBox x:Name="txRS" Height="25" TextWrapping="Wrap" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <TextBox x:Name="txRS" Height="25" TextWrapping="Wrap" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                         Text="{Binding BasicInfo.ResidualStenosis}"/>
                 <Label Content="个" Height="25" Width="75" HorizontalAlignment="Left"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
@@ -215,9 +220,12 @@
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5" Grid.Row="4" Grid.Column="3">
                 <Label Content="优势冠脉：" Height="25" Width="75" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Horizontal" Height="25">
-                    <RadioButton x:Name="rbDCR" Content="右优势型" VerticalContentAlignment="Center" />
-                    <RadioButton x:Name="rbDCB" Content="均衡型" VerticalContentAlignment="Center" />
-                    <RadioButton x:Name="rbDCL" Content="左优势型" VerticalContentAlignment="Center" />
+                    <RadioButton x:Name="rbDCR" Content="右优势型" VerticalContentAlignment="Center" 
+                                 IsChecked="{Binding BasicInfo.DominantCoronary, Converter={StaticResource DCRCheckedConverter}}" />
+                    <RadioButton x:Name="rbDCB" Content="均衡型" VerticalContentAlignment="Center" 
+                                 IsChecked="{Binding BasicInfo.DominantCoronary, Converter={StaticResource DCBCheckedConverter}}"/>
+                    <RadioButton x:Name="rbDCL" Content="左优势型" VerticalContentAlignment="Center" 
+                                 IsChecked="{Binding BasicInfo.DominantCoronary, Converter={StaticResource DCLCheckedConverter}}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

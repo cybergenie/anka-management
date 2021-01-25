@@ -9,11 +9,9 @@ namespace Anka2.Models
     public class RequiredRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
-            if (value == null)
-                return new ValidationResult(false, "该字段不能为空值！");
+        {            
             if (string.IsNullOrEmpty(value.ToString()))
-                return new ValidationResult(false, "该字段不能为空字符串！");
+                return new ValidationResult(false, "该项不能为空值！");
             return new ValidationResult(true, null);
         }
     }
@@ -56,9 +54,7 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex emailReg = new Regex("^(\\d{8})$");
-            if (value == null)
-                return new ValidationResult(false, "该数值不能为空值！");
+            Regex emailReg = new Regex("^(\\d{8})$");            
             if (!String.IsNullOrEmpty(value.ToString()))
             {
                 if (!emailReg.IsMatch(value.ToString()))
@@ -66,6 +62,8 @@ namespace Anka2.Models
                     return new ValidationResult(false, "请输入8位数字");
                 }
             }
+            else
+                return new ValidationResult(false, "该数值不能为空值！");
             return new ValidationResult(true, null);
         }
     }
@@ -74,9 +72,7 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex emailReg = new Regex("^(\\d{1,3})$");
-            if (value == null)
-                return new ValidationResult(false, "年龄不能为空值！");
+            Regex emailReg = new Regex("^(\\d{1,3})$");           
             if (!String.IsNullOrEmpty(value.ToString()))
             {
                 if (!emailReg.IsMatch(value.ToString()))
@@ -84,6 +80,8 @@ namespace Anka2.Models
                     return new ValidationResult(false, "输入年龄为整数");
                 }
             }
+            else
+                return new ValidationResult(false, "年龄不能为空值！");
             return new ValidationResult(true, null);
         }
     }
