@@ -1,31 +1,12 @@
-﻿using Anka2.Models;
-using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Anka2.Services
 {
     interface IDataService
     {
-        public bool AddPerson(BasicInfo newPerson);
-        public Window GetParentWindow(DependencyObject Source);
-       // public void SetStatusInfo();
-
-        
-    }
-    public enum SheetItems
-    {
-        BasicInfo,
-        Exercise,
-        PHQ,
-        GAD,
-        IPAQ,
-        OHQ,
-        SPPB,
-        Physique
-    };
-    public enum InfoType
-    {
-        Success,
-        Warning,
-        Error
     }
 }

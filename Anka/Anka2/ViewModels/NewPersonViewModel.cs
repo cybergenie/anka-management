@@ -1,13 +1,9 @@
 ﻿using Anka2.Models;
-using Anka2.Services;
-using System;
-using System.Windows;
-using System.Windows.Media;
 
 namespace Anka2.ViewModels
 {
     public class NewPersonViewModel : NotifyObject
-    { 
+    {
         /// <summary>
         /// 档案号
         /// </summary>
@@ -18,7 +14,7 @@ namespace Anka2.ViewModels
             set
             {
                 if (_personId != value)
-                {                  
+                {
                     _personId = value;
                     RaisePropertyChanged(nameof(PersonId));
                 }
@@ -38,6 +34,21 @@ namespace Anka2.ViewModels
                 {
                     _personName = value;
                     RaisePropertyChanged(nameof(PersonName));
+                }
+            }
+
+        }
+
+        private bool _personGender;
+        public bool PersonGender
+        {
+            get => _personGender;
+            set
+            {
+                if (_personGender != value)
+                {
+                    _personGender = value;
+                    RaisePropertyChanged(nameof(PersonGender));
                 }
             }
 

@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
         xmlns:s="clr-namespace:Anka2.ViewModels"
+        xmlns:m="clr-namespace:Anka2.Models"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <s:MainWindowViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -31,7 +32,7 @@
                     </avalonDock:LayoutAnchorablePaneGroup>
                     <avalonDock:LayoutDocumentPaneGroup x:Name="DocumentGroup" Orientation="Vertical" DockHeight="Auto">
                         <avalonDock:LayoutDocumentPane x:Name="DocumentPane" DockHeight="4*" DockWidth="*" CanRepositionItems="True" AllowDuplicateContent="False">
-                            <avalonDock:LayoutDocument x:Name="BasicInfoPane" Title="基本信息"  CanClose="False" CanFloat="False" IsSelectedChanged="SheetSelectedChanged" CanMove="True" ContentId="BasicInfo"  >
+                            <avalonDock:LayoutDocument x:Name="BasicInfoPane" Title="基本信息"  CanClose="False" CanFloat="False" CanMove="True" ContentId="BasicInfo"  >
                                 <ScrollViewer x:Name="BasicInfoSheet">
                                     <ScrollViewer.DataContext>
                                         <s:BasicInfoSheetViewModel/>

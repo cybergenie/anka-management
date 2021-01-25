@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="clr-namespace:Anka2.ViewModels" 
-        xmlns:m="clr-namespace:Anka2.Models" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:m="clr-namespace:Anka2.Models" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="新建档案" Height="400" Width="600" WindowStyle="None" ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" BorderThickness="1,1,1,1">
     <Window.DataContext>
         <s:NewPersonViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <m:InverseConverter x:Key="Inverse"/>
+    </Window.Resources>
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">       
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
             <Label Content="病 案 号：" HorizontalAlignment="Left" Width="75" VerticalAlignment="Top" />
@@ -34,6 +38,22 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
+            <Label Content="性     别：" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71"/>
+            <RadioButton x:Name="rbMale" Content="男" HorizontalAlignment="Left" VerticalAlignment="Center" Width="57" Margin="10,0,0,0" IsChecked="{Binding Path=PersonGender}">                
+            </RadioButton>
+            <RadioButton x:Name="rbFemale" Content="女" HorizontalAlignment="Left" VerticalAlignment="Center" Width="57" Margin="10,0,0,0" IsChecked="{Binding Path=PersonGender, Converter={StaticResource Inverse}}">
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Style.Triggers>
+                            <DataTrigger  Binding="{Binding Path=PersonGender, Mode=TwoWay}" Value="False">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
             <Label Content="年      龄：" HorizontalAlignment="Left" Width="75" VerticalAlignment="Top"/>

@@ -10,7 +10,7 @@ namespace Anka2.ViewModels
 {
     public class BasicInfoSheetViewModel : NotifyObject, IStatusInfoService
     {
-        public NotifyStatusInfoHandler NotifyStatusInfo; 
+        public NotifyStatusInfoHandler NotifyStatusInfo;         
         /// <summary>
         /// Enter键改变选框状态
         /// </summary>
@@ -43,7 +43,24 @@ namespace Anka2.ViewModels
                 return _keyDownCommand;
             }
         }
+        private BasicInfo _basicInfo = null;
+        public BasicInfo BasicInfo 
+        {
+            get=>_basicInfo;
+            set
+            {
+                if(_basicInfo!=value)
+                {
+                    _basicInfo = value;
+                    RaisePropertyChanged(nameof(BasicInfo));
+                }
+            }
+        }
 
+
+        /// <summary>
+        /// 激活基本信息输入区域
+        /// </summary>
         private bool _basicInfoContentEnable = false;
         public bool BasicInfoContentEnable
         {
@@ -56,44 +73,28 @@ namespace Anka2.ViewModels
                     RaisePropertyChanged(nameof(BasicInfoContentEnable));
                 }
             }
-        }
-        /// <summary>
-        /// Description:基本信息诊断
-        /// </summary>
-        private string _description;
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                if(_description!=value)
-                {
-                    _description = value;
-                    NotifyStatusInfo(InfoType.Success, "基本信息-诊断为："+value);
-                    RaisePropertyChanged(nameof(Description));                   
-                }
-            }
-        }
+        }       
+                
         /// <summary>
         /// 危险状态其他项激活状态
         /// </summary>
-        private bool _risk13Actived = false;
-        public bool Risk13Actived
-        {
-            get => _risk13Actived;
-            set
-            {
-                if (_risk13Actived != value)
-                {
-                    _risk13Actived = value;
-                    if(_risk13Actived == false)
-                    {
-                        Risk13 = "";
-                    }
-                    RaisePropertyChanged(nameof(Risk13Actived));
-                }
-            }
-        }
+        //private bool _risk13Actived = false;
+        //public bool Risk13Actived
+        //{
+        //    get => _risk13Actived;
+        //    set
+        //    {
+        //        if (_risk13Actived != value)
+        //        {
+        //            _risk13Actived = value;
+        //            if(_risk13Actived == false)
+        //            {
+        //                Risk13 = "";
+        //            }
+        //            RaisePropertyChanged(nameof(Risk13Actived));
+        //        }
+        //    }
+        //}
         /// <summary>
         /// 心功能Killip/NYHA项文本
         /// </summary>
@@ -109,91 +110,9 @@ namespace Anka2.ViewModels
                     RaisePropertyChanged(nameof(Killip));
                 }
             }
-        }
-        /// <summary>
-        /// 危险状态其他项文本
-        /// </summary>
-        private string _risk13;        
-        public string Risk13
-        {
-            get => _risk13;
-            set
-            {
-                if (_risk13 != value)
-                {
-                    _risk13 = value;
-                    RaisePropertyChanged(nameof(Risk13));
-                }
-            }
-        }        
-        /// <summary>
-        /// 危险状态其他项选中，激活输入框
-        /// </summary>
-        private CommandObject<RoutedEventArgs> _risk13Checked;
-        public CommandObject<RoutedEventArgs> Risk13Checked
-        {
-            get
-            {
-                if (_risk13Checked == null)
-                    _risk13Checked = new CommandObject<RoutedEventArgs>(
-                        new Action<RoutedEventArgs>(e =>
-                        {
-                            Risk13Actived = true;
-                        }));
-                return _risk13Checked;
-            }
-        }
-        /// <summary>
-        /// 危险状态其他项取消选中，冻结输入框
-        /// </summary>
-        private CommandObject<RoutedEventArgs> _risk13Unchecked;
-        public CommandObject<RoutedEventArgs> Risk13Unchecked
-        {
-            get
-            {
-                if (_risk13Unchecked == null)
-                    _risk13Unchecked = new CommandObject<RoutedEventArgs>(
-                        new Action<RoutedEventArgs>(e =>
-                        {
-                            Risk13Actived = false;
-                        }));
-                return _risk13Unchecked;
-            }
-        }
-        /// <summary>
-        /// 侧枝循环项选中，激活输入框
-        /// </summary>
-        private CommandObject<RoutedEventArgs> _cCChecked;
-        public CommandObject<RoutedEventArgs> CCChecked
-        {
-            get
-            {
-                if (_cCChecked == null)
-                    _cCChecked = new CommandObject<RoutedEventArgs>(
-                        new Action<RoutedEventArgs>(e =>
-                        {
-                           ((CheckBox)e.Source).Content= "侧枝循环：有";
-                        }));
-                return _cCChecked;
-            }
-        }
-        /// <summary>
-        /// 侧枝循环项取消选中，冻结输入框
-        /// </summary>
-        private CommandObject<RoutedEventArgs> _cCUnchecked;
-        public CommandObject<RoutedEventArgs> CCUnchecked
-        {
-            get
-            {
-                if (_cCUnchecked == null)
-                    _cCUnchecked = new CommandObject<RoutedEventArgs>(
-                        new Action<RoutedEventArgs>(e =>
-                        {
-                            ((CheckBox)e.Source).Content = "侧枝循环：无";
-                        }));
-                return _cCUnchecked;
-            }
-        }
+        }    
+        
+        
         /// <summary>
         /// 危险状态其他项文本
         /// </summary>

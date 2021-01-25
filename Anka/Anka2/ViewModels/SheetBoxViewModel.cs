@@ -12,11 +12,11 @@ namespace Anka2.ViewModels
 
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
-            return (item is SheetItemViewModel);            
+            return (item is SheetItemViewModel);
         }
 
-        
+
     }
 
-   
+
 }

@@ -1,17 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Debug;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Anka2.Models
 {
-    class DbAdapter: DbContext
+    class DbAdapter : DbContext
     {
         public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] {
             new DebugLoggerProvider()
@@ -29,7 +25,7 @@ namespace Anka2.Models
             DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlite(
-                "Data Source=anka.db");
+                "Data Source=./DataBase/anka.db");
             base.OnConfiguring(optionsBuilder);
         }
     }
@@ -37,14 +33,14 @@ namespace Anka2.Models
     public class BasicInfo
     {
         [Key]
-        public string Number { get; set; }
-        public string? Name { get; set; }
-        public string? Age { get; set; }
-        public bool? Male { get; set; }
-        public string? Killip { get; set; }
-        public string? EF { get; set; }
-        public string? LV { get; set; }
-        public string? BasicOther { get; set; }
+        public string Number { get; set; }//病案号
+        public string? Name { get; set; }//姓名
+        public string? Age { get; set; }//年龄
+        public bool? Male { get; set; }//性别
+        public string? Killip { get; set; }//Killip/NYHA：
+        public string? EF { get; set; }//EF：
+        public string? LV { get; set; }//LV：
+        public string? BasicOther { get; set; }//其  他
         public string? BasicRisk { get; set; }
         public string? RiskOther { get; set; }
         public int? PCI { get; set; }

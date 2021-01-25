@@ -2,7 +2,7 @@
 
 namespace Anka2.Models
 {
-    
+
     public class NotifyObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

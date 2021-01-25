@@ -12,6 +12,11 @@
     </ControlTemplate>
     
     <StackPanel x:Key="BasicInfo">
+        <StackPanel.Resources>
+            <m:GenderConverter x:Key="GenderConverter"/>
+            <m:CollatCircContentConverter x:Key="CollatCircContentConverter"/>
+            <m:Risk13CheckedConverter x:Key="Risk13CheckedConverter"/>
+        </StackPanel.Resources>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="KeyDown">
                 <m:EventCommand Command="{Binding KeyDownCommand}"/>
@@ -19,13 +24,13 @@
         </i:Interaction.Triggers>
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="姓名：" Height="25" Width="45" />
-            <Label x:Name="lbBasicName" Content="" Height="25" Width="65" />
+            <Label x:Name="lbBasicName" Content="{Binding BasicInfo.Name}" Height="25" Width="65" />
             <Label Content="性别：" Height="25" Width="45" />
-            <Label x:Name="lbBasicMale" Content="" Height="25" Width="65" />
+            <Label x:Name="lbBasicMale" Content="{Binding BasicInfo.Male,Converter={StaticResource GenderConverter}, Mode=TwoWay}" Height="25" Width="65" />
             <Label Content="年龄：" Height="25" Width="45" />
-            <Label x:Name="lbBasicAge" Content="" Height="25" Width="65" />
+            <Label x:Name="lbBasicAge" Content="{Binding BasicInfo.Age}" Height="25" Width="65" />
             <Label Content="病案号：" Height="25" Width="45" />
-            <Label x:Name="lbBasicNumber" Content="" Height="25" Width="80" />
+            <Label x:Name="lbBasicNumber" Content="{Binding BasicInfo.Number}" Height="25" Width="80"  />
             <Button x:Name="btBasicSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
             <Button x:Name="btBasicLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
         </StackPanel>
@@ -50,25 +55,25 @@
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.ColumnSpan="2">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Column="3">
                     <Label Content="诊断：" Height="25" Width="85" HorizontalAlignment="Left" FontWeight="Bold" Target="{Binding ElementName=txDescription}"/>
-                    <TextBox x:Name="txDescription" Width="315" Text="{Binding Description}"/>
+                    <TextBox x:Name="txDescription" Width="315" Text="{Binding BasicInfo.Description}"/>
                 </StackPanel>
                 <Label Content="心功能：" Height="25" Width="75" HorizontalAlignment="Left" FontWeight="Bold"/>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Column="3">
                     <Label Content="Killip/NYHA：" Height="25" Width="85" HorizontalAlignment="Left"/>
-                    <TextBox x:Name="txKillip"  Width="135" Text="{Binding Killip}"/>
+                    <TextBox x:Name="txKillip"  Width="135" Text="{Binding BasicInfo.Killip}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                 <Label Content="EF：" Height="25" Width="65" HorizontalAlignment="Left"/>
-                <TextBox x:Name="txEF" Width="135" />
+                <TextBox x:Name="txEF" Width="135" Text="{Binding BasicInfo.EF}" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
                 <Label Content="LV：" Height="25" Width="65" HorizontalAlignment="Left"/>
-                <TextBox x:Name="txLV" Height="25" TextWrapping="Wrap" Width="135" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="txLV" Height="25" TextWrapping="Wrap" Width="135" VerticalContentAlignment="Center" Text="{Binding BasicInfo.LV}"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="1" Grid.Column="3" Orientation="Horizontal">
                 <Label Content="其  他：" Height="25" Width="65" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="txBasicOther" Height="25" TextWrapping="Wrap" Width="135" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="txBasicOther" Height="25" TextWrapping="Wrap" Width="135" VerticalContentAlignment="Center" Text="{Binding BasicInfo.BasicOther}"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
                 <Label Content="危险因素：" Height="25" Width="65" VerticalContentAlignment="Center" FontWeight="Bold"/>
@@ -99,17 +104,11 @@
                     <CheckBox x:Name="cbRisk12" Content="肝功能异常 ALT" Height="25" VerticalContentAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Checked">
-                                <m:EventCommand Command="{Binding Risk13Checked}"/>
-                            </i:EventTrigger>
-                            <i:EventTrigger EventName="Unchecked">
-                                <m:EventCommand Command="{Binding Risk13Unchecked}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </CheckBox>
-                    <TextBox x:Name="txRisk13" Width="135" Height="25" VerticalContentAlignment="Center" IsEnabled="{Binding Risk13Actived}" Text="{Binding Risk13}"/>
+                    <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" 
+                              IsChecked="{Binding BasicInfo.RiskOther, Converter={StaticResource Risk13CheckedConverter}}"/>
+                    <TextBox x:Name="txRisk13" Width="135" Height="25" VerticalContentAlignment="Center" 
+                             IsEnabled="{Binding BasicInfo.RiskOther, Converter={StaticResource Risk13CheckedConverter}}" 
+                             Text="{Binding BasicInfo.RiskOther}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
@@ -207,16 +206,11 @@
                 <Label Content="个" Height="25" Width="75" HorizontalAlignment="Left"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
-                <CheckBox x:Name="cbCC" Content="侧枝循环：无" Height="25" VerticalContentAlignment="Center" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <m:EventCommand Command="{Binding CCChecked}"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="Unchecked">
-                            <m:EventCommand Command="{Binding CCUnchecked}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </CheckBox>
+                <CheckBox x:Name="cbCollatCirc" Content="{Binding BasicInfo.CollatCirc, Converter={StaticResource CollatCircContentConverter}}"
+                          Height="25" 
+                          VerticalContentAlignment="Center" 
+                          IsChecked="{Binding BasicInfo.CollatCirc}"/>
+
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5" Grid.Row="4" Grid.Column="3">
                 <Label Content="优势冠脉：" Height="25" Width="75" HorizontalAlignment="Left"/>

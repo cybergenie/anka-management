@@ -3,7 +3,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Anka2.ViewModels
@@ -11,7 +10,7 @@ namespace Anka2.ViewModels
     public class SheetItemViewModel : ContentControl
     {
         private static SheetItems selectedSheet;
-        protected override void OnMouseDown( MouseButtonEventArgs e)
+        protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
             Label lb = this.Content as Label;
@@ -21,7 +20,7 @@ namespace Anka2.ViewModels
 
         }
 
-        public static SheetItems SelectedSheet { set => selectedSheet= value; get=> selectedSheet; }
+        public static SheetItems SelectedSheet { set => selectedSheet = value; get => selectedSheet; }
         /// <summary>
         /// 改变当前选中的SheetItem的背景色，置于选中状态
         /// </summary>
@@ -52,22 +51,22 @@ namespace Anka2.ViewModels
                 parent = VisualTreeHelper.GetParent(parent);
             }
             //查找选中的SheetItem对应的Sheet
-            AvalonDock.Controls.LayoutDocumentPaneGroupControl layoutPanelControl = ((AvalonDock.DockingManager)parent).LayoutRootPanel.Children[2] 
+            AvalonDock.Controls.LayoutDocumentPaneGroupControl layoutPanelControl = ((AvalonDock.DockingManager)parent).LayoutRootPanel.Children[2]
                 as AvalonDock.Controls.LayoutDocumentPaneGroupControl;
             AvalonDock.Controls.LayoutDocumentPaneControl layoutDocumentPane = layoutPanelControl.Children[0]
                 as AvalonDock.Controls.LayoutDocumentPaneControl;
-            SheetItems selectedSheet = (SheetItems)Enum.Parse(typeof(SheetItems),((Label)item.Content).Name.ToString());
+            SheetItems selectedSheet = (SheetItems)Enum.Parse(typeof(SheetItems), ((Label)item.Content).Name.ToString());
             //对应的Sheet被选中
-            foreach(AvalonDock.Layout.LayoutDocument layoutDocument in layoutDocumentPane.Items)
+            foreach (AvalonDock.Layout.LayoutDocument layoutDocument in layoutDocumentPane.Items)
             {
-                if(layoutDocument.ContentId == selectedSheet.ToString())
+                if (layoutDocument.ContentId == selectedSheet.ToString())
                 {
                     layoutDocument.IsSelected = true;
                 }
-            }              
+            }
 
             return true;
         }
     }
-    
+
 }

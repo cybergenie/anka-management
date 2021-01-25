@@ -6,23 +6,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Views\NewPerson.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\BasicInfoSheet.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\NewPerson.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\SheetBox.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
 </Project>

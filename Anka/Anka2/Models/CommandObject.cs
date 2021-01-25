@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace Anka2.Models
 {
-    public class CommandObject:ICommand
+    public class CommandObject : ICommand
     {
         /// <summary>
         /// 检查命令是否可以执行的事件，在UI事件发生导致控件状态或数据发生变化时触发

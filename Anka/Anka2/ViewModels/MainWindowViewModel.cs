@@ -5,15 +5,20 @@ using System;
 using System.Windows;
 
 namespace Anka2.ViewModels
-{   
+{
     public delegate void NotifyNewPersonHandler(BasicInfo newPerson);
     public delegate void NotifyStatusInfoHandler(InfoType Type, string Info);
 
-    class MainWindowViewModel : NotifyObject, IStatusInfoService
+    public class MainWindowViewModel : NotifyObject, IStatusInfoService
     {
         public NotifyStatusInfoHandler NotifyStatusInfo;
-        public BasicInfo NewPersonInfo { set; get; }
+        private BasicInfo NewPersonInfo { set; get; }
         private Window RootSource { set; get; }
+
+
+
+
+
 
         private CommandObject<RoutedEventArgs> _new_Executed;
         public CommandObject<RoutedEventArgs> New_Executed
@@ -24,10 +29,9 @@ namespace Anka2.ViewModels
                     _new_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            IDataService dataService = new DataService();
+                            IDataUitls dataService = new DataUitls();
                             RootSource = dataService.GetParentWindow((DependencyObject)e.Source);
-                            NewPerson newPerson = new NewPerson();
-                            SheetsActived();
+                            NewPerson newPerson = new NewPerson();                            
                             newPerson.AddNewPerson(this.GetNewPersonInfo);                            
                             newPerson.Show();
                         }));
@@ -37,7 +41,8 @@ namespace Anka2.ViewModels
 
         private void GetNewPersonInfo(BasicInfo value)
         {
-            NewPersonInfo = value;           
+            NewPersonInfo = value;
+            SheetsActived();
             NotifyStatusInfo(InfoType.Success, "新建档案成功。");
         }
 
@@ -50,8 +55,7 @@ namespace Anka2.ViewModels
             BasicInfoSheetViewModel basicInfoSheetContext = ((MainWindow)RootSource).BasicInfoSheet.DataContext as BasicInfoSheetViewModel;
             basicInfoSheetContext.UpDateStatusInfo(statusBarContext.SetTipInfo);
             basicInfoSheetContext.BasicInfoContentEnable = true;
-            
-            
+            basicInfoSheetContext.BasicInfo = NewPersonInfo;
         }
 
         public void UpDateStatusInfo(NotifyStatusInfoHandler notify)

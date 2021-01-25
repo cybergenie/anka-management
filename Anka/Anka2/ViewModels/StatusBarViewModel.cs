@@ -1,13 +1,12 @@
 ﻿using Anka2.Models;
 using Anka2.Services;
-using System.Windows;
 
 namespace Anka2.ViewModels
 {
     class StatusBarViewModel : NotifyObject
-    {        
+    {
         private string _connectedDataBase;
-        public string ConnectedDataBase 
+        public string ConnectedDataBase
         {
             get => _connectedDataBase;
             set
@@ -34,9 +33,9 @@ namespace Anka2.ViewModels
             }
         }
 
-        public void SetTipInfo(InfoType Type,string Value)
+        public void SetTipInfo(InfoType Type, string Value)
         {
-            TipInfo = Value;            
+            TipInfo = Value;
         }
     }
 }
