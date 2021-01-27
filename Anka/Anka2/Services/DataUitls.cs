@@ -1,4 +1,5 @@
 ﻿using Anka2.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -48,9 +49,16 @@ namespace Anka2.Services
                 using (var context = new DbAdapter())
                 {
                     var existingPerson = context.DbPerson.Find(personId);
+                   
                     if (existingPerson != null)
                     {
-                        newPerson = existingPerson;                        
+                        var existingPersonList = context.DbPerson.
+                            Include(BasicInfo => BasicInfo.PExercise).
+                            Include(BasicInfo => BasicInfo.PGAD).
+                            Where<BasicInfo>(p => p.Number == personId).
+                            ToList();
+
+                        newPerson = existingPersonList[0]; 
                         return true;
                     }
                     else

@@ -48,19 +48,12 @@ namespace Anka2.Models
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string gender = (string)value;
-            bool male ;
-            switch (gender)
+            var male = gender switch
             {
-                case "男":
-                    male =  true;
-                    break;
-                case "女":
-                    male = false;
-                    break;
-                default:
-                    throw new NotImplementedException();
-
-            }
+                "男" => true,
+                "女" => false,
+                _ => throw new NotImplementedException(),
+            };
             return male;
         }
        

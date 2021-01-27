@@ -13,13 +13,13 @@ namespace Anka2.Models
             new DebugLoggerProvider()
         });
         public DbSet<BasicInfo> DbPerson { get; set; }
-        //public DbSet<Exercise> DbExercise { get; set; }
-        //public DbSet<GAD> DbGAD { get; set; }
-        //public DbSet<IPAQ> DbIPAQ { get; set; }
-        //public DbSet<OHQ> DbOHQ { get; set; }
-        //public DbSet<PHQ> DbPHQ { get; set; }
-        //public DbSet<Physique> DbPhysique { get; set; }
-        //public DbSet<SPPB> DbSPPB { get; set; }
+        public DbSet<Exercise> DbExercise { get; set; }
+        public DbSet<GAD> DbGAD { get; set; }
+        public DbSet<IPAQ> DbIPAQ { get; set; }
+        public DbSet<OHQ> DbOHQ { get; set; }
+        public DbSet<PHQ> DbPHQ { get; set; }
+        public DbSet<Physique> DbPhysique { get; set; }
+        public DbSet<SPPB> DbSPPB { get; set; }
 
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
@@ -84,7 +84,7 @@ namespace Anka2.Models
         public string? ECGs { get; set; }
         public string? Checks { get; set; }
         public string? basicinfoNumber { set; get; }
-        public BasicInfo basicinfo { get; set; }
+        public BasicInfo Basicinfo { get; set; }
 
     }
 
@@ -95,7 +95,7 @@ namespace Anka2.Models
         public string GADNumber { get; set; }
         public string GADResult { get; set; }
         public string basicinfoNumber { set; get; }
-        public BasicInfo basicinfo { get; set; }
+        public BasicInfo Basicinfo { get; set; }
     }
 
     [Table("ipaq")]
@@ -110,7 +110,7 @@ namespace Anka2.Models
         public string IPAQ4 { get; set; }
         public string IPAQ5 { get; set; }
         public string basicinfoNumber { set; get; }
-        public BasicInfo basicinfo { get; set; }
+        public BasicInfo Basicinfo { get; set; }
     }
 
     [Table("ohq")]
@@ -128,7 +128,7 @@ namespace Anka2.Models
         public string OHQ8 { get; set; }
         public string OHQ9 { get; set; }
         public string basicinfoNumber { set; get; }
-        public BasicInfo basicinfo { get; set; }
+        public BasicInfo Basicinfo { get; set; }
     }
 
     [Table("phq")]
@@ -138,7 +138,7 @@ namespace Anka2.Models
         public string PHQNumber { get; set; }
         public string PHQResult { get; set; }
         public string basicinfoNumber { set; get; }
-        public BasicInfo basicinfo { get; set; }
+        public BasicInfo Basicinfo { get; set; }
     }
 
     [Table("physique")]
@@ -147,7 +147,7 @@ namespace Anka2.Models
         [Key]
         public string PhysiqueNumber { get; set; }
         public string basicinfoNumber { set; get; }
-        public BasicInfo basicinfo { get; set; }
+        public BasicInfo Basicinfo { get; set; }
 
 
     }
@@ -158,7 +158,7 @@ namespace Anka2.Models
         [Key]
         public string SPPBNumber { get; set; }
         public string basicinfoNumber { set; get; }
-        public BasicInfo basicinfo { get; set; }
+        public BasicInfo Basicinfo { get; set; }
     }
 
 }
