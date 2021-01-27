@@ -21,11 +21,11 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex emailReg = new Regex("^(-?[0-9]*[.]*[0-9]*)$");
+            Regex numberReg = new Regex("^(-?[0-9]*[.]*[0-9]*)$");
 
             if (!String.IsNullOrEmpty(value.ToString()))
             {
-                if (!emailReg.IsMatch(value.ToString()))
+                if (!numberReg.IsMatch(value.ToString()))
                 {
                     return new ValidationResult(false, "请输入数字");
                 }
@@ -37,11 +37,11 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex emailReg = new Regex("^(\\d*)$");
+            Regex intReg = new Regex("^(\\d*)$");
 
             if (!String.IsNullOrEmpty(value.ToString()))
             {
-                if (!emailReg.IsMatch(value.ToString()))
+                if (!intReg.IsMatch(value.ToString()))
                 {
                     return new ValidationResult(false, "请输入整数");
                 }
@@ -54,10 +54,10 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex emailReg = new Regex("^(\\d{8})$");            
+            Regex personIdReg = new Regex("^(\\d{8})$");            
             if (!String.IsNullOrEmpty(value.ToString()))
             {
-                if (!emailReg.IsMatch(value.ToString()))
+                if (!personIdReg.IsMatch(value.ToString()))
                 {
                     return new ValidationResult(false, "请输入8位数字");
                 }
@@ -72,10 +72,10 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex emailReg = new Regex("^(\\d{1,3})$");           
+            Regex personAgeReg = new Regex("^(\\d{1,3})$");           
             if (!String.IsNullOrEmpty(value.ToString()))
             {
-                if (!emailReg.IsMatch(value.ToString()))
+                if (!personAgeReg.IsMatch(value.ToString()))
                 {
                     return new ValidationResult(false, "输入年龄为整数");
                 }

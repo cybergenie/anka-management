@@ -30,7 +30,7 @@
             <Label Content="姓名：" Height="25" Width="45" />
             <Label x:Name="lbBasicName" Content="{Binding BasicInfo.Name}" Height="25" Width="65" />
             <Label Content="性别：" Height="25" Width="45" />
-            <Label x:Name="lbBasicMale" Content="{Binding BasicInfo.Male,Converter={StaticResource GenderConverter}, Mode=TwoWay}" Height="25" Width="65" />
+            <Label x:Name="lbBasicMale" Content="{Binding BasicInfo.Male,Converter={StaticResource GenderConverter}}" Height="25" Width="65" />
             <Label Content="年龄：" Height="25" Width="45" />
             <Label x:Name="lbBasicAge" Content="{Binding BasicInfo.Age}" Height="25" Width="65" />
             <Label Content="病案号：" Height="25" Width="45" />
@@ -84,28 +84,28 @@
             </StackPanel>
             <StackPanel Margin="5,12,5,5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" >               
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <CheckBox x:Name="cbRisk1" Content="高血压" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                    <CheckBox x:Name="cbRisk2" Content="糖尿病" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                    <CheckBox x:Name="cbRisk3" Content="脑卒中" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <CheckBox x:Name="cbRisk1" Content="高血压" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  IsChecked="{Binding Risk1IsChecked}"/>
+                    <CheckBox x:Name="cbRisk2" Content="糖尿病" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding Risk2IsChecked}"/>
+                    <CheckBox x:Name="cbRisk3" Content="脑卒中" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding Risk3IsChecked}"/>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" >
-                    <CheckBox x:Name="cbRisk4" Content="吸  烟" Height="25" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                    <CheckBox x:Name="cbRisk5" Content="高LDL-C" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="120" Height="25" />
-                    <CheckBox x:Name="cbRisk6" Content="高  TG" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" />
+                    <CheckBox x:Name="cbRisk4" Content="吸  烟" Height="25" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsChecked="{Binding Risk4IsChecked}"/>
+                    <CheckBox x:Name="cbRisk5" Content="高LDL-C" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="120" Height="25" IsChecked="{Binding Risk5IsChecked}"/>
+                    <CheckBox x:Name="cbRisk6" Content="高  TG" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" IsChecked="{Binding Risk6IsChecked}"/>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" >
-                    <CheckBox x:Name="cbRisk7" Content="肥  胖" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                    <CheckBox x:Name="cbRisk8" Content="痛  风" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                    <CheckBox x:Name="cbRisk9" Content="运动不足" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" />
+                    <CheckBox x:Name="cbRisk7" Content="肥  胖" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding Risk7IsChecked}"/>
+                    <CheckBox x:Name="cbRisk8" Content="痛  风" Width="120" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding Risk8IsChecked}"/>
+                    <CheckBox x:Name="cbRisk9" Content="运动不足" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="120" Height="25" IsChecked="{Binding Risk9IsChecked}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
-                    <CheckBox x:Name="cbRisk10" Content="周围动脉硬化闭塞" Height="25" VerticalContentAlignment="Center" />
+                    <CheckBox x:Name="cbRisk10" Content="周围动脉硬化闭塞" Height="25" VerticalContentAlignment="Center" IsChecked="{Binding Risk10IsChecked}"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <CheckBox x:Name="cbRisk11" Content="肾功能不全 CRE" VerticalContentAlignment="Center" Height="25" />
+                    <CheckBox x:Name="cbRisk11" Content="肾功能不全 CRE" VerticalContentAlignment="Center" Height="25" IsChecked="{Binding Risk11IsChecked}"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <CheckBox x:Name="cbRisk12" Content="肝功能异常 ALT" Height="25" VerticalContentAlignment="Center" />
+                    <CheckBox x:Name="cbRisk12" Content="肝功能异常 ALT" Height="25" VerticalContentAlignment="Center" IsChecked="{Binding Risk12IsChecked}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
                     <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" 

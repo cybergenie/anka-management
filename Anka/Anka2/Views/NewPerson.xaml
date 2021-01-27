@@ -17,14 +17,14 @@
     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">       
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
             <Label Content="病 案 号：" HorizontalAlignment="Left" Width="75" VerticalAlignment="Top" />
-            <TextBox x:Name="txPersonID"  HorizontalAlignment="Left" Margin="0,0,0,0" Width="135" VerticalAlignment="Top" >
+            <TextBox x:Name="txPersonID"  HorizontalAlignment="Left" Margin="0,0,0,0" Width="135" VerticalAlignment="Top" TextChanged="txPersonID_TextChanged" >
                 <TextBox.Text>
-                    <Binding Path="PersonId">
+                    <Binding UpdateSourceTrigger="PropertyChanged"  Path="PersonId">
                         <Binding.ValidationRules>
                             <m:PersonIdRule />
                         </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
+                    </Binding>                    
+                </TextBox.Text>                
             </TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">

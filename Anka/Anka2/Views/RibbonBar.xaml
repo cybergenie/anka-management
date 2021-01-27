@@ -14,7 +14,7 @@
         <Fluent:Ribbon.InputBindings>
             <KeyBinding Gesture="Ctrl+N" Command="{Binding New_Executed}" />
             <KeyBinding Gesture="Ctrl+O" Command="{Binding New_Executed}" />
-            <KeyBinding Gesture="Ctrl+S" Command="{Binding New_Executed}" />
+            <KeyBinding Gesture="Ctrl+S" Command="{Binding Save_Executed}" />
             <KeyBinding Gesture="Ctrl+P" Command="{Binding New_Executed}" />
         </Fluent:Ribbon.InputBindings>
 
@@ -59,10 +59,10 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Fluent:Button>
-                <Fluent:Button x:Name="btnSave" Header="保存" LargeIcon="/Resources/Images/SaveBig.png" Size="Large" Margin="5,0,5,0" ToolTip="保存项目（Ctrl+S）">
+                <Fluent:Button x:Name="btnSave" Header="保存" LargeIcon="/Resources/Images/SaveBig.png" Size="Large" Margin="5,0,5,0" ToolTip="保存当前档案所有更改（Ctrl+S）">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <cmd:EventCommand Command="{Binding New_Executed }"/>
+                            <cmd:EventCommand Command="{Binding Save_Executed }"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Fluent:Button>

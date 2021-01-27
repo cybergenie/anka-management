@@ -1,4 +1,6 @@
 ﻿using Anka2.Models;
+using System;
+using System.Windows.Controls;
 
 namespace Anka2.ViewModels
 {
@@ -67,6 +69,6 @@ namespace Anka2.ViewModels
                 }
             }
 
-        }
+        }       
     }
 }

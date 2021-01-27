@@ -12,7 +12,10 @@ namespace Anka2.Models
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is bool ? !(bool)value : value;
+            if (value is not null)
+                return value is bool ? !(bool)value : value;
+            else
+                return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -25,15 +28,20 @@ namespace Anka2.Models
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool gender = (bool)value;
-            switch (gender)
+            if (value is not null)
             {
-                case true:
-                    return "男";
-                case false:
-                    return "女";
-                default:
-            }                
+                bool gender = (bool)value;
+                switch (gender)
+                {
+                    case true:
+                        return "男";
+                    case false:
+                        return "女";
+                    default:
+                }
+            }
+            else
+                return null;
             
         }
 
@@ -81,8 +89,8 @@ namespace Anka2.Models
     public class RiskOtherCheckedConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {            
-            return value is not null;
+        { 
+            return !String.IsNullOrEmpty(value.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

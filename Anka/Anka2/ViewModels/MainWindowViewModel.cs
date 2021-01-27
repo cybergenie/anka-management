@@ -16,10 +16,6 @@ namespace Anka2.ViewModels
         private Window RootSource { set; get; }
 
 
-
-
-
-
         private CommandObject<RoutedEventArgs> _new_Executed;
         public CommandObject<RoutedEventArgs> New_Executed
         {
@@ -28,9 +24,8 @@ namespace Anka2.ViewModels
                 if (_new_Executed == null)
                     _new_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
-                        {
-                            IDataUitls dataService = new DataUitls();
-                            RootSource = dataService.GetParentWindow((DependencyObject)e.Source);
+                        {                           
+                            RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
                             NewPerson newPerson = new NewPerson();                            
                             newPerson.AddNewPerson(this.GetNewPersonInfo);                            
                             newPerson.Show();
@@ -39,11 +34,28 @@ namespace Anka2.ViewModels
             }
         }
 
+        private CommandObject<RoutedEventArgs> _save_Executed;
+        public CommandObject<RoutedEventArgs> Save_Executed
+        {
+            get
+            {
+                if (_save_Executed == null)
+                    _save_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            bool saveInfo = DataUitls.SavePersonInfo(NewPersonInfo);
+                            if (saveInfo == true)
+                                NotifyStatusInfo(InfoType.Success, NewPersonInfo.Name+"的档案保存成功。档案编号为："+NewPersonInfo.Number);
+                        }));
+                return _save_Executed;
+            }
+        }
+
         private void GetNewPersonInfo(BasicInfo value)
         {
             NewPersonInfo = value;
             SheetsActived();
-            NotifyStatusInfo(InfoType.Success, "新建档案成功。");
+            NotifyStatusInfo(InfoType.Success, NewPersonInfo.Name + "的档案新建成功。档案编号为：" + NewPersonInfo.Number);
         }
 
         private void SheetsActived()
