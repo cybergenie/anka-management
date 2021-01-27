@@ -12,7 +12,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="CustomControls\Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ExportPreview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PhysiqueSheet.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

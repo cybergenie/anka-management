@@ -56,6 +56,9 @@
                             <avalonDock:LayoutDocument x:Name="SPPB" Title="SPPB/平衡能力"  CanClose="False" CanFloat="False" CanMove="True" ContentId="SPPB" >
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="Physique" Title="体质成分"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Physique" >
+                                <ScrollViewer>
+                                    <ContentControl x:Name="PhysiqueSheet" Content="{StaticResource Physique}"/>
+                                </ScrollViewer>
                             </avalonDock:LayoutDocument>
                         </avalonDock:LayoutDocumentPane>
                     </avalonDock:LayoutDocumentPaneGroup>
