@@ -15,7 +15,7 @@
             <KeyBinding Gesture="Ctrl+N" Command="{Binding New_Executed}" />
             <KeyBinding Gesture="Ctrl+O" Command="{Binding New_Executed}" />
             <KeyBinding Gesture="Ctrl+S" Command="{Binding Save_Executed}" />
-            <KeyBinding Gesture="Ctrl+P" Command="{Binding New_Executed}" />
+            <KeyBinding Gesture="Ctrl+P" Command="{Binding Export_Executed}" />
         </Fluent:Ribbon.InputBindings>
 
         <Fluent:Ribbon.DataContext>
@@ -69,7 +69,7 @@
                 <Fluent:Button x:Name="btnExport" Header="导出" LargeIcon="/Resources/Images/ExportBig.png" Size="Large" Margin="5,0,5,0" ToolTip="导出项目（Ctrl+P）">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <cmd:EventCommand Command="{Binding New_Executed }"/>
+                            <cmd:EventCommand Command="{Binding Export_Executed }"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Fluent:Button>

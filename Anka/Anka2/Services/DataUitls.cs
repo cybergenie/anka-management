@@ -1,6 +1,7 @@
 ﻿using Anka2.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -46,26 +47,23 @@ namespace Anka2.Services
             string personId = newPerson.Number;
             try
             {
-                using (var context = new DbAdapter())
+                using var context = new DbAdapter();
+                var existingPerson = context.DbPerson.Find(personId);
+
+                if (existingPerson != null)
                 {
-                    var existingPerson = context.DbPerson.Find(personId);
-                   
-                    if (existingPerson != null)
-                    {
-                        var existingPersonList = context.DbPerson.
-                            Include(BasicInfo => BasicInfo.PExercise).
-                            Include(BasicInfo => BasicInfo.PGAD).
-                            Where<BasicInfo>(p => p.Number == personId).
-                            ToList();
+                    var existingPersonList = context.DbPerson.
+                        Include(BasicInfo => BasicInfo.PExercise).
+                        Include(BasicInfo => BasicInfo.PGAD).
+                        Where<BasicInfo>(p => p.Number == personId).
+                        ToList();
 
-                        newPerson = existingPersonList[0]; 
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
+                    newPerson = existingPersonList[0];
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             catch (Exception e)
@@ -141,6 +139,7 @@ namespace Anka2.Services
             BasicRisk = new string(CharBasicRisks);
             return BasicRisk;
         }
+       
 
         public static bool IsPersonId(string personId)
         {           
@@ -148,6 +147,98 @@ namespace Anka2.Services
             return personIdReg.IsMatch(personId.ToString());          
 
         }
+
+        private static void GenderConvertor( ref DataTable dt, string columnName)
+        { 
+            foreach (DataRow dr in dt.Rows)
+            {
+                var gender = dr[columnName] switch
+                {
+                    "True" => "男",
+                    "False" => "女",
+                    _ => string.Empty,
+                };
+                dr[columnName] = gender;
+            }
+        }
+
+        private static void CollatCircConvertor(ref DataTable dt, string columnName)
+        {
+            foreach (DataRow dr in dt.Rows)
+            {
+                var CollatCirc = dr[columnName] switch
+                {
+                    "True" => "有",
+                    "False" => "无",
+                    _ => string.Empty,
+                };
+                dr[columnName] = CollatCirc;
+            }
+        }
+
+        private static void DominantCoronaryConvertor(ref DataTable dt, string columnName)
+        {
+            foreach (DataRow dr in dt.Rows)
+            {
+                var DominantCoronary = dr[columnName] switch
+                {
+                    "1" => "左优势型",
+                    "0" => "均衡型",
+                    "-1" => "右优势型",
+                    _ => string.Empty,
+                };
+                dr[columnName] = DominantCoronary;
+            }
+        }
+        private static void BasicRiskConvertor(ref DataTable dt, string columnName)
+        {
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!String.IsNullOrEmpty(dr[columnName].ToString()))
+                { 
+                    char[] chBasicRisk = dr[columnName].ToString().ToCharArray();
+                    dr[columnName] = string.Empty;
+                    for (int i = 0; i < chBasicRisk.Length; i++)
+                    {
+                        if (chBasicRisk[i] == '1')
+                        {
+                            var BasicRisk = i switch
+                            {
+                                0 => "高血压, ",
+                                1 => "糖尿病, ",
+                                2 => "脑卒中, ",
+                                3 => "吸烟, ",
+                                4 => "高LDL-C, ",
+                                5 => "高TG, ",
+                                6 => "肥胖, ",
+                                7 => "痛风, ",
+                                8 => "运动不足, ",
+                                9 => "周围动脉硬化闭塞, ",
+                                10 => "肾功能不全CRE, ",
+                                11 => "肝功能异常ALT, ",
+                                _ => string.Empty,
+                            };
+                            dr[columnName] += BasicRisk;
+                        }
+                    }
+                }
+                
+               
+            }
+        }
+
+        public static void BasicInfoValueConvertor(ref DataTable dt)
+        {
+            GenderConvertor(ref dt, "性别");
+            CollatCircConvertor(ref dt, "侧枝循环");
+            DominantCoronaryConvertor(ref dt, "优势冠脉");
+            BasicRiskConvertor(ref dt, "危险因素");
+        }
+        public static void ExerciseValueConvertor(ref DataTable dt)
+        {
+            GenderConvertor(ref dt, "性别");
+        }
+
     }
 
     public enum SheetItems

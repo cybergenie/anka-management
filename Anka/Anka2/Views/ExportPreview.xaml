@@ -1,12 +1,33 @@
-﻿<Window x:Class="Anka2.Views.ExportPreview"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anka2.Views"
+        xmlns:Services="clr-namespace:Anka2.Services" x:Class="Anka2.Views.ExportPreview"
         mc:Ignorable="d"
-        Title="ExportPreview" Height="450" Width="800">
+        Title="导出预览" Height="450" Width="800">
     <Grid>
-        
+        <TabControl TabStripPlacement="Bottom">
+            <TabItem Header="基本信息">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        <Services:DataService/>
+                    </Grid.DataContext>
+                    <DataGrid ItemsSource="{Binding DtBasicInfo}"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="运动负荷">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        <Services:DataService/>
+                    </Grid.DataContext>
+                    <DataGrid ItemsSource="{Binding DtExercise}"/>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
