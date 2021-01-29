@@ -20,23 +20,44 @@ namespace Anka2.Services
             PropertyDescriptorCollection properties =
                TypeDescriptor.GetProperties(typeof(T));
             DataTable table = new DataTable();
-            foreach (var prop in Dict)
-            {               
-                    table.Columns.Add(prop.Value, typeof(string));
+            foreach (PropertyDescriptor prop in properties)
+            {
+                if (Dict.ContainsKey(prop.Name) )
+                {
+
+                    if (prop.PropertyType.Name.Contains("List"))
+                    {
+                        table.Columns.Add(Dict[prop.Name], Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+                    }
+                    else
+                    {
+                        table.Columns.Add(Dict[prop.Name], typeof(string));
+                    }
+                }
+
             }
             foreach (T item in data)
             {
                 DataRow row = table.NewRow();
                 foreach (PropertyDescriptor prop in properties)
-                {
-                    if (prop.PropertyType.Name.Contains("List"))
-                    {
-                        List<Exercise> pExercise = prop.GetValue(item) as List<Exercise>;  
-                    }
+                {                    
                     if (Dict.Keys.Contains(prop.Name))
                         row[Dict[prop.Name]] = (prop.GetValue(item) ?? DBNull.Value).ToString();
                 }
+
+                foreach (PropertyDescriptor prop in properties)
+                {
+                    if (prop.PropertyType.Name.Contains("List"))
+                    {
+                        if (Dict.Keys.Contains(prop.Name))
+                        {                            
+                            row[Dict[prop.Name]] = (prop.GetValue(item) ?? DBNull.Value);
+                            MessageBox.Show(row[Dict[prop.Name]].GetType().Name);
+                        }
+                    }
+                }
                 table.Rows.Add(row);
+               
             }
             return table;
         }
@@ -67,6 +88,7 @@ namespace Anka2.Services
                     { "BNP", "BNP" },
                     { "D2", "D-二聚体" },
                     { "Tchol", "Tchol" },
+                    {"TG","TG" },
                     { "HDLC", "HDL-C" },
                     { "LDLC", "LDL-C" },
                     { "UA", "UA" },
@@ -108,12 +130,13 @@ namespace Anka2.Services
                     { "Age", "年龄" },
                     { "Male",  "性别" },
                     { "ExerciseNumber", "记录编号"  },
-                    { "Checks", "床上负荷|室内负荷|室外负荷|院外负荷" }
+                    { "PExercise.Checks", "床上负荷|室内负荷|室外负荷|院外负荷" }
                 };
             
                 using var context = new DbAdapter();
                 var BasicInfoList = context.DbPerson
                     .Include(BasicInfo => BasicInfo.PExercise)
+                    .AsSplitQuery()
                     .ToList();
                 var ExerciseList = BasicInfoList;
 

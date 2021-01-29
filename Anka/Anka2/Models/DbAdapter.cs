@@ -64,8 +64,8 @@ namespace Anka2.Models
         public string? ABI { get; set; }
         public string? cTnT { get; set; }
         public string? LY { get; set; }
-        public List<Exercise> PExercise { get; set; }
-        public List<GAD> PGAD { get; set; }
+        public virtual List<Exercise> PExercise { get; set; }
+        public virtual List<GAD> PGAD { get; set; }
     }
 
     [Table("exercise")]
