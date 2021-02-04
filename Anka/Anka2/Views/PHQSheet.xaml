@@ -1,0 +1,358 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Anka2.Views">
+    <StackPanel x:Key="PHQ">
+        <StackPanel Orientation="Horizontal" Height="25" Margin="5">
+            <Label Content="姓名：" Height="25" Width="45" />
+            <Label x:Name="lbPHQName" Content="" Height="25" Width="65" />
+            <Label Content="性别：" Height="25" Width="45" />
+            <Label x:Name="lbPHQMale" Content="" Height="25" Width="65" />
+            <Label Content="年龄：" Height="25" Width="45" />
+            <Label x:Name="lbPHQAge" Content="" Height="25" Width="65" />
+            <Label Content="编号：" Height="25" Width="45" />
+            <Label x:Name="lbPHQNumber" Content="" Height="25" Width="80" />
+            <ComboBox x:Name="txPHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
+            <Button x:Name="btPHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Width="45" Height="25" VerticalAlignment="Top" />
+            <Button x:Name="btPHQLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" />
+        </StackPanel>
+        <Grid DockPanel.Dock="Top" Margin="5" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--#region 第一行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" >
+                <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Label Content="PHQ评估量表" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" >
+                <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Label Content="完全" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                    <Label Content="不会" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2">
+                <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Label Content="偶尔" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                    <Label Content="(几天)" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3">
+                <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Label Content="经常" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                    <Label Content="(一半以上的天数)" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4">
+                <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Label Content="总是" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                    <Label Content="(几乎每天)" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第一行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="1" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="1、是否有感到精力不足或做事没兴趣的时候？" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="1" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ11" Content="0" GroupName="PHQ-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0" Height="35" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="1" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ12" Content="1" GroupName="PHQ-1" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="1" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ13" Content="2" GroupName="PHQ-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="1" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ14" Content="3" GroupName="PHQ-1" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第二行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="2" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="2、是否有情绪低落或情绪消极的时候？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="2" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ21" Content="0" GroupName="PHQ-2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="2" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ22" Content="1" GroupName="PHQ-2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="2" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ23" Content="2" GroupName="PHQ-2" Height="35" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="2" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ24" Content="3" GroupName="PHQ-2" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35"  />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第三行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="3" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="3、是否有失眠、睡不实，或者总犯困、睡不醒的时候？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="3" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ31" Content="0" GroupName="PHQ-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="3" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ32" Content="1" GroupName="PHQ-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="3" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ33" Content="2" GroupName="PHQ-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="3" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ34" Content="3" GroupName="PHQ-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 第四行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="4" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="4、是否有疲劳，感觉身体没劲的时候？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="4" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ41" Content="0" GroupName="PHQ-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="4" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ42" Content="1" GroupName="PHQ-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="4" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ43" Content="2" GroupName="PHQ-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="4" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ44" Content="3" GroupName="PHQ-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第五行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="5" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="5、是否有感到没有胃口，或者暴饮暴食的时候？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="5" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ51" Content="0" GroupName="PHQ-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="5" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ52" Content="1" GroupName="PHQ-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="5" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ53" Content="2" GroupName="PHQ-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="5" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ54" Content="3" GroupName="PHQ-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 第六行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="6" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="6、是否对自己信心不足，或有些不满意的时候？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="6" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ61" Content="0" GroupName="PHQ-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="6" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ62" Content="1" GroupName="PHQ-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="6" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ63" Content="2" GroupName="PHQ-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="6" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ64" Content="3" GroupName="PHQ-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 第七行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="7" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="7、是否有看电视或者读报的，很难全神贯注的情况？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="7" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ71" Content="0" GroupName="PHQ-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="7" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ72" Content="1" GroupName="PHQ-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="7" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ73" Content="2" GroupName="PHQ-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="7" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ74" Content="3" GroupName="PHQ-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第八行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="8" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="8、是否有烦躁易怒，或者寡言少语，反应迟缓的时候？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="8" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ81" Content="0" GroupName="PHQ-8" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="8" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ82" Content="1" GroupName="PHQ-8" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="8" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ83" Content="2" GroupName="PHQ-8" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"/>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="8" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ84" Content="3" GroupName="PHQ-8" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第九行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="9" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="9、是否有过对生活不满意甚而产生了轻生的念头？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="9" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ91" Content="0" GroupName="PHQ-9" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="9" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ92" Content="1" GroupName="PHQ-8" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="9" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ93" Content="2" GroupName="PHQ-9" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"/>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="9" >
+                <StackPanel VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbPHQ94" Content="3" GroupName="PHQ-9" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0" />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+        </Grid>
+        <StackPanel Margin="5">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="总评：( " VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="24" Margin="15,5,0,5" />
+                <Label x:Name="lbPHQResult" Content=""  Width="40" VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="24" Margin="15,5,0,5" />
+                <Label Content=")分" VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="24" Margin="15,5,0,5" />
+            </StackPanel>
+
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" >
+                    <RadioButton x:Name="rbPHQResult1" Content="0-4(无焦虑症）" GroupName="PHQ-All" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0" Height="35" IsEnabled="False" />
+                </StackPanel>
+
+
+                <StackPanel VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" >
+                    <RadioButton x:Name="rbPHQResult2" Content="5-9（可能轻微焦虑症）" GroupName="PHQ-All" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0" IsEnabled="False" />
+                </StackPanel>
+
+
+                <StackPanel VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Left" >
+                    <RadioButton x:Name="rbPHQResult3" Content="10-13（可能中度焦虑症）" GroupName="PHQ-All" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0" IsEnabled="False" />
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Left" >
+                    <RadioButton x:Name="rbPHQResult4" Content="14-18（可能中重度焦虑症）" GroupName="PHQ-All" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0" IsEnabled="False" />
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" >
+                    <RadioButton x:Name="rbPHQResult5" Content="19-21（可能重度焦虑症）" GroupName="PHQ-All" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0" IsEnabled="False" />
+                </StackPanel>
+
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+
+</ResourceDictionary>

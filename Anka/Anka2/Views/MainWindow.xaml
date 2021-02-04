@@ -46,14 +46,29 @@
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="PHQ" Title="PHQ评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="PHQ" >
+                                <ScrollViewer>
+                                    <ContentControl x:Name="PHQSheet" Content="{StaticResource PHQ}"/>
+                                </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="GAD" Title="GAD评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="GAD" >
+                                <ScrollViewer>
+                                    <ContentControl x:Name="GADSheet" Content="{StaticResource GAD}"/>
+                                </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="IPAQ" Title="IPAQ评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="IPAQ" >
+                                <ScrollViewer>
+                                    <ContentControl x:Name="IPAQSheet" Content="{StaticResource IPAQ}"/>
+                                </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="OHQ" Title="口腔卫生评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="OHQ" >
+                                <ScrollViewer>
+                                    <ContentControl x:Name="OHQSheet" Content="{StaticResource OHQ}"/>
+                                </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="SPPB" Title="SPPB/平衡能力"  CanClose="False" CanFloat="False" CanMove="True" ContentId="SPPB" >
+                                <ScrollViewer>
+                                    <ContentControl x:Name="SPPBSheet" Content="{StaticResource SPPB}"/>
+                                </ScrollViewer>
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="Physique" Title="体质成分"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Physique" >
                                 <ScrollViewer>

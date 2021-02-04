@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,21 +21,15 @@ namespace Anka2.Services
             PropertyDescriptorCollection properties =
                TypeDescriptor.GetProperties(typeof(T));
             DataTable table = new DataTable();
+
             foreach (PropertyDescriptor prop in properties)
             {
-                if (Dict.ContainsKey(prop.Name) )
+                if (Dict.ContainsKey(prop.Name))
                 {
-
-                    if (prop.PropertyType.Name.Contains("List"))
-                    {
-                        table.Columns.Add(Dict[prop.Name], Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
-                    }
-                    else
-                    {
-                        table.Columns.Add(Dict[prop.Name], typeof(string));
-                    }
+                  table.Columns.Add(Dict[prop.Name], typeof(string));
+                   
                 }
-
+                
             }
             foreach (T item in data)
             {
@@ -48,11 +43,10 @@ namespace Anka2.Services
                 foreach (PropertyDescriptor prop in properties)
                 {
                     if (prop.PropertyType.Name.Contains("List"))
-                    {
+                    {                        
                         if (Dict.Keys.Contains(prop.Name))
                         {                            
                             row[Dict[prop.Name]] = (prop.GetValue(item) ?? DBNull.Value);
-                            MessageBox.Show(row[Dict[prop.Name]].GetType().Name);
                         }
                     }
                 }
@@ -73,7 +67,7 @@ namespace Anka2.Services
                     { "Age", "年龄" },
                     { "Male",  "性别" },
                     { "Description", "诊断"  },
-                    { "Killip", "Killip/NYHA" },
+                    { "Killip", "Killip-NYHA" },
                     { "EF",  "EF"  },
                     { "LV",  "LV"  },
                     { "BasicOther", "其他" },
@@ -130,17 +124,35 @@ namespace Anka2.Services
                     { "Age", "年龄" },
                     { "Male",  "性别" },
                     { "ExerciseNumber", "记录编号"  },
-                    { "PExercise.Checks", "床上负荷|室内负荷|室外负荷|院外负荷" }
+                    { "BedUp", "床上负荷" },                   
+                    { "InRoom",  "室内负荷"},                        
+                    { "OutRoom", "室外负荷"},                    
+                    { "OutSide", "院外负荷" }
+
                 };
             
                 using var context = new DbAdapter();
-                var BasicInfoList = context.DbPerson
-                    .Include(BasicInfo => BasicInfo.PExercise)
-                    .AsSplitQuery()
-                    .ToList();
-                var ExerciseList = BasicInfoList;
+                //var ExerciseList = context.DbPerson
+                //    .Include(BasicInfo => BasicInfo.PExercise)
+                //    .ToList();
 
-                DataTable DtExercise = ToDataTable<BasicInfo>(ExerciseList, DicExercise);
+                var ExerciseList = (from basicInfo in context.DbPerson
+                                   join exercise in context.DbExercise
+                                   on basicInfo.Number equals exercise.basicinfoNumber
+                                   select new ExerciseList
+                                   {
+                                       Number = basicInfo.Number,
+                                       Name = basicInfo.Name,
+                                       Male = basicInfo.Male,
+                                       Age = basicInfo.Age,
+                                       ExerciseNumber = exercise.ExerciseNumber.Remove(0,9),
+                                       BedUp = exercise.Checks,
+                                       InRoom = exercise.Checks,
+                                       OutRoom = exercise.Checks,
+                                       OutSide = exercise.Checks
+                                   }).ToList();
+
+                DataTable DtExercise = ToDataTable<ExerciseList>(ExerciseList, DicExercise);
                 DtExercise.TableName = "运动负荷";
                 DataUitls.ExerciseValueConvertor(ref DtExercise);
                 return DtExercise.DefaultView;

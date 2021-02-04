@@ -12,6 +12,11 @@
                 <ResourceDictionary Source="/Views/BasicInfoSheet.xaml"/>
                 <ResourceDictionary Source="/Views/ExerciseSheet.xaml"/>
                 <ResourceDictionary Source="/Views/PhysiqueSheet.xaml"/>
+                <ResourceDictionary Source="/Views/PHQSheet.xaml"/>
+                <ResourceDictionary Source="/Views/GADSheet.xaml"/>
+                <ResourceDictionary Source="/Views/IPAQSheet.xaml"/>
+                <ResourceDictionary Source="/Views/OHQSheet.xaml"/>
+                <ResourceDictionary Source="/Views/SPPBSheet.xaml"/>
                 <ResourceDictionary Source="/CustomControls/Themes/Generic.xaml"/>
                 <ResourceDictionary Source="/Resources/Styles/ValidationTextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>

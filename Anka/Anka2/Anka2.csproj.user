@@ -18,7 +18,22 @@
     <Page Update="Views\ExportPreview.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\GADSheet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\IPAQSheet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OHQSheet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PHQSheet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\PhysiqueSheet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SPPBSheet.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

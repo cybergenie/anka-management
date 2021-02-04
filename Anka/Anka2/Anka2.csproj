@@ -7,6 +7,10 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Resources\Images\AlignObjectsBottom.png" />
     <None Remove="Resources\Images\AlignObjectsCenteredHorizontal.png" />
@@ -41,6 +45,9 @@
     <None Remove="Resources\Images\SendBackward.png" />
     <None Remove="Resources\Images\SendBackwardBig.png" />
     <None Remove="Resources\Images\SendToBack.png" />
+    <None Remove="Resources\Images\SPPB_1.bmp" />
+    <None Remove="Resources\Images\SPPB_2.bmp" />
+    <None Remove="Resources\Images\SPPB_3.bmp" />
     <None Remove="Resources\Images\Start.png" />
     <None Remove="Resources\Images\Ungroup.png" />
   </ItemGroup>
@@ -147,6 +154,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\SendToBack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\SPPB_1.bmp">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\SPPB_2.bmp">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\SPPB_3.bmp">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Start.png">

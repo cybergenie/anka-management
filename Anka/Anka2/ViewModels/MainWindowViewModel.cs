@@ -61,9 +61,12 @@ namespace Anka2.ViewModels
                     _save_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            bool saveInfo = DataUitls.SavePersonInfo(NewPersonInfo);
-                            if (saveInfo == true)
-                                NotifyStatusInfo(InfoType.Success, NewPersonInfo.Name+"的档案保存成功。档案编号为："+NewPersonInfo.Number);
+                            if (NewPersonInfo != null)
+                            {
+                                bool saveInfo = DataUitls.SavePersonInfo(NewPersonInfo);
+                                if (saveInfo == true)
+                                    NotifyStatusInfo(InfoType.Success, NewPersonInfo.Name + "的档案保存成功。档案编号为：" + NewPersonInfo.Number);
+                            }
                         }));
                 return _save_Executed;
             }

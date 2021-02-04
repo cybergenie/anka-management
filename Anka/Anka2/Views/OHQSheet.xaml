@@ -1,0 +1,287 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Anka2.Views">
+    <StackPanel x:Key="OHQ">
+        <StackPanel Orientation="Horizontal" Height="25" Margin="5">
+            <Label Content="姓名：" Height="25" Width="45" />
+            <Label x:Name="lbOHQName" Content="" Height="25" Width="65" />
+            <Label Content="性别：" Height="25" Width="45" />
+            <Label x:Name="lbOHQMale" Content="" Height="25" Width="65" />
+            <Label Content="年龄：" Height="25" Width="45" />
+            <Label x:Name="lbOHQAge" Content="" Height="25" Width="65" />
+            <Label Content="编号：" Height="25" Width="45" />
+            <Label x:Name="lbOHQNumber" Content="" Height="25" Width="80" />
+            <ComboBox x:Name="txOHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
+            <Button x:Name="btOHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"/>
+            <Button x:Name="btOHQLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" />
+        </StackPanel>
+        <Grid DockPanel.Dock="Top" Margin="5" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--#region 第一行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="NO." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Content="问题" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0" Height="25" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Content="回答" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0" Height="25" />
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第一行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="1" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="1" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap"><Run Text="您一天刷几次牙？"/><Run Text="（包括假牙"/><Run Text="）"/></TextBlock>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="1" >
+                <WrapPanel Margin="0" VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbOHQ11" Content="3次以上" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ12" Content="2次" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ13" Content="1次" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ14" Content="0次（一次也不刷的时候也有）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" />
+                </WrapPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第二行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="2" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="2" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="2" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap" Text="使用清洁牙齿的工具吗？（例如牙线等）"/>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="2" >
+                <WrapPanel Margin="0" VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbOHQ21" Content="每天" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ22" Content="有时使用" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ23" Content="不使用" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                </WrapPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第三行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="3" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="3" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="3" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap" Text="到目前为止你掉了几颗牙？" HorizontalAlignment="Left"/>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="3" >
+                <WrapPanel Margin="0" VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbOHQ31" Content="1个" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ32" Content="2个" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ33" Content="3-5个" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ34" Content="6-9个" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ35" Content="10个及以上" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ36" Content="0个（没掉）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                </WrapPanel>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 第四行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="4" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="4" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="4" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap" Text="您牙龈经常出血吗？" HorizontalAlignment="Left"/>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="4" >
+                <WrapPanel Margin="0" VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbOHQ41" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0"  >
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="经常（每周" />
+                            <TextBox x:Name="txOHQ41" Width="25" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次）" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ42" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0"  >
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="偶尔（每周" />
+                            <TextBox x:Name="txOHQ42" Width="25" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次）" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ43" Content="无（不出血）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0"  />
+                </WrapPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第五行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="5" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="5" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="5" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap" Text="你是否患有足癣（俗称脚气）？" HorizontalAlignment="Left"/>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="5" ToolTip="输入6h表示6小时" >
+                <WrapPanel Margin="0" VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbOHQ51" Content="从来没有" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ52" Content="现在有" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ53" Content="现在没有，但有时复发" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ54" Content="以前有，现在好了" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                </WrapPanel>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 第六行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="6" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="6" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="6" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap" Text="是否戴假牙？"/>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="6" >
+                <WrapPanel Margin="0" VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbOHQ61" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ62" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="部分是（共" />
+                            <TextBox x:Name="txOHQ62" Width="25" IsEnabled="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="颗假牙）" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ63" Content="全部替换" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                </WrapPanel>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region 第七行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="7" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="7" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="7" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap" Text="假牙清洁方式？"/>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="7" >
+                <WrapPanel Margin="0" VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbOHQ71" Content="清水浸泡" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ72" Content="假牙清洁剂浸泡" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ73" Content="用牙膏刷" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                </WrapPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第八行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="8" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="8" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="8" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap" Text="刷牙时长？"/>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="8" >
+                <WrapPanel Margin="0" VerticalAlignment="Center" >
+                    <RadioButton x:Name="rbOHQ81" Content="&lt;1分钟" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ82" Content="1-2分钟" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ83" Content="2分钟以上" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                </WrapPanel>
+            </Border>
+            <!--#endregion-->
+            <!--#region 第九行-->
+            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" Grid.Row="9" >
+                <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Label Content="9" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="9" >
+                <StackPanel VerticalAlignment="Center" >
+                    <Label Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <TextBlock TextWrapping="Wrap" Text="最近一年是否看过口腔医生？"/>
+                    </Label>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="9" >
+                <StackPanel>
+                    <WrapPanel Margin="0" VerticalAlignment="Center" >
+                        <RadioButton x:Name="rbOHQ91" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                        <RadioButton x:Name="rbOHQ92" Content="是（选择原因如下）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0"  />
+                    </WrapPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="15,0" VerticalAlignment="Center" Orientation="Horizontal" >
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="( 常规检查：" />
+                            <TextBox x:Name="txOHQ91" Width="25" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次/年；" />
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,0" >
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="生病：" />
+                            <TextBox x:Name="txOHQ92" Width="25" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次/年 ）" />
+                        </StackPanel>
+
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+        </Grid>
+
+    </StackPanel>
+
+</ResourceDictionary>

@@ -148,95 +148,155 @@ namespace Anka2.Services
 
         }
 
-        private static void GenderConvertor( ref DataTable dt, string columnName)
-        { 
-            foreach (DataRow dr in dt.Rows)
+        private static void GenderConvertor(DataRow dr, string columnName)
+        {
+            var gender = dr[columnName] switch
             {
-                var gender = dr[columnName] switch
-                {
-                    "True" => "男",
-                    "False" => "女",
-                    _ => string.Empty,
-                };
-                dr[columnName] = gender;
-            }
+                "True" => "男",
+                "False" => "女",
+                _ => string.Empty,
+            };
+            dr[columnName] = gender;
         }
 
-        private static void CollatCircConvertor(ref DataTable dt, string columnName)
+        private static void CollatCircConvertor(DataRow dr, string columnName)
         {
-            foreach (DataRow dr in dt.Rows)
+            var CollatCirc = dr[columnName] switch
             {
-                var CollatCirc = dr[columnName] switch
-                {
-                    "True" => "有",
-                    "False" => "无",
-                    _ => string.Empty,
-                };
-                dr[columnName] = CollatCirc;
-            }
+                "True" => "有",
+                "False" => "无",
+                _ => string.Empty,
+            };
+            dr[columnName] = CollatCirc;
         }
 
-        private static void DominantCoronaryConvertor(ref DataTable dt, string columnName)
+        private static void DominantCoronaryConvertor(DataRow dr, string columnName)
         {
-            foreach (DataRow dr in dt.Rows)
+            var DominantCoronary = dr[columnName] switch
             {
-                var DominantCoronary = dr[columnName] switch
-                {
-                    "1" => "左优势型",
-                    "0" => "均衡型",
-                    "-1" => "右优势型",
-                    _ => string.Empty,
-                };
-                dr[columnName] = DominantCoronary;
-            }
+                "1" => "左优势型",
+                "0" => "均衡型",
+                "-1" => "右优势型",
+                _ => string.Empty,
+            };
+            dr[columnName] = DominantCoronary;
         }
-        private static void BasicRiskConvertor(ref DataTable dt, string columnName)
+        private static void BasicRiskConvertor(DataRow dr, string columnName)
         {
-            foreach (DataRow dr in dt.Rows)
+            if (!String.IsNullOrEmpty(dr[columnName].ToString()))
             {
-                if (!String.IsNullOrEmpty(dr[columnName].ToString()))
-                { 
-                    char[] chBasicRisk = dr[columnName].ToString().ToCharArray();
-                    dr[columnName] = string.Empty;
-                    for (int i = 0; i < chBasicRisk.Length; i++)
+                char[] chBasicRisk = dr[columnName].ToString().ToCharArray();
+                dr[columnName] = string.Empty;
+                for (int i = 0; i < chBasicRisk.Length; i++)
+                {
+                    if (chBasicRisk[i] == '1')
                     {
-                        if (chBasicRisk[i] == '1')
+                        var BasicRisk = i switch
                         {
-                            var BasicRisk = i switch
-                            {
-                                0 => "高血压, ",
-                                1 => "糖尿病, ",
-                                2 => "脑卒中, ",
-                                3 => "吸烟, ",
-                                4 => "高LDL-C, ",
-                                5 => "高TG, ",
-                                6 => "肥胖, ",
-                                7 => "痛风, ",
-                                8 => "运动不足, ",
-                                9 => "周围动脉硬化闭塞, ",
-                                10 => "肾功能不全CRE, ",
-                                11 => "肝功能异常ALT, ",
-                                _ => string.Empty,
-                            };
-                            dr[columnName] += BasicRisk;
-                        }
+                            0 => "高血压, ",
+                            1 => "糖尿病, ",
+                            2 => "脑卒中, ",
+                            3 => "吸烟, ",
+                            4 => "高LDL-C, ",
+                            5 => "高TG, ",
+                            6 => "肥胖, ",
+                            7 => "痛风, ",
+                            8 => "运动不足, ",
+                            9 => "周围动脉硬化闭塞, ",
+                            10 => "肾功能不全CRE, ",
+                            11 => "肝功能异常ALT, ",
+                            _ => string.Empty,
+                        };
+                        dr[columnName] += BasicRisk;
                     }
                 }
-                
-               
             }
+
         }
+
+        private static void DateConvertor(DataRow dr, string columnName)
+        {
+            string ExerciseNumber = dr[columnName] as string;
+            string result = System.Text.RegularExpressions.Regex.Replace(ExerciseNumber, @"[^0-9]+", "/");
+            dr[columnName] = result;
+        }
+
+        private static void BedUpConvertor(DataRow dr, string columnName)
+        {
+            string BedUp = dr[columnName] as string;
+            string result = "不合格";
+
+            string[] BedUps = BedUp.Split('|');
+            for (int i = 0; i < 4; i++)
+            {
+                if (BedUps[i] == "1")
+                    result = "合格";
+            }
+            dr[columnName] = result;
+        }
+
+        private static void InRoomConvertor(DataRow dr, string columnName)
+        {
+            string BedUp = dr[columnName] as string;
+            string result = "不合格";
+
+            string[] BedUps = BedUp.Split('|');
+            for (int i = 4; i < 6; i++)
+            {
+                if (BedUps[i] == "1")
+                    result = "合格";
+            }
+            dr[columnName] = result;
+        }
+
+        private static void OutRoomConvertor(DataRow dr, string columnName)
+        {
+            string BedUp = dr[columnName] as string;
+            string result = "不合格";
+
+            string[] BedUps = BedUp.Split('|');
+            for (int i = 6; i < 8; i++)
+            {
+                if (BedUps[i] == "1")
+                    result = "合格";
+            }
+            dr[columnName] = result;
+        }
+
+        private static void OutSideConvertor(DataRow dr, string columnName)
+        {
+            string BedUp = dr[columnName] as string;
+            string result = "不合格";
+
+            string[] BedUps = BedUp.Split('|');
+            if (BedUps[9] == "1")
+                result = "合格";
+
+            dr[columnName] = result;
+        }
+
 
         public static void BasicInfoValueConvertor(ref DataTable dt)
         {
-            GenderConvertor(ref dt, "性别");
-            CollatCircConvertor(ref dt, "侧枝循环");
-            DominantCoronaryConvertor(ref dt, "优势冠脉");
-            BasicRiskConvertor(ref dt, "危险因素");
+            foreach (DataRow dr in dt.Rows)
+            {
+                GenderConvertor( dr, "性别");
+                CollatCircConvertor( dr, "侧枝循环");
+                DominantCoronaryConvertor( dr, "优势冠脉");
+                BasicRiskConvertor( dr, "危险因素");
+            }
         }
         public static void ExerciseValueConvertor(ref DataTable dt)
         {
-            GenderConvertor(ref dt, "性别");
+            foreach (DataRow dr in dt.Rows)
+            {
+                GenderConvertor( dr, "性别");
+                DateConvertor( dr, "记录编号");
+                BedUpConvertor( dr, "床上负荷");
+                InRoomConvertor(dr, "室内负荷");
+                OutRoomConvertor(dr, "室外负荷");
+                OutSideConvertor(dr, "院外负荷");
+            }
         }
 
     }

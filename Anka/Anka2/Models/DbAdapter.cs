@@ -24,69 +24,16 @@ namespace Anka2.Models
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlite(
+            //optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlite(
+            //    "Data Source=./DataBase/anka.db");
+            optionsBuilder.UseSqlite(
                 "Data Source=./DataBase/anka.db");
             base.OnConfiguring(optionsBuilder);
         }
     }
-    [Table("basicinfo")]
-    public class BasicInfo
-    {
-        [Key]
-        public string Number { get; set; }//病案号
-        public string? Name { get; set; }//姓名
-        public string? Age { get; set; }//年龄
-        public bool? Male { get; set; }//性别
-        public string? Killip { get; set; }//Killip/NYHA：
-        public string? EF { get; set; }//EF：
-        public string? LV { get; set; }//LV：
-        public string? BasicOther { get; set; }//其  他
-        public string? BasicRisk { get; set; }
-        public string? RiskOther { get; set; }
-        public int? PCI { get; set; }
-        public int? ResidualStenosis { get; set; }
-        public bool? CollatCirc { get; set; }
-        public int? DominantCoronary { get; set; }
-        public string? Description { get; set; }
-        public string? Hb { get; set; }
-        public string? Alb { get; set; }
-        public string? Cre { get; set; }
-        public string? BUN { get; set; }
-        public string? Glu { get; set; }
-        public string? HbAlc { get; set; }
-        public string? BNP { get; set; }
-        public string? D2 { get; set; }
-        public string? Tchol { get; set; }
-        public string? TG { get; set; }
-        public string? HDLC { get; set; }
-        public string? LDLC { get; set; }
-        public string? UA { get; set; }
-        public string? ABI { get; set; }
-        public string? cTnT { get; set; }
-        public string? LY { get; set; }
-        public virtual List<Exercise> PExercise { get; set; }
-        public virtual List<GAD> PGAD { get; set; }
-    }
+    
 
-    [Table("exercise")]
-    public class Exercise
-    {
-        [Key]
-        public string ExerciseNumber { get; set; }
-        public bool? InRoomUp { get; set; }
-        public string? Date { get; set; }
-        public string? BloodPressureLower { get; set; }
-        public string? BloodPressureUpper { get; set; }
-        public string? HeartRate { get; set; }
-        public string? BloodOxygen { get; set; }
-        public string? BorgIndex { get; set; }
-        public string? Remarks { get; set; }
-        public string? ECGs { get; set; }
-        public string? Checks { get; set; }
-        public string? basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; }
-
-    }
+    
 
     [Table("gad")]
     public class GAD
