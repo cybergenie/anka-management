@@ -75,18 +75,14 @@
                 </Fluent:Button>
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox x:Name="gbEdit" Header="编辑">
-                <Fluent:Button x:Name="btnPaste" Header="粘贴" LargeIcon="/Resources/Images/PasteBig.png" Margin="5,0,5,0" Size="Large" ToolTip="粘贴（Ctrl+V）"
-                               Command="{x:Static ApplicationCommands.Paste}"
-                               CommandTarget="{Binding ElementName=NewProject}"/>
-                <Fluent:Button x:Name="btnCut" Header="剪切" Icon="/Resources/Images/Cut.png" Size="Middle" Margin="5,0,5,0" ToolTip="剪切（Ctrl+X）"
-                               Command="{x:Static ApplicationCommands.Cut}"
-                               CommandTarget="{Binding ElementName=NewProject}"/>
-                <Fluent:Button x:Name="btnCopy" Header="复制" Icon="/Resources/Images/Copy.png" Size="Middle" Margin="5,0,5,0" ToolTip="复制（Ctrl+C）"
-                                Command="{x:Static ApplicationCommands.Copy}"
-                               CommandTarget="{Binding ElementName=NewProject}"/>
-                <Fluent:Button x:Name="btnDelete" Header="删除" Icon="/Resources/Images/Delete.png" Size="Middle" Margin="5,0,5,0" ToolTip="删除（Del）"
-                                Command="{x:Static ApplicationCommands.Delete}"
-                               CommandTarget="{Binding ElementName=NewProject}"/>
+                <Fluent:Button x:Name="btnPaste" Header="粘贴" LargeIcon="/Resources/Images/PasteBig.png" Margin="5,0,5,0" Size="Large" ToolTip="粘贴（Ctrl+V）"                               
+                              />
+                <Fluent:Button x:Name="btnCut" Header="剪切" Icon="/Resources/Images/Cut.png" Size="Middle" Margin="5,0,5,0" ToolTip="剪切（Ctrl+X）"                               
+                              />
+                <Fluent:Button x:Name="btnCopy" Header="复制" Icon="/Resources/Images/Copy.png" Size="Middle" Margin="5,0,5,0" ToolTip="复制（Ctrl+C）"                               
+                               />
+                <Fluent:Button x:Name="btnDelete" Header="删除" Icon="/Resources/Images/Delete.png" Size="Middle" Margin="5,0,5,0" ToolTip="删除（Del）"                               
+                               />
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
     </Fluent:Ribbon>

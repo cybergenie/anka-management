@@ -42,6 +42,9 @@
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="ExercisePane" Title="运动负荷"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Exercise" >
                                 <ScrollViewer>
+                                    <ScrollViewer.DataContext>
+                                        <s:ExerciseSheetViewModel/>
+                                    </ScrollViewer.DataContext>
                                     <ContentControl x:Name="ExerciseSheet" Content="{StaticResource Exercise}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>

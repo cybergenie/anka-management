@@ -11,7 +11,7 @@
             <Label Content="年龄：" Height="25" Width="45" />
             <Label x:Name="lbBasicAge" Height="25" Width="65" />
             <Label Content="病案号：" Height="25" Width="45" />
-            <Label x:Name="lbBasicNumber" Content="{Binding BasicInfo.Number}" Height="25" Width="80"  />
+            <Label x:Name="lbBasicNumber" Height="25" Width="80"  />
             <Button x:Name="btBasicSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
             <Button x:Name="btBasicLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
         </StackPanel>

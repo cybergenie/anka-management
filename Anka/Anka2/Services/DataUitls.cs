@@ -18,10 +18,14 @@ namespace Anka2.Services
             {
                 using (var context = new DbAdapter())
                 {
-                    var existingPerson = context.DbPerson.Find(personId);
+                    var existingPerson = context.DbPerson
+                        .Where(BasicInfo => BasicInfo.Number == personId)
+                        .Include(BasicInfo => BasicInfo.PExercise)
+                        .ToList();
+                        
                     if (existingPerson != null)
                     {
-                        newPerson = existingPerson;
+                        newPerson = existingPerson[0];
                         context.SaveChanges();
                         return NewPersonResult.Success_Load;
                     }

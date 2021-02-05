@@ -95,6 +95,12 @@ namespace Anka2.ViewModels
             basicInfoSheetContext.UpDateStatusInfo(statusBarContext.SetTipInfo);//绑定basicInfoSheet的状态栏信息更新
             basicInfoSheetContext.BasicInfoContentEnable = true;//激活basicInfoSheetContext信息录入
             basicInfoSheetContext.BasicInfo = NewPersonInfo;//传递NewPerson
+
+            ExerciseSheetViewModel exerciseSheetViewModel = ((MainWindow)RootSource).ExerciseSheet.DataContext as ExerciseSheetViewModel;
+            exerciseSheetViewModel.UpDateStatusInfo(statusBarContext.SetTipInfo);//绑定exerciseSheet的状态栏信息更新
+            exerciseSheetViewModel.ExerciseContentEnable = true;//激活exerciseSheetViewModelt信息录入
+            exerciseSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
+
         }
 
         public void UpDateStatusInfo(NotifyStatusInfoHandler notify)
