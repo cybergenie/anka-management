@@ -22,8 +22,8 @@ namespace Anka2.Services
                         .Where(BasicInfo => BasicInfo.Number == personId)
                         .Include(BasicInfo => BasicInfo.PExercise)
                         .ToList();
-                        
-                    if (existingPerson != null)
+
+                    if (existingPerson.Count > 0)
                     {
                         newPerson = existingPerson[0];
                         context.SaveChanges();

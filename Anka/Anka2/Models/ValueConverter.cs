@@ -83,8 +83,11 @@ namespace Anka2.Models
     public class RiskOtherCheckedConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        { 
-            return !String.IsNullOrEmpty(value.ToString());
+        {
+            if (value is not null)
+                return !String.IsNullOrEmpty(value.ToString());
+            else
+                return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

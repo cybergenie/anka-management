@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:Anka2.ViewModels"
-                    xmlns:Fluent="urn:fluent-ribbon" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:cmd="clr-namespace:Anka2.Models">
+                    xmlns:Fluent="urn:fluent-ribbon" 
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+                    xmlns:cmd="clr-namespace:Anka2.Models">
 
     <Fluent:Ribbon x:Key="RibbonBar" Grid.Row="0">
 
