@@ -71,6 +71,21 @@ namespace Anka2.ViewModels
                 return _save_Executed;
             }
         }
+
+        private CommandObject<RoutedEventArgs> _repair_Executed;
+        public CommandObject<RoutedEventArgs> Repair_Executed
+        {
+            get
+            {
+                if (_repair_Executed == null)
+                    _repair_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            DataUitls.RepairData();
+                        }));
+                return _repair_Executed;
+            }
+        }
         /// <summary>
         /// 将创建的NewPerson值返回到MainWindow
         /// </summary>
@@ -98,7 +113,7 @@ namespace Anka2.ViewModels
 
             ExerciseSheetViewModel exerciseSheetViewModel = ((MainWindow)RootSource).ExerciseSheet.DataContext as ExerciseSheetViewModel;
             exerciseSheetViewModel.UpDateStatusInfo(statusBarContext.SetTipInfo);//绑定exerciseSheet的状态栏信息更新
-            exerciseSheetViewModel.ExerciseContentEnable = true;//激活exerciseSheetViewModelt信息录入
+            exerciseSheetViewModel.ExerciseContent = null;
             exerciseSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
 
         }

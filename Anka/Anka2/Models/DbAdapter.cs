@@ -40,8 +40,8 @@ namespace Anka2.Models
     {
         [Key]
         public string GADNumber { get; set; }
-        public string GADResult { get; set; }
-        public string basicinfoNumber { set; get; }
+        public string? GADResult { get; set; }
+        public string? basicinfoNumber { set; get; }
         public BasicInfo Basicinfo { get; set; }
     }
 

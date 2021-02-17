@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Anka2.Models
 {
@@ -24,7 +25,9 @@ namespace Anka2.Models
         public string? ECGs { get; set; }
         public string Checks { get; set; }
         public string? basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; }
+        public BasicInfo Basicinfo { get; set; } 
+
+       
 
     }
 

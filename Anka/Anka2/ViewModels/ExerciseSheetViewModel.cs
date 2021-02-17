@@ -39,13 +39,13 @@ namespace Anka2.ViewModels
             {
                 if (_basicInfo != value)
                 {
-                    _basicInfo = value;
-                    RaisePropertyChanged(nameof(BasicInfo));
+                    _basicInfo = value;                    
                 }
+                RaisePropertyChanged(nameof(BasicInfo));
             }
         }
 
-        private int _exerciseIndex = 0;
+        private int _exerciseIndex = -1;
         public int ExerciseIndex
         {
             get
@@ -72,7 +72,11 @@ namespace Anka2.ViewModels
             }
             set
             {
-                BasicInfo.PExercise[ExerciseIndex] = value;
+                if (ExerciseIndex >= 0)
+                {
+                    BasicInfo.PExercise[ExerciseIndex] = value;                    
+                }
+                RaisePropertyChanged(nameof(ExerciseContent));
             }
         }
 
@@ -93,38 +97,41 @@ namespace Anka2.ViewModels
             }
         }
 
-        private CommandObject<RoutedEventArgs> _new_Exercise_Executed;
-        public CommandObject<RoutedEventArgs> New_Exercise_Executed
+        private CommandObject<RoutedEventArgs> _load_Exercise_Executed;
+        public CommandObject<RoutedEventArgs> Load_Exercise_Executed
         {
             get
             {
-                if (_new_Exercise_Executed == null)
-                    _new_Exercise_Executed = new CommandObject<RoutedEventArgs>(
+                if (_load_Exercise_Executed == null)
+                    _load_Exercise_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
-                        {
-                            MessageBox.Show(ExerciseNumberText);
+                        { 
                             if (!string.IsNullOrEmpty(ExerciseNumberText))
                             {
                                 if (BasicInfo is not null)
                                 {
-                                    if (BasicInfo.PExercise is not null)
+                                    ExerciseContentEnable = true;
+                                    //if (BasicInfo.PExercise is not null)
+                                    //{
+                                        ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
+                                    if (ExerciseIndex >= 0)
                                     {
-                                        ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == e.basicinfoNumber + "-" + ExerciseNumberText);                                       
-                                        if (ExerciseIndex >= 0)
-                                        {
-                                            ExerciseContent = BasicInfo.PExercise[ExerciseIndex];                                           
-                                        }
-                                        else
-                                        {
-                                            ExerciseContent = new Exercise { ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText };
-                                            BasicInfo.PExercise.Add(ExerciseContent);
-                                            ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == e.basicinfoNumber + "-" + ExerciseNumberText);
-                                        }
+                                        ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
                                     }
+                                    else
+                                    {
+                                        var exerciseContent = new Exercise { ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText, basicinfoNumber= BasicInfo.Number };
+                                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
+                                        BasicInfo.PExercise.Add(exerciseContent);
+                                        BasicInfo = BasicInfo;
+                                        ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
+                                        ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
+                                    }
+                                    //}
                                 }
                             }
                         }));
-                return _new_Exercise_Executed;
+                return _load_Exercise_Executed;
             }
         }
     }

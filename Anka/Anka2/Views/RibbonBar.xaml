@@ -53,7 +53,8 @@
                             <cmd:EventCommand Command="{Binding New_Executed }"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </Fluent:Button>
+                </Fluent:Button>             
+
                 <Fluent:Button x:Name="btnOpen" Header="连接" LargeIcon="/Resources/Images/ConnectBig.png" Size="Large" Margin="5,0,5,0" ToolTip="连接数据库（Ctrl+O）">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
@@ -85,6 +86,17 @@
                                />
                 <Fluent:Button x:Name="btnDelete" Header="删除" Icon="/Resources/Images/Delete.png" Size="Middle" Margin="5,0,5,0" ToolTip="删除（Del）"                               
                                />
+            </Fluent:RibbonGroupBox>
+        </Fluent:RibbonTabItem>
+        <Fluent:RibbonTabItem Header="工具" Width="65">
+            <Fluent:RibbonGroupBox x:Name="gbTools" Header="工具">
+                <Fluent:Button x:Name="btnRepair" Header="修复" LargeIcon="/Resources/Images/NewBig.png" Size="Large" Margin="5,0,5,0" ToolTip="修复以前的数据文件" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cmd:EventCommand Command="{Binding Repair_Executed }"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Fluent:Button>                
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
     </Fluent:Ribbon>

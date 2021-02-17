@@ -8,6 +8,12 @@
         <StackPanel.Resources>
             <m:ExerciseNumberConverter x:Key="ExerciseNumberConverter"/>
             <m:GenderConverter x:Key="GenderConverter"/>
+            <m:BloodPressureConverter x:Key="BloodPressureConverter"/>
+            <m:HeartRateConverter x:Key="HeartRateConverter"/>
+            <m:BloodOxygenConverter x:Key="BloodOxygenConverter"/>
+            <m:BorgIndexConverter x:Key="BorgIndexConverter"/>
+            <m:RemarksConverter x:Key="RemarksConverter"/>
+            <m:RemarksConverter x:Key="ECGsConverter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -28,17 +34,17 @@
                     </Binding>
                 </ComboBox.Text>
             </ComboBox>
-            <Button x:Name="btExcerciseSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Width="45">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <m:EventCommand Command="{Binding New_Exercise_Executed }"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
             <Button x:Name="btExcerciseLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Width="45">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <m:EventCommand Command="{Binding New_Exercise_Executed }"/>
+                        <m:EventCommand Command="{Binding Load_Exercise_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button x:Name="btExcerciseSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Width="45">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <m:EventCommand Command="{Binding Load_Exercise_Executed }"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
@@ -243,47 +249,119 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPBedUp1" HorizontalContentAlignment="Center" Text="/"  />
+                    <TextBox x:Name="txBPBedUp1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="0">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPBedUp2" HorizontalContentAlignment="Center"  Text="/"  />
+                    <TextBox x:Name="txBPBedUp2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="1">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPBedUp3" HorizontalContentAlignment="Center"  Text="/" />
+                    <TextBox x:Name="txBPBedUp3" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="2">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPBedUp4" HorizontalContentAlignment="Center" Text="/"  />
+                    <TextBox x:Name="txBPBedUp4" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="3">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="5" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPInRoom1" HorizontalContentAlignment="Center"  Text="/" />
+                    <TextBox x:Name="txBPInRoom1" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="4">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPInRoom2" HorizontalContentAlignment="Center" Text="/" />
+                    <TextBox x:Name="txBPInRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="5">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPOutRoom1" HorizontalContentAlignment="Center"  Text="/"  />
+                    <TextBox x:Name="txBPOutRoom1" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="6">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="8" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPOutRoom2" HorizontalContentAlignment="Center" Text="/" />
+                    <TextBox x:Name="txBPOutRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="7">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,2,1" DockPanel.Dock="Top" Grid.Column="9" Grid.Row="4">
                 <DockPanel >
-                    <TextBox x:Name="txBPOutRoom3" HorizontalContentAlignment="Center" Text="/" />
+                    <TextBox x:Name="txBPOutRoom3" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodPressureConverter}" ConverterParameter="8">
+                                <Binding.ValidationRules>
+                                    <m:BloodPressureRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <!--#endregion-->
@@ -296,47 +374,119 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="5">
                 <DockPanel >
-                    <TextBox x:Name="txBMPBedUp1" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBMPBedUp1" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="0">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="5">
                 <DockPanel >
-                    <TextBox x:Name="txBMPBedUp2" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBMPBedUp2" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="1">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="5">
                 <DockPanel >
-                    <TextBox x:Name="txBMPBedUp3" HorizontalContentAlignment="Center"  />
+                    <TextBox x:Name="txBMPBedUp3" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="2">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="5">
                 <DockPanel >
-                    <TextBox x:Name="txBMPBedUp4" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBMPBedUp4" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="3">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="5" Grid.Row="5">
                 <DockPanel >
-                    <TextBox x:Name="txBMPInRoom1" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBMPInRoom1" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="4">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="5">
                 <DockPanel >
-                    <TextBox x:Name="txBMPInRoom2" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBMPInRoom2" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="5">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="5">
                 <DockPanel >
-                    <TextBox x:Name="txBMPOutRoom1" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBMPOutRoom1" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="6">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="8" Grid.Row="5">
                 <DockPanel >
-                    <TextBox x:Name="txBMPOutRoom2" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBMPOutRoom2" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="7">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,2,1" DockPanel.Dock="Top" Grid.Column="9" Grid.Row="5">
                 <DockPanel>
-                    <TextBox x:Name="txBMPOutRoom3" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBMPOutRoom3" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource HeartRateConverter}" ConverterParameter="8">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <!--#endregion-->
@@ -349,47 +499,119 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="6">
                 <DockPanel >
-                    <TextBox x:Name="txBOBedUp1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBOBedUp1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="0">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="6">
                 <DockPanel >
-                    <TextBox x:Name="txBOBedUp2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBOBedUp2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="1">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="6">
                 <DockPanel >
-                    <TextBox x:Name="txBOBedUp3" HorizontalContentAlignment="Center"  />
+                    <TextBox x:Name="txBOBedUp3" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="2">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="6">
                 <DockPanel >
-                    <TextBox x:Name="txBOBedUp4" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBOBedUp4" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="3">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="5" Grid.Row="6">
                 <DockPanel >
-                    <TextBox x:Name="txBOInRoom1" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBOInRoom1" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="4">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="6">
                 <DockPanel >
-                    <TextBox x:Name="txBOInRoom2" HorizontalContentAlignment="Center"  Text="" />
+                    <TextBox x:Name="txBOInRoom2" HorizontalContentAlignment="Center"  >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="5">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="6">
                 <DockPanel >
-                    <TextBox x:Name="txBOOutRoom1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBOOutRoom1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="6">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="8" Grid.Row="6">
                 <DockPanel >
-                    <TextBox x:Name="txBOOutRoom2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBOOutRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="7">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,2,1" DockPanel.Dock="Top" Grid.Column="9" Grid.Row="6">
                 <DockPanel>
-                    <TextBox x:Name="txBOOutRoom3" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBOOutRoom3" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BloodOxygenConverter}" ConverterParameter="8">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <!--#endregion-->
@@ -402,47 +624,119 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="7">
                 <DockPanel >
-                    <TextBox x:Name="txBorgBedUp1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBorgBedUp1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="0">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="7">
                 <DockPanel >
-                    <TextBox x:Name="txBorgBedUp2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBorgBedUp2" HorizontalContentAlignment="Center" >
+                    <TextBox.Text>
+                        <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="1">
+                            <Binding.ValidationRules>
+                                <m:IntRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="7">
                 <DockPanel >
-                    <TextBox x:Name="txBorgBedUp3" HorizontalContentAlignment="Center" />
+                    <TextBox x:Name="txBorgBedUp3" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="2">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="7">
                 <DockPanel >
-                    <TextBox x:Name="txBorgBedUp4" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBorgBedUp4" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="3">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="5" Grid.Row="7">
                 <DockPanel >
-                    <TextBox x:Name="txBorgInRoom1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBorgInRoom1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="4">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="7">
                 <DockPanel >
-                    <TextBox x:Name="txBorgInRoom2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBorgInRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="5">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="7">
                 <DockPanel >
-                    <TextBox x:Name="txBorgOutRoom1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBorgOutRoom1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="6">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="8" Grid.Row="7">
                 <DockPanel >
-                    <TextBox x:Name="txBorgOutRoom2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBorgOutRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="7">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,2,1" DockPanel.Dock="Top" Grid.Column="9" Grid.Row="7">
                 <DockPanel>
-                    <TextBox x:Name="txBorgOutRoom3" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txBorgOutRoom3" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource BorgIndexConverter}" ConverterParameter="8">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <!--#endregion-->
@@ -455,47 +749,83 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="8">
                 <DockPanel >
-                    <TextBox x:Name="txAddBedUp1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txAddBedUp1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="0" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="8">
                 <DockPanel >
-                    <TextBox x:Name="txAddBedUp2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txAddBedUp2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="1" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="8">
                 <DockPanel >
-                    <TextBox x:Name="txAddBedUp3" HorizontalContentAlignment="Center" />
+                    <TextBox x:Name="txAddBedUp3" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="2" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="8">
                 <DockPanel >
-                    <TextBox x:Name="txAddBedUp4" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txAddBedUp4" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="3" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="5" Grid.Row="8">
                 <DockPanel >
-                    <TextBox x:Name="txAddInRoom1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txAddInRoom1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="4" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="8">
                 <DockPanel >
-                    <TextBox x:Name="txAddInRoom2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txAddInRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="5" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="8">
                 <DockPanel >
-                    <TextBox x:Name="txAddOutRoom1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txAddOutRoom1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="6" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="8" Grid.Row="8">
                 <DockPanel >
-                    <TextBox x:Name="txAddOutRoom2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txAddOutRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="7" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,2,1" DockPanel.Dock="Top" Grid.Column="9" Grid.Row="8">
                 <DockPanel>
-                    <TextBox x:Name="txAddOutRoom3" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txAddOutRoom3" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource RemarksConverter}" ConverterParameter="8" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <!--#endregion-->
@@ -508,47 +838,83 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="9">
                 <DockPanel >
-                    <TextBox x:Name="txECGBedUp1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txECGBedUp1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="0" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="9">
                 <DockPanel >
-                    <TextBox x:Name="txECGBedUp2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txECGBedUp2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="1" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="9">
                 <DockPanel >
-                    <TextBox x:Name="txECGBedUp3" HorizontalContentAlignment="Center" />
+                    <TextBox x:Name="txECGBedUp3" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="2" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="9">
                 <DockPanel >
-                    <TextBox x:Name="txECGBedUp4" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txECGBedUp4" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="3" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="5" Grid.Row="9">
                 <DockPanel >
-                    <TextBox x:Name="txECGInRoom1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txECGInRoom1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="4" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="9">
                 <DockPanel >
-                    <TextBox x:Name="txECGInRoom2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txECGInRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="5" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="9">
                 <DockPanel >
-                    <TextBox x:Name="txECGOutRoom1" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txECGOutRoom1" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="6" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="8" Grid.Row="9">
                 <DockPanel >
-                    <TextBox x:Name="txECGOutRoom2" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txECGOutRoom2" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="7" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,2,1" DockPanel.Dock="Top" Grid.Column="9" Grid.Row="9">
                 <DockPanel>
-                    <TextBox x:Name="txECGOutRoom3" HorizontalContentAlignment="Center" Text="" />
+                    <TextBox x:Name="txECGOutRoom3" HorizontalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ECGsConverter}" ConverterParameter="8" />
+                        </TextBox.Text>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <!--#endregion-->

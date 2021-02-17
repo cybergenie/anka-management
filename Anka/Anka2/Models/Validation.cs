@@ -37,13 +37,13 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex DateNumberReg = new Regex("^([0-9]{4}[,\\\\,/,\\-,., ]?[0-9]{1,2}[,\\\\,/,\\-,., ][0-9]{1,2})$");
+            Regex DateNumberReg = new Regex("^([1-2][0-9][0-9][0-9][,\\\\,/,\\-,., ]?[0-9][0-9][,\\\\,/,\\-,., ][0-9][0-9]-[0-9][0-9])$");
 
             if (!String.IsNullOrEmpty(value.ToString()))
             {
                 if (!DateNumberReg.IsMatch(value.ToString()))
                 {
-                    return new ValidationResult(false, @"请输入正确的格式,例如：2020/10/10，2020\10\10，2020-10-10,2020.10.10");
+                    return new ValidationResult(false, @"请输入正确的格式,例如：2020/10/10-01，2020\10\10-01，2020-10-10-01,2020.10.10-01");
                 }
             }
             return new ValidationResult(true, null);
@@ -99,6 +99,23 @@ namespace Anka2.Models
             else
                 return new ValidationResult(false, "年龄不能为空值！");
             return new ValidationResult(true, null);
+        }
+    }
+
+    public class BloodPressureRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            Regex bloodPressureReg = new Regex("^(\\d{0,3}/\\d{0,3})$");
+            if (!String.IsNullOrEmpty(value.ToString()))
+            {
+                if (!bloodPressureReg.IsMatch(value.ToString()))
+                {
+                    return new ValidationResult(false, "请输入正确的血压值，例如：71/113");
+                }
+            }
+            return new ValidationResult(true, null);
+
         }
     }
 
