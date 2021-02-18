@@ -81,7 +81,7 @@ namespace Anka2.ViewModels
                     _repair_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            DataUitls.RepairData();
+                            RepairTools.RepairData();
                         }));
                 return _repair_Executed;
             }

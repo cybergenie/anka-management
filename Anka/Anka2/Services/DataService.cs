@@ -98,16 +98,16 @@ namespace Anka2.Services
                 var BasicInfoList = context.DbPerson.ToList();
                 DataTable DtBasicInfo = ToDataTable<BasicInfo>(BasicInfoList, DicBasicInfo);
                 DtBasicInfo.TableName = "基本信息";
-                DataUitls.BasicInfoValueConvertor(ref DtBasicInfo);
+                BasicInfoExportConverter.BasicInfoValueConvertor(ref DtBasicInfo);
                 return DtBasicInfo.DefaultView;
             }
             set
             {
                 if (dtBasicInfo != value)
                 {
-                    dtBasicInfo = value;
-                    RaisePropertyChanged(nameof(DtBasicInfo));
+                    dtBasicInfo = value;                    
                 }
+                RaisePropertyChanged(nameof(DtBasicInfo));
             }
 
 
@@ -154,20 +154,64 @@ namespace Anka2.Services
 
                 DataTable DtExercise = ToDataTable<ExerciseList>(ExerciseList, DicExercise);
                 DtExercise.TableName = "运动负荷";
-                DataUitls.ExerciseValueConvertor(ref DtExercise);
+                ExerciseExportConverter.ExerciseValueConvertor(ref DtExercise);
                 return DtExercise.DefaultView;
             }
             set
             {
                 if (_dtExercise != value)
                 {
-                    _dtExercise = value;
-                    RaisePropertyChanged(nameof(DtExercise));
+                    _dtExercise = value;                    
                 }
+                RaisePropertyChanged(nameof(DtExercise));
             }
 
 
         }
+
+        public DataView _dtGAD;
+        public DataView DtGAD
+        {
+            get
+            {
+                Dictionary<string, string> DicGAD = new Dictionary<string, string> {
+                    { "Number", "病案号" },
+                    { "Name",  "姓名" },
+                    { "Age", "年龄" },
+                    { "Male",  "性别" },
+                    { "GADNumber", "记录编号"  },                   
+                    { "GADResult", "院外负荷" }
+
+                };
+                using var context = new DbAdapter();
+                var GADList = (from basicInfo in context.DbPerson
+                                    join gad in context.DbGAD
+                                    on basicInfo.Number equals gad.basicinfoNumber
+                                    select new GADList
+                                    {
+                                        Number = basicInfo.Number,
+                                        Name = basicInfo.Name,
+                                        Male = basicInfo.Male,
+                                        Age = basicInfo.Age,
+                                        GADNumber = gad.GADNumber.Remove(0, 9),
+                                        GADResult = gad.GADResult                                       
+                                    }).ToList();
+                DataTable DtGAD = ToDataTable<GADList>(GADList, DicGAD);
+                DtGAD.TableName = "GAD评估量表";
+                ExerciseExportConverter.ExerciseValueConvertor(ref DtGAD);
+                return DtGAD.DefaultView;
+
+            }
+            set
+            {
+                if (_dtGAD != value)
+                {
+                    _dtGAD = value;
+                }
+                RaisePropertyChanged(nameof(DtGAD));
+            }
+        }
+
 
 
     }

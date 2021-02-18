@@ -25,7 +25,14 @@
                     </Grid.DataContext>
                     <DataGrid ItemsSource="{Binding DtExercise}"/>
                 </Grid>
-
+            </TabItem>
+            <TabItem Header="GAD评估量表">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        <Services:DataService/>
+                    </Grid.DataContext>
+                    <DataGrid ItemsSource="{Binding DtExercise}"/>
+                </Grid>
             </TabItem>
         </TabControl>
 

@@ -35,15 +35,7 @@ namespace Anka2.Models
 
     
 
-    [Table("gad")]
-    public class GAD
-    {
-        [Key]
-        public string GADNumber { get; set; }
-        public string? GADResult { get; set; }
-        public string? basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; }
-    }
+   
 
     [Table("ipaq")]
     public class IPAQ
