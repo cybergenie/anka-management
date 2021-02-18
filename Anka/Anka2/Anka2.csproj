@@ -190,7 +190,7 @@
 
   <ItemGroup>
     <None Update="DataBase\anka.db">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

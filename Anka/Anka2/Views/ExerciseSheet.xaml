@@ -16,6 +16,7 @@
             <mc:RemarksConverter x:Key="RemarksConverter"/>
             <mc:RemarksConverter x:Key="ECGsConverter"/>
             <mc:DatePickerConverter x:Key="DatePickerConverter"/>
+            <mc:ChecksConverter x:Key="ChecksConverter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -1008,14 +1009,14 @@
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
                     <RadioButton x:Name="rbBedUpYes2" Content="是" Margin="5,0" >
-                        <!--<RadioButton.IsChecked>
-                            <Binding Path="{StaticResource }" ConverterParameter="01"/>
-                        </RadioButton.IsChecked>-->
+                        <RadioButton.IsChecked>
+                            <Binding Path="{StaticResource ChecksConverter}" ConverterParameter="01"/>
+                        </RadioButton.IsChecked>
                     </RadioButton>
                     <RadioButton x:Name="rbBedUpNo2" Content="否" >
-                        <!--<RadioButton.IsChecked>
+                        <RadioButton.IsChecked>
                             <Binding Path="{StaticResource ChecksConverter}" ConverterParameter="00"/>
-                        </RadioButton.IsChecked>-->
+                        </RadioButton.IsChecked>
                     </RadioButton>
                 </StackPanel>
             </Border>

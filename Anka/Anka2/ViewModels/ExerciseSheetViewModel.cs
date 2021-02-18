@@ -111,14 +111,17 @@ namespace Anka2.ViewModels
                 if (_load_Exercise_Executed == null)
                     _load_Exercise_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
-                        { 
+                        {
                             if (!string.IsNullOrEmpty(ExerciseNumberText))
                             {
                                 if (BasicInfo is not null)
                                 {
                                     ExerciseContentEnable = true;
-                                    //if (BasicInfo.PExercise is not null)
-                                    //{
+                                    if (BasicInfo.PExercise is  null)
+                                    {
+                                        List<Exercise> exercises = new List<Exercise>();
+                                        BasicInfo.PExercise= exercises;
+                                    }
                                     ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
                                     if (ExerciseIndex >= 0)
                                     {
@@ -132,8 +135,11 @@ namespace Anka2.ViewModels
                                         BasicInfo = BasicInfo;
                                         ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
                                         ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
-                                    }
-                                    //}
+                                    }                                    
+                                }
+                                else
+                                {
+                                    MessageBox.Show("当前档案不存在，请新建档案信息。");
                                 }
                             }
                         }));

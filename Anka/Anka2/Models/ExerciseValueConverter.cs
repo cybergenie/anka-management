@@ -378,4 +378,72 @@ namespace Anka2.Models.ExerciseValueConverter
             return tempValue;
         }
     }
+
+    public class ChecksConverter : IValueConverter
+    {
+        private object tempValue = null;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            tempValue = value;
+            var parameterArray = ((string)parameter).ToCharArray();
+            int index = System.Convert.ToInt32(parameterArray[0]);
+            bool checkItem = parameterArray[1] == '1' ? true : false;            
+            if (value is not null)
+            {              
+                    var ChecksArray = ((Exercise)value).Checks.Split('|');
+                    switch (ChecksArray[index])
+                    {
+                        case "0": {
+                                switch (checkItem)
+                                {
+                                    case true:
+                                        return false;
+                                    case false:
+                                        return true;
+                                }
+                            }
+                        case "1":
+                            {
+                                switch (checkItem)
+                                {
+                                    case true:
+                                        return true;
+                                    case false:
+                                        return false;
+                                }
+                            }
+                        default:
+                            {
+                                return false;
+                            }
+                    }              
+            }
+            return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var parameterArray = ((string)parameter).ToCharArray();
+            int index = System.Convert.ToInt32(parameterArray[0]);
+            bool checkItem = parameterArray[1] == '1' ? true : false;
+            if (tempValue is not null)
+            {
+                var ChecksArray = new string[9];
+                if (((Exercise)tempValue).Checks is not null)
+                {
+                    ChecksArray = ((Exercise)tempValue).Checks.Split('|');
+                }
+                if (value is not null)
+                {
+                    if (checkItem is true)
+                    { 
+                    }
+                    ChecksArray[index] = value.ToString();
+                }
+                ((Exercise)tempValue).Checks = string.Join('|', ChecksArray);
+
+            }
+            return tempValue;
+        }
+    }
 }
