@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:Anka2.ViewModels" 
                     xmlns:m="clr-namespace:Anka2.Models" 
+                    xmlns:mc="clr-namespace:Anka2.Models.BasicInfoConverter" 
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors">  
     
     <ControlTemplate x:Key="validationTemplate">
@@ -14,13 +15,13 @@
     <StackPanel x:Key="BasicInfo">
         <StackPanel.Resources>
             <m:GenderConverter x:Key="GenderConverter"/>
-            <m:CollatCircContentConverter x:Key="CollatCircContentConverter"/>
-            <m:RiskOtherCheckedConverter x:Key="Risk13CheckedConverter"/>
-            <m:DCLCheckedConverter x:Key="DCLCheckedConverter"/>
-            <m:DCBCheckedConverter x:Key="DCBCheckedConverter"/>
-            <m:DCRCheckedConverter x:Key="DCRCheckedConverter"/>
-            <m:RisksConverter x:Key="RisksConverter"/>
-            <m:BasicRiskConverter x:Key="BasicRiskConverter"/>
+            <mc:CollatCircContentConverter x:Key="CollatCircContentConverter"/>
+            <mc:RiskOtherCheckedConverter x:Key="Risk13CheckedConverter"/>
+            <mc:DCLCheckedConverter x:Key="DCLCheckedConverter"/>
+            <mc:DCBCheckedConverter x:Key="DCBCheckedConverter"/>
+            <mc:DCRCheckedConverter x:Key="DCRCheckedConverter"/>
+            <mc:RisksConverter x:Key="RisksConverter"/>
+            <mc:BasicRiskConverter x:Key="BasicRiskConverter"/>
         </StackPanel.Resources>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="KeyDown">

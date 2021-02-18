@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -92,8 +93,13 @@ namespace Anka2.ViewModels
             {
                 if (_exerciseNumberText != value)
                 {
+                    var endNumber = value.Substring(value.Length - 3, 3);
+                    value = value.Remove(value.Length - 3, 3);
+                    value = Regex.Replace(value, @"[^0-9]+", "/");
+                    value += endNumber;
                     _exerciseNumberText = value;
                 }
+                RaisePropertyChanged(nameof(ExerciseNumberText));
             }
         }
 
@@ -113,14 +119,14 @@ namespace Anka2.ViewModels
                                     ExerciseContentEnable = true;
                                     //if (BasicInfo.PExercise is not null)
                                     //{
-                                        ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
+                                    ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
                                     if (ExerciseIndex >= 0)
                                     {
                                         ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
                                     }
                                     else
                                     {
-                                        var exerciseContent = new Exercise { ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText, basicinfoNumber= BasicInfo.Number };
+                                        var exerciseContent = new Exercise { ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText, basicinfoNumber = BasicInfo.Number };
                                         //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
                                         BasicInfo.PExercise.Add(exerciseContent);
                                         BasicInfo = BasicInfo;

@@ -33,11 +33,28 @@ namespace Anka2.Models
             return new ValidationResult(true, null);
         }
     }
+
+    public class DateRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            Regex DateNumberReg = new Regex("^([1-2][0-9][0-9][0-9][/][0-9][0-9]?[/][0-9][0-9]?)$");
+
+            if (!String.IsNullOrEmpty(value.ToString()))
+            {
+                if (!DateNumberReg.IsMatch(value.ToString()))
+                {
+                    return new ValidationResult(false, @"请输入正确的格式,例如：2020/10/10-01，2020\10\10-01，2020-10-10-01,2020.10.10-01");
+                }
+            }
+            return new ValidationResult(true, null);
+        }
+    }
     public class DateNumberRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex DateNumberReg = new Regex("^([1-2][0-9][0-9][0-9][,\\\\,/,\\-,., ]?[0-9][0-9][,\\\\,/,\\-,., ][0-9][0-9]-[0-9][0-9])$");
+            Regex DateNumberReg = new Regex("^([1-2][0-9][0-9][0-9][,\\\\,/,\\-,., ]?[0-9][0-9]?[,\\\\,/,\\-,., ][0-9][0-9]?-[0-9][0-9])$");
 
             if (!String.IsNullOrEmpty(value.ToString()))
             {
