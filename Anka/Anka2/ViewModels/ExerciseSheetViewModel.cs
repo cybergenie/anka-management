@@ -93,11 +93,15 @@ namespace Anka2.ViewModels
             {
                 if (_exerciseNumberText != value)
                 {
-                    var endNumber = value.Substring(value.Length - 3, 3);
-                    value = value.Remove(value.Length - 3, 3);
-                    value = Regex.Replace(value, @"[^0-9]+", "/");
-                    value += endNumber;
+                    if (!string.IsNullOrWhiteSpace(value))
+                    {
+                        var endNumber = value.Substring(value.Length - 3, 3);
+                        value = value.Remove(value.Length - 3, 3);
+                        value = Regex.Replace(value, @"[^0-9]+", "/");
+                        value += endNumber;
+                    }                    
                     _exerciseNumberText = value;
+
                 }
                 RaisePropertyChanged(nameof(ExerciseNumberText));
             }

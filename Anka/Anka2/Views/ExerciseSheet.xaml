@@ -1002,64 +1002,128 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbBedUpYes1" Content="是" Margin="5,0" />
-                    <RadioButton x:Name="rbBedUpNo1" Content="否" />
+                    <RadioButton x:Name="rbBedUpYes1" Content="是" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="01"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbBedUpNo1" Content="否" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="00"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
                     <RadioButton x:Name="rbBedUpYes2" Content="是" Margin="5,0" >
                         <RadioButton.IsChecked>
-                            <Binding Path="{StaticResource ChecksConverter}" ConverterParameter="01"/>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="11"/>
                         </RadioButton.IsChecked>
                     </RadioButton>
                     <RadioButton x:Name="rbBedUpNo2" Content="否" >
                         <RadioButton.IsChecked>
-                            <Binding Path="{StaticResource ChecksConverter}" ConverterParameter="00"/>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="10"/>
                         </RadioButton.IsChecked>
                     </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbBedUpYes3" Content="是" Margin="5,0" />
-                    <RadioButton x:Name="rbBedUpNo3" Content="否" />
+                    <RadioButton x:Name="rbBedUpYes3" Content="是" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="21"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbBedUpNo3" Content="否" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="20"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbBedUpYes4" Content="是" Margin="5,0" />
-                    <RadioButton x:Name="rbBedUpNo4" Content="否" />
+                    <RadioButton x:Name="rbBedUpYes4" Content="是" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="31"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbBedUpNo4" Content="否" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="30"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="5" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbInRoomYes1" Content="是" Margin="5,0" />
-                    <RadioButton x:Name="rbInRoomNo1" Content="否" />
+                    <RadioButton x:Name="rbInRoomYes1" Content="是" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="41"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbInRoomNo1" Content="否" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="40"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbInRoomYes2" Content="是" Margin="5,0" />
-                    <RadioButton x:Name="rbInRoomNo2" Content="否" />
+                    <RadioButton x:Name="rbInRoomYes2" Content="是" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="51"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbInRoomNo2" Content="否" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="50"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbOutRoomYes1" Content="是" Margin="5,0" />
-                    <RadioButton x:Name="rbOutRoomNo1" Content="否" />
+                    <RadioButton x:Name="rbOutRoomYes1" Content="是" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="61"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOutRoomNo1" Content="否" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="60"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,1" DockPanel.Dock="Top" Grid.Column="8" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbOutRoomYes2" Content="是" Margin="5,0" />
-                    <RadioButton x:Name="rbOutRoomNo2" Content="否" />
+                    <RadioButton x:Name="rbOutRoomYes2" Content="是" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="71"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOutRoomNo2" Content="否" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="70"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,2,1" DockPanel.Dock="Top" Grid.Column="9" Grid.Row="10">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbOutRoomYes3" Content="是" Margin="5,0" />
-                    <RadioButton x:Name="rbOutRoomNo3" Content="否" />
+                    <RadioButton x:Name="rbOutRoomYes3" Content="是" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="81"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOutRoomNo3" Content="否" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource ChecksConverter}" ConverterParameter="80"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <!--#endregion-->

@@ -386,7 +386,7 @@ namespace Anka2.Models.ExerciseValueConverter
         {
             tempValue = value;
             var parameterArray = ((string)parameter).ToCharArray();
-            int index = System.Convert.ToInt32(parameterArray[0]);
+            int index = System.Convert.ToInt32(parameterArray[0].ToString());
             bool checkItem = parameterArray[1] == '1' ? true : false;            
             if (value is not null)
             {              
@@ -424,21 +424,40 @@ namespace Anka2.Models.ExerciseValueConverter
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var parameterArray = ((string)parameter).ToCharArray();
-            int index = System.Convert.ToInt32(parameterArray[0]);
+            int index = System.Convert.ToInt32(parameterArray[0].ToString());
             bool checkItem = parameterArray[1] == '1' ? true : false;
             if (tempValue is not null)
             {
-                var ChecksArray = new string[9];
+                var ChecksArray = new string[10];
                 if (((Exercise)tempValue).Checks is not null)
                 {
                     ChecksArray = ((Exercise)tempValue).Checks.Split('|');
                 }
                 if (value is not null)
                 {
-                    if (checkItem is true)
-                    { 
+                    switch (checkItem)
+                    {
+                        case true:
+                            {
+                                switch (value)
+                                {                                   
+                                    case false: ChecksArray[index] = "0"; break;
+                                    case true: ChecksArray[index] = "1"; break;
+                                    default: ChecksArray[index] = ""; break;
+                                }
+                                break;
+                            }
+                        case false:
+                            {
+                                switch (value)
+                                {
+                                    case false: ChecksArray[index] = "1"; break;
+                                    case true: ChecksArray[index] = "0"; break;
+                                    default: ChecksArray[index] = ""; break;
+                                }
+                                break;
+                            }
                     }
-                    ChecksArray[index] = value.ToString();
                 }
                 ((Exercise)tempValue).Checks = string.Join('|', ChecksArray);
 
