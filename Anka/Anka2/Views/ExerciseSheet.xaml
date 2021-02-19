@@ -17,6 +17,7 @@
             <mc:RemarksConverter x:Key="ECGsConverter"/>
             <mc:DatePickerConverter x:Key="DatePickerConverter"/>
             <mc:ChecksConverter x:Key="ChecksConverter"/>
+            <mc:InRoomUpConverter x:Key="InRoomUpConverter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -175,8 +176,16 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,1,0.5" DockPanel.Dock="Top" Grid.Column="6" Grid.Row="2">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                    <RadioButton x:Name="rbInRoomUp5" Content="5" Margin="5,0" />
-                    <RadioButton x:Name="rbInRoomUp10" Content="10" />
+                    <RadioButton x:Name="rbInRoomUp5" Content="5" Margin="5,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource InRoomUpConverter}" ConverterParameter="05"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbInRoomUp10" Content="10" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="ExerciseContent" Converter="{StaticResource InRoomUpConverter}" ConverterParameter="10"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1,1,0.5,0.5" DockPanel.Dock="Top" Grid.Column="7" Grid.Row="2">

@@ -145,7 +145,7 @@ namespace Anka2.Services
                                        Name = basicInfo.Name,
                                        Male = basicInfo.Male,
                                        Age = basicInfo.Age,
-                                       ExerciseNumber = exercise.ExerciseNumber.Remove(0,9),
+                                       ExerciseNumber = exercise.ExerciseNumber.Remove(0, basicInfo.Number.Length + 1),
                                        BedUp = exercise.Checks,
                                        InRoom = exercise.Checks,
                                        OutRoom = exercise.Checks,
@@ -180,7 +180,7 @@ namespace Anka2.Services
                     { "Age", "年龄" },
                     { "Male",  "性别" },
                     { "GADNumber", "记录编号"  },                   
-                    { "GADResult", "院外负荷" }
+                    { "GADResult", "GAD总分" }
 
                 };
                 using var context = new DbAdapter();
@@ -193,12 +193,12 @@ namespace Anka2.Services
                                         Name = basicInfo.Name,
                                         Male = basicInfo.Male,
                                         Age = basicInfo.Age,
-                                        GADNumber = gad.GADNumber.Remove(0, 9),
+                                        GADNumber = gad.GADNumber.Remove(0, basicInfo.Number.Length+1),
                                         GADResult = gad.GADResult                                       
                                     }).ToList();
                 DataTable DtGAD = ToDataTable<GADList>(GADList, DicGAD);
                 DtGAD.TableName = "GAD评估量表";
-                ExerciseExportConverter.ExerciseValueConvertor(ref DtGAD);
+                GADExportConverter.GADValueConvertor(ref DtGAD);
                 return DtGAD.DefaultView;
 
             }

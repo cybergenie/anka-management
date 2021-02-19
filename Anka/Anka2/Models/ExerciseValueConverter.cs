@@ -39,6 +39,73 @@ namespace Anka2.Models.ExerciseValueConverter
         }
     }
 
+    public class InRoomUpConverter : IValueConverter
+    {
+        private object tempValue = null;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            tempValue = value;
+            if (value is not null)
+            {
+                var inRoomUp = ((Exercise)value).InRoomUp;
+                switch (parameter)
+                {
+                    case "05":
+                        {
+                            switch (inRoomUp)
+                            {
+                                case false: return true;
+                                default: return false;
+                            }
+                        }
+                    case "10":
+                        {
+                            switch (inRoomUp)
+                            {
+                                case true: return true;
+                                default: return false;
+                            }
+                        }
+                }
+
+            }
+            return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (tempValue is not null)
+            {
+                switch (parameter)
+                {
+                    case "05":
+                        {
+                            switch (value)
+                            {
+                                case true:
+                                    ((Exercise)tempValue).InRoomUp = false;break;
+                                default:
+                                    ((Exercise)tempValue).InRoomUp = null;break;
+                            }
+                            break;
+                        }
+                    case "10":
+                        {
+                            switch (value)
+                            {
+                                case true:
+                                    ((Exercise)tempValue).InRoomUp = true; break;
+                                default:
+                                    ((Exercise)tempValue).InRoomUp = null; break;
+                            }
+                            break;
+                        }
+                }
+            }
+            return tempValue;
+        }
+    }
+
     public class DatePickerConverter : IValueConverter
     {
         private object tempValue = null;
@@ -362,6 +429,7 @@ namespace Anka2.Models.ExerciseValueConverter
             int index = System.Convert.ToInt32(parameter);
             if (tempValue is not null)
             {
+
                 var ECGs = new string[9];
                 if (((Exercise)tempValue).Remarks is not null)
                 {
@@ -389,11 +457,14 @@ namespace Anka2.Models.ExerciseValueConverter
             int index = System.Convert.ToInt32(parameterArray[0].ToString());
             bool checkItem = parameterArray[1] == '1' ? true : false;            
             if (value is not null)
-            {              
+            {
+                if (((Exercise)value).Checks is not null)
+                {
                     var ChecksArray = ((Exercise)value).Checks.Split('|');
                     switch (ChecksArray[index])
                     {
-                        case "0": {
+                        case "0":
+                            {
                                 switch (checkItem)
                                 {
                                     case true:
@@ -416,7 +487,8 @@ namespace Anka2.Models.ExerciseValueConverter
                             {
                                 return false;
                             }
-                    }              
+                    }
+                }
             }
             return false;
         }

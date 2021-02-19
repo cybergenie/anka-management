@@ -128,7 +128,7 @@ namespace Anka2.Models
             {
                 if (!bloodPressureReg.IsMatch(value.ToString()))
                 {
-                    return new ValidationResult(false, "请输入正确的血压值，例如：71/113");
+                    return new ValidationResult(false, "请输入正确的血压值，例如：120/85");
                 }
             }
             return new ValidationResult(true, null);

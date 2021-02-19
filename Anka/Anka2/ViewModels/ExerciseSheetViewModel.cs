@@ -130,6 +130,7 @@ namespace Anka2.ViewModels
                                     if (ExerciseIndex >= 0)
                                     {
                                         ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
+                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "运动负荷记录加载成功。记录编号为：" + ExerciseNumberText + "。");
                                     }
                                     else
                                     {
@@ -139,7 +140,10 @@ namespace Anka2.ViewModels
                                         BasicInfo = BasicInfo;
                                         ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
                                         ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
-                                    }                                    
+                                       
+                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的运动负荷记录创建成功。记录编号为：" + ExerciseNumberText + "。");
+                                    }
+
                                 }
                                 else
                                 {

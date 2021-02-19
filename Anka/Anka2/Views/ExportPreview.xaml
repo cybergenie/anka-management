@@ -31,7 +31,7 @@
                     <Grid.DataContext>
                         <Services:DataService/>
                     </Grid.DataContext>
-                    <DataGrid ItemsSource="{Binding DtExercise}"/>
+                    <DataGrid ItemsSource="{Binding DtGAD}"/>
                 </Grid>
             </TabItem>
         </TabControl>
