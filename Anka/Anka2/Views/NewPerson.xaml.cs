@@ -41,7 +41,7 @@ namespace Anka2.Views
                 }
             }
             else
-                MessageBox.Show("档案号格式错误，请重新输入。","错误", MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("档案号输入错误，请重新输入。","错误", MessageBoxButton.OK,MessageBoxImage.Error);
 
             
         }

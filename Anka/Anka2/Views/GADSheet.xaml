@@ -1,21 +1,56 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Anka2.Views">
+                    xmlns:local="clr-namespace:Anka2.Views"
+                     xmlns:m="clr-namespace:Anka2.Models" 
+                    xmlns:mc="clr-namespace:Anka2.Models.GADValueConverter" 
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
     <StackPanel x:Key="GAD">
+        <StackPanel.Resources>
+            <mc:GADNumberConverter x:Key="GADNumberConverter"/>
+            <m:GenderConverter x:Key="GenderConverter"/>
+            <mc:GADResultConverter x:Key="GADResultConverter"/>
+            <mc:GADResultAllConverter x:Key="GADResultAllConverter"/>
+        </StackPanel.Resources>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="KeyDown">
+                <m:EventCommand Command="{Binding KeyDownCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
-            <Label Content="姓名：" Height="25" Width="45" />
-            <Label x:Name="lbGADName" Content="" Height="25" Width="65" />
-            <Label Content="性别：" Height="25" Width="45" />
-            <Label x:Name="lbGADMale" Content="" Height="25" Width="65" />
-            <Label Content="年龄：" Height="25" Width="45" />
-            <Label x:Name="lbGADAge" Content="" Height="25" Width="65" />
-            <Label Content="编号：" Height="25" Width="45" />
-            <Label x:Name="lbGADNumber" Content="" Height="25" Width="80" />
-            <ComboBox x:Name="txGADLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
-            <Button x:Name="btGADSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" />
-            <Button x:Name="btGADLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" />
+            <Label Content="姓  名：" Height="25" Width="50" />
+            <Label x:Name="lbGADName"  Height="25" Width="65" Content="{Binding BasicInfo.Name}"/>
+            <Label Content="性  别：" Height="25" Width="50" />
+            <Label x:Name="lbGADMale" Height="25" Width="65" Content="{Binding BasicInfo.Male,Converter={StaticResource GenderConverter}}"/>
+            <Label Content="年  龄：" Height="25" Width="50" />
+            <Label x:Name="lbGADAge" Height="25" Width="65"  Content="{Binding BasicInfo.Age}"/>
+            <Label Content="编  号：" Height="25" Width="50" />
+            <Label x:Name="lbGADNumber"  Height="25" Width="80" Content="{Binding BasicInfo.Number}"/>
+            <ComboBox x:Name="txGADLoop" Width="120" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" 
+                      ItemsSource="{Binding BasicInfo.PGAD ,Converter={StaticResource GADNumberConverter}}">
+                <ComboBox.Text>
+                    <Binding Path="GADNumberText">
+                        <Binding.ValidationRules>
+                            <m:DateNumberRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.Text>
+            </ComboBox>
+            <Button x:Name="btGADSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <m:EventCommand Command="{Binding Load_GAD_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button x:Name="btGADLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <m:EventCommand Command="{Binding Load_GAD_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </StackPanel>
-        <Grid DockPanel.Dock="Top" Margin="5" >
+        <Grid DockPanel.Dock="Top" Margin="5" IsEnabled="{Binding GADContentEnable}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"/>
                 <RowDefinition Height="35"/>
@@ -73,22 +108,38 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="1" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD11" Content="0" GroupName="GAD-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0" Height="35"  />
+                    <RadioButton x:Name="rbGAD11" Content="0" GroupName="GAD-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0" Height="35"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="00"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="1" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD12" Content="1" GroupName="GAD-1" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD12" Content="1" GroupName="GAD-1" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="01"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="1" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD13" Content="2" GroupName="GAD-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD13" Content="2" GroupName="GAD-1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="02"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="1" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD14" Content="3" GroupName="GAD-1" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35"  />
+                    <RadioButton x:Name="rbGAD14" Content="3" GroupName="GAD-1" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="03"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <!--#endregion-->
@@ -100,22 +151,38 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="2" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD21" Content="0" GroupName="GAD-2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD21" Content="0" GroupName="GAD-2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="10"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="2" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD22" Content="1" GroupName="GAD-2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD22" Content="1" GroupName="GAD-2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="11"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="2" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD23" Content="2" GroupName="GAD-2" Height="35" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  />
+                    <RadioButton x:Name="rbGAD23" Content="2" GroupName="GAD-2" Height="35" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="12"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="2" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD24" Content="3" GroupName="GAD-2" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35"  />
+                    <RadioButton x:Name="rbGAD24" Content="3" GroupName="GAD-2" Margin="5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="13"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <!--#endregion-->
@@ -127,22 +194,38 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="3" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD31" Content="0" GroupName="GAD-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD31" Content="0" GroupName="GAD-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="20"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="3" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD32" Content="1" GroupName="GAD-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD32" Content="1" GroupName="GAD-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="21"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="3" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD33" Content="2" GroupName="GAD-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD33" Content="2" GroupName="GAD-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="22"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="3" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD34" Content="3" GroupName="GAD-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD34" Content="3" GroupName="GAD-3" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="23"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <!--#endregion-->
@@ -155,22 +238,38 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="4" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD41" Content="0" GroupName="GAD-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD41" Content="0" GroupName="GAD-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="30"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="4" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD42" Content="1" GroupName="GAD-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD42" Content="1" GroupName="GAD-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="31"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="4" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD43" Content="2" GroupName="GAD-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD43" Content="2" GroupName="GAD-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="32"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="4" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD44" Content="3" GroupName="GAD-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD44" Content="3" GroupName="GAD-4" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="33"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <!--#endregion-->
@@ -182,22 +281,38 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="5" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD51" Content="0" GroupName="GAD-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD51" Content="0" GroupName="GAD-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="40"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="5" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD52" Content="1" GroupName="GAD-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD52" Content="1" GroupName="GAD-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="41"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="5" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD53" Content="2" GroupName="GAD-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD53" Content="2" GroupName="GAD-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="42"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="5" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD54" Content="3" GroupName="GAD-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD54" Content="3" GroupName="GAD-5" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="43"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <!--#endregion-->
@@ -210,22 +325,38 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="6" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD61" Content="0" GroupName="GAD-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD61" Content="0" GroupName="GAD-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="50"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="6" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD62" Content="1" GroupName="GAD-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD62" Content="1" GroupName="GAD-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="51"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="6" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD63" Content="2" GroupName="GAD-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD63" Content="2" GroupName="GAD-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="52"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="6" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD64" Content="3" GroupName="GAD-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD64" Content="3" GroupName="GAD-6" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="53"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <!--#endregion-->
@@ -240,29 +371,46 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" Grid.Row="7" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD71" Content="0" GroupName="GAD-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD71" Content="0" GroupName="GAD-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="60"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="7" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD72" Content="1" GroupName="GAD-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD72" Content="1" GroupName="GAD-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="61"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="3" Grid.Row="7" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD73" Content="2" GroupName="GAD-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  />
+                    <RadioButton x:Name="rbGAD73" Content="2" GroupName="GAD-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="62"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="4" Grid.Row="7" >
                 <StackPanel VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbGAD74" Content="3" GroupName="GAD-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"/>
+                    <RadioButton x:Name="rbGAD74" Content="3" GroupName="GAD-7" Height="35" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0">
+                        <RadioButton.IsChecked>
+                            <Binding Path="GADContent" Converter="{StaticResource GADResultConverter}" ConverterParameter="63"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
             </Border>
             <!--#endregion-->
         </Grid>
         <StackPanel Orientation="Horizontal">
             <Label Content="总评：( " VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="24" Margin="15,5,0,5" />
-            <Label x:Name="lbGADResult" Content=""  Width="40" VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="24" Margin="15,5,0,5" />
+            <Label x:Name="lbGADResult" Width="40" VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="24" Margin="15,5,0,5"
+                   Content="{Binding GADContent, Converter={StaticResource GADResultAllConverter}}"/>
             <Label Content=")分" VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="24" Margin="15,5,0,5" />
         </StackPanel>
     </StackPanel>

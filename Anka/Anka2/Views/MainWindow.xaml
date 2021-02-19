@@ -55,6 +55,9 @@
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="GAD" Title="GAD评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="GAD" >
                                 <ScrollViewer>
+                                    <ScrollViewer.DataContext>
+                                        <s:GADSheetViewModel/>
+                                    </ScrollViewer.DataContext>
                                     <ContentControl x:Name="GADSheet" Content="{StaticResource GAD}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>

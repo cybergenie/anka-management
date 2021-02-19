@@ -69,7 +69,7 @@ namespace Anka2.Models
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("数据表Exercise转换错误,错误编号为" + tempNumber + "\n" + e.Message);
+                    MessageBox.Show("数据表Exercise转换错误,错误编号为" + tempNumber + "\n" + e.Message,"错误", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
                 var s = RepairList;
@@ -80,7 +80,7 @@ namespace Anka2.Models
             }
             catch (Exception e)
             {
-                MessageBox.Show("Exercise数据连接错误，错误信息为：" + e.Message);
+                MessageBox.Show("Exercise数据连接错误，错误信息为：" + e.Message,"错误",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
 
@@ -131,7 +131,7 @@ namespace Anka2.Models
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("数据表GAD转换错误,错误编号为" + tempNumber + "\n" + e.Message);
+                    MessageBox.Show("数据表GAD转换错误,错误编号为" + tempNumber + "\n" + e.Message,"错误", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
                 context.SaveChanges();
@@ -141,7 +141,7 @@ namespace Anka2.Models
             }
             catch (Exception e)
             {
-                MessageBox.Show("GAD数据连接错误，错误信息为：" + e.Message);
+                MessageBox.Show("GAD数据连接错误，错误信息为：" + e.Message,"错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 

@@ -7,6 +7,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Anka2.ViewModels
 {
@@ -16,6 +19,35 @@ namespace Anka2.ViewModels
         public void UpDateStatusInfo(NotifyStatusInfoHandler notify)
         {
             NotifyStatusInfo += notify;
+        }
+        private CommandObject<KeyEventArgs> _keyDownCommand;
+        public CommandObject<KeyEventArgs> KeyDownCommand
+        {
+            get
+            {
+                if (_keyDownCommand == null)
+                    _keyDownCommand = new CommandObject<KeyEventArgs>(
+                        new Action<KeyEventArgs>(e =>
+                        {
+                            if (e.Key == Key.Enter)
+                            {
+                                IInputElement focusedElement = Keyboard.FocusedElement;
+                                if (focusedElement.GetType().Name == "CheckBox" || focusedElement.GetType().Name == "RadioButton")
+                                {
+                                    ((ToggleButton)focusedElement).IsChecked = !((ToggleButton)focusedElement).IsChecked;
+                                }
+
+                            }
+
+                            if (e.Key == Key.Escape)
+                            {
+                                IInputElement focusedElement = Keyboard.FocusedElement;
+                                ((Control)focusedElement).MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
+                            }
+
+                        }));
+                return _keyDownCommand;
+            }
         }
 
         private bool _exerciseContentEnable = false;
@@ -147,7 +179,7 @@ namespace Anka2.ViewModels
                                 }
                                 else
                                 {
-                                    MessageBox.Show("当前档案不存在，请新建档案信息。");
+                                    MessageBox.Show("当前档案不存在，请新建档案信息。","警告", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 }
                             }
                         }));

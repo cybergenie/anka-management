@@ -211,7 +211,7 @@ namespace Anka2.Models.ExerciseValueConverter
                     }
                     else
                     {
-                        MessageBox.Show("第" + (index + 1) + "个血压值填写错误。");
+                        MessageBox.Show("第" + (index + 1) + "个血压值填写错误。","警告",MessageBoxButton.OK,MessageBoxImage.Warning);
                     }
                 }
                 ((Exercise)tempValue).BloodPressureLower = string.Join('|', BloodPressureLower);

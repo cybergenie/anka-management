@@ -24,6 +24,7 @@ namespace Anka2.Services
                     var existingPerson = context.DbPerson
                         .Where(BasicInfo => BasicInfo.Number == personId)
                         .Include(BasicInfo => BasicInfo.PExercise)
+                        .Include(BasicInfo => BasicInfo.PGAD)
                         .ToList();
 
                     if (existingPerson.Count > 0)
@@ -43,7 +44,7 @@ namespace Anka2.Services
             }
             catch (Exception e)
             {
-                MessageBox.Show("新建档案错误，错误信息为：" + e.Message);
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message,"错误",MessageBoxButton.OK,MessageBoxImage.Error);
                 return NewPersonResult.Error;
             }            
         }   
@@ -73,7 +74,7 @@ namespace Anka2.Services
             }
             catch (Exception e)
             {
-                MessageBox.Show("档案号查询错误，错误信息为：" + e.Message);
+                MessageBox.Show("档案号查询错误，错误信息为：" + e.Message,"错误",MessageBoxButton.OK,MessageBoxImage.Error);
                 return false;
             }
         }
@@ -200,7 +201,8 @@ namespace Anka2.Services
     {
         Success,
         Warning,
-        Error
+        Error,
+        Info
     }
 
     public enum NewPersonResult

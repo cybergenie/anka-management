@@ -19,6 +19,11 @@
             <mc:ChecksConverter x:Key="ChecksConverter"/>
             <mc:InRoomUpConverter x:Key="InRoomUpConverter"/>
         </StackPanel.Resources>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="KeyDown">
+                <m:EventCommand Command="{Binding KeyDownCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
             <Label x:Name="lbLoadName"  Height="25" Width="65" Content="{Binding BasicInfo.Name}"/>
