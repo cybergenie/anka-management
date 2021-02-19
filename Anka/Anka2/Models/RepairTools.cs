@@ -13,12 +13,14 @@ namespace Anka2.Models
 {
     public class RepairTools
     {
-        public static bool RepairData()
+        async public static Task RepairData()
         {
             bool RepairResult = false;
-            RepairResult = RepairExercise();
-            RepairResult = RepairGAD();
-            return RepairResult;
+            await Task.Run(() =>
+            {
+                RepairResult = RepairExercise();
+                RepairResult = RepairGAD();
+            });          
 
         }
         private static bool RepairExercise()

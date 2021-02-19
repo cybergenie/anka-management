@@ -79,28 +79,31 @@ namespace Anka2.ViewModels
             {
                 if (_repair_Executed == null)
                     _repair_Executed = new CommandObject<RoutedEventArgs>(
-                        new Action<RoutedEventArgs>(e =>
+                        new Action<RoutedEventArgs>(async e =>
                         {
-                            NotifyStatusInfo(InfoType.Info,"数据正在修复中,请稍等...");
-                        bool repairInfo = false;
+                            RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
+                            StatusBarViewModel statusBarContext = ((MainWindow)RootSource).StatusBar.DataContext as StatusBarViewModel;
+                            this.UpDateStatusInfo(statusBarContext.SetTipInfo);                           
+                            bool repairInfo = true;
                             try
                             {
-                                repairInfo = RepairTools.RepairData();
+                                NotifyStatusInfo(InfoType.Info, "数据正在修复中,请稍等...");
+                                await RepairTools.RepairData();
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
                                 repairInfo = false;
-                                MessageBox.Show("数据修复失败,失败信息:\n"+ex.Message,"错误", MessageBoxButton.OK,MessageBoxImage.Error);
+                                MessageBox.Show("数据修复失败,失败信息:\n" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                             finally
                             {
                                 switch (repairInfo)
                                 {
-                                    case true: NotifyStatusInfo(InfoType.Info, "数据修复已完成。");break;
-                                    case false: NotifyStatusInfo(InfoType.Info, "数据修复失败。"); break;
+                                    case true: NotifyStatusInfo(InfoType.Info, "数据修复已完成。"); break;
+                                    case false: NotifyStatusInfo(InfoType.Error, "数据修复失败。"); break;
                                 }
                             }
-                            
+
                         }));
                 return _repair_Executed;
             }
