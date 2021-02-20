@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -146,6 +147,38 @@ namespace Anka2.Services
             string endNumber = ItemNumber.Substring(ItemNumber.Length - 3, 3);
             string result = Regex.Replace(ItemNumber.Substring(0, ItemNumber.Length - 3), @"[^0-9]+", "/")+ endNumber;
             dr[columnName] = result;
+        }
+
+        public static string BackupFile(string originFile, string FilePath)
+        {
+            var file = originFile.Split('.');
+            string fileType;
+            string fileName;
+            if (file.Length > 1)
+            {
+                fileType = file[file.Length - 1];
+                fileName = originFile.Remove(originFile.Length - fileType.Length - 1, fileType.Length+1);
+            }
+            else
+            {
+                fileName = originFile;
+            }
+            string backupFile = fileName + "_" + DateTime.Now.ToString("yyMMddHHmmss");
+            string pLocalFilePath = FilePath + originFile;//要复制的文件路径
+            string pSaveFilePath = FilePath + backupFile + ".bak";//指定存储的路径
+            try
+            {
+                if (File.Exists(pLocalFilePath))//必须判断要复制的文件是否存在
+                {
+                    File.Copy(pLocalFilePath, pSaveFilePath, false);//三个参数分别是源文件路径，存储路径，若存储路径有相同文件是否替换
+                }
+            }
+            catch
+            {
+                MessageBox.Show("文件"+ FilePath+ originFile+"备份失败。","错误",MessageBoxButton.OK,MessageBoxImage.Error);
+                return null;
+            }
+            return backupFile+".bak";
         }
     }
 

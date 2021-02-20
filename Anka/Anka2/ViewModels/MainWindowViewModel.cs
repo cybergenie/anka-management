@@ -2,6 +2,8 @@
 using Anka2.Services;
 using Anka2.Views;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Anka2.ViewModels
@@ -72,6 +74,37 @@ namespace Anka2.ViewModels
             }
         }
 
+
+        private CommandObject<RoutedEventArgs> _backup_Executed;
+        public CommandObject<RoutedEventArgs> Backup_Executed
+        {
+            get
+            {
+                if (_backup_Executed == null)
+                    _backup_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>( e =>
+                        {
+                            RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
+                            StatusBarViewModel statusBarContext = ((MainWindow)RootSource).StatusBar.DataContext as StatusBarViewModel;
+                            this.UpDateStatusInfo(statusBarContext.SetTipInfo);
+
+                            NotifyStatusInfo(InfoType.Info, "开始备份数据库。");
+                            var backupResult = DataUitls.BackupFile("anka.db", ".\\DataBase\\");
+                            if(backupResult is not null)
+                            {
+                                NotifyStatusInfo(InfoType.Info, "数据文件" + backupResult + "备份完成。");
+                            }
+                            else
+                            {
+                                NotifyStatusInfo(InfoType.Info, "数据文件备份失败。");
+                            }                                                                             
+                            
+                        }));
+                return _backup_Executed;
+            }
+        }
+
+
         private CommandObject<RoutedEventArgs> _repair_Executed;
         public CommandObject<RoutedEventArgs> Repair_Executed
         {
@@ -84,24 +117,38 @@ namespace Anka2.ViewModels
                             RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
                             StatusBarViewModel statusBarContext = ((MainWindow)RootSource).StatusBar.DataContext as StatusBarViewModel;
                             this.UpDateStatusInfo(statusBarContext.SetTipInfo);
-                            bool repairInfo = true;
+                            RepairInfo repairInfo;
                             try
-                            {                               
-                                await RepairTools.RepairData();
+                            {
+                                NotifyStatusInfo(InfoType.Info, "开始备份数据库。");
+                                var backupFile = DataUitls.BackupFile("anka.db", ".\\DataBase\\");
+                                if (backupFile is not null)
+                                {
+                                    NotifyStatusInfo(InfoType.Info, "数据文件" + backupFile + "备份成功。");
+                                    repairInfo = new RepairInfo();
+                                    await Task.Run(() =>
+                                    {
+                                        App.Current.Dispatcher.Invoke((Action)(() =>
+                                        {
+                                            repairInfo.Show();
+                                        }));                                       
+
+                                    });
+
+                                   
+                                }
+                                else
+                                {
+                                    NotifyStatusInfo(InfoType.Info, "数据文件备份失败，无法进行数据修复。");
+                                }
+                                
+                               
                             }
                             catch (Exception ex)
-                            {
-                                repairInfo = false;
+                            {                                
                                 MessageBox.Show("数据修复失败,失败信息:\n" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
-                            finally
-                            {
-                                switch (repairInfo)
-                                {
-                                    case true: NotifyStatusInfo(InfoType.Info, "数据修复已完成。"); break;
-                                    case false: NotifyStatusInfo(InfoType.Error, "数据修复失败。"); break;
-                                }
-                            }
+                            
 
                         }));
                 return _repair_Executed;

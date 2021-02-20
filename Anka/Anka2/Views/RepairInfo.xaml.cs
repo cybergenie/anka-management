@@ -103,6 +103,11 @@ namespace Anka2.Views
                 this.repairInfo.Text += "PHQ评估量表数据已经修复完成。\n";                
             }));
             bgMeet.ReportProgress(100);
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.btOK.IsEnabled = true;
+            }));
+           
         }
 
         private bool RepairExercise()
@@ -155,7 +160,7 @@ namespace Anka2.Views
                 {
                     App.Current.Dispatcher.Invoke((Action)(() =>
                     {
-                        this.repairInfo.Text += "ERROR:数据表Exercise转换错误,错误编号为" + tempNumber + "\n" + e.Message+"\n";                        
+                        this.repairInfo.Text += "*ERROR:数据表Exercise转换错误,错误编号为" + tempNumber + "\n" + e.Message+"\n";                        
                     }));                    
                     return false;
                 }
@@ -169,7 +174,7 @@ namespace Anka2.Views
             {
                 App.Current.Dispatcher.Invoke((Action)(() =>
                 {
-                    this.repairInfo.Text += "ERROR:Exercise数据连接错误，错误信息为：" + e.Message + "\n";
+                    this.repairInfo.Text += "*ERROR:Exercise数据连接错误，错误信息为：" + e.Message + "\n";
                 }));               
                 return false;
             }
@@ -223,7 +228,7 @@ namespace Anka2.Views
                 {
                     App.Current.Dispatcher.Invoke((Action)(() =>
                     {
-                        this.repairInfo.Text += "ERROR:数据表GAD转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
+                        this.repairInfo.Text += "*ERROR:数据表GAD转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
                     }));                    
                     return false;
                 }
@@ -236,7 +241,7 @@ namespace Anka2.Views
             {
                 App.Current.Dispatcher.Invoke((Action)(() =>
                 {
-                    this.repairInfo.Text += "ERROR:GAD数据连接错误，错误信息为：" + e.Message + "\n";
+                    this.repairInfo.Text += "*ERROR:GAD数据连接错误，错误信息为：" + e.Message + "\n";
                 }));               
                 return false;
             }
@@ -290,7 +295,7 @@ namespace Anka2.Views
                 {
                     App.Current.Dispatcher.Invoke((Action)(() =>
                     {
-                        this.repairInfo.Text += "ERROR:数据表PHQ转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
+                        this.repairInfo.Text += "*ERROR:数据表PHQ转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
                     }));                    
                     return false;
                 }
@@ -303,7 +308,7 @@ namespace Anka2.Views
             {
                 App.Current.Dispatcher.Invoke((Action)(() =>
                 {
-                    this.repairInfo.Text += "ERROR:PHQ数据连接错误，错误信息为：" + e.Message + "\n";
+                    this.repairInfo.Text += "*ERROR:PHQ数据连接错误，错误信息为：" + e.Message + "\n";
                 }));               
                 return false;
             }
@@ -341,7 +346,7 @@ namespace Anka2.Views
             {
                 App.Current.Dispatcher.Invoke((Action)(() =>
                 {
-                    this.repairInfo.Text += "WARNING:"+Number+"记录编号信息缺失：年份信息改为1900."+"\n";
+                    this.repairInfo.Text += "*WARNING:"+Number+"记录编号信息缺失：年份信息改为1900."+"\n";
                 }));
                 newNumber += "-";
                 newNumber += "1900";
@@ -360,7 +365,7 @@ namespace Anka2.Views
                 {
                     App.Current.Dispatcher.Invoke((Action)(() =>
                     {
-                        this.repairInfo.Text += "WARNING:" + Number + "记录编号信息缺失：月份信息改为0." + "\n";
+                        this.repairInfo.Text += "*WARNING:" + Number + "记录编号信息缺失：月份信息改为0." + "\n";
                     }));
                 }
             }
@@ -370,7 +375,7 @@ namespace Anka2.Views
                 newNumber += "0";
                 App.Current.Dispatcher.Invoke((Action)(() =>
                 {
-                    this.repairInfo.Text += "WARNING:" + Number + "记录编号信息缺失：月份信息改为0." + "\n";
+                    this.repairInfo.Text += "*WARNING:" + Number + "记录编号信息缺失：月份信息改为0." + "\n";
                 }));
             }
             //日期信息
@@ -391,7 +396,7 @@ namespace Anka2.Views
                     newNumber += "0";
                     App.Current.Dispatcher.Invoke((Action)(() =>
                     {
-                        this.repairInfo.Text += "WARNING:" + Number + "日期信息缺失：日期信息改为0." + "\n";
+                        this.repairInfo.Text += "*WARNING:" + Number + "日期信息缺失：日期信息改为0." + "\n";
                     }));
                 }
             }
@@ -399,7 +404,7 @@ namespace Anka2.Views
             {
                 App.Current.Dispatcher.Invoke((Action)(() =>
                 {
-                    this.repairInfo.Text += "WARNING:" + Number + "日期信息缺失：日期信息改为0." + "\n";
+                    this.repairInfo.Text += "*WARNING:" + Number + "日期信息缺失：日期信息改为0." + "\n";
                 }));
                 newNumber += "/";
                 newNumber += "0";
@@ -409,7 +414,7 @@ namespace Anka2.Views
 
         }
 
-        private static T ItemCopy<T>(T item, string Number)
+        private  T ItemCopy<T>(T item, string Number)
         {
             PropertyDescriptorCollection properties =
               TypeDescriptor.GetProperties(typeof(T));
@@ -449,7 +454,10 @@ namespace Anka2.Views
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception("字段[" + info.Name + "]转换出错," + ex.Message);
+                        App.Current.Dispatcher.Invoke((Action)(() =>
+                        {
+                            this.repairInfo.Text += "*ERROR:" + "字段[" + info.Name + "]转换出错," + ex.Message + "\n";
+                        }));                        
                     }
                 }
             }

@@ -1,4 +1,5 @@
-﻿using Anka2.Views;
+﻿using Anka2.Services;
+using Anka2.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace Anka2.Models
     public class RepairTools
     {
         async public static Task RepairData()
-        {
+        {            
             RepairInfo repairInfo;
             repairInfo = new RepairInfo();
             await Task.Run(() =>

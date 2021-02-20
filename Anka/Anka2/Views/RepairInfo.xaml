@@ -125,6 +125,6 @@
                 </TextBox.Style>
             </TextBox>
         </StackPanel>
-        <Button x:Name="btOK" Grid.Row="2" Width="65" Height="25" Content="确  定" Click="btOK_Click"/>
+        <Button x:Name="btOK" Grid.Row="2" Width="65" Height="25" Content="确  定" Click="btOK_Click" IsEnabled="False"/>
     </Grid>
 </Window>

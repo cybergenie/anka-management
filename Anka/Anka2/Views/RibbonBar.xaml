@@ -69,13 +69,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Fluent:Button>
-                <Fluent:Button x:Name="btnExport" Header="导出" LargeIcon="/Resources/Images/ExportBig.png" Size="Large" Margin="5,0,5,0" ToolTip="导出项目（Ctrl+P）">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <cmd:EventCommand Command="{Binding Export_Executed }"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Fluent:Button>
+                
             </Fluent:RibbonGroupBox>
             <Fluent:RibbonGroupBox x:Name="gbEdit" Header="编辑">
                 <Fluent:Button x:Name="btnPaste" Header="粘贴" LargeIcon="/Resources/Images/PasteBig.png" Margin="5,0,5,0" Size="Large" ToolTip="粘贴（Ctrl+V）"                               
@@ -90,13 +84,27 @@
         </Fluent:RibbonTabItem>
         <Fluent:RibbonTabItem Header="工具" Width="65">
             <Fluent:RibbonGroupBox x:Name="gbTools" Header="工具">
-                <Fluent:Button x:Name="btnRepair" Header="修复" LargeIcon="/Resources/Images/NewBig.png" Size="Large" Margin="5,0,5,0" ToolTip="修复以前的数据文件" >
+                <Fluent:Button x:Name="btnBackup" Header="备份" LargeIcon="/Resources/Images/Backup.png" Size="Large" Margin="5,0,5,0" ToolTip="备份数据文件">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cmd:EventCommand Command="{Binding Backup_Executed }"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Fluent:Button>
+                <Fluent:Button x:Name="btnRepair" Header="修复" LargeIcon="/Resources/Images/Repair.png" Size="Large" Margin="5,0,5,0" ToolTip="修复以前的数据文件" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <cmd:EventCommand Command="{Binding Repair_Executed }"/>
                         </i:EventTrigger>
+                    </i:Interaction.Triggers>               
+                </Fluent:Button>
+                <Fluent:Button x:Name="btnExport" Header="导出" LargeIcon="/Resources/Images/ExportBig.png" Size="Large" Margin="5,0,5,0" ToolTip="导出项目（Ctrl+P）">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cmd:EventCommand Command="{Binding Export_Executed }"/>
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </Fluent:Button>                
+                </Fluent:Button>
             </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
     </Fluent:Ribbon>

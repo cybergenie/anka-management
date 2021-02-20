@@ -18,6 +18,7 @@
     <None Remove="Resources\Images\AlignObjectsLeft.png" />
     <None Remove="Resources\Images\AlignObjectsRight.png" />
     <None Remove="Resources\Images\AlignObjectsTop.png" />
+    <None Remove="Resources\Images\Backup.png" />
     <None Remove="Resources\Images\BringForward.png" />
     <None Remove="Resources\Images\BringForwardBig.png" />
     <None Remove="Resources\Images\BringToFront.png" />
@@ -40,6 +41,7 @@
     <None Remove="Resources\Images\PasteBig.png" />
     <None Remove="Resources\Images\Print.png" />
     <None Remove="Resources\Images\Process.png" />
+    <None Remove="Resources\Images\Repair.png" />
     <None Remove="Resources\Images\Save.png" />
     <None Remove="Resources\Images\SaveBig.png" />
     <None Remove="Resources\Images\SendBackward.png" />
@@ -86,6 +88,7 @@
     <Resource Include="Resources\Images\AlignObjectsTop.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Backup.png" />
     <Resource Include="Resources\Images\BringForward.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -143,6 +146,7 @@
     <Resource Include="Resources\Images\Process.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Repair.png" />
     <Resource Include="Resources\Images\Save.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
