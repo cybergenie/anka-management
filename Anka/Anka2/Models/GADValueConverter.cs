@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Anka2.Models.GADValueConverter
@@ -62,7 +60,7 @@ namespace Anka2.Models.GADValueConverter
                                 {
                                     case 0:
                                         return true;
-                                    default :
+                                    default:
                                         return false;
                                 }
                             }
@@ -90,7 +88,7 @@ namespace Anka2.Models.GADValueConverter
                                     default: return false;
                                 }
                             }
-                        default:return false;
+                        default: return false;
 
                     }
                 }
@@ -116,12 +114,12 @@ namespace Anka2.Models.GADValueConverter
                     {
                         case true:
                             {
-                                ChecksArray[index] = checkItem.ToString(); break;                               
+                                ChecksArray[index] = checkItem.ToString(); break;
                             }
                         case false:
-                            {                              
+                            {
                                 break;
-                            }                           
+                            }
                     }
                 }
                 ((GAD)tempValue).GADResult = string.Join('|', ChecksArray);
@@ -132,19 +130,19 @@ namespace Anka2.Models.GADValueConverter
     }
 
     public class GADResultAllConverter : IValueConverter
-    {       
+    {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string GADResultAll = null;
             if (value is not null)
-            {               
+            {
                 if (((GAD)value).GADResult is not null)
                 {
                     int iGADResultAll = 0;
                     var GADResultArray = ((GAD)value).GADResult.Split('|');
-                    foreach(var GADResult in GADResultArray)
+                    foreach (var GADResult in GADResultArray)
                     {
-                        if(!string.IsNullOrEmpty(GADResult))
+                        if (!string.IsNullOrEmpty(GADResult))
                         {
                             if (System.Convert.ToInt32(GADResult) > 0)
                             {

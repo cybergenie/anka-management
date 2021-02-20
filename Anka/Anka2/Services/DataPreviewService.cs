@@ -1,19 +1,13 @@
 ﻿using Anka2.Models;
-using Anka2.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Anka2.Services
 {
-    public class DataPreviewService: NotifyObject
+    public class DataPreviewService : NotifyObject
     {
 
         private static DataTable ToDataTable<T>(IList<T> data, Dictionary<string, string> Dict)
@@ -26,16 +20,16 @@ namespace Anka2.Services
             {
                 if (Dict.ContainsKey(prop.Name))
                 {
-                  table.Columns.Add(Dict[prop.Name], typeof(string));
-                   
+                    table.Columns.Add(Dict[prop.Name], typeof(string));
+
                 }
-                
+
             }
             foreach (T item in data)
             {
                 DataRow row = table.NewRow();
                 foreach (PropertyDescriptor prop in properties)
-                {                    
+                {
                     if (Dict.Keys.Contains(prop.Name))
                         row[Dict[prop.Name]] = (prop.GetValue(item) ?? DBNull.Value).ToString();
                 }
@@ -43,15 +37,15 @@ namespace Anka2.Services
                 foreach (PropertyDescriptor prop in properties)
                 {
                     if (prop.PropertyType.Name.Contains("List"))
-                    {                        
+                    {
                         if (Dict.Keys.Contains(prop.Name))
-                        {                            
+                        {
                             row[Dict[prop.Name]] = (prop.GetValue(item) ?? DBNull.Value);
                         }
                     }
                 }
                 table.Rows.Add(row);
-               
+
             }
             return table;
         }
@@ -92,7 +86,7 @@ namespace Anka2.Services
                     { "PCI",  "PCI"  },
                     { "ResidualStenosis", "75%以上残余狭窄数目"  },
                     { "CollatCirc", "侧枝循环"  },
-                    { "DominantCoronary", "优势冠脉" } 
+                    { "DominantCoronary", "优势冠脉" }
                 };
                 using var context = new DbAdapter();
                 var BasicInfoList = context.DbPerson.ToList();
@@ -105,7 +99,7 @@ namespace Anka2.Services
             {
                 if (dtBasicInfo != value)
                 {
-                    dtBasicInfo = value;                    
+                    dtBasicInfo = value;
                 }
                 RaisePropertyChanged(nameof(DtBasicInfo));
             }
@@ -124,33 +118,33 @@ namespace Anka2.Services
                     { "Age", "年龄" },
                     { "Male",  "性别" },
                     { "ExerciseNumber", "记录编号"  },
-                    { "BedUp", "床上负荷" },                   
-                    { "InRoom",  "室内负荷"},                        
-                    { "OutRoom", "室外负荷"},                    
+                    { "BedUp", "床上负荷" },
+                    { "InRoom",  "室内负荷"},
+                    { "OutRoom", "室外负荷"},
                     { "OutSide", "院外负荷" }
 
                 };
-            
+
                 using var context = new DbAdapter();
                 //var ExerciseList = context.DbPerson
                 //    .Include(BasicInfo => BasicInfo.PExercise)
                 //    .ToList();
 
                 var ExerciseList = (from basicInfo in context.DbPerson
-                                   join exercise in context.DbExercise
-                                   on basicInfo.Number equals exercise.basicinfoNumber
-                                   select new ExerciseList
-                                   {
-                                       Number = basicInfo.Number,
-                                       Name = basicInfo.Name,
-                                       Male = basicInfo.Male,
-                                       Age = basicInfo.Age,
-                                       ExerciseNumber = exercise.ExerciseNumber.Remove(0, basicInfo.Number.Length + 1),
-                                       BedUp = exercise.Checks,
-                                       InRoom = exercise.Checks,
-                                       OutRoom = exercise.Checks,
-                                       OutSide = exercise.Checks
-                                   }).ToList();
+                                    join exercise in context.DbExercise
+                                    on basicInfo.Number equals exercise.basicinfoNumber
+                                    select new ExerciseList
+                                    {
+                                        Number = basicInfo.Number,
+                                        Name = basicInfo.Name,
+                                        Male = basicInfo.Male,
+                                        Age = basicInfo.Age,
+                                        ExerciseNumber = exercise.ExerciseNumber.Remove(0, basicInfo.Number.Length + 1),
+                                        BedUp = exercise.Checks,
+                                        InRoom = exercise.Checks,
+                                        OutRoom = exercise.Checks,
+                                        OutSide = exercise.Checks
+                                    }).ToList();
 
                 DataTable DtExercise = ToDataTable<ExerciseList>(ExerciseList, DicExercise);
                 DtExercise.TableName = "运动负荷";
@@ -161,7 +155,7 @@ namespace Anka2.Services
             {
                 if (_dtExercise != value)
                 {
-                    _dtExercise = value;                    
+                    _dtExercise = value;
                 }
                 RaisePropertyChanged(nameof(DtExercise));
             }
@@ -179,23 +173,23 @@ namespace Anka2.Services
                     { "Name",  "姓名" },
                     { "Age", "年龄" },
                     { "Male",  "性别" },
-                    { "GADNumber", "记录编号"  },                   
-                    { "GADResult", "GAD总分" }
+                    { "GADNumber", "记录编号"  },
+                    { "GADResult", "GAD评分" }
 
                 };
                 using var context = new DbAdapter();
                 var GADList = (from basicInfo in context.DbPerson
-                                    join gad in context.DbGAD
-                                    on basicInfo.Number equals gad.basicinfoNumber
-                                    select new GADList
-                                    {
-                                        Number = basicInfo.Number,
-                                        Name = basicInfo.Name,
-                                        Male = basicInfo.Male,
-                                        Age = basicInfo.Age,
-                                        GADNumber = gad.GADNumber.Remove(0, basicInfo.Number.Length+1),
-                                        GADResult = gad.GADResult                                       
-                                    }).ToList();
+                               join gad in context.DbGAD
+                               on basicInfo.Number equals gad.basicinfoNumber
+                               select new GADList
+                               {
+                                   Number = basicInfo.Number,
+                                   Name = basicInfo.Name,
+                                   Male = basicInfo.Male,
+                                   Age = basicInfo.Age,
+                                   GADNumber = gad.GADNumber.Remove(0, basicInfo.Number.Length + 1),
+                                   GADResult = gad.GADResult
+                               }).ToList();
                 DataTable DtGAD = ToDataTable<GADList>(GADList, DicGAD);
                 DtGAD.TableName = "GAD评估量表";
                 GADExportConverter.GADValueConvertor(ref DtGAD);
@@ -209,6 +203,48 @@ namespace Anka2.Services
                     _dtGAD = value;
                 }
                 RaisePropertyChanged(nameof(DtGAD));
+            }
+        }
+        public DataView _dtPHQ;
+        public DataView DtPHQ
+        {
+            get
+            {
+                Dictionary<string, string> DicPHQ = new Dictionary<string, string> {
+                    { "Number", "病案号" },
+                    { "Name",  "姓名" },
+                    { "Age", "年龄" },
+                    { "Male",  "性别" },
+                    { "PHQNumber", "记录编号"  },
+                    { "PHQResult", "PHQ评分" }
+
+                };
+                using var context = new DbAdapter();
+                var PHQList = (from basicInfo in context.DbPerson
+                               join phq in context.DbPHQ
+                               on basicInfo.Number equals phq.basicinfoNumber
+                               select new PHQList
+                               {
+                                   Number = basicInfo.Number,
+                                   Name = basicInfo.Name,
+                                   Male = basicInfo.Male,
+                                   Age = basicInfo.Age,
+                                   PHQNumber = phq.PHQNumber.Remove(0, basicInfo.Number.Length + 1),
+                                   PHQResult = phq.PHQResult
+                               }).ToList();
+                DataTable DtPHQ = ToDataTable<PHQList>(PHQList, DicPHQ);
+                DtPHQ.TableName = "PHQ评估量表";
+                PHQExportConverter.PHQValueConvertor(ref DtPHQ);
+                return DtPHQ.DefaultView;
+
+            }
+            set
+            {
+                if (_dtPHQ != value)
+                {
+                    _dtPHQ = value;
+                }
+                RaisePropertyChanged(nameof(DtPHQ));
             }
         }
 

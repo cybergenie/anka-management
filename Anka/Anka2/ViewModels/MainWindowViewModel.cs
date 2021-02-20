@@ -24,10 +24,10 @@ namespace Anka2.ViewModels
                 if (_new_Executed == null)
                     _new_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
-                        {                           
+                        {
                             RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
-                            NewPerson newPerson = new NewPerson();                            
-                            newPerson.AddNewPerson(this.GetNewPersonInfo);                            
+                            NewPerson newPerson = new NewPerson();
+                            newPerson.AddNewPerson(this.GetNewPersonInfo);
                             newPerson.Show();
                         }));
                 return _new_Executed;
@@ -83,7 +83,7 @@ namespace Anka2.ViewModels
                         {
                             RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
                             StatusBarViewModel statusBarContext = ((MainWindow)RootSource).StatusBar.DataContext as StatusBarViewModel;
-                            this.UpDateStatusInfo(statusBarContext.SetTipInfo);                           
+                            this.UpDateStatusInfo(statusBarContext.SetTipInfo);
                             bool repairInfo = true;
                             try
                             {

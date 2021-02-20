@@ -10,6 +10,9 @@
     <Compile Update="Views\ExportPreview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\RepairInfo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="CustomControls\Themes\Generic.xaml">
@@ -31,6 +34,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PhysiqueSheet.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RepairInfo.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SPPBSheet.xaml">

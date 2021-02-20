@@ -10,7 +10,7 @@ namespace Anka2
         public MainWindow()
         {
             InitializeComponent();
-        }       
+        }
 
     }
 }

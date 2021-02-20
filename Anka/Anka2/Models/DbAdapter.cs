@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Debug;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,11 +30,11 @@ namespace Anka2.Models
             base.OnConfiguring(optionsBuilder);
         }
     }
-    
 
-    
 
-   
+
+
+
 
     [Table("ipaq")]
     public class IPAQ
@@ -70,7 +69,7 @@ namespace Anka2.Models
         public BasicInfo Basicinfo { get; set; }
     }
 
-    
+
 
     [Table("physique")]
     public class Physique

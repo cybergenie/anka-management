@@ -2,10 +2,7 @@
 using Anka2.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -72,7 +69,7 @@ namespace Anka2.ViewModels
             {
                 if (_basicInfo != value)
                 {
-                    _basicInfo = value;                    
+                    _basicInfo = value;
                 }
                 RaisePropertyChanged(nameof(BasicInfo));
             }
@@ -107,7 +104,7 @@ namespace Anka2.ViewModels
             {
                 if (ExerciseIndex >= 0)
                 {
-                    BasicInfo.PExercise[ExerciseIndex] = value;                    
+                    BasicInfo.PExercise[ExerciseIndex] = value;
                 }
                 RaisePropertyChanged(nameof(ExerciseContent));
             }
@@ -131,7 +128,7 @@ namespace Anka2.ViewModels
                         value = value.Remove(value.Length - 3, 3);
                         value = Regex.Replace(value, @"[^0-9]+", "/");
                         value += endNumber;
-                    }                    
+                    }
                     _exerciseNumberText = value;
 
                 }
@@ -153,10 +150,10 @@ namespace Anka2.ViewModels
                                 if (BasicInfo is not null)
                                 {
                                     ExerciseContentEnable = true;
-                                    if (BasicInfo.PExercise is  null)
+                                    if (BasicInfo.PExercise is null)
                                     {
                                         List<Exercise> exercises = new List<Exercise>();
-                                        BasicInfo.PExercise= exercises;
+                                        BasicInfo.PExercise = exercises;
                                     }
                                     ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
                                     if (ExerciseIndex >= 0)
@@ -172,14 +169,14 @@ namespace Anka2.ViewModels
                                         BasicInfo = BasicInfo;
                                         ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
                                         ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
-                                       
+
                                         NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的运动负荷记录创建成功。记录编号为：" + ExerciseNumberText + "。");
                                     }
 
                                 }
                                 else
                                 {
-                                    MessageBox.Show("当前档案不存在，请新建档案信息。","警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 }
                             }
                         }));

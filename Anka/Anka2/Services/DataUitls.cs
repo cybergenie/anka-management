@@ -1,22 +1,19 @@
 ﻿using Anka2.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
 namespace Anka2.Services
 {
-    public class DataUitls 
+    public class DataUitls
     {
         public static NewPersonResult AddNewPerson(ref BasicInfo newPerson)
         {
-            string personId = newPerson.Number; 
+            string personId = newPerson.Number;
             try
             {
                 using (var context = new DbAdapter())
@@ -40,15 +37,15 @@ namespace Anka2.Services
                         context.SaveChanges();
                         return NewPersonResult.Success_New;
                     }
-                    
+
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show("新建档案错误，错误信息为：" + e.Message,"错误",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return NewPersonResult.Error;
-            }            
-        }   
+            }
+        }
         public static bool CheckNewPerson(ref BasicInfo newPerson)
         {
             string personId = newPerson.Number;
@@ -75,7 +72,7 @@ namespace Anka2.Services
             }
             catch (Exception e)
             {
-                MessageBox.Show("档案号查询错误，错误信息为：" + e.Message,"错误",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("档案号查询错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -88,21 +85,21 @@ namespace Anka2.Services
                 using (var context = new DbAdapter())
                 {
                     var existingPerson = context.DbPerson.Find(personId);
-                    if (existingPerson!=null)
+                    if (existingPerson != null)
                     {
                         context.Entry(existingPerson).CurrentValues.SetValues(Person);
                         context.SaveChanges();
                     }
                     else
                     {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);                       
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
-                    }                    
+                    }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);                
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
                 return false;
             }
             return true;
@@ -125,33 +122,10 @@ namespace Anka2.Services
             return (Window)parent;
         }
 
-        public static bool BasicRisk2Checked(string BasicRisk, int SN)
-        {
-            if (!String.IsNullOrEmpty(BasicRisk))
-            {
-                Char[] CharBasicRisks = BasicRisk.ToCharArray();
-                return CharBasicRisks[SN] == '1';
-            }
-            else
-                return false;
-        }
-
-        public static string Checked2BasicRisk(string BasicRisk, int SN, bool IsChecked)
-        {
-            if (String.IsNullOrEmpty(BasicRisk)) 
-                BasicRisk = "000000000000";
-
-            Char[] CharBasicRisks = BasicRisk.ToCharArray();
-            CharBasicRisks[SN] = IsChecked ? '1' : '0';
-            BasicRisk = new string(CharBasicRisks);
-            return BasicRisk;
-        }
-       
-
         public static bool IsPersonId(string personId)
-        {           
+        {
             Regex personIdReg = new Regex("^(\\d{8})$");
-            return personIdReg.IsMatch(personId.ToString());          
+            return personIdReg.IsMatch(personId.ToString());
 
         }
 
@@ -164,27 +138,15 @@ namespace Anka2.Services
                 _ => string.Empty,
             };
             dr[columnName] = gender;
-        }       
+        }
 
         public static void DateConvertor(DataRow dr, string columnName)
         {
-            string ExerciseNumber = dr[columnName] as string;
-            string result = System.Text.RegularExpressions.Regex.Replace(ExerciseNumber, @"[^0-9]+", "/");
+            string ItemNumber = dr[columnName] as string;
+            string endNumber = ItemNumber.Substring(ItemNumber.Length - 3, 3);
+            string result = Regex.Replace(ItemNumber.Substring(0, ItemNumber.Length - 3), @"[^0-9]+", "/")+ endNumber;
             dr[columnName] = result;
-        }       
-       
-       
-        public static void GADValueConvertor(ref DataTable dt)
-        {
-            foreach (DataRow dr in dt.Rows)
-            {
-                GenderConvertor(dr, "性别");
-                DateConvertor(dr, "记录编号");
-                //GADChecksConvertor(dr, "量表评分");               
-            }
         }
-
-
     }
 
     public enum SheetItems

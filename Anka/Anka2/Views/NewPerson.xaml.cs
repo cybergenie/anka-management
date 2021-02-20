@@ -1,8 +1,8 @@
 ﻿using Anka2.Models;
 using Anka2.Services;
 using Anka2.ViewModels;
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Anka2.Views
 {
@@ -41,9 +41,9 @@ namespace Anka2.Views
                 }
             }
             else
-                MessageBox.Show("档案号输入错误，请重新输入。","错误", MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("档案号输入错误，请重新输入。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            
+
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -59,22 +59,22 @@ namespace Anka2.Views
                 BasicInfo newPerson = new BasicInfo
                 {
                     Number = newPersonContext.PersonId
-                   
+
                 };
                 bool addInfo = DataUitls.CheckNewPerson(ref newPerson);
                 if (addInfo == true)
                 {
                     newPersonContext.PersonGender = newPerson.Male is null ? false : (bool)newPerson.Male;
                     newPersonContext.PersonName = newPerson.Name;
-                    newPersonContext.PersonAge = newPerson.Age;                    
+                    newPersonContext.PersonAge = newPerson.Age;
                     this.btNewPerson.Content = "读  取";
                     this.btNewPerson.Background = Brushes.PaleGreen;
                 }
-                else if(addInfo == false)
+                else if (addInfo == false)
                 {
                     newPersonContext.PersonGender = false;
                     newPersonContext.PersonName = string.Empty;
-                    newPersonContext.PersonAge = string.Empty;                    
+                    newPersonContext.PersonAge = string.Empty;
                     this.btNewPerson.Content = "新  建";
                     this.btNewPerson.Background = this.btCancel.Background;
                 }

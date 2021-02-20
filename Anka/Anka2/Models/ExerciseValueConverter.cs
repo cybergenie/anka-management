@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Data;
 
 namespace Anka2.Models.ExerciseValueConverter
-{   
+{
     public class ExerciseNumberConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -83,9 +83,9 @@ namespace Anka2.Models.ExerciseValueConverter
                             switch (value)
                             {
                                 case true:
-                                    ((Exercise)tempValue).InRoomUp = false;break;
+                                    ((Exercise)tempValue).InRoomUp = false; break;
                                 default:
-                                    ((Exercise)tempValue).InRoomUp = null;break;
+                                    ((Exercise)tempValue).InRoomUp = null; break;
                             }
                             break;
                         }
@@ -211,7 +211,7 @@ namespace Anka2.Models.ExerciseValueConverter
                     }
                     else
                     {
-                        MessageBox.Show("第" + (index + 1) + "个血压值填写错误。","警告",MessageBoxButton.OK,MessageBoxImage.Warning);
+                        MessageBox.Show("第" + (index + 1) + "个血压值填写错误。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 ((Exercise)tempValue).BloodPressureLower = string.Join('|', BloodPressureLower);
@@ -455,7 +455,7 @@ namespace Anka2.Models.ExerciseValueConverter
             tempValue = value;
             var parameterArray = ((string)parameter).ToCharArray();
             int index = System.Convert.ToInt32(parameterArray[0].ToString());
-            bool checkItem = parameterArray[1] == '1' ? true : false;            
+            bool checkItem = parameterArray[1] == '1' ? true : false;
             if (value is not null)
             {
                 if (((Exercise)value).Checks is not null)
@@ -512,7 +512,7 @@ namespace Anka2.Models.ExerciseValueConverter
                         case true:
                             {
                                 switch (value)
-                                {                                   
+                                {
                                     case false: ChecksArray[index] = "0"; break;
                                     case true: ChecksArray[index] = "1"; break;
                                     default: ChecksArray[index] = ""; break;

@@ -9,7 +9,7 @@ namespace Anka2.Models
     public class RequiredRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {            
+        {
             if (string.IsNullOrEmpty(value.ToString()))
                 return new ValidationResult(false, "该项不能为空值！");
             return new ValidationResult(true, null);
@@ -87,7 +87,7 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex personIdReg = new Regex("^(\\d{8})$");            
+            Regex personIdReg = new Regex("^(\\d{8})$");
             if (!String.IsNullOrEmpty(value.ToString()))
             {
                 if (!personIdReg.IsMatch(value.ToString()))
@@ -105,7 +105,7 @@ namespace Anka2.Models
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Regex personAgeReg = new Regex("^(\\d{1,3})$");           
+            Regex personAgeReg = new Regex("^(\\d{1,3})$");
             if (!String.IsNullOrEmpty(value.ToString()))
             {
                 if (!personAgeReg.IsMatch(value.ToString()))

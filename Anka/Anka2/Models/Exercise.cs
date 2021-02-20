@@ -19,9 +19,9 @@ namespace Anka2.Models
         public string? ECGs { get; set; }
         public string? Checks { get; set; }
         public string? basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; } 
+        public BasicInfo Basicinfo { get; set; }
 
-       
+
 
     }
 
@@ -32,9 +32,9 @@ namespace Anka2.Models
         public string? Age { get; set; }//年龄
         public bool? Male { get; set; }//性别
         public string ExerciseNumber { get; set; }
-        public string? BedUp { get; set; }        
-        public string? InRoom { get; set; }        
-        public string? OutRoom { get; set; }       
+        public string? BedUp { get; set; }
+        public string? InRoom { get; set; }
+        public string? OutRoom { get; set; }
         public string? OutSide { get; set; }
     }
 }

@@ -3,24 +3,24 @@ using System.Data;
 
 namespace Anka2.Models
 {
-    public class GADExportConverter
+    public class PHQExportConverter
     {
-        public static void GADValueConvertor(ref DataTable dt)
+        public static void PHQValueConvertor(ref DataTable dt)
         {
             foreach (DataRow dr in dt.Rows)
             {
                 DataUitls.GenderConvertor(dr, "性别");
                 DataUitls.DateConvertor(dr, "记录编号");
-                GADResultConvertor(dr, "GAD评分");
+                PHQResultConvertor(dr, "PHQ评分");
             }
         }
 
-        private static void GADResultConvertor(DataRow dr, string columnName)
+        private static void PHQResultConvertor(DataRow dr, string columnName)
         {
-            string GADResult = dr[columnName] as string;
+            string PHQResult = dr[columnName] as string;
             int result = 0;
 
-            string[] strResults = GADResult.Split('|');
+            string[] strResults = PHQResult.Split('|');
             foreach (var strResult in strResults)
             {
                 if (!string.IsNullOrEmpty(strResult))

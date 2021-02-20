@@ -10,7 +10,7 @@ namespace Anka2.ViewModels
 {
     public class BasicInfoSheetViewModel : NotifyObject, IStatusInfoService
     {
-        public NotifyStatusInfoHandler NotifyStatusInfo;         
+        public NotifyStatusInfoHandler NotifyStatusInfo;
         /// <summary>
         /// Enter键改变选框状态
         /// </summary>
@@ -37,25 +37,25 @@ namespace Anka2.ViewModels
                             {
                                 IInputElement focusedElement = Keyboard.FocusedElement;
                                 ((Control)focusedElement).MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
-                            }                          
+                            }
 
                         }));
                 return _keyDownCommand;
             }
         }
         private BasicInfo _basicInfo = null;
-        public BasicInfo BasicInfo 
+        public BasicInfo BasicInfo
         {
-            get=>_basicInfo;
+            get => _basicInfo;
             set
             {
-                if(_basicInfo!=value)
+                if (_basicInfo != value)
                 {
-                    _basicInfo = value;
-                    RaisePropertyChanged(nameof(BasicInfo));
+                    _basicInfo = value;                    
                 }
+                RaisePropertyChanged(nameof(BasicInfo));
             }
-        }   
+        }
 
         /// <summary>
         /// 激活基本信息输入区域
@@ -68,7 +68,7 @@ namespace Anka2.ViewModels
             {
                 if (_basicInfoContentEnable != value)
                 {
-                    _basicInfoContentEnable = value;                   
+                    _basicInfoContentEnable = value;
                     RaisePropertyChanged(nameof(BasicInfoContentEnable));
                 }
             }

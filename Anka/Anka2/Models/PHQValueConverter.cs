@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Anka2.Models.PHQValueConverter
@@ -142,7 +140,7 @@ namespace Anka2.Models.PHQValueConverter
                 int iPHQResultAll = 0;
                 if (((PHQ)value).PHQResult is not null)
                 {
-                    
+
                     var PHQResultArray = ((PHQ)value).PHQResult.Split('|');
                     foreach (var PHQResult in PHQResultArray)
                     {
@@ -157,9 +155,9 @@ namespace Anka2.Models.PHQValueConverter
                     PHQResultAll = iPHQResultAll.ToString();
                 }
 
-                if(iPHQResultAll is >=0 and <=4)
+                if (iPHQResultAll is >= 0 and <= 4)
                 {
-                    if(parameter is "1")
+                    if (parameter is "1")
                     {
                         return true;
                     }
@@ -186,7 +184,7 @@ namespace Anka2.Models.PHQValueConverter
                         return true;
                     }
                 }
-                if (iPHQResultAll is >= 19 )
+                if (iPHQResultAll is >= 19)
                 {
                     if (parameter is "5")
                     {

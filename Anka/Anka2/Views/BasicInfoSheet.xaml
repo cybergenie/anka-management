@@ -16,7 +16,7 @@
         <StackPanel.Resources>
             <m:GenderConverter x:Key="GenderConverter"/>
             <mc:CollatCircContentConverter x:Key="CollatCircContentConverter"/>
-            <mc:RiskOtherCheckedConverter x:Key="Risk13CheckedConverter"/>
+            <mc:RiskOtherConverter x:Key="RiskOtherConverter"/>
             <mc:DCLCheckedConverter x:Key="DCLCheckedConverter"/>
             <mc:DCBCheckedConverter x:Key="DCBCheckedConverter"/>
             <mc:DCRCheckedConverter x:Key="DCRCheckedConverter"/>
@@ -123,10 +123,14 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" >
                     <CheckBox x:Name="cbRisk13" Content="其他:" Height="25" Width="65" VerticalContentAlignment="Center" 
-                              IsChecked="{Binding BasicInfo.RiskOther, Converter={StaticResource Risk13CheckedConverter}}"/>
+                              IsChecked="{Binding BasicInfo, Converter={StaticResource RiskOtherConverter},ConverterParameter = 12}"/>
                     <TextBox x:Name="txRisk13" Width="135" Height="25" VerticalContentAlignment="Center" 
-                             IsEnabled="{Binding BasicInfo.RiskOther, Converter={StaticResource Risk13CheckedConverter}}" 
-                             Text="{Binding BasicInfo.RiskOther}"/>
+                             IsEnabled="{Binding BasicInfo, Converter={StaticResource RiskOtherConverter},ConverterParameter = 12}" >
+                        <TextBox.Text>
+                            <Binding Path="BasicInfo" Converter="{StaticResource RiskOtherConverter}" ConverterParameter="00"/>
+                        </TextBox.Text>
+                    </TextBox>
+                    
                 </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
