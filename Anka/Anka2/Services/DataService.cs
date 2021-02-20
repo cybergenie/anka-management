@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace Anka2.Services
 {
-    public class DataService: NotifyObject
+    public class DataPreviewService: NotifyObject
     {
 
         private static DataTable ToDataTable<T>(IList<T> data, Dictionary<string, string> Dict)

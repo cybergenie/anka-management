@@ -25,6 +25,7 @@ namespace Anka2.Services
                         .Where(BasicInfo => BasicInfo.Number == personId)
                         .Include(BasicInfo => BasicInfo.PExercise)
                         .Include(BasicInfo => BasicInfo.PGAD)
+                        .Include(BasicInfo => BasicInfo.PPHQ)
                         .ToList();
 
                     if (existingPerson.Count > 0)

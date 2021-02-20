@@ -146,7 +146,10 @@ namespace Anka2.Models.GADValueConverter
                     {
                         if(!string.IsNullOrEmpty(GADResult))
                         {
-                            iGADResultAll += System.Convert.ToInt32(GADResult);
+                            if (System.Convert.ToInt32(GADResult) > 0)
+                            {
+                                iGADResultAll += System.Convert.ToInt32(GADResult);
+                            }
                         }
                     }
                     GADResultAll = iGADResultAll.ToString();

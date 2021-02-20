@@ -45,5 +45,6 @@ namespace Anka2.Models
         public string? LY { get; set; }
         public virtual List<Exercise> PExercise { get; set; }
         public virtual List<GAD> PGAD { get; set; }
+        public virtual List<PHQ> PPHQ { get; set; }
     }
 }

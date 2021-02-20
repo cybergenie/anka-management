@@ -70,15 +70,7 @@ namespace Anka2.Models
         public BasicInfo Basicinfo { get; set; }
     }
 
-    [Table("phq")]
-    public class PHQ
-    {
-        [Key]
-        public string PHQNumber { get; set; }
-        public string PHQResult { get; set; }
-        public string basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; }
-    }
+    
 
     [Table("physique")]
     public class Physique

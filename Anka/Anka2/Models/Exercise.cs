@@ -17,7 +17,7 @@ namespace Anka2.Models
         public string? BorgIndex { get; set; }
         public string? Remarks { get; set; }
         public string? ECGs { get; set; }
-        public string Checks { get; set; }
+        public string? Checks { get; set; }
         public string? basicinfoNumber { set; get; }
         public BasicInfo Basicinfo { get; set; } 
 

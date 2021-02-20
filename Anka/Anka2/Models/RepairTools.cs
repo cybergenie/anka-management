@@ -14,12 +14,12 @@ namespace Anka2.Models
     public class RepairTools
     {
         async public static Task RepairData()
-        {
-            bool RepairResult = false;
+        {            
             await Task.Run(() =>
             {
-                RepairResult = RepairExercise();
-                RepairResult = RepairGAD();
+                RepairExercise();
+                RepairGAD();
+                RepairPHQ();
             });          
 
         }
@@ -144,6 +144,67 @@ namespace Anka2.Models
             catch (Exception e)
             {
                 MessageBox.Show("GAD数据连接错误，错误信息为：" + e.Message,"错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+        }
+
+        private static bool RepairPHQ()
+        {
+            try
+            {
+                var context = new DbAdapter();
+                var RepairList = context.DbPHQ.ToList();
+                string tempNumber = null;
+                try
+                {
+                    for (int i = 0; i < RepairList.Count; i++)
+                    {
+                        tempNumber = RepairList[i].PHQNumber.Trim();
+                        var tempList = RepairList[i];
+                        string tempBaiscNumber = RepairList[i].basicinfoNumber;
+                        context.DbPHQ.Remove(tempList);
+
+                        RepairList.RemoveAt(i);
+                        var newNumber = NumberConverter(tempNumber, tempBaiscNumber);
+                        RepairList.Insert(i, ItemCopy(tempList, newNumber));
+
+                    }
+
+                    for (int i = 0; i < RepairList.Count; i++)
+                    {
+                        Regex IndexReg = new Regex("^(-\\d{2})$");
+                        if (!IndexReg.IsMatch(RepairList[i].PHQNumber.Substring(RepairList[i].PHQNumber.Length - 3, 3)))
+                        {
+                            string tempListNumber = RepairList[i].PHQNumber;
+                            var exsitingList = RepairList.FindAll((PHQ e) => e.PHQNumber == tempListNumber);
+                            RepairList.RemoveAll((PHQ e) => e.PHQNumber == tempListNumber);
+                            for (int j = 0; j < exsitingList.Count; j++)
+                            {
+                                if (!string.IsNullOrWhiteSpace(exsitingList[j].basicinfoNumber))
+                                {
+                                    exsitingList[j].PHQNumber = exsitingList[j].PHQNumber + "-" + (j + 1).ToString("D2");
+                                    tempNumber = exsitingList[j].PHQNumber;
+                                    context.DbPHQ.Add(exsitingList[j]);
+                                    RepairList.Add(exsitingList[j]);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("数据表PHQ转换错误,错误编号为" + tempNumber + "\n" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                context.SaveChanges();
+                return true;
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("PHQ数据连接错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 

@@ -143,6 +143,11 @@ namespace Anka2.ViewModels
             gadSheetViewModel.GADContent = null;
             gadSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
 
+            PHQSheetViewModel phqSheetViewModel = ((MainWindow)RootSource).PHQSheet.DataContext as PHQSheetViewModel;
+            phqSheetViewModel.UpDateStatusInfo(statusBarContext.SetTipInfo);//绑定exerciseSheet的状态栏信息更新
+            phqSheetViewModel.PHQContent = null;
+            phqSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
+
         }
 
         public void UpDateStatusInfo(NotifyStatusInfoHandler notify)

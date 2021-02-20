@@ -50,6 +50,9 @@
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="PHQ" Title="PHQ评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="PHQ" >
                                 <ScrollViewer>
+                                    <ScrollViewer.DataContext>
+                                        <s:PHQSheetViewModel/>
+                                    </ScrollViewer.DataContext>
                                     <ContentControl x:Name="PHQSheet" Content="{StaticResource PHQ}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>
