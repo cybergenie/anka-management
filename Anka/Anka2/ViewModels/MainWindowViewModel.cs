@@ -36,6 +36,24 @@ namespace Anka2.ViewModels
             }
         }
 
+        private CommandObject<RoutedEventArgs> _preview_Executed;
+        public CommandObject<RoutedEventArgs> Preview_Executed
+        {
+            get
+            {
+                if (_preview_Executed == null)
+                    _preview_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
+                            ExportPreview ExportPreview = new ExportPreview();
+                            //newPerson.AddNewPerson(this.GetNewPersonInfo);
+                            ExportPreview.Show();
+                        }));
+                return _preview_Executed;
+            }
+        }
+
         private CommandObject<RoutedEventArgs> _export_Executed;
         public CommandObject<RoutedEventArgs> Export_Executed
         {

@@ -102,12 +102,47 @@ namespace Anka2.Views
             {
                 this.repairInfo.Text += "PHQ评估量表数据已经修复完成。\n";                
             }));
+            bgMeet.ReportProgress(60);
+            RepairIPAQ();
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text += "IPAQ评估量表数据已经修复完成。\n";
+            }));
+
+            bgMeet.ReportProgress(70);
+            RepairOHQ();
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text += "口腔卫生评估量表数据已经修复完成。\n";
+            }));
+
+            bgMeet.ReportProgress(80);
+            RepairSPPB();
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text += "SPPB/身体平衡评估量表数据已经修复完成。\n";
+            }));
+
+            bgMeet.ReportProgress(90);
+            RepairPhysique();
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text += "体质数据表已经修复完成。\n";
+            }));
+
+
             bgMeet.ReportProgress(100);
             App.Current.Dispatcher.Invoke((Action)(() =>
             {
                 this.btOK.IsEnabled = true;
             }));
-           
+
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text += "数据修复完成。\n";
+            }));
+            bgMeet.ReportProgress(100);
+
         }
 
         private bool RepairExercise()
@@ -314,6 +349,26 @@ namespace Anka2.Views
             }
 
         }
+        private bool RepairIPAQ()
+        {
+            return true;
+        }
+
+        private bool RepairOHQ()
+        {
+            return true;
+        }
+
+        private bool RepairSPPB()
+        {
+            return true;
+        }
+
+        private bool RepairPhysique()
+        {
+            return true;
+        }
+
 
         private string NumberConverter(string Number, string basicinfoNumber)
         {

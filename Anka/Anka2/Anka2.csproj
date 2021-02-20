@@ -39,6 +39,7 @@
     <None Remove="Resources\Images\OpenFolder.png" />
     <None Remove="Resources\Images\Paste.png" />
     <None Remove="Resources\Images\PasteBig.png" />
+    <None Remove="Resources\Images\Preview.png" />
     <None Remove="Resources\Images\Print.png" />
     <None Remove="Resources\Images\Process.png" />
     <None Remove="Resources\Images\Repair.png" />
@@ -139,6 +140,7 @@
     <Resource Include="Resources\Images\PasteBig.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Preview.png" />
     <Resource Include="Resources\Images\Print.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
