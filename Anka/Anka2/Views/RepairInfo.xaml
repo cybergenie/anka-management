@@ -6,30 +6,7 @@
         xmlns:local="clr-namespace:Anka2.Views"
         mc:Ignorable="d"
         Title="RepairInfo" Height="450" Width="800">
-    <Window.Resources>
-        <Style x:Key="NewFolderButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="ContentContainer">
-                        <!--设置背景-->
-                        <Image Name="IMG_BK" Stretch="Fill"  Source="Image/2.png"/>
-                        <Image Stretch="None" Margin="5"  Source="/WpfApplication9;component/Image/fold.png" VerticalAlignment="Center" HorizontalAlignment="Left"></Image>
-                        <TextBlock Margin="10 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">新建文件夹</TextBlock>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Source" TargetName="IMG_BK" Value="Image/1.png"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Source" TargetName="IMG_BK" Value="Image/1.png"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-        </Window.Resources>
+
 
     <Grid >
         <!--<Button Content ="开始" HorizontalAlignment="Left" Margin="10,10,0,0" Name ="button1" VerticalAlignment="Top" Click="button1_Click" Width ="48" />-->
