@@ -86,8 +86,7 @@ namespace Anka2.ViewModels
                             this.UpDateStatusInfo(statusBarContext.SetTipInfo);
                             bool repairInfo = true;
                             try
-                            {
-                                NotifyStatusInfo(InfoType.Info, "数据正在修复中,请稍等...");
+                            {                               
                                 await RepairTools.RepairData();
                             }
                             catch (Exception ex)

@@ -27,10 +27,11 @@ namespace Anka2.Views
         public RepairInfo()
         {
             InitializeComponent();
+            this.btReapir.Content = "开始\n修复";
         }
 
         BackgroundWorker bgMeet;
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void btReapir_Click(object sender, RoutedEventArgs e)
         {
             bgMeet = new BackgroundWorker();
             //能否报告进度更新
@@ -60,7 +61,7 @@ namespace Anka2.Views
         {
             this.Dispatcher.Invoke(new Action(() =>
             {
-                this.lab_pro.Content = e.ProgressPercentage + "%";
+                this.btReapir.Content = e.ProgressPercentage + "%";
             }));
         }
 
@@ -70,18 +71,41 @@ namespace Anka2.Views
             loading.Visibility = System.Windows.Visibility.Collapsed;
             this.Dispatcher.Invoke(new Action(() =>
             {
-                this.lab_pro.Content = "完成";
+                this.btReapir.Content = "修复\n完成";
             }));
         }
 
         public void GetData()
         {
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text = "开始修复运动负荷表数据...\n";
+            }));
+            
+            bgMeet.ReportProgress(1);
             RepairExercise();
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text += "运动负荷表已经修复完成。\n";
+                this.repairInfo.Text += "开始修复GAD评估量表数据...\n";
+            }));           
+            bgMeet.ReportProgress(30);
             RepairGAD();
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text += "GAD评估量表数据已经修复完成。\n";
+                this.repairInfo.Text += "开始修复PHQ评估量表数据...\n";
+            }));
+            bgMeet.ReportProgress(50);
             RepairPHQ();
+            App.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                this.repairInfo.Text += "PHQ评估量表数据已经修复完成。\n";                
+            }));
+            bgMeet.ReportProgress(100);
         }
 
-        private static bool RepairExercise()
+        private bool RepairExercise()
         {
             try
             {
@@ -129,7 +153,10 @@ namespace Anka2.Views
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("数据表Exercise转换错误,错误编号为" + tempNumber + "\n" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    App.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        this.repairInfo.Text += "ERROR:数据表Exercise转换错误,错误编号为" + tempNumber + "\n" + e.Message+"\n";                        
+                    }));                    
                     return false;
                 }
                 var s = RepairList;
@@ -140,13 +167,16 @@ namespace Anka2.Views
             }
             catch (Exception e)
             {
-                MessageBox.Show("Exercise数据连接错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "ERROR:Exercise数据连接错误，错误信息为：" + e.Message + "\n";
+                }));               
                 return false;
             }
 
         }
 
-        private static bool RepairGAD()
+        private bool RepairGAD()
         {
             try
             {
@@ -191,7 +221,10 @@ namespace Anka2.Views
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("数据表GAD转换错误,错误编号为" + tempNumber + "\n" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    App.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        this.repairInfo.Text += "ERROR:数据表GAD转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
+                    }));                    
                     return false;
                 }
                 context.SaveChanges();
@@ -201,13 +234,16 @@ namespace Anka2.Views
             }
             catch (Exception e)
             {
-                MessageBox.Show("GAD数据连接错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "ERROR:GAD数据连接错误，错误信息为：" + e.Message + "\n";
+                }));               
                 return false;
             }
 
         }
 
-        private static bool RepairPHQ()
+        private  bool RepairPHQ()
         {
             try
             {
@@ -252,7 +288,10 @@ namespace Anka2.Views
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("数据表PHQ转换错误,错误编号为" + tempNumber + "\n" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    App.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        this.repairInfo.Text += "ERROR:数据表PHQ转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
+                    }));                    
                     return false;
                 }
                 context.SaveChanges();
@@ -262,13 +301,16 @@ namespace Anka2.Views
             }
             catch (Exception e)
             {
-                MessageBox.Show("PHQ数据连接错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "ERROR:PHQ数据连接错误，错误信息为：" + e.Message + "\n";
+                }));               
                 return false;
             }
 
         }
 
-        private static string NumberConverter(string Number, string basicinfoNumber)
+        private string NumberConverter(string Number, string basicinfoNumber)
         {
             string newNumber = null;
             string tempNumber = Number.Trim();
@@ -289,7 +331,7 @@ namespace Anka2.Views
                 strTempNumber[0] = temp.Substring(0, 4);
                 strTempNumber.Insert(1, temp.Remove(0, 4));
             }
-
+            //年份信息
             if (YearReg.IsMatch(strTempNumber[0]))
             {
                 newNumber += "-";
@@ -297,9 +339,16 @@ namespace Anka2.Views
             }
             else
             {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "WARNING:"+Number+"记录编号信息缺失：年份信息改为1900."+"\n";
+                }));
                 newNumber += "-";
                 newNumber += "1900";
             }
+
+            //月份信息
+
             if (strTempNumber.Count > 1)
             {
                 if (MonthReg.IsMatch(strTempNumber[1]))
@@ -307,12 +356,24 @@ namespace Anka2.Views
                     newNumber += "/";
                     newNumber += strTempNumber[1];
                 }
+                else
+                {
+                    App.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        this.repairInfo.Text += "WARNING:" + Number + "记录编号信息缺失：月份信息改为0." + "\n";
+                    }));
+                }
             }
             else
             {
                 newNumber += "/";
-                newNumber += "1";
+                newNumber += "0";
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "WARNING:" + Number + "记录编号信息缺失：月份信息改为0." + "\n";
+                }));
             }
+            //日期信息
             if (strTempNumber.Count > 2)
             {
                 if (strTempNumber[2].Length > 4)
@@ -324,11 +385,24 @@ namespace Anka2.Views
                     newNumber += "/";
                     newNumber += strTempNumber[2];
                 }
+                else
+                {
+                    newNumber += "/";
+                    newNumber += "0";
+                    App.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        this.repairInfo.Text += "WARNING:" + Number + "日期信息缺失：日期信息改为0." + "\n";
+                    }));
+                }
             }
             else
             {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "WARNING:" + Number + "日期信息缺失：日期信息改为0." + "\n";
+                }));
                 newNumber += "/";
-                newNumber += "1";
+                newNumber += "0";
             }
 
             return newNumber;
@@ -384,7 +458,10 @@ namespace Anka2.Views
             return s;
         }
 
-
-
+        private void btOK_Click(object sender, RoutedEventArgs e)
+        {            
+            ((Window)this).Close();
+           
+        }
     }
 }
