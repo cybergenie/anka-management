@@ -3,7 +3,7 @@ using System.Data;
 
 namespace Anka2.Models
 {
-    public class GADExportConverter
+    public class IPAQExportConverter
     {
         public static void GADValueConvertor(ref DataTable dt)
         {
@@ -11,11 +11,11 @@ namespace Anka2.Models
             {
                 DataUitls.GenderConvertor(dr, "性别");
                 DataUitls.DateConvertor(dr, "记录编号");
-                GADResultConvertor(dr, "GAD评分");
+                IPAQResultConvertor(dr, "GAD评分");
             }
         }
 
-        private static void GADResultConvertor(DataRow dr, string columnName)
+        private static void IPAQResultConvertor(DataRow dr, string columnName)
         {
             string GADResult = dr[columnName] as string;
             int result = 0;

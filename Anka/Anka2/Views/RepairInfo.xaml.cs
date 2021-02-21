@@ -351,7 +351,68 @@ namespace Anka2.Views
         }
         private bool RepairIPAQ()
         {
-            return true;
+            try
+            {
+                var context = new DbAdapter();
+                var RepairList = context.DbIPAQ.ToList();
+                string tempNumber = null;
+                try
+                {
+                    for (int i = 0; i < RepairList.Count; i++)
+                    {
+                        tempNumber = RepairList[i].IPAQNumber.Trim();
+                        var tempList = RepairList[i];
+                        string tempBaiscNumber = RepairList[i].basicinfoNumber;
+                        context.DbIPAQ.Remove(tempList);
+
+                        RepairList.RemoveAt(i);
+                        var newNumber = NumberConverter(tempNumber, tempBaiscNumber);
+                        RepairList.Insert(i, ItemCopy(tempList, newNumber));
+
+                    }
+
+                    for (int i = 0; i < RepairList.Count; i++)
+                    {
+                        Regex IndexReg = new Regex("^(-\\d{2})$");
+                        if (!IndexReg.IsMatch(RepairList[i].IPAQNumber.Substring(RepairList[i].IPAQNumber.Length - 3, 3)))
+                        {
+                            string tempListNumber = RepairList[i].IPAQNumber;
+                            var exsitingList = RepairList.FindAll((IPAQ e) => e.IPAQNumber == tempListNumber);
+                            RepairList.RemoveAll((IPAQ e) => e.IPAQNumber == tempListNumber);
+                            for (int j = 0; j < exsitingList.Count; j++)
+                            {
+                                if (!string.IsNullOrWhiteSpace(exsitingList[j].basicinfoNumber))
+                                {
+                                    exsitingList[j].IPAQNumber = exsitingList[j].IPAQNumber + "-" + (j + 1).ToString("D2");
+                                    tempNumber = exsitingList[j].IPAQNumber;
+                                    context.DbIPAQ.Add(exsitingList[j]);
+                                    RepairList.Add(exsitingList[j]);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    App.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        this.repairInfo.Text += "*ERROR:数据表IPAQ转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
+                    }));
+                    return false;
+                }
+                context.SaveChanges();
+                return true;
+
+
+            }
+            catch (Exception e)
+            {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "*ERROR:IPAQ数据连接错误，错误信息为：" + e.Message + "\n";
+                }));
+                return false;
+            }
         }
 
         private bool RepairOHQ()

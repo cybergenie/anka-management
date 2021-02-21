@@ -66,6 +66,9 @@
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="IPAQ" Title="IPAQ评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="IPAQ" >
                                 <ScrollViewer>
+                                    <ScrollViewer.DataContext>
+                                        <s:IPAQSheetViewModel/>
+                                    </ScrollViewer.DataContext>
                                     <ContentControl x:Name="IPAQSheet" Content="{StaticResource IPAQ}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>

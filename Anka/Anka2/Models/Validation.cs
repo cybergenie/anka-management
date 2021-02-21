@@ -34,6 +34,23 @@ namespace Anka2.Models
         }
     }
 
+    public class HourRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            Regex numberReg = new Regex("^([0-9]*[.]*[0-9]*[h,H,m,M]?[0-9]*[m,M]?)$");
+
+            if (!String.IsNullOrEmpty(value.ToString()))
+            {
+                if (!numberReg.IsMatch(value.ToString()))
+                {
+                    return new ValidationResult(false, "请输入时间,例如:30，30m,30M表示30分钟,2.5h,2.5H表示2.5小时,2h30,2H30m表示2小时30分");
+                }
+            }
+            return new ValidationResult(true, null);
+        }
+    }
+
     public class DateRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)

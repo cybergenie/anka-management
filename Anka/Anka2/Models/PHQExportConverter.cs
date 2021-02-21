@@ -24,7 +24,10 @@ namespace Anka2.Models
             foreach (var strResult in strResults)
             {
                 if (!string.IsNullOrEmpty(strResult))
-                    result += System.Convert.ToInt32(strResult);
+                    if (System.Convert.ToInt32(strResult) > 0)
+                    {
+                        result += System.Convert.ToInt32(strResult);
+                    }
             }
             dr[columnName] = result.ToString();
         }

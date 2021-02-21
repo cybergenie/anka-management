@@ -212,6 +212,11 @@ namespace Anka2.ViewModels
             phqSheetViewModel.PHQContent = null;
             phqSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
 
+            IPAQSheetViewModel ipaqSheetViewModel = ((MainWindow)RootSource).IPAQSheet.DataContext as IPAQSheetViewModel;
+            ipaqSheetViewModel.UpDateStatusInfo(statusBarContext.SetTipInfo);//绑定exerciseSheet的状态栏信息更新
+            ipaqSheetViewModel.IPAQContent = null;
+            ipaqSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
+
         }
 
         public void UpDateStatusInfo(NotifyStatusInfoHandler notify)

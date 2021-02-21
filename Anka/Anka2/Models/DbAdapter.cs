@@ -36,20 +36,7 @@ namespace Anka2.Models
 
 
 
-    [Table("ipaq")]
-    public class IPAQ
-    {
-        [Key]
-        public string IPAQNumber { get; set; }
-        public bool? IPAQ0 { get; set; }
-        public string IPAQ1 { get; set; }
-        public string IPAQ2 { get; set; }
-        public string IPAQ3 { get; set; }
-        public string IPAQ4 { get; set; }
-        public string IPAQ5 { get; set; }
-        public string basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; }
-    }
+    
 
     [Table("ohq")]
     public class OHQ

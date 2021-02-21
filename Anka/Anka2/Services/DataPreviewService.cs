@@ -192,7 +192,7 @@ namespace Anka2.Services
                                }).ToList();
                 DataTable DtGAD = ToDataTable<GADList>(GADList, DicGAD);
                 DtGAD.TableName = "GAD评估量表";
-                GADExportConverter.GADValueConvertor(ref DtGAD);
+                IPAQExportConverter.GADValueConvertor(ref DtGAD);
                 return DtGAD.DefaultView;
 
             }
