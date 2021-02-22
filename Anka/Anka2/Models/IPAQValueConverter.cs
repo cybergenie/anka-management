@@ -38,8 +38,7 @@ namespace Anka2.Models.IPAQValueConverter
     }
 
     public class IPAQ0Converter : IValueConverter
-    {
-        private object tempValue = null;
+    {        
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         { 
             switch (value)
@@ -79,11 +78,15 @@ namespace Anka2.Models.IPAQValueConverter
     }
 
     public class IPAQ4Converter : IValueConverter
-    {
-        private object tempValue = null;
+    {        
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.ToString();
+            if (value is not null)
+            {
+                return value.ToString();
+            }
+            else
+                return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -93,11 +96,11 @@ namespace Anka2.Models.IPAQValueConverter
             {
                 string[] strHour = ((string)value).Split('h', 'H');
                 time += System.Convert.ToDouble(strHour[0]) * 60;
-                if(strHour.Length>1)
+                if(strHour[1].Trim().Length>0)
                 {
                     if(strHour[1].Contains('m') || strHour[1].Contains('M'))
                     {
-                        string[] strMinute = ((string)value).Split('h', 'H');
+                        string[] strMinute = ((string)strHour[1]).Split('m', 'M');
                         time += System.Convert.ToDouble(strMinute[0]);
                     }
                     else
@@ -108,7 +111,7 @@ namespace Anka2.Models.IPAQValueConverter
             }
             else
             {
-                string strTime = Regex.Replace((string)value, @"[^0-9]+", "");
+                string strTime = Regex.Replace((string)value, @"[^0-9,.]+", "");
                 time += System.Convert.ToDouble(strTime);
             }
 
@@ -116,6 +119,93 @@ namespace Anka2.Models.IPAQValueConverter
             
         }
     }
+    public class IPAQ5Converter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch (value)
+            {
+                case "0":
+                    {
+                        if ((string)parameter == "0")
+                            return true;
+                        else
+                            return false;
+                    }
+                case "1":
+                    {
+                        if ((string)parameter == "1")
+                            return true;
+                        else
+                            return false;
+                    }
+                case "2":
+                    {
+                        if ((string)parameter == "2")
+                            return true;
+                        else
+                            return false;
+                    }
+                case "3":
+                    {
+                        if ((string)parameter == "3")
+                            return true;
+                        else
+                            return false;
+                    }
+                case "4":
+                    {
+                        if ((string)parameter == "4")
+                            return true;
+                        else
+                            return false;
+                    }
+                case "5":
+                    {
+                        if ((string)parameter == "5")
+                            return true;
+                        else
+                            return false;
+                    }
+                case "6":
+                    {
+                        if ((string)parameter == "6")
+                            return true;
+                        else
+                            return false;
+                    }
+                default: return false;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch (value)
+            {
+                case true:
+                    {
+                        if ((string)parameter == "0")
+                            return "0";
+                        if ((string)parameter == "1")
+                            return "1";
+                        if ((string)parameter == "2")
+                            return "2";
+                        if ((string)parameter == "3")
+                            return "3";
+                        if ((string)parameter == "4")
+                            return "4";
+                        if ((string)parameter == "5")
+                            return "5";
+                        if ((string)parameter == "6")
+                            return "6";
+                        else
+                            return null;
+                    }
+                default: return null;
+            }
+        }
+    }
+
 
 
 

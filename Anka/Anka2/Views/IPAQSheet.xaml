@@ -10,6 +10,7 @@
             <m:GenderConverter x:Key="GenderConverter"/>
             <mc:IPAQ0Converter x:Key="IPAQ0Converter"/>
             <mc:IPAQ4Converter x:Key="IPAQ4Converter"/>
+            <mc:IPAQ5Converter x:Key="IPAQ5Converter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -45,7 +46,7 @@
                     </i:Interaction.Triggers>
                 </Button>
         </StackPanel>
-        <Grid DockPanel.Dock="Top" Margin="5" >
+        <Grid DockPanel.Dock="Top" Margin="5" IsEnabled="{Binding IPAQContentEnable}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"/>
                 <RowDefinition Height="35"/>
@@ -218,13 +219,41 @@
                 <StackPanel VerticalAlignment="Center" >
                     <Label Content="最近1周，平均1天走多少步？" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,5,0,5" />
                     <WrapPanel Margin="0,5" >
-                        <RadioButton x:Name="rbIPAQ51" Content="&lt;2000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" />
-                        <RadioButton x:Name="rbIPAQ52" Content="2000-3000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" />
-                        <RadioButton x:Name="rbIPAQ53" Content="3000-4000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" />
-                        <RadioButton x:Name="rbIPAQ54" Content="4000-5000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" />
-                        <RadioButton x:Name="rbIPAQ55" Content="5000-7000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" />
-                        <RadioButton x:Name="rbIPAQ56" Content="70000到1万步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" />
-                        <RadioButton x:Name="rbIPAQ57" Content="1万步以上" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" />
+                        <RadioButton x:Name="rbIPAQ51" Content="&lt;2000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="IPAQContent.IPAQ5" Converter="{StaticResource IPAQ5Converter}" ConverterParameter="0"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbIPAQ52" Content="2000-3000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="IPAQContent.IPAQ5" Converter="{StaticResource IPAQ5Converter}" ConverterParameter="1"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbIPAQ53" Content="3000-4000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="IPAQContent.IPAQ5" Converter="{StaticResource IPAQ5Converter}" ConverterParameter="2"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbIPAQ54" Content="4000-5000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="IPAQContent.IPAQ5" Converter="{StaticResource IPAQ5Converter}" ConverterParameter="3"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbIPAQ55" Content="5000-7000步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="IPAQContent.IPAQ5" Converter="{StaticResource IPAQ5Converter}" ConverterParameter="4"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbIPAQ56" Content="70000到1万步" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="IPAQContent.IPAQ5" Converter="{StaticResource IPAQ5Converter}" ConverterParameter="5"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbIPAQ57" Content="1万步以上" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" Width="105" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="IPAQContent.IPAQ5" Converter="{StaticResource IPAQ5Converter}" ConverterParameter="6"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
                     </WrapPanel>
                 </StackPanel>
             </Border>
