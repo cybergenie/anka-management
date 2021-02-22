@@ -3,24 +3,24 @@ using System.Data;
 
 namespace Anka2.Models
 {
-    public class IPAQExportConverter
+    public class OHQExportConverter
     {
-        public static void IPAQValueConvertor(ref DataTable dt)
+        public static void OHQValueConvertor(ref DataTable dt)
         {
             foreach (DataRow dr in dt.Rows)
             {
                 DataUitls.GenderConvertor(dr, "性别");
                 DataUitls.DateConvertor(dr, "记录编号");
-                //IPAQResultConvertor(dr, "GAD评分");
+                OHQ5ResultConvertor(dr, "OHQ-5");
             }
         }
 
-        private static void IPAQResultConvertor(DataRow dr, string columnName)
+        private static void OHQ5ResultConvertor(DataRow dr, string columnName)
         {
-            string GADResult = dr[columnName] as string;
+            string PHQResult = dr[columnName] as string;
             int result = 0;
 
-            string[] strResults = GADResult.Split('|');
+            string[] strResults = PHQResult.Split('|');
             foreach (var strResult in strResults)
             {
                 if (!string.IsNullOrEmpty(strResult))

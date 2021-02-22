@@ -32,32 +32,6 @@ namespace Anka2.Models
     }
 
 
-
-
-
-
-    
-
-    [Table("ohq")]
-    public class OHQ
-    {
-        [Key]
-        public string OHQNumber { get; set; }
-        public string OHQ1 { get; set; }
-        public string OHQ2 { get; set; }
-        public string OHQ3 { get; set; }
-        public string OHQ4 { get; set; }
-        public string OHQ5 { get; set; }
-        public string OHQ6 { get; set; }
-        public string OHQ7 { get; set; }
-        public string OHQ8 { get; set; }
-        public string OHQ9 { get; set; }
-        public string basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; }
-    }
-
-
-
     [Table("physique")]
     public class Physique
     {

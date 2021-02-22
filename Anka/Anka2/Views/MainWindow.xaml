@@ -74,6 +74,9 @@
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="OHQ" Title="口腔卫生评估量表"  CanClose="False" CanFloat="False" CanMove="True" ContentId="OHQ" >
                                 <ScrollViewer>
+                                    <ScrollViewer.DataContext>
+                                        <s:OHQSheetViewModel/>
+                                    </ScrollViewer.DataContext>
                                     <ContentControl x:Name="OHQSheet" Content="{StaticResource OHQ}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>

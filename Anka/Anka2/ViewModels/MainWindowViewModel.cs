@@ -217,6 +217,11 @@ namespace Anka2.ViewModels
             ipaqSheetViewModel.IPAQContent = null;
             ipaqSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
 
+            OHQSheetViewModel ohqSheetViewModel = ((MainWindow)RootSource).OHQSheet.DataContext as OHQSheetViewModel;
+            ohqSheetViewModel.UpDateStatusInfo(statusBarContext.SetTipInfo);//绑定exerciseSheet的状态栏信息更新
+            ohqSheetViewModel.OHQContent = null;
+            ohqSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
+
         }
 
         public void UpDateStatusInfo(NotifyStatusInfoHandler notify)

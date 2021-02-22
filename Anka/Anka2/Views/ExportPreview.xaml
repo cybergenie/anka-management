@@ -42,6 +42,14 @@
                     <DataGrid ItemsSource="{Binding DtGAD}"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="IPAQ评估量表">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        <Services:DataPreviewService/>
+                    </Grid.DataContext>
+                    <DataGrid ItemsSource="{Binding DtIPAQ}"/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

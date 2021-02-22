@@ -192,7 +192,7 @@ namespace Anka2.Services
                                }).ToList();
                 DataTable DtGAD = ToDataTable<GADList>(GADList, DicGAD);
                 DtGAD.TableName = "GAD评估量表";
-                IPAQExportConverter.GADValueConvertor(ref DtGAD);
+                GADExportConverter.GADValueConvertor(ref DtGAD);
                 return DtGAD.DefaultView;
 
             }
@@ -245,6 +245,59 @@ namespace Anka2.Services
                     _dtPHQ = value;
                 }
                 RaisePropertyChanged(nameof(DtPHQ));
+            }
+        }
+        public DataView _dtIPAQ;
+        public DataView DtIPAQ
+        {
+            get
+            {
+                Dictionary<string, string> DicIPAQ = new Dictionary<string, string> {
+                    { "Number", "病案号" },
+                    { "Name",  "姓名" },
+                    { "Age", "年龄" },
+                    { "Male",  "性别" },
+                    { "IPAQNumber", "记录编号"  },
+                    { "IPAQ0", "是否知道"  },
+                    { "IPAQ1", "IPAQ-1(天)"  },
+                    { "IPAQ2", "IPAQ-2(天)"  },
+                    { "IPAQ3", "IPAQ-3(天)"  },
+                    { "IPAQ4", "IPAQ-4(分钟)"  },
+                    { "IPAQ5", "IPAQ-5(步/天)"  },
+
+
+                };
+                using var context = new DbAdapter();
+                var IPAQList = (from basicInfo in context.DbPerson
+                               join ipaq in context.DbIPAQ
+                               on basicInfo.Number equals ipaq.basicinfoNumber
+                               select new IPAQList
+                               {
+                                   Number = basicInfo.Number,
+                                   Name = basicInfo.Name,
+                                   Male = basicInfo.Male,
+                                   Age = basicInfo.Age,
+                                   IPAQNumber = ipaq.IPAQNumber.Remove(0, basicInfo.Number.Length + 1),
+                                   IPAQ0 = ipaq.IPAQ0,
+                                   IPAQ1 = ipaq.IPAQ1,
+                                   IPAQ2 = ipaq.IPAQ2,
+                                   IPAQ3 = ipaq.IPAQ3,
+                                   IPAQ4 = ipaq.IPAQ4,
+                                   IPAQ5 = ipaq.IPAQ5
+                               }).ToList();
+                DataTable DtIPAQ = ToDataTable<IPAQList>(IPAQList, DicIPAQ);
+                DtIPAQ.TableName = "IPAQ评估量表";
+                IPAQExportConverter.IPAQValueConvertor(ref DtIPAQ);
+                return DtIPAQ.DefaultView;
+
+            }
+            set
+            {
+                if (_dtIPAQ != value)
+                {
+                    _dtIPAQ = value;
+                }
+                RaisePropertyChanged(nameof(DtIPAQ));
             }
         }
 

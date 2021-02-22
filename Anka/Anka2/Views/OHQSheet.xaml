@@ -1,21 +1,49 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:m="clr-namespace:Anka2.Models" 
+                    xmlns:mc="clr-namespace:Anka2.Models.OHQValueConverter" 
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:local="clr-namespace:Anka2.Views">
     <StackPanel x:Key="OHQ">
+        <StackPanel.Resources>
+            <mc:OHQNumberConverter x:Key="OHQNumberConverter"/>
+            <m:GenderConverter x:Key="GenderConverter"/>
+        </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
-            <Label Content="姓名：" Height="25" Width="45" />
-            <Label x:Name="lbOHQName" Content="" Height="25" Width="65" />
-            <Label Content="性别：" Height="25" Width="45" />
-            <Label x:Name="lbOHQMale" Content="" Height="25" Width="65" />
-            <Label Content="年龄：" Height="25" Width="45" />
-            <Label x:Name="lbOHQAge" Content="" Height="25" Width="65" />
-            <Label Content="编号：" Height="25" Width="45" />
-            <Label x:Name="lbOHQNumber" Content="" Height="25" Width="80" />
-            <ComboBox x:Name="txOHQLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
-            <Button x:Name="btOHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"/>
-            <Button x:Name="btOHQLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" />
+            <Label Content="姓  名：" Height="25" Width="50" />
+            <Label x:Name="lbOHQName" Height="25" Width="65" Content="{Binding BasicInfo.Name}"/>
+            <Label Content="性  别：" Height="25" Width="50" />
+            <Label x:Name="lbOHQMale" Height="25" Width="65" Content="{Binding BasicInfo.Male,Converter={StaticResource GenderConverter}}"/>
+            <Label Content="年  龄：" Height="25" Width="50" />
+            <Label x:Name="lbOHQAge" Height="25" Width="65" Content="{Binding BasicInfo.Age}"/>
+            <Label Content="编  号：" Height="25" Width="50" />
+            <Label x:Name="lbOHQNumber" Height="25" Width="80" Content="{Binding BasicInfo.Number}"/>
+            <ComboBox x:Name="txOHQLoop" Width="120" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" 
+                      ItemsSource="{Binding BasicInfo.POHQ ,Converter={StaticResource OHQNumberConverter}}">
+                <ComboBox.Text>
+                    <Binding Path="OHQNumberText">
+                        <Binding.ValidationRules>
+                            <m:DateNumberRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.Text>
+            </ComboBox>
+            <Button x:Name="btOHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <m:EventCommand Command="{Binding Load_OHQ_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button x:Name="btOHQLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <m:EventCommand Command="{Binding Load_OHQ_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </StackPanel>
-        <Grid DockPanel.Dock="Top" Margin="5" >
+        <Grid DockPanel.Dock="Top" Margin="5" IsEnabled="{Binding OHQContentEnable}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="65"/>
@@ -42,12 +70,12 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1" >
                 <StackPanel VerticalAlignment="Center" >
-                    <Label Content="问题" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0" Height="25" />
+                    <Label Content="问  题" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0" Height="25" />
                 </StackPanel>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" >
                 <StackPanel VerticalAlignment="Center" >
-                    <Label Content="回答" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0" Height="25" />
+                    <Label Content="回  答" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="15,0,0,0" Height="25" />
                 </StackPanel>
             </Border>
             <!--#endregion-->
