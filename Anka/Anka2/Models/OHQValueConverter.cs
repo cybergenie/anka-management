@@ -18,13 +18,20 @@ namespace Anka2.Models.OHQValueConverter
                 var ohqNumberList = ((List<OHQ>)value).Select(t => t.OHQNumber).ToList();
                 for (int i = 0; i < ohqNumberList.Count; i++)
                 {
-                    if (ohqNumberList[i].Substring(0, 8) == ((List<OHQ>)value)[i].basicinfoNumber)
+                    if (ohqNumberList[i].Substring(0, ((List<OHQ>)value)[i].basicinfoNumber.Length) == ((List<OHQ>)value)[i].basicinfoNumber)
                     {
-                        ohqNumberList[i] = ohqNumberList[i].Remove(0, 9);
-                        var endNumber = ohqNumberList[i].Substring(ohqNumberList[i].Length - 3, 3);
-                        ohqNumberList[i] = ohqNumberList[i].Remove(ohqNumberList[i].Length - 3, 3);
-                        ohqNumberList[i] = Regex.Replace(ohqNumberList[i], @"[^0-9]+", "/");
-                        ohqNumberList[i] += endNumber;
+                        try
+                        {
+                            ohqNumberList[i] = ohqNumberList[i].Remove(0, ((List<OHQ>)value)[i].basicinfoNumber.Length+1);
+                            var endNumber = ohqNumberList[i].Substring(ohqNumberList[i].Length - 3, 3);
+                            ohqNumberList[i] = ohqNumberList[i].Remove(ohqNumberList[i].Length - 3, 3);
+                            ohqNumberList[i] = Regex.Replace(ohqNumberList[i], @"[^0-9]+", "/");
+                            ohqNumberList[i] += endNumber;
+                        }
+                        catch(Exception)
+                        {
+                            ohqNumberList[i] = ohqNumberList[i].Remove(0, 9);
+                        }
                     }
                 }
                 return ohqNumberList;

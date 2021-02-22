@@ -301,6 +301,66 @@ namespace Anka2.Services
             }
         }
 
+        public DataView _dtOHQ;
+        public DataView DtOHQ
+        {
+            get
+            {
+                Dictionary<string, string> DicOHQ = new Dictionary<string, string> {
+                    { "Number", "病案号" },
+                    { "Name",  "姓名" },
+                    { "Age", "年龄" },
+                    { "Male",  "性别" },
+                    { "OHQNumber", "记录编号"  },                    
+                    { "OHQ1", "OHQ-1"  },
+                    { "OHQ2", "OHQ-2"  },
+                    { "OHQ3", "OHQ-3"  },
+                    { "OHQ4", "OHQ-4"  },
+                    { "OHQ5", "OHQ-5"  },
+                    { "OHQ6", "OHQ-6"  },
+                    { "OHQ7", "OHQ-7"  },
+                    { "OHQ8", "OHQ-8"  },
+                    { "OHQ9", "OHQ-9"  },
+                };
+                using var context = new DbAdapter();
+                var OHQList = (from basicInfo in context.DbPerson
+                                join ohq in context.DbOHQ
+                                on basicInfo.Number equals ohq.basicinfoNumber
+                                select new OHQList
+                                {
+                                    Number = basicInfo.Number,
+                                    Name = basicInfo.Name,
+                                    Male = basicInfo.Male,
+                                    Age = basicInfo.Age,
+                                    OHQNumber = ohq.OHQNumber.Remove(0, basicInfo.Number.Length + 1),
+                                    OHQ1 = ohq.OHQ1,
+                                    OHQ2 = ohq.OHQ2,
+                                    OHQ3 = ohq.OHQ3,
+                                    OHQ4 = ohq.OHQ4,
+                                    OHQ5 = ohq.OHQ5,
+                                    OHQ6 = ohq.OHQ6,
+                                    OHQ7 = ohq.OHQ7,
+                                    OHQ8 = ohq.OHQ8,
+                                    OHQ9 = ohq.OHQ9,
+
+                                }).ToList();
+                DataTable DtOHQ = ToDataTable<OHQList>(OHQList, DicOHQ);
+                DtOHQ.TableName = "口腔卫生评估量表";
+                OHQExportConverter.OHQValueConvertor(ref DtOHQ);
+                return DtOHQ.DefaultView;
+
+            }
+            set
+            {
+                if (_dtOHQ != value)
+                {
+                    _dtOHQ = value;
+                }
+                RaisePropertyChanged(nameof(DtOHQ));
+            }
+
+        }
+
 
 
     }

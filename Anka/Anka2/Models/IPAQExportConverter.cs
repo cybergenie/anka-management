@@ -11,25 +11,38 @@ namespace Anka2.Models
             {
                 DataUitls.GenderConvertor(dr, "性别");
                 DataUitls.DateConvertor(dr, "记录编号");
-                //IPAQResultConvertor(dr, "GAD评分");
+                IPAQ0ResultConvertor(dr, "是否知道");
+                IPAQ5ResultConvertor(dr, "IPAQ-5(步/天)");
             }
         }
 
-        private static void IPAQResultConvertor(DataRow dr, string columnName)
-        {
-            string GADResult = dr[columnName] as string;
-            int result = 0;
-
-            string[] strResults = GADResult.Split('|');
-            foreach (var strResult in strResults)
+        private static void IPAQ0ResultConvertor(DataRow dr, string columnName)
+        {            
+            var IPAQResult = dr[columnName] switch
             {
-                if (!string.IsNullOrEmpty(strResult))
-                    if (System.Convert.ToInt32(strResult) > 0)
-                    {
-                        result += System.Convert.ToInt32(strResult);
-                    }
-            }
-            dr[columnName] = result.ToString();
+                "True" => "是",
+                "False" => "否",
+                _ => string.Empty,
+
+            };            
+            dr[columnName] = IPAQResult;
+        }
+
+        private static void IPAQ5ResultConvertor(DataRow dr, string columnName)
+        {
+            var IPAQResult = dr[columnName] switch
+            {
+                "0" => "<2000步",
+                "1" => "2000-3000步",
+                "2" => "3000-4000步",
+                "3" => "4000-5000步",
+                "4" => "5000-7000步",
+                "5" => "7000到1万步",
+                "6" => "1万步以上",
+                _ => string.Empty,
+
+            };
+            dr[columnName] = IPAQResult;
         }
 
     }

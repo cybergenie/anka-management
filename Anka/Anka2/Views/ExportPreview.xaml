@@ -50,6 +50,14 @@
                     <DataGrid ItemsSource="{Binding DtIPAQ}"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="口腔卫生评估量表">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        <Services:DataPreviewService/>
+                    </Grid.DataContext>
+                    <DataGrid ItemsSource="{Binding DtOHQ}"/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

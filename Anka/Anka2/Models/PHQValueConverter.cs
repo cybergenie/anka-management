@@ -18,9 +18,9 @@ namespace Anka2.Models.PHQValueConverter
                 var phqNumberList = ((List<PHQ>)value).Select(t => t.PHQNumber).ToList();
                 for (int i = 0; i < phqNumberList.Count; i++)
                 {
-                    if (phqNumberList[i].Substring(0, 8) == ((List<PHQ>)value)[i].basicinfoNumber)
+                    if (phqNumberList[i].Substring(0, ((List<PHQ>)value)[i].basicinfoNumber.Length) == ((List<PHQ>)value)[i].basicinfoNumber)
                     {
-                        phqNumberList[i] = phqNumberList[i].Remove(0, 9);
+                        phqNumberList[i] = phqNumberList[i].Remove(0, ((List<PHQ>)value)[i].basicinfoNumber.Length+1);
                         var endNumber = phqNumberList[i].Substring(phqNumberList[i].Length - 3, 3);
                         phqNumberList[i] = phqNumberList[i].Remove(phqNumberList[i].Length - 3, 3);
                         phqNumberList[i] = Regex.Replace(phqNumberList[i], @"[^0-9]+", "/");

@@ -18,13 +18,20 @@ namespace Anka2.Models.ExerciseValueConverter
                 var exerciseNumberList = ((List<Exercise>)value).Select(t => t.ExerciseNumber).ToList();
                 for (int i = 0; i < exerciseNumberList.Count; i++)
                 {
-                    if (exerciseNumberList[i].Substring(0, 8) == ((List<Exercise>)value)[i].basicinfoNumber)
+                    if (exerciseNumberList[i].Substring(0, ((List<Exercise>)value)[i].basicinfoNumber.Length) == ((List<Exercise>)value)[i].basicinfoNumber)
                     {
-                        exerciseNumberList[i] = exerciseNumberList[i].Remove(0, 9);
-                        var endNumber = exerciseNumberList[i].Substring(exerciseNumberList[i].Length - 3, 3);
-                        exerciseNumberList[i] = exerciseNumberList[i].Remove(exerciseNumberList[i].Length - 3, 3);
-                        exerciseNumberList[i] = Regex.Replace(exerciseNumberList[i], @"[^0-9]+", "/");
-                        exerciseNumberList[i] += endNumber;
+                        try
+                        {
+                            exerciseNumberList[i] = exerciseNumberList[i].Remove(0, ((List<Exercise>)value)[i].basicinfoNumber.Length+1);
+                            var endNumber = exerciseNumberList[i].Substring(exerciseNumberList[i].Length - 3, 3);
+                            exerciseNumberList[i] = exerciseNumberList[i].Remove(exerciseNumberList[i].Length - 3, 3);
+                            exerciseNumberList[i] = Regex.Replace(exerciseNumberList[i], @"[^0-9]+", "/");
+                            exerciseNumberList[i] += endNumber;
+                        }
+                        catch(Exception)
+                        {
+                            exerciseNumberList[i] = exerciseNumberList[i].Remove(0, 9);
+                        }
                     }
                 }
                 return exerciseNumberList;

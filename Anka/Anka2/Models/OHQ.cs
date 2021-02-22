@@ -27,7 +27,7 @@ namespace Anka2.Models
         public string? Name { get; set; }//姓名
         public string? Age { get; set; }//年龄
         public bool? Male { get; set; }//性别
-        public string OHQNumber { get; set; }
+        public string? OHQNumber { get; set; }
         public string? OHQ1 { get; set; }
         public string? OHQ2 { get; set; }
         public string? OHQ3 { get; set; }

@@ -145,10 +145,17 @@ namespace Anka2.Services
 
         public static void DateConvertor(DataRow dr, string columnName)
         {
-            string ItemNumber = dr[columnName] as string;
-            string endNumber = ItemNumber.Substring(ItemNumber.Length - 3, 3);
-            string result = Regex.Replace(ItemNumber.Substring(0, ItemNumber.Length - 3), @"[^0-9]+", "/")+ endNumber;
-            dr[columnName] = result;
+            try
+            {
+                string ItemNumber = dr[columnName] as string;
+                string endNumber = ItemNumber.Substring(ItemNumber.Length - 3, 3);
+                string result = Regex.Replace(ItemNumber.Substring(0, ItemNumber.Length - 3), @"[^0-9]+", "/") + endNumber;
+                dr[columnName] = result;
+            }
+            catch (Exception)
+            {
+                dr[columnName] = dr[columnName] as string;
+            }
         }
 
         public static string BackupFile(string originFile, string FilePath)

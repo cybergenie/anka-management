@@ -16,13 +16,20 @@ namespace Anka2.Models.IPAQValueConverter
                 var ipaqNumberList = ((List<IPAQ>)value).Select(t => t.IPAQNumber).ToList();
                 for (int i = 0; i < ipaqNumberList.Count; i++)
                 {
-                    if (ipaqNumberList[i].Substring(0, 8) == ((List<IPAQ>)value)[i].basicinfoNumber)
+                    if (ipaqNumberList[i].Substring(0, ((List<IPAQ>)value)[i].basicinfoNumber.Length) == ((List<IPAQ>)value)[i].basicinfoNumber)
                     {
-                        ipaqNumberList[i] = ipaqNumberList[i].Remove(0, 9);
-                        var endNumber = ipaqNumberList[i].Substring(ipaqNumberList[i].Length - 3, 3);
-                        ipaqNumberList[i] = ipaqNumberList[i].Remove(ipaqNumberList[i].Length - 3, 3);
-                        ipaqNumberList[i] = Regex.Replace(ipaqNumberList[i], @"[^0-9]+", "/");
-                        ipaqNumberList[i] += endNumber;
+                        try
+                        {
+                            ipaqNumberList[i] = ipaqNumberList[i].Remove(0, ((List<IPAQ>)value)[i].basicinfoNumber.Length+1);
+                            var endNumber = ipaqNumberList[i].Substring(ipaqNumberList[i].Length - 3, 3);
+                            ipaqNumberList[i] = ipaqNumberList[i].Remove(ipaqNumberList[i].Length - 3, 3);
+                            ipaqNumberList[i] = Regex.Replace(ipaqNumberList[i], @"[^0-9]+", "/");
+                            ipaqNumberList[i] += endNumber;
+                        }
+                        catch(Exception)
+                        {
+                            ipaqNumberList[i] = ipaqNumberList[i].Remove(0, 9); 
+                        }
                     }
                 }
                 return ipaqNumberList;

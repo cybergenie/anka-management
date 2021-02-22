@@ -17,13 +17,20 @@ namespace Anka2.Models.GADValueConverter
                 var gadNumberList = ((List<GAD>)value).Select(t => t.GADNumber).ToList();
                 for (int i = 0; i < gadNumberList.Count; i++)
                 {
-                    if (gadNumberList[i].Substring(0, 8) == ((List<GAD>)value)[i].basicinfoNumber)
+                    if (gadNumberList[i].Substring(0, ((List<GAD>)value)[i].basicinfoNumber.Length) == ((List<GAD>)value)[i].basicinfoNumber)
                     {
-                        gadNumberList[i] = gadNumberList[i].Remove(0, 9);
-                        var endNumber = gadNumberList[i].Substring(gadNumberList[i].Length - 3, 3);
-                        gadNumberList[i] = gadNumberList[i].Remove(gadNumberList[i].Length - 3, 3);
-                        gadNumberList[i] = Regex.Replace(gadNumberList[i], @"[^0-9]+", "/");
-                        gadNumberList[i] += endNumber;
+                        try
+                        {
+                            gadNumberList[i] = gadNumberList[i].Remove(0, ((List<GAD>)value)[i].basicinfoNumber.Length+1);
+                            var endNumber = gadNumberList[i].Substring(gadNumberList[i].Length - 3, 3);
+                            gadNumberList[i] = gadNumberList[i].Remove(gadNumberList[i].Length - 3, 3);
+                            gadNumberList[i] = Regex.Replace(gadNumberList[i], @"[^0-9]+", "/");
+                            gadNumberList[i] += endNumber;
+                        }
+                        catch(Exception)
+                        {
+                            gadNumberList[i] = gadNumberList[i].Remove(0, 9);
+                        }
                     }
                 }
                 return gadNumberList;
