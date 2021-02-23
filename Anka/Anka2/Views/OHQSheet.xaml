@@ -8,6 +8,8 @@
         <StackPanel.Resources>
             <mc:OHQNumberConverter x:Key="OHQNumberConverter"/>
             <m:GenderConverter x:Key="GenderConverter"/>
+            <mc:OHQ1Converter x:Key="OHQ1Converter"/>
+            <mc:OHQ2Converter x:Key="OHQ2Converter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -94,10 +96,26 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="1" >
                 <WrapPanel Margin="0" VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbOHQ11" Content="3次以上" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ12" Content="2次" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ13" Content="1次" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ14" Content="0次（一次也不刷的时候也有）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" />
+                    <RadioButton x:Name="rbOHQ11" Content="3次以上" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ1" Converter="{StaticResource OHQ1Converter}" ConverterParameter="0"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ12" Content="2次" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ1" Converter="{StaticResource OHQ1Converter}" ConverterParameter="1"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ13" Content="1次" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ1" Converter="{StaticResource OHQ1Converter}" ConverterParameter="2"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ14" Content="0次（一次也不刷的时候也有）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ1" Converter="{StaticResource OHQ1Converter}" ConverterParameter="3"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </WrapPanel>
             </Border>
             <!--#endregion-->
@@ -116,9 +134,21 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="2" >
                 <WrapPanel Margin="0" VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbOHQ21" Content="每天" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ22" Content="有时使用" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ23" Content="不使用" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ21" Content="每天" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ2" Converter="{StaticResource OHQ2Converter}" ConverterParameter="0"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ22" Content="有时使用" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ2" Converter="{StaticResource OHQ1Converter}" ConverterParameter="1"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ23" Content="不使用" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ2" Converter="{StaticResource OHQ1Converter}" ConverterParameter="2"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </WrapPanel>
             </Border>
             <!--#endregion-->
