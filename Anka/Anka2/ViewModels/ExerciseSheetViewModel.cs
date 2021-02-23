@@ -3,6 +3,7 @@ using Anka2.Services;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -68,7 +69,7 @@ namespace Anka2.ViewModels
             set
             {
                 if (_basicInfo != value)
-                {
+                {                    
                     _basicInfo = value;
                 }
                 RaisePropertyChanged(nameof(BasicInfo));
@@ -104,7 +105,7 @@ namespace Anka2.ViewModels
             {
                 if (ExerciseIndex >= 0)
                 {
-                    BasicInfo.PExercise[ExerciseIndex] = value;
+                    BasicInfo.PExercise[ExerciseIndex] = value;  
                 }
                 RaisePropertyChanged(nameof(ExerciseContent));
             }
@@ -136,6 +137,26 @@ namespace Anka2.ViewModels
             }
         }
 
+
+
+        private CommandObject<SelectionChangedEventArgs> _selection_Exercise_Executed;
+        public CommandObject<SelectionChangedEventArgs> Selection_Exercise_Executed
+        {
+            get
+            {
+                if (_selection_Exercise_Executed == null)
+                    _selection_Exercise_Executed = new CommandObject<SelectionChangedEventArgs>(
+                        new Action<SelectionChangedEventArgs>(e =>
+                        {
+                            if (e.AddedItems.Count>0)
+                            {
+                                ExerciseNumberText = e.AddedItems[0].ToString();
+                            }
+                            loadExerciseContent();
+                        }));
+                return _selection_Exercise_Executed;
+            }
+        }
         private CommandObject<RoutedEventArgs> _load_Exercise_Executed;
         public CommandObject<RoutedEventArgs> Load_Exercise_Executed
         {
@@ -145,43 +166,52 @@ namespace Anka2.ViewModels
                     _load_Exercise_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            if (!string.IsNullOrEmpty(ExerciseNumberText))
-                            {
-                                if (BasicInfo is not null)
-                                {
-                                    ExerciseContentEnable = true;
-                                    if (BasicInfo.PExercise is null)
-                                    {
-                                        List<Exercise> exercises = new List<Exercise>();
-                                        BasicInfo.PExercise = exercises;
-                                    }
-                                    ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
-                                    if (ExerciseIndex >= 0)
-                                    {
-                                        ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "运动负荷记录加载成功。记录编号为：" + ExerciseNumberText + "。");
-                                    }
-                                    else
-                                    {
-                                        var exerciseContent = new Exercise { ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText, basicinfoNumber = BasicInfo.Number };
-                                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
-                                        BasicInfo.PExercise.Add(exerciseContent);
-                                        BasicInfo = BasicInfo;
-                                        ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
-                                        ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
-
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的运动负荷记录创建成功。记录编号为：" + ExerciseNumberText + "。");
-                                    }
-
-                                }
-                                else
-                                {
-                                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                }
-                            }
+                            loadExerciseContent();
                         }));
                 return _load_Exercise_Executed;
             }
         }
+
+        private void loadExerciseContent()
+        {
+            if (!string.IsNullOrEmpty(ExerciseNumberText))
+            {
+                if (BasicInfo is not null)
+                {
+                    ExerciseContentEnable = true;
+                    if (BasicInfo.PExercise is null)
+                    {
+                        List<Exercise> exercises = new List<Exercise>();
+                        BasicInfo.PExercise = exercises;
+                    }
+                    ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
+                    if (ExerciseIndex >= 0)
+                    {
+                        ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "运动负荷记录加载成功。记录编号为：" + ExerciseNumberText + "。");
+                    }
+                    else
+                    {
+                        var exerciseContent = new Exercise { ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText, basicinfoNumber = BasicInfo.Number };
+                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
+                        BasicInfo.PExercise.Add(exerciseContent);
+
+                        BasicInfo = BasicInfo;
+                        ExerciseIndex = BasicInfo.PExercise.FindIndex((Exercise e) => e.ExerciseNumber == BasicInfo.Number + "-" + ExerciseNumberText);
+                        ExerciseContent = BasicInfo.PExercise[ExerciseIndex];
+
+
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的运动负荷记录创建成功。记录编号为：" + ExerciseNumberText + "。");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+
+
     }
 }

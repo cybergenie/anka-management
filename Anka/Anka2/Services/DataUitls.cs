@@ -80,7 +80,7 @@ namespace Anka2.Services
             }
         }
 
-        public static bool SavePersonInfo(BasicInfo Person)
+        public static bool SavePersonInfo( BasicInfo Person)
         {
             string personId = Person.Number;
             try

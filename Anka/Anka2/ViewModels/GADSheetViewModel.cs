@@ -138,6 +138,25 @@ namespace Anka2.ViewModels
             }
         }
 
+        private CommandObject<SelectionChangedEventArgs> _selection_GAD_Executed;
+        public CommandObject<SelectionChangedEventArgs> Selection_GAD_Executed
+        {
+            get
+            {
+                if (_selection_GAD_Executed == null)
+                    _selection_GAD_Executed = new CommandObject<SelectionChangedEventArgs>(
+                        new Action<SelectionChangedEventArgs>(e =>
+                        {
+                            if (e.AddedItems.Count > 0)
+                            {
+                                GADNumberText = e.AddedItems[0].ToString();
+                            }
+                            loadGADContent();
+                        }));
+                return _selection_GAD_Executed;
+            }
+        }
+
         private CommandObject<RoutedEventArgs> _load_GAD_Executed;
         public CommandObject<RoutedEventArgs> Load_GAD_Executed
         {
@@ -147,42 +166,47 @@ namespace Anka2.ViewModels
                     _load_GAD_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            if (!string.IsNullOrEmpty(GADNumberText))
-                            {
-                                if (BasicInfo is not null)
-                                {
-                                    GADContentEnable = true;
-                                    if (BasicInfo.PGAD is null)
-                                    {
-                                        List<GAD> gad = new List<GAD>();
-                                        BasicInfo.PGAD = gad;
-                                    }
-                                    GADIndex = BasicInfo.PGAD.FindIndex((GAD e) => e.GADNumber == BasicInfo.Number + "-" + GADNumberText);
-                                    if (GADIndex >= 0)
-                                    {
-                                        GADContent = BasicInfo.PGAD[GADIndex];
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "GAD记录加载成功。记录编号为：" + GADNumberText + "。");
-                                    }
-                                    else
-                                    {
-                                        var gadContent = new GAD { GADNumber = BasicInfo.Number + "-" + GADNumberText, basicinfoNumber = BasicInfo.Number };
-                                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
-                                        BasicInfo.PGAD.Add(gadContent);
-                                        BasicInfo = BasicInfo;
-                                        GADIndex = BasicInfo.PGAD.FindIndex((GAD e) => e.GADNumber == BasicInfo.Number + "-" + GADNumberText);
-                                        GADContent = BasicInfo.PGAD[GADIndex];
-
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的GAD记录创建成功。记录编号为：" + GADNumberText + "。");
-                                    }
-
-                                }
-                                else
-                                {
-                                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                }
-                            }
+                            loadGADContent();
                         }));
                 return _load_GAD_Executed;
+            }
+        }
+
+        private void loadGADContent()
+        {
+            if (!string.IsNullOrEmpty(GADNumberText))
+            {
+                if (BasicInfo is not null)
+                {
+                    GADContentEnable = true;
+                    if (BasicInfo.PGAD is null)
+                    {
+                        List<GAD> gad = new List<GAD>();
+                        BasicInfo.PGAD = gad;
+                    }
+                    GADIndex = BasicInfo.PGAD.FindIndex((GAD e) => e.GADNumber == BasicInfo.Number + "-" + GADNumberText);
+                    if (GADIndex >= 0)
+                    {
+                        GADContent = BasicInfo.PGAD[GADIndex];
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "GAD记录加载成功。记录编号为：" + GADNumberText + "。");
+                    }
+                    else
+                    {
+                        var gadContent = new GAD { GADNumber = BasicInfo.Number + "-" + GADNumberText, basicinfoNumber = BasicInfo.Number };
+                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
+                        BasicInfo.PGAD.Add(gadContent);
+                        BasicInfo = BasicInfo;
+                        GADIndex = BasicInfo.PGAD.FindIndex((GAD e) => e.GADNumber == BasicInfo.Number + "-" + GADNumberText);
+                        GADContent = BasicInfo.PGAD[GADIndex];
+
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的GAD记录创建成功。记录编号为：" + GADNumberText + "。");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
         }
     }

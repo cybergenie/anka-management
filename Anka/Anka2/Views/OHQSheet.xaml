@@ -27,6 +27,11 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </ComboBox.Text>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <m:EventCommand Command="{Binding Selection_OHQ_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ComboBox>
             <Button x:Name="btOHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45">
                 <i:Interaction.Triggers>

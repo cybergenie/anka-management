@@ -50,7 +50,7 @@ namespace Anka2.ViewModels
             set
             {
                 if (_basicInfo != value)
-                {
+                { 
                     _basicInfo = value;                    
                 }
                 RaisePropertyChanged(nameof(BasicInfo));
