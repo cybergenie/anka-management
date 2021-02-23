@@ -126,6 +126,63 @@ namespace Anka2.ViewModels
             }
         }
 
+        private CommandObject<SelectionChangedEventArgs> _selection_IPAQ_Executed;
+        public CommandObject<SelectionChangedEventArgs> Selection_IPAQ_Executed
+        {
+            get
+            {
+                if (_selection_IPAQ_Executed == null)
+                    _selection_IPAQ_Executed = new CommandObject<SelectionChangedEventArgs>(
+                        new Action<SelectionChangedEventArgs>(e =>
+                        {
+                            if (e.AddedItems.Count > 0)
+                            {
+                                IPAQNumberText = e.AddedItems[0].ToString();
+                            }
+                            loadIPAQContent();
+                        }));
+                return _selection_IPAQ_Executed;
+            }
+        }
+
+        private void loadIPAQContent()
+        {
+            if (!string.IsNullOrEmpty(IPAQNumberText))
+            {
+                if (BasicInfo is not null)
+                {
+                    IPAQContentEnable = true;
+                    if (BasicInfo.PIPAQ is null)
+                    {
+                        List<IPAQ> ipaq = new List<IPAQ>();
+                        BasicInfo.PIPAQ = ipaq;
+                    }
+                    IPAQIndex = BasicInfo.PIPAQ.FindIndex((IPAQ e) => e.IPAQNumber == BasicInfo.Number + "-" + IPAQNumberText);
+                    if (IPAQIndex >= 0)
+                    {
+                        IPAQContent = BasicInfo.PIPAQ[IPAQIndex];
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "GAD记录加载成功。记录编号为：" + IPAQNumberText + "。");
+                    }
+                    else
+                    {
+                        var ipaqContent = new IPAQ { IPAQNumber = BasicInfo.Number + "-" + IPAQNumberText, basicinfoNumber = BasicInfo.Number };
+                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
+                        BasicInfo.PIPAQ.Add(ipaqContent);
+                        BasicInfo = BasicInfo;
+                        IPAQIndex = BasicInfo.PIPAQ.FindIndex((IPAQ e) => e.IPAQNumber == BasicInfo.Number + "-" + IPAQNumberText);
+                        IPAQContent = BasicInfo.PIPAQ[IPAQIndex];
+
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的IPAQ记录创建成功。记录编号为：" + IPAQNumberText + "。");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+
         private CommandObject<RoutedEventArgs> _load_IPAQ_Executed;
         public CommandObject<RoutedEventArgs> Load_IPAQ_Executed
         {
@@ -135,40 +192,7 @@ namespace Anka2.ViewModels
                     _load_IPAQ_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            if (!string.IsNullOrEmpty(IPAQNumberText))
-                            {
-                                if (BasicInfo is not null)
-                                {
-                                    IPAQContentEnable = true;
-                                    if (BasicInfo.PIPAQ is null)
-                                    {
-                                        List<IPAQ> ipaq = new List<IPAQ>();
-                                        BasicInfo.PIPAQ = ipaq;
-                                    }
-                                    IPAQIndex = BasicInfo.PIPAQ.FindIndex((IPAQ e) => e.IPAQNumber == BasicInfo.Number + "-" + IPAQNumberText);
-                                    if (IPAQIndex >= 0)
-                                    {
-                                        IPAQContent = BasicInfo.PIPAQ[IPAQIndex];
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "GAD记录加载成功。记录编号为：" + IPAQNumberText + "。");
-                                    }
-                                    else
-                                    {
-                                        var ipaqContent = new IPAQ { IPAQNumber = BasicInfo.Number + "-" + IPAQNumberText, basicinfoNumber = BasicInfo.Number };
-                                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
-                                        BasicInfo.PIPAQ.Add(ipaqContent);
-                                        BasicInfo = BasicInfo;
-                                        IPAQIndex = BasicInfo.PIPAQ.FindIndex((IPAQ e) => e.IPAQNumber == BasicInfo.Number + "-" + IPAQNumberText);
-                                        IPAQContent = BasicInfo.PIPAQ[IPAQIndex];
-
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的IPAQ记录创建成功。记录编号为：" + IPAQNumberText + "。");
-                                    }
-
-                                }
-                                else
-                                {
-                                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                }
-                            }
+                            loadIPAQContent();
                         }));
                 return _load_IPAQ_Executed;
             }

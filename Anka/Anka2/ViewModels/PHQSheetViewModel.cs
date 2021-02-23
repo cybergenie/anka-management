@@ -138,6 +138,63 @@ namespace Anka2.ViewModels
             }
         }
 
+        private CommandObject<SelectionChangedEventArgs> _selection_PHQ_Executed;
+        public CommandObject<SelectionChangedEventArgs> Selection_PHQ_Executed
+        {
+            get
+            {
+                if (_selection_PHQ_Executed == null)
+                    _selection_PHQ_Executed = new CommandObject<SelectionChangedEventArgs>(
+                        new Action<SelectionChangedEventArgs>(e =>
+                        {
+                            if (e.AddedItems.Count > 0)
+                            {
+                                PHQNumberText = e.AddedItems[0].ToString();
+                            }
+                            loadPHQContent();
+                        }));
+                return _selection_PHQ_Executed;
+            }
+        }
+
+        private void loadPHQContent()
+        {
+            if (!string.IsNullOrEmpty(PHQNumberText))
+            {
+                if (BasicInfo is not null)
+                {
+                    PHQContentEnable = true;
+                    if (BasicInfo.PPHQ is null)
+                    {
+                        List<PHQ> phq = new List<PHQ>();
+                        BasicInfo.PPHQ = phq;
+                    }
+                    PHQIndex = BasicInfo.PPHQ.FindIndex((PHQ e) => e.PHQNumber == BasicInfo.Number + "-" + PHQNumberText);
+                    if (PHQIndex >= 0)
+                    {
+                        PHQContent = BasicInfo.PPHQ[PHQIndex];
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "PHQ记录加载成功。记录编号为：" + PHQNumberText + "。");
+                    }
+                    else
+                    {
+                        var phqContent = new PHQ { PHQNumber = BasicInfo.Number + "-" + PHQNumberText, basicinfoNumber = BasicInfo.Number };
+                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
+                        BasicInfo.PPHQ.Add(phqContent);
+                        BasicInfo = BasicInfo;
+                        PHQIndex = BasicInfo.PPHQ.FindIndex((PHQ e) => e.PHQNumber == BasicInfo.Number + "-" + PHQNumberText);
+                        PHQContent = BasicInfo.PPHQ[PHQIndex];
+
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的PHQ记录创建成功。记录编号为：" + PHQNumberText + "。");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+
         private CommandObject<RoutedEventArgs> _load_PHQ_Executed;
         public CommandObject<RoutedEventArgs> Load_PHQ_Executed
         {
@@ -147,40 +204,7 @@ namespace Anka2.ViewModels
                     _load_PHQ_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            if (!string.IsNullOrEmpty(PHQNumberText))
-                            {
-                                if (BasicInfo is not null)
-                                {
-                                    PHQContentEnable = true;
-                                    if (BasicInfo.PPHQ is null)
-                                    {
-                                        List<PHQ> phq = new List<PHQ>();
-                                        BasicInfo.PPHQ = phq;
-                                    }
-                                    PHQIndex = BasicInfo.PPHQ.FindIndex((PHQ e) => e.PHQNumber == BasicInfo.Number + "-" + PHQNumberText);
-                                    if (PHQIndex >= 0)
-                                    {
-                                        PHQContent = BasicInfo.PPHQ[PHQIndex];
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "PHQ记录加载成功。记录编号为：" + PHQNumberText + "。");
-                                    }
-                                    else
-                                    {
-                                        var phqContent = new PHQ { PHQNumber = BasicInfo.Number + "-" + PHQNumberText, basicinfoNumber = BasicInfo.Number };
-                                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
-                                        BasicInfo.PPHQ.Add(phqContent);
-                                        BasicInfo = BasicInfo;
-                                        PHQIndex = BasicInfo.PPHQ.FindIndex((PHQ e) => e.PHQNumber == BasicInfo.Number + "-" + PHQNumberText);
-                                        PHQContent = BasicInfo.PPHQ[PHQIndex];
-
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的PHQ记录创建成功。记录编号为：" + PHQNumberText + "。");
-                                    }
-
-                                }
-                                else
-                                {
-                                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                }
-                            }
+                            loadPHQContent();
                         }));
                 return _load_PHQ_Executed;
             }

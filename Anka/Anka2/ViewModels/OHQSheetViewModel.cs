@@ -138,6 +138,63 @@ namespace Anka2.ViewModels
             }
         }
 
+        private CommandObject<SelectionChangedEventArgs> _selection_OHQ_Executed;
+        public CommandObject<SelectionChangedEventArgs> Selection_OHQ_Executed
+        {
+            get
+            {
+                if (_selection_OHQ_Executed == null)
+                    _selection_OHQ_Executed = new CommandObject<SelectionChangedEventArgs>(
+                        new Action<SelectionChangedEventArgs>(e =>
+                        {
+                            if (e.AddedItems.Count > 0)
+                            {
+                                OHQNumberText = e.AddedItems[0].ToString();
+                            }
+                            loadOHQContent();
+                        }));
+                return _selection_OHQ_Executed;
+            }
+        }
+
+        private void loadOHQContent()
+        {
+            if (!string.IsNullOrEmpty(OHQNumberText))
+            {
+                if (BasicInfo is not null)
+                {
+                    OHQContentEnable = true;
+                    if (BasicInfo.POHQ is null)
+                    {
+                        List<OHQ> ohq = new List<OHQ>();
+                        BasicInfo.POHQ = ohq;
+                    }
+                    OHQIndex = BasicInfo.POHQ.FindIndex((OHQ e) => e.OHQNumber == BasicInfo.Number + "-" + OHQNumberText);
+                    if (OHQIndex >= 0)
+                    {
+                        OHQContent = BasicInfo.POHQ[OHQIndex];
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "口腔卫生记录加载成功。记录编号为：" + OHQNumberText + "。");
+                    }
+                    else
+                    {
+                        var ohqContent = new OHQ { OHQNumber = BasicInfo.Number + "-" + OHQNumberText, basicinfoNumber = BasicInfo.Number };
+                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
+                        BasicInfo.POHQ.Add(ohqContent);
+                        BasicInfo = BasicInfo;
+                        OHQIndex = BasicInfo.POHQ.FindIndex((OHQ e) => e.OHQNumber == BasicInfo.Number + "-" + OHQNumberText);
+                        OHQContent = BasicInfo.POHQ[OHQIndex];
+
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的口腔卫生记录创建成功。记录编号为：" + OHQNumberText + "。");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+
         private CommandObject<RoutedEventArgs> _load_OHQ_Executed;
         public CommandObject<RoutedEventArgs> Load_OHQ_Executed
         {
@@ -147,40 +204,7 @@ namespace Anka2.ViewModels
                     _load_OHQ_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            if (!string.IsNullOrEmpty(OHQNumberText))
-                            {
-                                if (BasicInfo is not null)
-                                {
-                                    OHQContentEnable = true;
-                                    if (BasicInfo.POHQ is null)
-                                    {
-                                        List<OHQ> ohq = new List<OHQ>();
-                                        BasicInfo.POHQ = ohq;
-                                    }
-                                    OHQIndex = BasicInfo.POHQ.FindIndex((OHQ e) => e.OHQNumber == BasicInfo.Number + "-" + OHQNumberText);
-                                    if (OHQIndex >= 0)
-                                    {
-                                        OHQContent = BasicInfo.POHQ[OHQIndex];
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "口腔卫生记录加载成功。记录编号为：" + OHQNumberText + "。");
-                                    }
-                                    else
-                                    {
-                                        var ohqContent = new OHQ { OHQNumber = BasicInfo.Number + "-" + OHQNumberText, basicinfoNumber = BasicInfo.Number };
-                                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
-                                        BasicInfo.POHQ.Add(ohqContent);
-                                        BasicInfo = BasicInfo;
-                                        OHQIndex = BasicInfo.POHQ.FindIndex((OHQ e) => e.OHQNumber == BasicInfo.Number + "-" + OHQNumberText);
-                                        OHQContent = BasicInfo.POHQ[OHQIndex];
-
-                                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的口腔卫生记录创建成功。记录编号为：" + OHQNumberText + "。");
-                                    }
-
-                                }
-                                else
-                                {
-                                    MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                }
-                            }
+                            loadOHQContent();
                         }));
                 return _load_OHQ_Executed;
             }
