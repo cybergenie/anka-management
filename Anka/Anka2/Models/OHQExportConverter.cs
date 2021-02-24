@@ -151,7 +151,7 @@ namespace Anka2.Models
             {
                 case "A":
                     {
-                        OHQResult = "否";                       
+                        OHQResult = "否";
                     }
                     break;
                 case "B":

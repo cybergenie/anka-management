@@ -50,37 +50,44 @@ namespace Anka2.Models.OHQValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-           switch (value.ToString())
+            if (value is not null)
             {
-                case "0":
-                    {
-                        if (parameter.ToString() == "0")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "1":
-                    {
-                        if (parameter.ToString() == "1")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "2":
-                    {
-                        if (parameter.ToString() == "2")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "3":
-                    {
-                        if (parameter.ToString() == "3")
-                            return true;
-                        else
-                            return false;
-                    }
-                default:return false;
+                switch (value.ToString())
+                {
+                    case "0":
+                        {
+                            if (parameter.ToString() == "0")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "1":
+                        {
+                            if (parameter.ToString() == "1")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "2":
+                        {
+                            if (parameter.ToString() == "2")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "3":
+                        {
+                            if (parameter.ToString() == "3")
+                                return true;
+                            else
+                                return false;
+                        }
+                    default: return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -106,31 +113,36 @@ namespace Anka2.Models.OHQValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch (value.ToString())
+            if (value is not null)
             {
-                case "0":
-                    {
-                        if (parameter.ToString() == "0")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "1":
-                    {
-                        if (parameter.ToString() == "1")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "2":
-                    {
-                        if (parameter.ToString() == "2")
-                            return true;
-                        else
-                            return false;
-                    }              
-                default: return false;
+                switch (value.ToString())
+                {
+                    case "0":
+                        {
+                            if (parameter.ToString() == "0")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "1":
+                        {
+                            if (parameter.ToString() == "1")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "2":
+                        {
+                            if (parameter.ToString() == "2")
+                                return true;
+                            else
+                                return false;
+                        }
+                    default: return false;
+                }
             }
+            else
+                return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -154,52 +166,57 @@ namespace Anka2.Models.OHQValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch (value.ToString())
+            if (value is not null)
             {
-                case "0":
-                    {
-                        if (parameter.ToString() == "0")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "1":
-                    {
-                        if (parameter.ToString() == "1")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "2":
-                    {
-                        if (parameter.ToString() == "2")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "3":
-                    {
-                        if (parameter.ToString() == "3")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "4":
-                    {
-                        if (parameter.ToString() == "4")
-                            return true;
-                        else
-                            return false;
-                    }
-                case "5":
-                    {
-                        if (parameter.ToString() == "5")
-                            return true;
-                        else
-                            return false;
-                    }
-                default: return false;
+                switch (value.ToString())
+                {
+                    case "0":
+                        {
+                            if (parameter.ToString() == "0")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "1":
+                        {
+                            if (parameter.ToString() == "1")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "2":
+                        {
+                            if (parameter.ToString() == "2")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "3":
+                        {
+                            if (parameter.ToString() == "3")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "4":
+                        {
+                            if (parameter.ToString() == "4")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "5":
+                        {
+                            if (parameter.ToString() == "5")
+                                return true;
+                            else
+                                return false;
+                        }
+                    default: return false;
+                }
             }
+            else
+                return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -226,74 +243,175 @@ namespace Anka2.Models.OHQValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var OHQ4s = value.ToString().Split('-');           
-            switch (OHQ4s[0])
+            if (value is not null)
             {
-                case "A":
-                    {
-                        switch (parameter.ToString())
+                var OHQ4s = value.ToString().Split('-');
+                switch (OHQ4s[0])
+                {
+                    case "A":
                         {
-                            case "0x": return true;
-                            case "0t": return OHQ4s[1];
-                            default:
-                                {
-                                    if (parameter.ToString().Contains('x'))
-                                        return false;
-                                    else
-                                        return null;
-                                }
+                            switch (parameter.ToString())
+                            {
+                                case "0x": return true;
+                                case "0t": return OHQ4s[1];
+                                default:
+                                    {
+                                        if (parameter.ToString().Contains('x'))
+                                            return false;
+                                        else
+                                            return null;
+                                    }
+                            }
                         }
-                    }
-                case "B":
-                    {
-                        switch (parameter.ToString())
+                    case "B":
                         {
-                            case "1x": return true;
-                            case "1t": return OHQ4s[1];
-                            default:
-                                {
-                                    if (parameter.ToString().Contains('x'))
-                                        return false;
-                                    else
-                                        return null;
-                                }
+                            switch (parameter.ToString())
+                            {
+                                case "1x": return true;
+                                case "1t": return OHQ4s[1];
+                                default:
+                                    {
+                                        if (parameter.ToString().Contains('x'))
+                                            return false;
+                                        else
+                                            return null;
+                                    }
+                            }
                         }
-                    }
-                case "C":
-                    {
-                        switch (parameter.ToString())
+                    case "C":
                         {
-                            case "2": return true;
-                            default: return false;
+                            switch (parameter.ToString())
+                            {
+                                case "2x": return true;
+                                default:
+                                    {
+                                        if (parameter.ToString().Contains('x'))
+                                            return false;
+                                        else
+                                            return null;
+                                    }
+                            }
                         }
-                    }
-                default: return null;
+                    default:
+                        {
+                            if (parameter.ToString().Contains('x'))
+                                return false;
+                            else
+                                return null;
+                        }
+                }
             }
+            else
+            {
+                if (parameter.ToString().Contains('x'))
+                    return false;
+                else
+                    return null;
+            }
+               
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {            
+            string OHQ4s = parameter.ToString() switch
+            {
+                "0x" => "A-" + string.Empty,
+                "0t" => "A-" + value.ToString(),
+                "1x" => "B-" + string.Empty,
+                "1t" => "B-" + value.ToString(),
+                "2x" => "C-" + string.Empty,
+                _ => null
+
+            };
+
+            return OHQ4s;
+
+
+        }
+    }
+    public class OHQ5Converter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is not null)
+            {
+                switch (value.ToString())
+                {
+                    case "0":
+                        {
+                            if (parameter.ToString() == "0")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "1":
+                        {
+                            if (parameter.ToString() == "1")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "2":
+                        {
+                            if (parameter.ToString() == "2")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "3":
+                        {
+                            if (parameter.ToString() == "3")
+                                return true;
+                            else
+                                return false;
+                        }                   
+                    default: return false;
+                }
+            }
+            else
+                return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            char[] OHQ4s = new char[3];
-            if (parameter.ToString().Contains('x'))
+            string OHQ5 = null;
+            if ((bool)value == true)
             {
-                if ((bool)value == true)
+                OHQ5 = parameter.ToString() switch
                 {
-                    switch(parameter.ToString().ToCharArray()[0])
-                    {
-                        case '0':
-                            {
-                                OHQ4s[0] = 'A';                                
-                            }
-                            break;
-                        case '1': OHQ4s[0] = 'B'; break;
-                        case '2': OHQ4s[0] = 'C'; break;
-                    }
-                }
+                    "0" => "0",
+                    "1" => "1",
+                    "2" => "2",
+                    "3" => "3",                   
+                    _ => null
+                };
             }
 
-            return string.Join('-', OHQ4s);
+            return OHQ5;
+        }
+    }
+    public class OHQ6Converter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
 
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class OHQ7Converter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
 
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 
