@@ -394,7 +394,44 @@ namespace Anka2.Models.OHQValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value is not null)
+            {
+                switch (value.ToString())
+                {
+                    case "0":
+                        {
+                            if (parameter.ToString() == "00")
+                                return true;
+                            else if (parameter.ToString() == "11")
+                                return null;
+                            else return false;
+
+                        }
+                    case "99":
+                        {
+                            if (parameter.ToString() == "20")
+                                return true;
+                            else if (parameter.ToString() == "11")
+                                return null;
+                            else return false;
+                        }
+                    default:
+                        {
+                            if (parameter.ToString() == "10")
+                                return true;
+                            else if (parameter.ToString() == "11")
+                                return value.ToString();
+                            else return false;
+                        }
+                }
+               
+            }
+            else
+            {
+                if (parameter.ToString() == "11")
+                    return null;
+                else return false;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
