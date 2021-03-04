@@ -222,6 +222,11 @@ namespace Anka2.ViewModels
             ohqSheetViewModel.OHQContent = null;
             ohqSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
 
+            SPPBSheetViewModel sppbSheetViewModel = ((MainWindow)RootSource).SPPBSheet.DataContext as SPPBSheetViewModel;
+            sppbSheetViewModel.UpDateStatusInfo(statusBarContext.SetTipInfo);//绑定exerciseSheet的状态栏信息更新
+            sppbSheetViewModel.SPPBContent = null;
+            sppbSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
+
         }
 
         public void UpDateStatusInfo(NotifyStatusInfoHandler notify)

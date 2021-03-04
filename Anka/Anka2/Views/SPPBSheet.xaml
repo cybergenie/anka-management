@@ -1,21 +1,58 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="clr-namespace:Anka2.Models" 
+                    xmlns:mc="clr-namespace:Anka2.Models.SPPBValueConverter" 
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:local="clr-namespace:Anka2.Views">
     <StackPanel x:Key="SPPB">
+        <StackPanel.Resources>
+            <mc:SPPBNumberConverter x:Key="SPPBNumberConverter"/>
+            <m:GenderConverter x:Key="GenderConverter"/>
+            <mc:BalanceTesting1Converter x:Key="BalanceTesting1Converter"/>
+            <mc:BalanceTesting2Converter x:Key="BalanceTesting2Converter"/>
+            <mc:BalanceTesting3Converter x:Key="BalanceTesting3Converter"/>
+            <mc:WalkingTestingConverter x:Key="WalkingTestingConverter"/>
+        </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
-            <Label Content="姓名：" Height="25" Width="45" />
-            <Label x:Name="lbSPPBName" Content="" Height="25" Width="65" />
-            <Label Content="性别：" Height="25" Width="45" />
-            <Label x:Name="lbSPPBMale" Content="" Height="25" Width="65" />
-            <Label Content="年龄：" Height="25" Width="45" />
-            <Label x:Name="lbSPPBAge" Content="" Height="25" Width="65" />
-            <Label Content="编号：" Height="25" Width="45" />
-            <Label x:Name="lbSPPBNumber" Content="" Height="25" Width="80" />
-            <ComboBox x:Name="txSPPBLoop" Width="80" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" />
-            <Button x:Name="btSPPBSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"/>
-            <Button x:Name="btSPPBLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" />
+            <Label Content="姓  名：" Height="25" Width="50" />
+            <Label x:Name="lbSPPBName" Height="25" Width="65" Content="{Binding BasicInfo.Name}"/>
+            <Label Content="性  别：" Height="25" Width="50" />
+            <Label x:Name="lbSPPBMale" Height="25" Width="65" Content="{Binding BasicInfo.Male,Converter={StaticResource GenderConverter}}"/>
+            <Label Content="年  龄：" Height="25" Width="50" />
+            <Label x:Name="lbSPPBAge" Height="25" Width="65" Content="{Binding BasicInfo.Age}"/>
+            <Label Content="编  号：" Height="25" Width="50" />
+            <Label x:Name="lbSPPBNumber" Height="25" Width="80" Content="{Binding BasicInfo.Number}"/>
+            <ComboBox x:Name="txSPPBLoop" Width="120" HorizontalAlignment="Left" Height="25" VerticalContentAlignment="Center" IsEditable="True" 
+                       ItemsSource="{Binding BasicInfo.PSPPB ,Converter={StaticResource SPPBNumberConverter}}">
+                <ComboBox.Text>
+                    <Binding Path="SPPBNumberText">
+                        <Binding.ValidationRules>
+                            <m:DateNumberRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.Text>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <m:EventCommand Command="{Binding Selection_SPPB_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <Button x:Name="btSPPBSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <m:EventCommand Command="{Binding Load_SPPB_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button x:Name="btSPPBLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <m:EventCommand Command="{Binding Load_SPPB_Executed }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </StackPanel>
-        <Grid DockPanel.Dock="Top" Margin="5" >
+        <Grid DockPanel.Dock="Top" Margin="5" IsEnabled="{Binding SPPBContentEnable}">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition/>
@@ -47,13 +84,38 @@
                     <Label Content="①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                     <Image Source="/Resources/Images/SPPB_1.bmp" Height="25" />
                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                    <RadioButton x:Name="rbSPPBYes1" Content="是" GroupName="SPPB11" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <RadioButton x:Name="rbSPPBYes1" Content="是" GroupName="SPPB11" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.BalanceTesting1" Converter="{StaticResource BalanceTesting1Converter}" ConverterParameter="01"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                     <RadioButton x:Name="rbSPPBNo1"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB11" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.BalanceTesting1" Converter="{StaticResource BalanceTesting1Converter}" ConverterParameter="00"/>
+                        </RadioButton.IsChecked>
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="否：" />
-                            <TextBox x:Name="txSPPB11" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
+                            <TextBox x:Name="txSPPB11" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" 
+                                     IsEnabled="{Binding SPPBContent.BalanceTesting1, Converter={StaticResource BalanceTesting1Converter}, ConverterParameter=00}" >
+                                <TextBox.Text>
+                                    <Binding Path="SPPBContent.BalanceTesting1" Converter="{StaticResource BalanceTesting1Converter}" ConverterParameter="10">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                            <TextBox x:Name="txSPPB12" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                            <TextBox x:Name="txSPPB12" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                     IsEnabled="{Binding SPPBContent.BalanceTesting1, Converter={StaticResource BalanceTesting1Converter}, ConverterParameter=00}" >
+                                <TextBox.Text>
+                                    <Binding Path="SPPBContent.BalanceTesting1" Converter="{StaticResource BalanceTesting1Converter}" ConverterParameter="11">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                         </StackPanel>
                     </RadioButton>
@@ -62,13 +124,38 @@
                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                     <Image Height="25" Source="/Resources/Images/SPPB_2.bmp" />
                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                    <RadioButton x:Name="rbSPPBYes2" Content="是" GroupName="SPPB12" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <RadioButton x:Name="rbSPPBYes2" Content="是" GroupName="SPPB12" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.BalanceTesting2" Converter="{StaticResource BalanceTesting2Converter}" ConverterParameter="01"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                     <RadioButton x:Name="rbSPPBNo2"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB12">
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.BalanceTesting2" Converter="{StaticResource BalanceTesting2Converter}" ConverterParameter="00"/>
+                        </RadioButton.IsChecked>                    
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="否：" />
-                            <TextBox x:Name="txSPPB21" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
+                            <TextBox x:Name="txSPPB21" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center"
+                                     IsEnabled="{Binding SPPBContent.BalanceTesting2, Converter={StaticResource BalanceTesting2Converter}, ConverterParameter=00}" >
+                                <TextBox.Text>
+                                    <Binding Path="SPPBContent.BalanceTesting2" Converter="{StaticResource BalanceTesting2Converter}" ConverterParameter="10">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                            <TextBox x:Name="txSPPB22" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                            <TextBox x:Name="txSPPB22" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                     IsEnabled="{Binding SPPBContent.BalanceTesting2, Converter={StaticResource BalanceTesting2Converter}, ConverterParameter=00}" >
+                                <TextBox.Text>
+                                    <Binding Path="SPPBContent.BalanceTesting2" Converter="{StaticResource BalanceTesting2Converter}" ConverterParameter="11">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                         </StackPanel>
                     </RadioButton>
@@ -77,13 +164,38 @@
                     <Label Content="③" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                     <Image Source="/Resources/Images/SPPB_3.bmp" Height="25" />
                     <Label Content="10秒：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                    <RadioButton x:Name="rbSPPBYes3" Content="是" GroupName="SPPB13" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  />
+                    <RadioButton x:Name="rbSPPBYes3" Content="是" GroupName="SPPB13" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.BalanceTesting3" Converter="{StaticResource BalanceTesting3Converter}" ConverterParameter="01"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                     <RadioButton x:Name="rbSPPBNo3"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB13" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.BalanceTesting3" Converter="{StaticResource BalanceTesting3Converter}" ConverterParameter="00"/>
+                        </RadioButton.IsChecked>
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="否：" />
-                            <TextBox x:Name="txSPPB31" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
+                            <TextBox x:Name="txSPPB31" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" 
+                                      IsEnabled="{Binding SPPBContent.BalanceTesting3, Converter={StaticResource BalanceTesting3Converter}, ConverterParameter=00}" >
+                                <TextBox.Text>
+                                    <Binding Path="SPPBContent.BalanceTesting3" Converter="{StaticResource BalanceTesting3Converter}" ConverterParameter="10">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                            <TextBox x:Name="txSPPB32" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                            <TextBox x:Name="txSPPB32" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                      IsEnabled="{Binding SPPBContent.BalanceTesting3, Converter={StaticResource BalanceTesting3Converter}, ConverterParameter=00}" >
+                                <TextBox.Text>
+                                    <Binding Path="SPPBContent.BalanceTesting3" Converter="{StaticResource BalanceTesting3Converter}" ConverterParameter="11">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                         </StackPanel>
                     </RadioButton>
@@ -93,22 +205,62 @@
                 <Label Content="(2) 4米通常步行速度测试" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                 <WrapPanel>
                     <Label Content="① 时间：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txSPPB41" Width="45" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txSPPB41" Width="45" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="10">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                    <TextBox x:Name="txSPPB42" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txSPPB42" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="11">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                 </WrapPanel>
                 <WrapPanel>
                     <Label Content="② 时间：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txSPPB51" Width="45" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txSPPB51" Width="45" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.walkingTesting2" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="10">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                    <TextBox x:Name="txSPPB52" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txSPPB52" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.walkingTesting2" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="11">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                 </WrapPanel>
                 <WrapPanel>
                     <Label Content="辅助工具的使用：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <RadioButton x:Name="rbSPPBYes4" Content="有" GroupName="SPPB21" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" />
-                    <RadioButton x:Name="rbSPPBNo4" Content="无" GroupName="SPPB21" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" />
+                    <RadioButton x:Name="rbSPPBYes4" Content="有" GroupName="SPPB21" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="01"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbSPPBNo4" Content="无" GroupName="SPPB21" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="00"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </WrapPanel>
             </StackPanel>
             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1" >

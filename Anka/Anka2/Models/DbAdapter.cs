@@ -42,14 +42,4 @@ namespace Anka2.Models
 
 
     }
-
-    [Table("sppb")]
-    public class SPPB
-    {
-        [Key]
-        public string SPPBNumber { get; set; }
-        public string basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; }
-    }
-
 }

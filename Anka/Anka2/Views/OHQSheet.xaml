@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:m="clr-namespace:Anka2.Models" 
+                    xmlns:m="clr-namespace:Anka2.Models" 
                     xmlns:mc="clr-namespace:Anka2.Models.OHQValueConverter" 
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:local="clr-namespace:Anka2.Views">

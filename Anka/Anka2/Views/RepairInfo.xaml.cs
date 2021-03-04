@@ -494,7 +494,68 @@ namespace Anka2.Views
 
         private bool RepairSPPB()
         {
-            return true;
+            try
+            {
+                var context = new DbAdapter();
+                var RepairList = context.DbSPPB.ToList();
+                string tempNumber = null;
+                try
+                {
+                    for (int i = 0; i < RepairList.Count; i++)
+                    {
+                        tempNumber = RepairList[i].SPPBNumber.Trim();
+                        var tempList = RepairList[i];
+                        string tempBaiscNumber = RepairList[i].basicinfoNumber;
+                        context.DbSPPB.Remove(tempList);
+
+                        RepairList.RemoveAt(i);
+                        var newNumber = NumberConverter(tempNumber, tempBaiscNumber);
+                        RepairList.Insert(i, ItemCopy(tempList, newNumber));
+
+                    }
+
+                    for (int i = 0; i < RepairList.Count; i++)
+                    {
+                        Regex IndexReg = new Regex("^(-\\d{2})$");
+                        if (!IndexReg.IsMatch(RepairList[i].SPPBNumber.Substring(RepairList[i].SPPBNumber.Length - 3, 3)))
+                        {
+                            string tempListNumber = RepairList[i].SPPBNumber;
+                            var exsitingList = RepairList.FindAll((SPPB e) => e.SPPBNumber == tempListNumber);
+                            RepairList.RemoveAll((SPPB e) => e.SPPBNumber == tempListNumber);
+                            for (int j = 0; j < exsitingList.Count; j++)
+                            {
+                                if (!string.IsNullOrWhiteSpace(exsitingList[j].basicinfoNumber))
+                                {
+                                    exsitingList[j].SPPBNumber = exsitingList[j].SPPBNumber + "-" + (j + 1).ToString("D2");
+                                    tempNumber = exsitingList[j].SPPBNumber;
+                                    context.DbSPPB.Add(exsitingList[j]);
+                                    RepairList.Add(exsitingList[j]);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    App.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        this.repairInfo.Text += "*ERROR:数据表SPPB转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
+                    }));
+                    return false;
+                }
+                context.SaveChanges();
+                return true;
+
+
+            }
+            catch (Exception e)
+            {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "*ERROR:SPPB数据连接错误，错误信息为：" + e.Message + "\n";
+                }));
+                return false;
+            }
         }
 
         private bool RepairPhysique()

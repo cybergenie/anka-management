@@ -82,6 +82,9 @@
                             </avalonDock:LayoutDocument>
                             <avalonDock:LayoutDocument x:Name="SPPB" Title="SPPB/平衡能力"  CanClose="False" CanFloat="False" CanMove="True" ContentId="SPPB" >
                                 <ScrollViewer>
+                                    <ScrollViewer.DataContext>
+                                        <s:SPPBSheetViewModel/>
+                                    </ScrollViewer.DataContext>
                                     <ContentControl x:Name="SPPBSheet" Content="{StaticResource SPPB}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>

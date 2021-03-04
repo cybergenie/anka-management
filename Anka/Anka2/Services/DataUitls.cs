@@ -26,6 +26,7 @@ namespace Anka2.Services
                         .Include(BasicInfo => BasicInfo.PPHQ)
                         .Include(BasicInfo => BasicInfo.PIPAQ)
                         .Include(BasicInfo => BasicInfo.POHQ)
+                        .Include(BasicInfo => BasicInfo.PSPPB)
                         .ToList();
 
                     if (existingPerson.Count > 0)
