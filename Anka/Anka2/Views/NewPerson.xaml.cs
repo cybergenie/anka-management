@@ -2,6 +2,7 @@
 using Anka2.Services;
 using Anka2.ViewModels;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Anka2.Views
@@ -78,6 +79,23 @@ namespace Anka2.Views
                     this.btNewPerson.Content = "新  建";
                     this.btNewPerson.Background = this.btCancel.Background;
                 }
+            }
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch { }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
             }
         }
     }
