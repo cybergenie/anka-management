@@ -394,24 +394,276 @@ namespace Anka2.Models.OHQValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value is not null)
+            {
+                switch (value.ToString())
+                {
+                    case "0":
+                        {
+                            if (parameter.ToString() == "00")
+                                return true;
+                            else if (parameter.ToString().ToCharArray()[1] == '1')
+                                return null;
+                            else
+                                return false;
+                        }
+                    case "99":
+                        {
+                            if (parameter.ToString() == "20")
+                                return true;
+                            else if (parameter.ToString().ToCharArray()[1] == '1')
+                                return null;
+                            else
+                                return false;
+                        }                   
+                    default:
+                        {
+                            if (parameter.ToString() == "10")
+                                return true;
+                            if (parameter.ToString().ToCharArray()[1] == '1')
+                                return value.ToString();
+                            else
+                                return false;
+                        }
+                }
+            }
+            else
+            {
+                if (parameter.ToString().ToCharArray()[1] == '1')
+                    return null;
+                else
+                    return false;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            string OHQ6 = parameter.ToString() switch
+            {
+                "00" => "0",
+                "10" => "0",
+                "11" => value.ToString(),
+                "20" => "99",               
+                _ => null
+
+            };
+
+            return OHQ6;
         }
     }
     public class OHQ7Converter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value is not null)
+            {
+                switch (value.ToString())
+                {
+                    case "0":
+                        {
+                            if (parameter.ToString() == "0")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "1":
+                        {
+                            if (parameter.ToString() == "1")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "2":
+                        {
+                            if (parameter.ToString() == "2")
+                                return true;
+                            else
+                                return false;
+                        }
+                   
+                    default: return false;
+                }
+            }
+            else
+                return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            string OHQ7 = null;
+            if ((bool)value == true)
+            {
+                OHQ7 = parameter.ToString() switch
+                {
+                    "0" => "0",
+                    "1" => "1",
+                    "2" => "2",                   
+                    _ => null
+                };
+            }
+
+            return OHQ7;
+        }
+    }
+
+    public class OHQ8Converter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is not null)
+            {
+                switch (value.ToString())
+                {
+                    case "0":
+                        {
+                            if (parameter.ToString() == "0")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "1":
+                        {
+                            if (parameter.ToString() == "1")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case "2":
+                        {
+                            if (parameter.ToString() == "2")
+                                return true;
+                            else
+                                return false;
+                        }
+
+                    default: return false;
+                }
+            }
+            else
+                return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string OHQ8 = null;
+            if ((bool)value == true)
+            {
+                OHQ8 = parameter.ToString() switch
+                {
+                    "0" => "0",
+                    "1" => "1",
+                    "2" => "2",
+                    _ => null
+                };
+            }
+            return OHQ8;
+        }
+    }
+    public class OHQ9Converter : IValueConverter
+    {
+        private object tempOHQ9Result;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            tempOHQ9Result = value;
+            if (tempOHQ9Result is null)
+            {
+                value = null;
+            }            
+            else
+            {
+                value = tempOHQ9Result.ToString();
+            }
+
+            if (value is not null)
+            {
+                var OHQ9s = value.ToString().Split('-');
+                switch (OHQ9s[0])
+                {
+                    case "A":
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => true,
+                                "01" => false,
+                                _ => null,
+                            };
+                        }
+                    case "B":
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => false,
+                                "01" => true,
+                                "10" => OHQ9s[1],
+                                "11" => OHQ9s[2],
+                                _ => null,
+                            };
+                        }
+                    default:
+                        {
+                            if (parameter.ToString().ToCharArray()[0] == '0')
+                                return false;
+                            else
+                                return null;
+                        }
+                }
+            }
+            else
+            {
+                if (parameter.ToString().ToCharArray()[0] == '0')
+                    return false;
+                else
+                    return null;
+            }
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string[] OHQ9ResultArray;
+            if (tempOHQ9Result is null)
+            {
+                OHQ9ResultArray = new string[3];
+            }           
+            else
+            {
+                OHQ9ResultArray = tempOHQ9Result.ToString().Split('-');
+            }            
+            switch (parameter.ToString())
+            {
+                case "00":
+                    {
+                        if ((bool)value == true)
+                        {
+                            OHQ9ResultArray[0] = "A";
+                            OHQ9ResultArray[1] = null;
+                            OHQ9ResultArray[2] = null;
+                            tempOHQ9Result = string.Join('-', OHQ9ResultArray);
+                        }
+                    }break;
+                case "01":
+                    {
+                        if ((bool)value == true)
+                            OHQ9ResultArray[0] = "B";
+                        tempOHQ9Result = string.Join('-', OHQ9ResultArray);
+                    }
+                    break;
+                case "10":
+                    {
+                        OHQ9ResultArray[0] = "B";
+                        OHQ9ResultArray[1] = value.ToString();
+                        tempOHQ9Result = string.Join('-', OHQ9ResultArray);
+                    }
+                    break;
+                case "11":
+                    {
+                        OHQ9ResultArray[0] = "B";
+                        OHQ9ResultArray[2] = value.ToString();
+                        tempOHQ9Result = string.Join('-', OHQ9ResultArray);
+                    }
+                    break;
+            }            
+            return tempOHQ9Result;
         }
     }
 

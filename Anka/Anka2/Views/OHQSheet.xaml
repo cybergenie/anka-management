@@ -15,6 +15,8 @@
             <mc:OHQ5Converter x:Key="OHQ5Converter"/>
             <mc:OHQ6Converter x:Key="OHQ6Converter"/>
             <mc:OHQ7Converter x:Key="OHQ7Converter"/>
+            <mc:OHQ8Converter x:Key="OHQ8Converter"/>
+            <mc:OHQ9Converter x:Key="OHQ9Converter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -326,15 +328,34 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="6" >
                 <WrapPanel Margin="0" VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbOHQ61" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ61" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ6" Converter="{StaticResource OHQ6Converter}" ConverterParameter="00"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                     <RadioButton x:Name="rbOHQ62" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ6" Converter="{StaticResource OHQ6Converter}" ConverterParameter="10"/>
+                        </RadioButton.IsChecked>
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="部分是（共" />
-                            <TextBox x:Name="txOHQ62" Width="25" IsEnabled="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                            <TextBox x:Name="txOHQ62" Width="25" IsEnabled="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" >
+                                <TextBox.Text>
+                                    <Binding Path="OHQContent.OHQ6" Converter="{StaticResource OHQ6Converter}" ConverterParameter="11">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="颗假牙）" />
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton x:Name="rbOHQ63" Content="全部替换" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ63" Content="全部替换" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ6" Converter="{StaticResource OHQ6Converter}" ConverterParameter="20"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </WrapPanel>
             </Border>
             <!--#endregion-->
@@ -354,9 +375,21 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="7" >
                 <WrapPanel Margin="0" VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbOHQ71" Content="清水浸泡" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ72" Content="假牙清洁剂浸泡" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ73" Content="用牙膏刷" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ71" Content="清水浸泡" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ7" Converter="{StaticResource OHQ7Converter}" ConverterParameter="0"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ72" Content="假牙清洁剂浸泡" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ7" Converter="{StaticResource OHQ7Converter}" ConverterParameter="1"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ73" Content="用牙膏刷" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ7" Converter="{StaticResource OHQ7Converter}" ConverterParameter="2"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </WrapPanel>
             </Border>
             <!--#endregion-->
@@ -375,9 +408,21 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="8" >
                 <WrapPanel Margin="0" VerticalAlignment="Center" >
-                    <RadioButton x:Name="rbOHQ81" Content="&lt;1分钟" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ82" Content="1-2分钟" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                    <RadioButton x:Name="rbOHQ83" Content="2分钟以上" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
+                    <RadioButton x:Name="rbOHQ81" Content="&lt;1分钟" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ8" Converter="{StaticResource OHQ8Converter}" ConverterParameter="0"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ82" Content="1-2分钟" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ8" Converter="{StaticResource OHQ8Converter}" ConverterParameter="1"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbOHQ83" Content="2分钟以上" GroupName="PHQ-6" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="OHQContent.OHQ8" Converter="{StaticResource OHQ8Converter}" ConverterParameter="2"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </WrapPanel>
             </Border>
             <!--#endregion-->
@@ -397,18 +442,42 @@
             <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="2" Grid.Row="9" >
                 <StackPanel>
                     <WrapPanel Margin="0" VerticalAlignment="Center" >
-                        <RadioButton x:Name="rbOHQ91" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" />
-                        <RadioButton x:Name="rbOHQ92" Content="是（选择原因如下）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0"  />
+                        <RadioButton x:Name="rbOHQ91" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="OHQContent.OHQ9" Converter="{StaticResource OHQ9Converter}" ConverterParameter="00"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbOHQ92" Content="是（选择原因如下）" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="25,0,50,0"  >
+                            <RadioButton.IsChecked>
+                                <Binding Path="OHQContent.OHQ9" Converter="{StaticResource OHQ9Converter}" ConverterParameter="01"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
                     </WrapPanel>
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Margin="15,0" VerticalAlignment="Center" Orientation="Horizontal" >
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="( 常规检查：" />
-                            <TextBox x:Name="txOHQ91" Width="25" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txOHQ91" Width="25" IsEnabled="{Binding OHQContent.OHQ9, Converter={StaticResource OHQ9Converter}, ConverterParameter=01}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                                <TextBox.Text>
+                                    <Binding Path="OHQContent.OHQ9" Converter="{StaticResource OHQ9Converter}" ConverterParameter="10">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次/年；" />
                         </StackPanel>
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,0" >
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="生病：" />
-                            <TextBox x:Name="txOHQ92" Width="25" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txOHQ92" Width="25" IsEnabled="{Binding OHQContent.OHQ9, Converter={StaticResource OHQ9Converter}, ConverterParameter=01}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                                <TextBox.Text>
+                                    <Binding Path="OHQContent.OHQ9" Converter="{StaticResource OHQ9Converter}" ConverterParameter="11">
+                                        <Binding.ValidationRules>
+                                            <m:IntRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次/年 ）" />
                         </StackPanel>
 
