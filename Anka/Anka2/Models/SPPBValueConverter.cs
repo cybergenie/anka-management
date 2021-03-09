@@ -369,7 +369,7 @@ namespace Anka2.Models.SPPBValueConverter
             return tempBalanceTestingResult;
         }
     }
-    public class WalkingTestingConverter : IValueConverter
+    public class WalkingTesting1Converter : IValueConverter
     {
         private object tempWalkingTestingResult;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -413,10 +413,14 @@ namespace Anka2.Models.SPPBValueConverter
                         }
                     default:
                         {
-                            if (parameter.ToString().ToCharArray()[0] == '0')
-                                return false;
-                            else
-                                return null;
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => false,
+                                "01" => false,
+                                "10" => WalkingTestings[1],
+                                "11" => WalkingTestings[2],
+                                _ => null,
+                            };
                         }
                 }
             }
@@ -475,6 +479,343 @@ namespace Anka2.Models.SPPBValueConverter
                     break;
             }
             return tempWalkingTestingResult;
+        }
+    }
+
+    public class WalkingTesting2Converter : IValueConverter
+    {
+        private object tempWalkingTestingResult;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            tempWalkingTestingResult = value;
+            if (tempWalkingTestingResult is null)
+            {
+                value = null;
+            }
+            else
+            {
+                value = tempWalkingTestingResult.ToString();
+            }
+
+            if (value is not null)
+            {
+                var WalkingTestings = value.ToString().Split('-');
+
+                return (parameter.ToString()) switch
+                {
+                    "10" => WalkingTestings[1],
+                    "11" => WalkingTestings[2],
+                    _ => null,
+                };
+
+
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string[] WalkingTestingResultArray;
+            if (tempWalkingTestingResult is null)
+            {
+                WalkingTestingResultArray = new string[3];
+            }
+            else
+            {
+                WalkingTestingResultArray = tempWalkingTestingResult.ToString().Split('-');
+            }
+            switch (parameter.ToString())
+            {               
+                case "10":
+                    {
+                        WalkingTestingResultArray[1] = value.ToString();
+                        tempWalkingTestingResult = string.Join('-', WalkingTestingResultArray);
+                    }
+                    break;
+                case "11":
+                    {
+                        WalkingTestingResultArray[2] = value.ToString();
+                        tempWalkingTestingResult = string.Join('-', WalkingTestingResultArray);
+                    }
+                    break;
+            }
+            return tempWalkingTestingResult;
+        }
+    }
+    public class SitUpTesting1Converter : IValueConverter
+    {
+        private object tempSitUpTestingResult;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            tempSitUpTestingResult = value;
+            if (tempSitUpTestingResult is null)
+            {
+                value = null;
+            }
+            else
+            {
+                value = tempSitUpTestingResult.ToString();
+            }
+
+            if (value is not null)
+            {
+                var SitUpTestings = value.ToString().Split('-');
+
+                switch (SitUpTestings[0])
+                {
+                    case "A":
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => true,
+                                "01" => false,
+                                "10" => SitUpTestings[1],
+                                "11" => SitUpTestings[2],                                
+                                _ => null,
+                            };
+                        }
+                    case "B":
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => false,
+                                "01" => true,                               
+                                "22" => SitUpTestings[2],
+                                _ => null,
+                            };
+                        }
+                    default:
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => false,
+                                "01" => false,                                
+                                _ => null,
+                            };
+                        }
+                }
+
+
+            }
+            else
+            {
+                if (parameter.ToString().ToCharArray()[0] == '0')
+                    return false;
+                else
+                    return null;
+            }
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string[] SitUpTestingResultArray;
+            if (tempSitUpTestingResult is null)
+            {
+                SitUpTestingResultArray = new string[3];
+            }
+            else
+            {
+                SitUpTestingResultArray = tempSitUpTestingResult.ToString().Split('-');
+            }
+            switch (parameter.ToString())
+            {
+                case "00":
+                    {
+                        if ((bool)value == true)
+                        {
+                            SitUpTestingResultArray[0] = "A";
+                            SitUpTestingResultArray[1] = null;
+                            SitUpTestingResultArray[2] = null;
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }                        
+                    }
+                    break;
+                case "01":
+                    {
+                        if ((bool)value == true)
+                        {
+                            SitUpTestingResultArray[0] = "B";
+                            SitUpTestingResultArray[1] = null;
+                            SitUpTestingResultArray[2] = null;
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+                       
+                    }
+                    break;
+                case "10":
+                    {
+                        if (SitUpTestingResultArray[0] == "A")
+                        {
+                            SitUpTestingResultArray[1] = value.ToString();
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+                        
+                    }
+                    break;
+                case "11":
+                    {
+                        if (SitUpTestingResultArray[0] == "A")
+                        {
+                            SitUpTestingResultArray[2] = value.ToString();
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+                        
+                    }
+                    break;
+                case "22":
+                    {
+                        if (SitUpTestingResultArray[0] == "B")
+                        {
+                            SitUpTestingResultArray[1] = null;
+                            SitUpTestingResultArray[2] = value.ToString();
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+                        
+                    }
+                    break;
+            }
+            return tempSitUpTestingResult;
+        }
+    }
+    public class SitUpTesting2Converter : IValueConverter
+    {
+        private object tempSitUpTestingResult;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            tempSitUpTestingResult = value;
+            if (tempSitUpTestingResult is null)
+            {
+                value = null;
+            }
+            else
+            {
+                value = tempSitUpTestingResult.ToString();
+            }
+
+            if (value is not null)
+            {
+                var SitUpTestings = value.ToString().Split('-');
+
+                switch (SitUpTestings[0])
+                {
+                    case "A":
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => true,
+                                "01" => false,
+                                "10" => SitUpTestings[1],
+                                "11" => SitUpTestings[2],
+                                _ => null,
+                            };
+                        }
+                    case "B":
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => false,
+                                "01" => true,
+                                "22" => SitUpTestings[2],
+                                _ => null,
+                            };
+                        }
+                    default:
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => false,
+                                "01" => false,
+                                _ => null,
+                            };
+                        }
+                }
+
+
+            }
+            else
+            {
+                if (parameter.ToString().ToCharArray()[0] == '0')
+                    return false;
+                else
+                    return null;
+            }
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string[] SitUpTestingResultArray;
+            if (tempSitUpTestingResult is null)
+            {
+                SitUpTestingResultArray = new string[3];
+            }
+            else
+            {
+                SitUpTestingResultArray = tempSitUpTestingResult.ToString().Split('-');
+            }
+            switch (parameter.ToString())
+            {
+                case "00":
+                    {
+                        if ((bool)value == true)
+                        {
+                            SitUpTestingResultArray[0] = "A";
+                            SitUpTestingResultArray[1] = null;
+                            SitUpTestingResultArray[2] = null;
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+                    }
+                    break;
+                case "01":
+                    {
+                        if ((bool)value == true)
+                        {
+                            SitUpTestingResultArray[0] = "B";
+                            SitUpTestingResultArray[1] = null;
+                            SitUpTestingResultArray[2] = null;
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+
+                    }
+                    break;
+                case "10":
+                    {
+                        if (SitUpTestingResultArray[0] == "A")
+                        {
+                            SitUpTestingResultArray[1] = value.ToString();
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+
+                    }
+                    break;
+                case "11":
+                    {
+                        if (SitUpTestingResultArray[0] == "A")
+                        {
+                            SitUpTestingResultArray[2] = value.ToString();
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+
+                    }
+                    break;
+                case "22":
+                    {
+                        if (SitUpTestingResultArray[0] == "B")
+                        {
+                            SitUpTestingResultArray[1] = null;
+                            SitUpTestingResultArray[2] = value.ToString();
+                            tempSitUpTestingResult = string.Join('-', SitUpTestingResultArray);
+                        }
+
+                    }
+                    break;
+            }
+            return tempSitUpTestingResult;
         }
     }
 

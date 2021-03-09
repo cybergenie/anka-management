@@ -11,7 +11,10 @@
             <mc:BalanceTesting1Converter x:Key="BalanceTesting1Converter"/>
             <mc:BalanceTesting2Converter x:Key="BalanceTesting2Converter"/>
             <mc:BalanceTesting3Converter x:Key="BalanceTesting3Converter"/>
-            <mc:WalkingTestingConverter x:Key="WalkingTestingConverter"/>
+            <mc:WalkingTesting1Converter x:Key="WalkingTesting1Converter"/>
+            <mc:WalkingTesting2Converter x:Key="WalkingTesting2Converter"/>
+            <mc:SitUpTesting1Converter x:Key="SitUpTesting1Converter"/>
+            <mc:SitUpTesting2Converter x:Key="SitUpTesting2Converter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -207,7 +210,7 @@
                     <Label Content="① 时间：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                     <TextBox x:Name="txSPPB41" Width="45" Height="25" VerticalContentAlignment="Center" >
                         <TextBox.Text>
-                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="10">
+                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTesting1Converter}" ConverterParameter="10">
                                 <Binding.ValidationRules>
                                     <m:IntRule />
                                 </Binding.ValidationRules>
@@ -217,7 +220,7 @@
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                     <TextBox x:Name="txSPPB42" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
                         <TextBox.Text>
-                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="11">
+                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTesting1Converter}" ConverterParameter="11">
                                 <Binding.ValidationRules>
                                     <m:IntRule />
                                 </Binding.ValidationRules>
@@ -230,7 +233,7 @@
                     <Label Content="② 时间：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                     <TextBox x:Name="txSPPB51" Width="45" Height="25" VerticalContentAlignment="Center" >
                         <TextBox.Text>
-                            <Binding Path="SPPBContent.walkingTesting2" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="10">
+                            <Binding Path="SPPBContent.walkingTesting2" Converter="{StaticResource WalkingTesting2Converter}" ConverterParameter="10">
                                 <Binding.ValidationRules>
                                     <m:IntRule />
                                 </Binding.ValidationRules>
@@ -240,7 +243,7 @@
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                     <TextBox x:Name="txSPPB52" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
                         <TextBox.Text>
-                            <Binding Path="SPPBContent.walkingTesting2" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="11">
+                            <Binding Path="SPPBContent.walkingTesting2" Converter="{StaticResource WalkingTesting2Converter}" ConverterParameter="11">
                                 <Binding.ValidationRules>
                                     <m:IntRule />
                                 </Binding.ValidationRules>
@@ -253,12 +256,12 @@
                     <Label Content="辅助工具的使用：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                     <RadioButton x:Name="rbSPPBYes4" Content="有" GroupName="SPPB21" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" >
                         <RadioButton.IsChecked>
-                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="01"/>
+                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTesting1Converter}" ConverterParameter="01"/>
                         </RadioButton.IsChecked>
                     </RadioButton>
                     <RadioButton x:Name="rbSPPBNo4" Content="无" GroupName="SPPB21" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" >
                         <RadioButton.IsChecked>
-                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTestingConverter}" ConverterParameter="00"/>
+                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTesting1Converter}" ConverterParameter="00"/>
                         </RadioButton.IsChecked>
                     </RadioButton>
                 </WrapPanel>
@@ -266,19 +269,52 @@
             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1" >
                 <Label Content="(3) 坐立起测试（5次）" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                 <RadioButton x:Name="rbSPPBYes5"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" HorizontalAlignment="Left" GroupName="SPPB31" >
+                    <RadioButton.IsChecked>
+                        <Binding Path="SPPBContent.SitUpTesting" Converter="{StaticResource SitUpTesting1Converter}" ConverterParameter="00"/>
+                    </RadioButton.IsChecked>
                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="时间" />
-                        <TextBox x:Name="txSPPB61" Width="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
+                        <TextBox x:Name="txSPPB61" Width="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" 
+                                 IsEnabled="{Binding SPPBContent.SitUpTesting, Converter={StaticResource SitUpTesting1Converter}, ConverterParameter=00}" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.SitUpTesting" Converter="{StaticResource SitUpTesting1Converter}" ConverterParameter="10">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                        <TextBox x:Name="txSPPB62" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False" />
+                        <TextBox x:Name="txSPPB62" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                 IsEnabled="{Binding SPPBContent.SitUpTesting, Converter={StaticResource SitUpTesting1Converter}, ConverterParameter=00}" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.SitUpTesting" Converter="{StaticResource SitUpTesting1Converter}" ConverterParameter="11">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                     </StackPanel>
                 </RadioButton>
 
                 <RadioButton x:Name="rbSPPBNo5"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB31" >
+                    <RadioButton.IsChecked>
+                        <Binding Path="SPPBContent.SitUpTesting" Converter="{StaticResource SitUpTesting2Converter}" ConverterParameter="01"/>
+                    </RadioButton.IsChecked>
                     <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" >
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="不能完成5次，可完成" />
-                        <TextBox x:Name="txSPPB7" Width="45" Height="25" VerticalContentAlignment="Center" IsEnabled="False" />
+                        <TextBox x:Name="txSPPB7" Width="45" Height="25" VerticalContentAlignment="Center" 
+                                 IsEnabled="{Binding SPPBContent.SitUpTesting, Converter={StaticResource SitUpTesting2Converter}, ConverterParameter=01}" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.SitUpTesting" Converter="{StaticResource SitUpTesting2Converter}" ConverterParameter="22">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次" />
 
                     </StackPanel>
