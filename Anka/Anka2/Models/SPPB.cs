@@ -38,14 +38,14 @@ namespace Anka2.Models
         public string? HeartRate { set; get; }
         public string? Temperature { set; get; }
         public string? Breathe { set; get; }
-        public string? LeftHandHurt { set; get; }
-        public string? RightHandHurt { set; get; }
+        public bool? LeftHandHurt { set; get; }
+        public bool? RightHandHurt { set; get; }
         public string? GripStrengthLeft1 { set; get; }
         public string? GripStrengthRight1 { set; get; }
         public string? GripStrengthLeft2 { set; get; }
         public string? GripStrengthRight2 { set; get; }
-        public string? LeftLapHurt { set; get; }
-        public string? RightLapHurt { set; get; }
+        public bool? LeftLapHurt { set; get; }
+        public bool? RightLapHurt { set; get; }
         public string? LapStrengthLeft1 { set; get; }
         public string? LapStrengthRight1 { set; get; }
         public string? LapStrengthLeft2 { set; get; }
@@ -90,14 +90,14 @@ namespace Anka2.Models
         public string? HeartRate { set; get; }
         public string? Temperature { set; get; }
         public string? Breathe { set; get; }
-        public string? LeftHandHurt { set; get; }
-        public string? RightHandHurt { set; get; }
+        public bool? LeftHandHurt { set; get; }
+        public bool? RightHandHurt { set; get; }
         public string? GripStrengthLeft1 { set; get; }
         public string? GripStrengthRight1 { set; get; }
         public string? GripStrengthLeft2 { set; get; }
         public string? GripStrengthRight2 { set; get; }
-        public string? LeftLapHurt { set; get; }
-        public string? RightLapHurt { set; get; }
+        public bool? LeftLapHurt { set; get; }
+        public bool? RightLapHurt { set; get; }
         public string? LapStrengthLeft1 { set; get; }
         public string? LapStrengthRight1 { set; get; }
         public string? LapStrengthLeft2 { set; get; }

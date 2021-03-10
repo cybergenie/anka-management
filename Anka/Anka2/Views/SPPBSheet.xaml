@@ -14,7 +14,9 @@
             <mc:WalkingTesting1Converter x:Key="WalkingTesting1Converter"/>
             <mc:WalkingTesting2Converter x:Key="WalkingTesting2Converter"/>
             <mc:SitUpTesting1Converter x:Key="SitUpTesting1Converter"/>
-            <mc:SitUpTesting2Converter x:Key="SitUpTesting2Converter"/>
+            <mc:SitUpTesting2Converter x:Key="SitUpTesting2Converter"/> 
+            <mc:TUGConverter x:Key="TUGConverter"/>
+            <mc:HurtConverter x:Key="HurtConverter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -332,15 +334,39 @@
                 <Label Content="(1) 3米往返步行（TUG）" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left" Margin="15,0,0,0" >
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="时间：" />
-                    <TextBox x:Name="txBalance11" Width="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance11" Width="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.TUG" Converter="{StaticResource TUGConverter}" ConverterParameter="10">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
-                    <TextBox x:Name="txBalance12" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance12" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.TUG" Converter="{StaticResource TUGConverter}" ConverterParameter="11">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="分秒" />
                 </StackPanel>
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Left" Margin="15,0,0,0" >
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="辅助工具的使用：" />
-                    <RadioButton x:Name="rbBalanceYes" Content="是"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB41" />
-                    <RadioButton x:Name="rbBalanceNo" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB41" />
+                    <RadioButton x:Name="rbBalanceYes" Content="是"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB41" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.TUG" Converter="{StaticResource TUGConverter}" ConverterParameter="01"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
+                    <RadioButton x:Name="rbBalanceNo" Content="否" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB41" >
+                        <RadioButton.IsChecked>
+                            <Binding Path="SPPBContent.TUG" Converter="{StaticResource TUGConverter}" ConverterParameter="00"/>
+                        </RadioButton.IsChecked>
+                    </RadioButton>
                 </StackPanel>
 
             </StackPanel>
@@ -348,18 +374,51 @@
                 <Label Content="(2) 体前屈（FRT）" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                 <StackPanel Orientation="Horizontal">
                     <Label Content="左：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance21" Width="45" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance21" Width="45" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.FRTLeft1">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance22" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance22" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.FRTLeft2">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="右：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance31" Width="45" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance31" Width="45" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.FRTRight1">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance32" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance32" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.FRTRight2">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                        
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                 </StackPanel>
 
@@ -368,12 +427,28 @@
                 <Label Content="(3) 座位双脚开闭" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                 <StackPanel Orientation="Horizontal">
                     <Label Content="①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance41" Width="45" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance41" Width="45" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.SFO1">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="个/10秒" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance42" Width="45" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance42" Width="45" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.SFO2">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="个/10秒" />
                 </StackPanel>
             </StackPanel>
@@ -382,18 +457,50 @@
                 <Label Content="(4) 单脚站立" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                 <StackPanel Orientation="Horizontal">
                     <Label Content="左：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance51" Width="45" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance51" Width="45" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.OneFootLeft1">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance52" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance52" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.OneFootLeft2">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="右：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance61" Width="45" Height="25" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance61" Width="45" Height="25" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.OneFootRight1">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                     <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                    <TextBox x:Name="txBalance62" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="txBalance62" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBox.Text>
+                            <Binding Path="SPPBContent.OneFootRight2">
+                                <Binding.ValidationRules>
+                                    <m:IntRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="秒" />
                 </StackPanel>
             </StackPanel>
@@ -406,22 +513,54 @@
                 <WrapPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" Margin="15,0" Width="120">
                         <Label Content="身高：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txSize1" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txSize1" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.Hight">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                         <Label Content="体重：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txSize2" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txSize2" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.Weight">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                         <Label Content="腰围：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txSize3" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txSize3" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.Waistline">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                         <Label Content="臀围：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txSize4" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txSize4" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.Hipline">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     </StackPanel>
                 </WrapPanel>
@@ -429,22 +568,54 @@
                 <WrapPanel Orientation="Horizontal" Margin="0,5">
                     <StackPanel Orientation="Horizontal" Margin="15,0" Width="180">
                         <Label Content="上臂围度（左）：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txSize5" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txSize5" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.ArmlineLeft">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="180" Margin="15,0">
                         <Label Content="上臂围度（右）：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txSize6" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txSize6" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.ArmlineRight">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="15,0" Width="180">
                         <Label Content="大腿围度（左）：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txSize7" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txSize7" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.LeglineLeft">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="180" Margin="15,0">
                         <Label Content="大腿围度（右）：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txSize8" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txSize8" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.LeglineRight">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="cm" />
                     </StackPanel>
                 </WrapPanel>
@@ -459,24 +630,64 @@
                 <WrapPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" Margin="15,0" Width="200">
                         <Label Content="血压：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txVitals1" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txVitals1" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.BloodPressureUpper">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="/" />
-                        <TextBox x:Name="txVitals2" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txVitals2" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.BloodPressureLower">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="mmHg" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="140" Margin="15,0">
                         <Label Content="心率：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txVitals3" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txVitals3" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.HeartRate">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="bmp" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                         <Label Content="体温：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txVitals4" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txVitals4" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.Temperature">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="℃" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="120" Margin="15,0">
                         <Label Content="呼吸：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txVitals5" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txVitals5" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.Breathe">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="次" />
                     </StackPanel>
                 </WrapPanel>
@@ -491,32 +702,80 @@
                 <WrapPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                         <Label Content="左手：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txGripStrength1" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txGripStrength1" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.GripStrengthLeft1">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                        <TextBox x:Name="txGripStrength2" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txGripStrength2" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.GripStrengthLeft2">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                         <Label Content="左手外伤等情况：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <RadioButton x:Name="rbGripStrengthYes1" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB51" />
-                        <RadioButton x:Name="rbGripStrengthNo1" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB51" />
+                        <RadioButton x:Name="rbGripStrengthYes1" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB51" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="SPPBContent.LeftHandHurt" Converter="{StaticResource HurtConverter}"  ConverterParameter="1"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbGripStrengthNo1" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB51" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="SPPBContent.LeftHandHurt" Converter="{StaticResource HurtConverter}" ConverterParameter="0"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
                     </StackPanel>
                 </WrapPanel>
 
                 <WrapPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                         <Label Content="右手：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txGripStrength3" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txGripStrength3" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.GripStrengthRight1">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                        <TextBox x:Name="txGripStrength4" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txGripStrength4" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.GripStrengthRight2">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                         <Label Content="右手外伤等情况：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <RadioButton x:Name="rbGripStrengthYes2" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB52" />
-                        <RadioButton x:Name="rbGripStrengthNo2" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB52" />
+                        <RadioButton x:Name="rbGripStrengthYes2" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB52" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="SPPBContent.RightHandHurt" Converter="{StaticResource HurtConverter}" ConverterParameter="1"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbGripStrengthNo2" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB52" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="SPPBContent.RightHandHurt" Converter="{StaticResource HurtConverter}" ConverterParameter="0"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
                     </StackPanel>
                 </WrapPanel>
             </StackPanel>
@@ -530,32 +789,80 @@
                 <WrapPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                         <Label Content="左：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txLapStrength1" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txLapStrength1" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.LapStrengthLeft1">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                        <TextBox x:Name="txLapStrength2" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txLapStrength2" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.LapStrengthLeft2">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                         <Label Content="（左）外伤等情况：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <RadioButton x:Name="rbLapStrengthYes1" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB61" />
-                        <RadioButton x:Name="rbLapStrengthNo1" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB61" />
+                        <RadioButton x:Name="rbLapStrengthYes1" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB61" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="SPPBContent.LeftLapHurt" Converter="{StaticResource HurtConverter}" ConverterParameter="1"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbLapStrengthNo1" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB61" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="SPPBContent.LeftLapHurt" Converter="{StaticResource HurtConverter}" ConverterParameter="0"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
                     </StackPanel>
                 </WrapPanel>
 
                 <WrapPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                         <Label Content="右：①" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <TextBox x:Name="txLapStrength3" Width="45" Height="25" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txLapStrength3" Width="45" Height="25" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.LapStrengthRight1">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                         <Label Content="②" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
-                        <TextBox x:Name="txLapStrength4" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txLapStrength4" Width="45" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" >
+                            <TextBox.Text>
+                                <Binding Path="SPPBContent.LapStrengthRight2">
+                                    <Binding.ValidationRules>
+                                        <m:IntRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="kg" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Width="270" Margin="15,0">
                         <Label Content="（右）外伤等情况：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" />
-                        <RadioButton x:Name="rbLapStrengthYes2" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB62" />
-                        <RadioButton x:Name="rbLapStrengthNo2" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB62" />
+                        <RadioButton x:Name="rbLapStrengthYes2" Content="有"  Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB62" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="SPPBContent.RightLapHurt" Converter="{StaticResource HurtConverter}" ConverterParameter="1"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
+                        <RadioButton x:Name="rbLapStrengthNo2" Content="无" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" GroupName="SPPB62" >
+                            <RadioButton.IsChecked>
+                                <Binding Path="SPPBContent.RightLapHurt" Converter="{StaticResource HurtConverter}" ConverterParameter="0"/>
+                            </RadioButton.IsChecked>
+                        </RadioButton>
                     </StackPanel>
                 </WrapPanel>
             </StackPanel>

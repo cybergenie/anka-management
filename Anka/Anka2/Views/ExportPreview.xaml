@@ -58,6 +58,14 @@
                     <DataGrid ItemsSource="{Binding DtOHQ}"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="SPPB/平衡能力">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        <Services:DataPreviewService/>
+                    </Grid.DataContext>
+                    <DataGrid ItemsSource="{Binding DtSPPB}"/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

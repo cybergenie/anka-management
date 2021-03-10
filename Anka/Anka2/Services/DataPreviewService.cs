@@ -360,6 +360,109 @@ namespace Anka2.Services
             }
 
         }
+        public DataView _dtSPPB;
+        public DataView DtSPPB
+        {
+            get
+            {
+                Dictionary<string, string> DicSPPB = new Dictionary<string, string> {
+                    { "Number", "病案号" },
+                    { "Name",  "姓名" },
+                    { "Age", "年龄" },
+                    { "Male",  "性别" },
+                    { "SPPBNumber", "记录编号"  },
+                    { "BalanceTesting1", "平衡测试-1"  },
+                    { "BalanceTesting2", "平衡测试-2"  },
+                    { "BalanceTesting3", "平衡测试-3"  },
+                    { "walkingTesting1", "4米行走-1"  },
+                    { "walkingTesting2", "4米行走-2"  },
+                    { "SitUpTesting", "坐起立"  },
+                    { "TUG", "3米往返步行(TUG)"  },
+                    { "FRTLeft1", "体前屈(左)-1"  },
+                    { "FRTLeft2", "体前屈(左)-2"  },
+                    { "FRTRight1", "体前屈(右)-1"  },
+                    { "FRTRight2", "体前屈(右)-2"  },
+                    { "Hight", "身高"  },
+                    { "Weight", "体重"  },
+                    { "Waistline", "腰围"  },
+                    { "Hipline", "臀围"  },
+                    { "ArmlineLeft", "上臂围度(左)"  },
+                    { "ArmlineRight", "上臂围度(右)"  },
+                    { "LeglineLeft", "大腿围度(左)"  },
+                    { "LeglineRight", "大腿围度(右)"  },
+                    { "GripStrengthLeft1", "左手握力"  },
+                    { "GripStrengthRight1", "右手握力"  }                    
+                };
+                using var context = new DbAdapter();
+                var SPPBList = (from basicInfo in context.DbPerson
+                               join sppb in context.DbSPPB
+                               on basicInfo.Number equals sppb.basicinfoNumber
+                               select new SPPBList
+                               {
+                                   Number = basicInfo.Number,
+                                   Name = basicInfo.Name,
+                                   Male = basicInfo.Male,
+                                   Age = basicInfo.Age,
+                                   SPPBNumber = sppb.SPPBNumber.Remove(0, basicInfo.Number.Length + 1),
+                                   BalanceTesting1 = sppb.BalanceTesting1,
+                                   BalanceTesting2 = sppb.BalanceTesting2,
+                                   BalanceTesting3 = sppb.BalanceTesting3,
+                                   walkingTesting1 = sppb.walkingTesting1,
+                                   walkingTesting2 = sppb.walkingTesting2,
+                                   SitUpTesting = sppb.SitUpTesting,
+                                   TUG = sppb.TUG,
+                                   FRTLeft1 = sppb.FRTLeft1,
+                                   FRTLeft2 = sppb.FRTLeft2,
+                                   FRTRight1 = sppb.FRTRight1,
+                                   FRTRight2 = sppb.FRTRight2,
+                                   SFO1 = sppb.SFO1,
+                                   SFO2 = sppb.SFO2,
+                                   OneFootLeft1 = sppb.OneFootLeft1,
+                                   OneFootLeft2 = sppb.OneFootLeft2,
+                                   OneFootRight1 = sppb.OneFootRight1,
+                                   OneFootRight2 = sppb.OneFootRight2,
+                                   Hight = sppb.Hight,
+                                   Weight = sppb.Weight,
+                                   Waistline = sppb.Waistline,
+                                   Hipline = sppb.Hipline,
+                                   ArmlineLeft = sppb.ArmlineLeft,
+                                   ArmlineRight = sppb.ArmlineRight,
+                                   LeglineLeft = sppb.LeglineLeft,
+                                   LeglineRight = sppb.LeglineRight,
+                                   BloodPressureUpper = sppb.BloodPressureUpper,
+                                   BloodPressureLower = sppb.BloodPressureLower,
+                                   HeartRate = sppb.HeartRate,
+                                   Temperature = sppb.Temperature,
+                                   Breathe = sppb.Breathe,
+                                   LeftHandHurt = sppb.LeftHandHurt,
+                                   RightHandHurt = sppb.RightHandHurt,
+                                   GripStrengthLeft1 = sppb.GripStrengthLeft1,
+                                   GripStrengthRight1 = sppb.GripStrengthRight1,
+                                   GripStrengthLeft2 = sppb.GripStrengthLeft2,
+                                   GripStrengthRight2 = sppb.GripStrengthRight2,
+                                   LeftLapHurt = sppb.LeftLapHurt,
+                                   RightLapHurt = sppb.RightLapHurt,
+                                   LapStrengthLeft1 = sppb.LapStrengthLeft1,
+                                   LapStrengthRight1 = sppb.LapStrengthRight1,
+                                   LapStrengthLeft2 = sppb.LapStrengthLeft2,
+                                   LapStrengthRight2 = sppb.LapStrengthRight2
+                               }).ToList();
+                DataTable DtSPPB = ToDataTable<SPPBList>(SPPBList, DicSPPB);
+                DtSPPB.TableName = "SPPB/平衡能力评估量表";
+                SPPBExportConverter.SPPBValueConvertor(ref DtSPPB);
+                return DtSPPB.DefaultView;
+
+            }
+            set
+            {
+                if (_dtSPPB != value)
+                {
+                    _dtSPPB = value;
+                }
+                RaisePropertyChanged(nameof(DtSPPB));
+            }
+
+        }
 
 
 

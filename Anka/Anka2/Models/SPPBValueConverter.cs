@@ -58,15 +58,13 @@ namespace Anka2.Models.SPPBValueConverter
             {
                 var BalanceTestings = value.ToString().Split('-');
                 switch (BalanceTestings[0])
-                {
+                {                   
                     case "A":
                         {
                             return (parameter.ToString()) switch
                             {
-                                "00" => true,
-                                "01" => false,
-                                "10" => BalanceTestings[1],
-                                "11" => BalanceTestings[2],
+                                "00" => false,
+                                "01" => true,                               
                                 _ => null,
                             };
                         }
@@ -74,8 +72,10 @@ namespace Anka2.Models.SPPBValueConverter
                         {
                             return (parameter.ToString()) switch
                             {
-                                "00" => false,
-                                "01" => true,                               
+                                "00" => true,
+                                "01" => false,
+                                "10" => BalanceTestings[1],
+                                "11" => BalanceTestings[2],
                                 _ => null,
                             };
                         }
@@ -110,17 +110,8 @@ namespace Anka2.Models.SPPBValueConverter
                 BalanceTestingResultArray = tempBalanceTestingResult.ToString().Split('-');
             }
             switch (parameter.ToString())
-            {
+            {                
                 case "00":
-                    {
-                        if ((bool)value == true)
-                        {
-                            BalanceTestingResultArray[0] = "A";
-                        }
-                        tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
-                    }
-                    break;
-                case "01":
                     {
                         if ((bool)value == true)
                         {
@@ -131,16 +122,25 @@ namespace Anka2.Models.SPPBValueConverter
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
                     break;
+                case "01":
+                    {
+                        if ((bool)value == true)
+                        {
+                            BalanceTestingResultArray[0] = "A";
+                        }
+                        tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
+                    }
+                    break;
                 case "10":
                     {
-                        BalanceTestingResultArray[0] = "A";
+                        BalanceTestingResultArray[0] = "B";
                         BalanceTestingResultArray[1] = value.ToString();
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
                     break;
                 case "11":
                     {
-                        BalanceTestingResultArray[0] = "A";
+                        BalanceTestingResultArray[0] = "B";
                         BalanceTestingResultArray[2] = value.ToString();
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
@@ -168,15 +168,13 @@ namespace Anka2.Models.SPPBValueConverter
             {
                 var BalanceTestings = value.ToString().Split('-');
                 switch (BalanceTestings[0])
-                {
+                {                   
                     case "A":
                         {
                             return (parameter.ToString()) switch
                             {
-                                "00" => true,
-                                "01" => false,
-                                "10" => BalanceTestings[1],
-                                "11" => BalanceTestings[2],
+                                "00" => false,
+                                "01" => true,
                                 _ => null,
                             };
                         }
@@ -184,8 +182,10 @@ namespace Anka2.Models.SPPBValueConverter
                         {
                             return (parameter.ToString()) switch
                             {
-                                "00" => false,
-                                "01" => true,
+                                "00" => true,
+                                "01" => false,
+                                "10" => BalanceTestings[1],
+                                "11" => BalanceTestings[2],
                                 _ => null,
                             };
                         }
@@ -225,7 +225,7 @@ namespace Anka2.Models.SPPBValueConverter
                     {
                         if ((bool)value == true)
                         {
-                            BalanceTestingResultArray[0] = "A";
+                            BalanceTestingResultArray[0] = "B";
                         }
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
@@ -234,7 +234,7 @@ namespace Anka2.Models.SPPBValueConverter
                     {
                         if ((bool)value == true)
                         {
-                            BalanceTestingResultArray[0] = "B";
+                            BalanceTestingResultArray[0] = "A";
                             BalanceTestingResultArray[1] = null;
                             BalanceTestingResultArray[2] = null;
                         }
@@ -243,14 +243,14 @@ namespace Anka2.Models.SPPBValueConverter
                     break;
                 case "10":
                     {
-                        BalanceTestingResultArray[0] = "A";
+                        BalanceTestingResultArray[0] = "B";
                         BalanceTestingResultArray[1] = value.ToString();
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
                     break;
                 case "11":
                     {
-                        BalanceTestingResultArray[0] = "A";
+                        BalanceTestingResultArray[0] = "B";
                         BalanceTestingResultArray[2] = value.ToString();
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
@@ -278,15 +278,13 @@ namespace Anka2.Models.SPPBValueConverter
             {
                 var BalanceTestings = value.ToString().Split('-');
                 switch (BalanceTestings[0])
-                {
+                {                   
                     case "A":
                         {
                             return (parameter.ToString()) switch
                             {
-                                "00" => true,
-                                "01" => false,
-                                "10" => BalanceTestings[1],
-                                "11" => BalanceTestings[2],
+                                "00" => false,
+                                "01" => true,
                                 _ => null,
                             };
                         }
@@ -294,8 +292,10 @@ namespace Anka2.Models.SPPBValueConverter
                         {
                             return (parameter.ToString()) switch
                             {
-                                "00" => false,
-                                "01" => true,
+                                "00" => true,
+                                "01" => false,
+                                "10" => BalanceTestings[1],
+                                "11" => BalanceTestings[2],
                                 _ => null,
                             };
                         }
@@ -335,7 +335,7 @@ namespace Anka2.Models.SPPBValueConverter
                     {
                         if ((bool)value == true)
                         {
-                            BalanceTestingResultArray[0] = "A";
+                            BalanceTestingResultArray[0] = "B";
                         }
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
@@ -344,7 +344,7 @@ namespace Anka2.Models.SPPBValueConverter
                     {
                         if ((bool)value == true)
                         {
-                            BalanceTestingResultArray[0] = "B";
+                            BalanceTestingResultArray[0] = "A";
                             BalanceTestingResultArray[1] = null;
                             BalanceTestingResultArray[2] = null;
                         }
@@ -353,14 +353,14 @@ namespace Anka2.Models.SPPBValueConverter
                     break;
                 case "10":
                     {
-                        BalanceTestingResultArray[0] = "A";
+                        BalanceTestingResultArray[0] = "B";
                         BalanceTestingResultArray[1] = value.ToString();
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
                     break;
                 case "11":
                     {
-                        BalanceTestingResultArray[0] = "A";
+                        BalanceTestingResultArray[0] = "B";
                         BalanceTestingResultArray[2] = value.ToString();
                         tempBalanceTestingResult = string.Join('-', BalanceTestingResultArray);
                     }
@@ -388,13 +388,13 @@ namespace Anka2.Models.SPPBValueConverter
             {
                 var WalkingTestings = value.ToString().Split('-');
                 switch (WalkingTestings[0])
-                {
+                {                   
                     case "A":
                         {
                             return (parameter.ToString()) switch
                             {
-                                "00" => true,
-                                "01" => false,
+                                "00" => false,
+                                "01" => true,
                                 "10" => WalkingTestings[1],
                                 "11" => WalkingTestings[2],
                                 _ => null,
@@ -404,8 +404,8 @@ namespace Anka2.Models.SPPBValueConverter
                         {
                             return (parameter.ToString()) switch
                             {
-                                "00" => false,
-                                "01" => true,
+                                "00" => true,
+                                "01" => false,
                                 "10" => WalkingTestings[1],
                                 "11" => WalkingTestings[2],
                                 _ => null,
@@ -451,7 +451,7 @@ namespace Anka2.Models.SPPBValueConverter
                     {
                         if ((bool)value == true)
                         {
-                            WalkingTestingResultArray[0] = "A";
+                            WalkingTestingResultArray[0] = "B";
                         }
                         tempWalkingTestingResult = string.Join('-', WalkingTestingResultArray);
                     }
@@ -460,7 +460,7 @@ namespace Anka2.Models.SPPBValueConverter
                     {
                         if ((bool)value == true)
                         {
-                            WalkingTestingResultArray[0] = "B";
+                            WalkingTestingResultArray[0] = "A";
                         }
                         tempWalkingTestingResult = string.Join('-', WalkingTestingResultArray);
                     }
@@ -481,7 +481,6 @@ namespace Anka2.Models.SPPBValueConverter
             return tempWalkingTestingResult;
         }
     }
-
     public class WalkingTesting2Converter : IValueConverter
     {
         private object tempWalkingTestingResult;
@@ -817,6 +816,168 @@ namespace Anka2.Models.SPPBValueConverter
             }
             return tempSitUpTestingResult;
         }
+    }
+    public class TUGConverter : IValueConverter
+    {
+        private object tempTUGResult;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            tempTUGResult = value;
+            if (tempTUGResult is null)
+            {
+                value = null;
+            }
+            else
+            {
+                value = tempTUGResult.ToString();
+            }
+
+            if (value is not null)
+            {
+                var TUGs = value.ToString().Split('-');
+                switch (TUGs[0])
+                {
+                    case "A":
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => false,
+                                "01" => true,
+                                "10" => TUGs[1],
+                                "11" => TUGs[2],
+                                _ => null,
+                            };
+                        }
+                    case "B":
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => true,
+                                "01" => false,
+                                "10" => TUGs[1],
+                                "11" => TUGs[2],
+                                _ => null,
+                            };
+                        }
+                    default:
+                        {
+                            return (parameter.ToString()) switch
+                            {
+                                "00" => false,
+                                "01" => false,
+                                "10" => TUGs[1],
+                                "11" => TUGs[2],
+                                _ => null,
+                            };
+                        }
+                }
+            }
+            else
+            {
+                if (parameter.ToString().ToCharArray()[0] == '0')
+                    return false;
+                else
+                    return null;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string[] TUGResultArray;
+            if (tempTUGResult is null)
+            {
+                TUGResultArray = new string[3];
+            }
+            else
+            {
+                TUGResultArray = tempTUGResult.ToString().Split('-');
+            }
+            switch (parameter.ToString())
+            {
+                case "00":
+                    {
+                        if ((bool)value == true)
+                        {
+                            TUGResultArray[0] = "B";
+                        }
+                        tempTUGResult = string.Join('-', TUGResultArray);
+                    }
+                    break;
+                case "01":
+                    {
+                        if ((bool)value == true)
+                        {
+                            TUGResultArray[0] = "A";
+                        }
+                        tempTUGResult = string.Join('-', TUGResultArray);
+                    }
+                    break;
+                case "10":
+                    {
+                        TUGResultArray[1] = value.ToString();
+                        tempTUGResult = string.Join('-', TUGResultArray);
+                    }
+                    break;
+                case "11":
+                    {
+                        TUGResultArray[2] = value.ToString();
+                        tempTUGResult = string.Join('-', TUGResultArray);
+                    }
+                    break;
+            }
+            return tempTUGResult;
+        }
+    }
+    public class HurtConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is not null)
+            {
+                bool hurt = (bool)value;
+                switch (hurt)
+                {
+                    case true:
+                        {
+                            if (parameter.ToString() == "1")
+                                return true;
+                            else
+                                return false;
+                        }
+                    case false:
+                        {
+                            if (parameter.ToString() == "0")
+                                return true;
+                            else
+                                return false;
+                        }                   
+                }
+            }
+            else
+                return false;
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if ((bool)value == true)
+            {
+                if (parameter.ToString() == "1")
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                if (parameter.ToString() == "0")
+                    return true;
+                else
+                    return false;
+            }
+
+
+        }
+
     }
 
 

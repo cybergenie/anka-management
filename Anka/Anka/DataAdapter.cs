@@ -787,8 +787,7 @@ namespace Anka
             dtOutput.Columns["Name"].ColumnName = "姓名";
             dtOutput.Columns["Age"].ColumnName = "年龄";
             dtOutput.Columns["SPPBNumber"].ColumnName = "平衡测试编号";
-            dtOutput.Columns["平衡测试编号"].SetOrdinal(4);
-            
+            dtOutput.Columns["平衡测试编号"].SetOrdinal(4);            
             dtOutput.Columns["BalanceTesting1"].ColumnName = "平衡测试-1";
             dtOutput.Columns["平衡测试-1"].SetOrdinal(5);
             dtOutput.Columns["BalanceTesting2"].ColumnName = "平衡测试-2";
