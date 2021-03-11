@@ -8,11 +8,12 @@
         <StackPanel.Resources>
             <mc:SPPBNumberConverter x:Key="SPPBNumberConverter"/>
             <m:GenderConverter x:Key="GenderConverter"/>
-            <mc:BalanceTesting1Converter x:Key="BalanceTesting1Converter"/>
-            <mc:BalanceTesting2Converter x:Key="BalanceTesting2Converter"/>
-            <mc:BalanceTesting3Converter x:Key="BalanceTesting3Converter"/>
-            <mc:WalkingTesting1Converter x:Key="WalkingTesting1Converter"/>
-            <mc:WalkingTesting2Converter x:Key="WalkingTesting2Converter"/>
+            <mc:BalanceTestingConverter x:Key="BalanceTesting1Converter"/>
+            <mc:BalanceTestingConverter x:Key="BalanceTesting2Converter"/>
+            <mc:BalanceTestingConverter x:Key="BalanceTesting3Converter"/>
+            <mc:WalkingTestingConverter x:Key="WalkingTesting1Converter"/>
+            <mc:WalkingTestingConverter x:Key="WalkingTesting2Converter"/>
+            <mc:WalkingAssitantConverter x:Key="WalkingAssitantConverter"/>
             <mc:SitUpTesting1Converter x:Key="SitUpTesting1Converter"/>
             <mc:SitUpTesting2Converter x:Key="SitUpTesting2Converter"/> 
             <mc:TUGConverter x:Key="TUGConverter"/>
@@ -257,13 +258,13 @@
                 <WrapPanel>
                     <Label Content="辅助工具的使用：" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" />
                     <RadioButton x:Name="rbSPPBYes4" Content="有" GroupName="SPPB21" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" >
-                        <RadioButton.IsChecked>
-                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTesting1Converter}" ConverterParameter="01"/>
+                        <RadioButton.IsChecked>                            
+                                <Binding Path="SPPBContent" Converter="{StaticResource WalkingAssitantConverter}" ConverterParameter="01"/>                            
                         </RadioButton.IsChecked>
                     </RadioButton>
                     <RadioButton x:Name="rbSPPBNo4" Content="无" GroupName="SPPB21" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="15,0,0,0" >
                         <RadioButton.IsChecked>
-                            <Binding Path="SPPBContent.walkingTesting1" Converter="{StaticResource WalkingTesting1Converter}" ConverterParameter="00"/>
+                            <Binding Path="SPPBContent" Converter="{StaticResource WalkingAssitantConverter}" ConverterParameter="00"/>
                         </RadioButton.IsChecked>
                     </RadioButton>
                 </WrapPanel>
@@ -378,7 +379,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.FRTLeft1">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -389,7 +390,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.FRTLeft2">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -402,7 +403,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.FRTRight1">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -413,7 +414,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.FRTRight2">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -431,7 +432,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.SFO1">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -444,7 +445,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.SFO2">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -461,7 +462,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.OneFootLeft1">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -472,7 +473,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.OneFootLeft2">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -485,7 +486,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.OneFootRight1">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -496,7 +497,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.OneFootRight2">
                                 <Binding.ValidationRules>
-                                    <m:IntRule />
+                                    <m:NumberRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -517,7 +518,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Hight">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -530,7 +531,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Weight">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -543,7 +544,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Waistline">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -556,7 +557,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Hipline">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -572,7 +573,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.ArmlineLeft">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -585,7 +586,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.ArmlineRight">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -598,7 +599,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LeglineLeft">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -611,7 +612,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LeglineRight">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -670,7 +671,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Temperature">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -683,7 +684,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Breathe">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -706,7 +707,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.GripStrengthLeft1">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -717,7 +718,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.GripStrengthLeft2">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -746,7 +747,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.GripStrengthRight1">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -757,7 +758,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.GripStrengthRight2">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -793,7 +794,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LapStrengthLeft1">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -804,7 +805,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LapStrengthLeft2">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -833,7 +834,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LapStrengthRight1">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -844,7 +845,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LapStrengthRight2">
                                     <Binding.ValidationRules>
-                                        <m:IntRule />
+                                        <m:NumberRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>

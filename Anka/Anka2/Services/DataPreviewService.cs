@@ -382,6 +382,12 @@ namespace Anka2.Services
                     { "FRTLeft2", "体前屈(左)-2"  },
                     { "FRTRight1", "体前屈(右)-1"  },
                     { "FRTRight2", "体前屈(右)-2"  },
+                    { "SFO1", "座位双脚开闭-1"  },
+                    { "SFO2", "座位双脚开闭-2"  },
+                    { "OneFootLeft1", "单脚站立(左)-1"  },
+                    { "OneFootLeft2", "单脚站立(左)-2"  },
+                    { "OneFootRight1", "单脚站立(右)-1"  },
+                    { "OneFootRight2", "单脚站立(右)-2"  },
                     { "Hight", "身高"  },
                     { "Weight", "体重"  },
                     { "Waistline", "腰围"  },
@@ -390,8 +396,17 @@ namespace Anka2.Services
                     { "ArmlineRight", "上臂围度(右)"  },
                     { "LeglineLeft", "大腿围度(左)"  },
                     { "LeglineRight", "大腿围度(右)"  },
-                    { "GripStrengthLeft1", "左手握力"  },
-                    { "GripStrengthRight1", "右手握力"  }                    
+                    { "BloodPressureUpper", "BloodPressureUpper"  },
+                    { "BloodPressureLower", "BloodPressureLower"  },
+                    { "HeartRate", "心率"  },
+                    { "Temperature", "体温"  },
+                    { "Breathe", "呼吸"  },
+                    { "LeftHandHurt", "LeftHandHurt"  },
+                    { "RightLapHurt", "RightLapHurt"  },
+                    { "GripStrengthLeft1", "左手握力-1"  },
+                    { "GripStrengthLeft2", "左手握力-2"  },
+                    { "GripStrengthRight1", "右手握力-1"  },
+                    { "GripStrengthRight2", "右手握力-2"  }
                 };
                 using var context = new DbAdapter();
                 var SPPBList = (from basicInfo in context.DbPerson
