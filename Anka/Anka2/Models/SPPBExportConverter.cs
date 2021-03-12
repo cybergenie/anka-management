@@ -90,5 +90,48 @@ namespace Anka2.Models
             dr[columnName] = ConvertorResult;
         }
 
+        private static void SitUpTestingConvertor(DataRow dr, string columnName)
+        {
+            string SitUpTestingResult = dr[columnName] as string;
+            string ConvertorResult = null;
+            if (!string.IsNullOrEmpty(SitUpTestingResult))
+            {
+                string[] strResults = SitUpTestingResult.Split('-');
+                if (string.IsNullOrEmpty(strResults[1]))
+                {
+                    strResults[1] = "0";
+                }
+                if (string.IsNullOrEmpty(strResults[2]))
+                {
+                    strResults[2] = "0";
+                }
+                switch (strResults[0])
+                {
+                    case "A":
+                        {
+                            ConvertorResult = "5次";
+                            if (strResults[1] != "0" || strResults[2] != "0")
+                            {
+                                ConvertorResult += ",用时" + strResults[1] + "秒" + strResults[2] + "分秒";
+                            }
+                        }
+                        break;
+                    case "B":
+                        {
+                            ConvertorResult = "不能完成5次";
+                            if (strResults[2] != "0")
+                            {
+                                ConvertorResult += ",可完成" + strResults[2] + "次";
+                            }
+                            
+                        }
+                        break;
+                }
+               
+
+            }
+            dr[columnName] = ConvertorResult;
+        }
+
     }
 }
