@@ -30,16 +30,5 @@ namespace Anka2.Models
             base.OnConfiguring(optionsBuilder);
         }
     }
-
-
-    [Table("physique")]
-    public class Physique
-    {
-        [Key]
-        public string PhysiqueNumber { get; set; }
-        public string basicinfoNumber { set; get; }
-        public BasicInfo Basicinfo { get; set; }
-
-
-    }
+        
 }

@@ -80,7 +80,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--#region SPPB-->
-            <Border BorderBrush="Black" BorderThickness="0,1,0,0" Grid.ColumnSpan="3" Margin="0">
+            <Border BorderBrush="Gray" BorderThickness="0,1,0,0" Grid.ColumnSpan="3" Margin="0">
                 <Label Height="25" Content="SPPB" FontWeight="Bold"/>
             </Border>
 

@@ -560,7 +560,68 @@ namespace Anka2.Views
 
         private bool RepairPhysique()
         {
-            return true;
+            try
+            {
+                var context = new DbAdapter();
+                var RepairList = context.DbPhysique.ToList();
+                string tempNumber = null;
+                try
+                {
+                    for (int i = 0; i < RepairList.Count; i++)
+                    {
+                        tempNumber = RepairList[i].PhysiqueNumber.Trim();
+                        var tempList = RepairList[i];
+                        string tempBaiscNumber = RepairList[i].basicinfoNumber;
+                        context.DbPhysique.Remove(tempList);
+
+                        RepairList.RemoveAt(i);
+                        var newNumber = NumberConverter(tempNumber, tempBaiscNumber);
+                        RepairList.Insert(i, ItemCopy(tempList, newNumber));
+
+                    }
+
+                    for (int i = 0; i < RepairList.Count; i++)
+                    {
+                        Regex IndexReg = new Regex("^(-\\d{2})$");
+                        if (!IndexReg.IsMatch(RepairList[i].PhysiqueNumber.Substring(RepairList[i].PhysiqueNumber.Length - 3, 3)))
+                        {
+                            string tempListNumber = RepairList[i].PhysiqueNumber;
+                            var exsitingList = RepairList.FindAll((Physique e) => e.PhysiqueNumber == tempListNumber);
+                            RepairList.RemoveAll((Physique e) => e.PhysiqueNumber == tempListNumber);
+                            for (int j = 0; j < exsitingList.Count; j++)
+                            {
+                                if (!string.IsNullOrWhiteSpace(exsitingList[j].basicinfoNumber))
+                                {
+                                    exsitingList[j].PhysiqueNumber = exsitingList[j].PhysiqueNumber + "-" + (j + 1).ToString("D2");
+                                    tempNumber = exsitingList[j].PhysiqueNumber;
+                                    context.DbPhysique.Add(exsitingList[j]);
+                                    RepairList.Add(exsitingList[j]);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    App.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        this.repairInfo.Text += "*ERROR:数据表Physique转换错误,错误编号为" + tempNumber + "\n" + e.Message + "\n";
+                    }));
+                    return false;
+                }
+                context.SaveChanges();
+                return true;
+
+
+            }
+            catch (Exception e)
+            {
+                App.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    this.repairInfo.Text += "*ERROR:Physique数据连接错误，错误信息为：" + e.Message + "\n";
+                }));
+                return false;
+            }
         }
 
 

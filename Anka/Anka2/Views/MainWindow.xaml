@@ -88,8 +88,11 @@
                                     <ContentControl x:Name="SPPBSheet" Content="{StaticResource SPPB}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>
-                            <avalonDock:LayoutDocument x:Name="Physique" Title="体质成分"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Physique" >
+                            <avalonDock:LayoutDocument x:Name="Physique" Title="体质成分"  CanClose="False" CanFloat="False" CanMove="True" ContentId="Physique" >                               
                                 <ScrollViewer>
+                                    <ScrollViewer.DataContext>
+                                        <s:PhysiqueSheetViewModel/>
+                                    </ScrollViewer.DataContext>
                                     <ContentControl x:Name="PhysiqueSheet" Content="{StaticResource Physique}"/>
                                 </ScrollViewer>
                             </avalonDock:LayoutDocument>

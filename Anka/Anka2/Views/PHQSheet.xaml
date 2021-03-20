@@ -71,7 +71,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--#region 第一行-->
-            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" >
+            <Border BorderBrush="Gray" DockPanel.Dock="Top" BorderThickness="1" >
                 <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
                     <Label Content="PHQ评估量表" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </StackPanel>

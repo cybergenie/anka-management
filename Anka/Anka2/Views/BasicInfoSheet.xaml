@@ -54,7 +54,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="Black" Grid.ColumnSpan="4" BorderThickness="0,1">
+            <Border BorderBrush="Gray" Grid.ColumnSpan="4" BorderThickness="0,1">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Margin="5" >
                 </StackPanel>
             </Border>

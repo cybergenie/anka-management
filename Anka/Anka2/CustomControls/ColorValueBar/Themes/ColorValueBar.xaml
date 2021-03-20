@@ -1,0 +1,200 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+    xmlns:local="clr-namespace:Anka2.CustomControls">
+
+
+    <Style TargetType="{x:Type local:ColorValueBar}">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ColorValueBar}">
+                    <Canvas Name="ValueBarCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" >
+                        <Rectangle Name="Bar"
+                            Width="{Binding ElementName=ValueBarCanvas, Path=Width}"
+                            Height="{c:Binding ElementName=ValueBarCanvas, Path=Height-55}"                            
+                            Stroke="Gray" StrokeThickness="0.5"
+                            RadiusX="{c:Binding RelativeSource={RelativeSource Mode=Self}, Path=Height/2}"
+                            RadiusY="{c:Binding RelativeSource={RelativeSource Mode=Self}, Path=Height/2}"
+                            Canvas.Left="0"
+                            Canvas.Top="35"/>
+                        <StackPanel Orientation="Horizontal"  
+                                    Canvas.Left="{Binding ElementName=Bar, Path=RadiusX}"
+                            Canvas.Top="35">
+                            <Label Name="CellOne"   
+                                     BorderBrush="Gray" BorderThickness="0,0,0.5,0"
+                                       Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellOneLength}"
+                                       Height="{c:Binding ElementName=Bar, Path=Height}"
+                                       Content="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellOneText}"
+                                      HorizontalContentAlignment="Center"
+                                       VerticalContentAlignment="Center" 
+                                     Background="Transparent"                                     
+                                     Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellOneShow}"                                     
+                                       />
+
+                            
+                                <Label Name="CellTwo"   
+                                         BorderBrush="Gray" BorderThickness="0.5,0,0.5,0"
+                                       Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellTwoLength}"
+                                       Height="{c:Binding ElementName=Bar, Path=Height}"
+                                       Background="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type local:ColorValueBar}}, 
+                                Path=Color}"                                           
+                                         Content="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellTwoText}"
+                                         Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellTwoShow}"
+                                         HorizontalContentAlignment="Center"
+                                       VerticalContentAlignment="Center" 
+                                       />
+
+                            <Label Name="CellThree"   
+                                     BorderBrush="Gray" BorderThickness="0.5,0,0.5,0"
+                                       Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellThreeLength}"
+                                       Height="{c:Binding ElementName=Bar, Path=Height}"
+                                       Background="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type local:ColorValueBar}}, 
+                                Path=Color}"                                       
+                                     Content="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellThreeText}"
+                                     Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellThreeShow}"
+                                     HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center" />
+
+                            <Label Name="CellFour"   
+                                     BorderBrush="Gray" BorderThickness="0.5,0,0,0"
+                                       Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellFourLength}"
+                                       Height="{c:Binding ElementName=Bar, Path=Height}"
+                                     Content="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellFourText}"
+                                     Background="Transparent"
+                                     Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=CellFourShow}"
+                                     HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center" 
+                                       />                          
+                        </StackPanel>
+                        <Canvas 
+                            Canvas.Left="0"
+                            Canvas.Top="{c:Binding ElementName=Bar, Path=Height+35}">
+
+                            <Label
+                                 Canvas.Left="{c:Binding  RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorOnePosition}"
+                                Content="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorOneText}" 
+                                   Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorOneShow}"   
+                                MinWidth="40"
+                                HorizontalContentAlignment="Left"                               
+                               >
+                                <Label.RenderTransform>
+                                    <RotateTransform Angle="{c:Binding RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type local:ColorValueBar}}, 
+                                        Path=Orientation}"
+                                                     CenterX="10"
+                                                     CenterY="10"/>
+                                </Label.RenderTransform>
+
+                            </Label>
+                            <Label
+                                 Canvas.Left="{c:Binding  RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorTwoPosition}"
+                                Content="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorTwoText}" 
+                                   Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorTwoShow}"
+                                MinWidth="40"  
+                                HorizontalContentAlignment="Left"
+                                >
+                                <Label.RenderTransform>
+                                    <RotateTransform Angle="{c:Binding RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type local:ColorValueBar}}, 
+                                        Path=Orientation}"
+                                                     CenterX="10"
+                                                     CenterY="10"/>
+                                </Label.RenderTransform>
+
+                            </Label>
+                            <Label
+                                 Canvas.Left="{c:Binding  RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorThreePosition}"
+                                Content="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorThreeText}" 
+                                   Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorThreeShow}"
+                                 MinWidth="40"  HorizontalContentAlignment="Left"
+                               >
+                                <Label.RenderTransform>
+                                    <RotateTransform Angle="{c:Binding RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type local:ColorValueBar}}, 
+                                        Path=Orientation}"
+                                                     CenterX="10"
+                                                     CenterY="10"/>
+                                </Label.RenderTransform>
+                            </Label>
+
+
+                        </Canvas>
+                        <StackPanel  Canvas.Left="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorPosition}" 
+                                     Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorShow}"
+                                 Canvas.Top="0" >
+                            <Label Margin="-20,0,0,0"
+                            Content="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorValue}"  
+                                   MinWidth="40"
+                               Height="24"                                    
+                                   HorizontalContentAlignment="Right">
+                                <Label.RenderTransform>
+                                    <RotateTransform Angle="{c:Binding RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type local:ColorValueBar}}, 
+                                        Path=Orientation}" CenterX="26" CenterY="10"/>
+                                </Label.RenderTransform>
+                            </Label>
+                            <Polygon Fill="Gray"
+                                 Margin="-3,-3,-3,-3"
+                                 Points="0,0 6,12 12,0"                                 
+                                 Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type local:ColorValueBar}},
+                                Path=IndicatorShow}"/>
+                        </StackPanel>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

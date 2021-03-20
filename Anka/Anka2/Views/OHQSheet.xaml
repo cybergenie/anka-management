@@ -77,7 +77,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--#region 第一行-->
-            <Border BorderBrush="Black" DockPanel.Dock="Top" BorderThickness="1" >
+            <Border BorderBrush="Gray" DockPanel.Dock="Top" BorderThickness="1" >
                 <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" >
                     <Label Content="NO." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,0,0" Height="25" />
                 </StackPanel>

@@ -60,14 +60,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dirkster.AvalonDock" Version="4.50.0" />
-    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.50.0" />
-    <PackageReference Include="Fluent.Ribbon" Version="8.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
+    <PackageReference Include="CalcBinding" Version="2.5.2" />
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.50.2" />
+    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.50.2" />
+    <PackageReference Include="Fluent.Ribbon" Version="8.0.3" />
+    <PackageReference Include="InteractiveDataDisplay.NetCore.WPF" Version="1.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
-    <PackageReference Include="NPOI" Version="2.5.1" />
+    <PackageReference Include="NPOI" Version="2.5.2" />
   </ItemGroup>
 
   <ItemGroup>

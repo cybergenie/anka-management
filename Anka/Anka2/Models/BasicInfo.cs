@@ -45,5 +45,7 @@ namespace Anka2.Models
         public virtual List<IPAQ> PIPAQ{ get; set; }
         public virtual List<OHQ> POHQ { get; set; }
         public virtual List<SPPB> PSPPB { get; set; }
+        public virtual List<Physique> PPhysique { get; set; }
+        
     }
 }

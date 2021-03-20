@@ -227,6 +227,11 @@ namespace Anka2.ViewModels
             sppbSheetViewModel.SPPBContent = null;
             sppbSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
 
+            PhysiqueSheetViewModel physiqueSheetViewModel = ((MainWindow)RootSource).PhysiqueSheet.DataContext as PhysiqueSheetViewModel;
+            physiqueSheetViewModel.UpDateStatusInfo(statusBarContext.SetTipInfo);//绑定exerciseSheet的状态栏信息更新
+            physiqueSheetViewModel.PhysiqueContent = null;
+            physiqueSheetViewModel.BasicInfo = NewPersonInfo;//传递NewPerson
+
         }
 
         public void UpDateStatusInfo(NotifyStatusInfoHandler notify)

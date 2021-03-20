@@ -15,7 +15,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="CustomControls\Themes\Generic.xaml">
+    <Page Update="CustomControls\PAContent\Themes\PAContent.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ExportPreview.xaml">

@@ -27,6 +27,7 @@ namespace Anka2.Services
                         .Include(BasicInfo => BasicInfo.PIPAQ)
                         .Include(BasicInfo => BasicInfo.POHQ)
                         .Include(BasicInfo => BasicInfo.PSPPB)
+                        .Include(BasicInfo => BasicInfo.PPhysique)
                         .ToList();
 
                     if (existingPerson.Count > 0)
@@ -61,8 +62,13 @@ namespace Anka2.Services
                 if (existingPerson != null)
                 {
                     var existingPersonList = context.DbPerson.
-                        Include(BasicInfo => BasicInfo.PExercise).
+                         Include(BasicInfo => BasicInfo.PExercise).
                         Include(BasicInfo => BasicInfo.PGAD).
+                        Include(BasicInfo => BasicInfo.PPHQ).
+                        Include(BasicInfo => BasicInfo.PIPAQ).
+                        Include(BasicInfo => BasicInfo.POHQ).
+                        Include(BasicInfo => BasicInfo.PSPPB).
+                        Include(BasicInfo => BasicInfo.PPhysique).
                         Where<BasicInfo>(p => p.Number == personId).
                         ToList();
 

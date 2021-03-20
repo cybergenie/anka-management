@@ -396,17 +396,23 @@ namespace Anka2.Services
                     { "ArmlineRight", "上臂围度(右)"  },
                     { "LeglineLeft", "大腿围度(左)"  },
                     { "LeglineRight", "大腿围度(右)"  },
-                    { "BloodPressureUpper", "BloodPressureUpper"  },
+                    { "BloodPressureUpper", "血压"  },
                     { "BloodPressureLower", "BloodPressureLower"  },
                     { "HeartRate", "心率"  },
                     { "Temperature", "体温"  },
                     { "Breathe", "呼吸"  },
-                    { "LeftHandHurt", "LeftHandHurt"  },
-                    { "RightLapHurt", "RightLapHurt"  },
+                    { "LeftHandHurt", "左手外伤"  },
+                    { "RightHandHurt", "右手外伤"  },
                     { "GripStrengthLeft1", "左手握力-1"  },
                     { "GripStrengthLeft2", "左手握力-2"  },
                     { "GripStrengthRight1", "右手握力-1"  },
-                    { "GripStrengthRight2", "右手握力-2"  }
+                    { "GripStrengthRight2", "右手握力-2"  },
+                    { "LeftLapHurt", "左腿外伤"  },
+                    { "RightLapHurt", "右腿外伤"  },
+                    { "LapStrengthLeft1", "伸膝力(左)-1"  },
+                    { "LapStrengthLeft2", "伸膝力(左)-2"  },
+                    { "LapStrengthRight1", "伸膝力(右)-1"  },
+                    { "LapStrengthRight2", "伸膝力(右)-2"  }
                 };
                 using var context = new DbAdapter();
                 var SPPBList = (from basicInfo in context.DbPerson
