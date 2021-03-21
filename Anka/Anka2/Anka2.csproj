@@ -65,6 +65,7 @@
     <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.50.2" />
     <PackageReference Include="Fluent.Ribbon" Version="8.0.3" />
     <PackageReference Include="InteractiveDataDisplay.NetCore.WPF" Version="1.0.2" />
+    <PackageReference Include="LiveCharts.Wpf.Core" Version="0.9.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />

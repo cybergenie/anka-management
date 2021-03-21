@@ -50,5 +50,23 @@ namespace Anka2.CustomControls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PAContent), new FrameworkPropertyMetadata(typeof(PAContent)));
         }
+
+        public static readonly DependencyProperty PAPointPositionProperty =
+            DependencyProperty.Register("PAPointText", typeof(string), typeof(ColorValueBar));
+
+        public string PAPointPosition
+        {
+            get { return (string)GetValue(PAPointPositionProperty); }
+            set { SetValue(PAPointPositionProperty, value); }
+        }
+
+        public static readonly DependencyProperty PAPointShowProperty =
+            DependencyProperty.Register("PAPointShow", typeof(Visibility), typeof(ColorValueBar));
+
+        public Visibility PAPointShow
+        {
+            get { return (Visibility)GetValue(PAPointShowProperty); }
+            set { SetValue(PAPointShowProperty, value); }
+        }
     }
 }

@@ -50,7 +50,7 @@
             </Button>
         </StackPanel>
 
-        <Grid x:Name="PhysiqueContent"  DockPanel.Dock="Top" Margin="5" >
+        <Grid x:Name="PhysiqueContent"  DockPanel.Dock="Top" Margin="5" IsEnabled="{Binding PhysiqueContentEnable}" >
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition/>
@@ -177,7 +177,7 @@
                         <Label Width="50" Content="TBW[1]" Margin="10,35,10,0"/>
 
                         <custom:ColorValueBar Margin="0,5,0,5"
-                            Width="320" Height="80" Color="LightGreen"
+                            Width="320" Height="75" Color="LightGreen"
                             CellOneLength="60" CellOneText="低" 
                             CellTwoLength="60" 
                             CellThreeLength="60" 
@@ -227,27 +227,27 @@
                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <StackPanel Margin="0,0,15,0" >
                             <Label Content="骨骼肌肉质量(SMM):" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txSMM" Width="60" Height="25" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="txSMM" />
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="左臂肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txLA" Width="60" Height="25" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="txLA" />
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="躯干肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txTK" Width="60" Height="25" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="txTK" />
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="右臂肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txRA" Width="60" Height="25"  HorizontalAlignment="Left"/>
+                            <TextBox x:Name="txRA"/>
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="左腿肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txLL" Width="60" Height="25"   HorizontalAlignment="Left"/>
+                            <TextBox x:Name="txLL" />
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="右腿肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txRL" Width="60" Height="25" HorizontalAlignment="Left" />
+                            <TextBox x:Name="txRL" />
                         </StackPanel>
                     </WrapPanel>
                     <Grid Margin="0,10,0,10">
@@ -390,12 +390,12 @@
                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <StackPanel Margin="0,0,15,0" Width="120">
                             <Label Content="内脏脂肪(VAT):"/>
-                            <TextBox x:Name="txVAT" Width="45" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txVAT" />
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0" Width="120">
 
                             <Label Content="腰围 单位(WC):"/>
-                            <TextBox x:Name="txWC" Width="45" Height="25" VerticalContentAlignment="Center"  />
+                            <TextBox x:Name="txWC"  />
                         </StackPanel>
 
                     </WrapPanel>
@@ -434,16 +434,17 @@
                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <StackPanel Margin="0,0,15,0" Width="120">
                             <Label Content="相角(φ):"/>
-                            <TextBox x:Name="txPA" Width="45" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txPA"  />
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0" Width="120">
-
                             <Label Content="百分位:"/>
-                            <TextBox x:Name="txPAPercent" Width="45" Height="25" VerticalContentAlignment="Center" />
+                            <TextBox x:Name="txPAPercent" />
                         </StackPanel>
                     </WrapPanel>
                     <WrapPanel Margin="0,15,0,0">
-                        <custom:PAContent Margin="0,5,0,5"                           />
+                        <custom:PAContent  Margin="0,5,0,5"
+                            PAPointPosition="80,60" 
+                            PAPointShow="Visible"/>
                     </WrapPanel>
 
 
