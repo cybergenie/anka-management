@@ -8,11 +8,11 @@ namespace Anka2.Models
     {
         [Key]
         public string PhysiqueNumber { get; set; }   
-        public double Weight { get; set; }
-        public double Hight { get; set; }
-        public double FM { get; set; }
-        public double TBW { get; set; }
-        public double BCW { get; set; }
+        public string Weight { get; set; }
+        public string Hight { get; set; }
+        public string FM { get; set; }
+        public string TBW { get; set; }
+        public string BCW { get; set; }
         public double SMMAll { get; set; }
         public double SMMArmLeft { get; set; }
         public double SMMArmRight { get; set; }
@@ -33,11 +33,11 @@ namespace Anka2.Models
         public string? Age { get; set; }//年龄
         public bool? Male { get; set; }//性别
         public string? PhysiqueNumber { get; set; }
-        public double? Weight { get; set; }
-        public double? Hight { get; set; }
-        public double? FM { get; set; }
-        public double? TBW { get; set; }
-        public double? BCW { get; set; }
+        public string? Weight { get; set; }
+        public string? Hight { get; set; }
+        public string? FM { get; set; }
+        public string? TBW { get; set; }
+        public string? BCW { get; set; }
         public double? SMMAll { get; set; }
         public double? SMMArmLeft { get; set; }
         public double? SMMArmRight { get; set; }

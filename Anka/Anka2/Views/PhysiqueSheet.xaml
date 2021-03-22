@@ -9,7 +9,13 @@
     <StackPanel x:Key="Physique">
         <StackPanel.Resources>
             <mc:PhysiqueNumberConverter x:Key="PhysiqueNumberConverter"/>
-            <m:GenderConverter x:Key="GenderConverter"/>
+            <m:GenderConverter x:Key="GenderConverter"/> 
+            <mc:BMIConverter x:Key="BMIConverter"/>
+            <mc:FMPercentConverter x:Key="FMPercentConverter"/>
+            <mc:FMIndexConverter x:Key="FMIndexConverter"/>
+            <mc:TBWConverter x:Key="TBWConverter"/>
+            <mc:BCWConverter x:Key="BCWConverter"/>
+            <mc:EBWConverter x:Key="EBWConverter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -100,7 +106,10 @@
                             <Label Content="BMI:"/>
                             <TextBox x:Name="bmiBMI" Width="60" Height="25" VerticalContentAlignment="Center" IsReadOnly="True" >
                                 <TextBox.Text>
-                                    <c:Binding Path="PhysiqueContent.Hight > 0 ? PhysiqueContent.Weight / (PhysiqueContent.Hight * PhysiqueContent.Hight) : 0 "  StringFormat="{}{0:n2}" />
+                                    <MultiBinding Converter="{StaticResource BMIConverter}">
+                                        <Binding Path="PhysiqueContent.Weight" />
+                                        <Binding Path="PhysiqueContent.Hight"  />
+                                    </MultiBinding>                                    
                                 </TextBox.Text>
                             </TextBox>
                             <Label Content="kg/m²"/>
@@ -124,7 +133,10 @@
                             IndicatorEnd="40"
                             Orientation="0">
                             <custom:ColorValueBar.IndicatorValue>
-                                <c:Binding Path="PhysiqueContent.Hight > 0 ? Math.Round(PhysiqueContent.Weight / (PhysiqueContent.Hight * PhysiqueContent.Hight),2) : 0 " />
+                                <MultiBinding Converter="{StaticResource BMIConverter}" ConverterParameter="BarValue">
+                                    <Binding Path="PhysiqueContent.Weight" />
+                                    <Binding Path="PhysiqueContent.Hight"  />
+                                </MultiBinding>
                             </custom:ColorValueBar.IndicatorValue>                           
                         </custom:ColorValueBar>
                     </WrapPanel>
@@ -136,14 +148,36 @@
                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="200">
                             <Label Content="脂肪重量:"/>
-                            <TextBox x:Name="txFM" Width="45" VerticalContentAlignment="Center"  />
+                            <TextBox x:Name="txFM" Width="45" VerticalContentAlignment="Center"  >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.FM" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label Content="kg("/>
-                            <Label x:Name="txFM2" Content=" "/>
+                            <Label x:Name="txFM2" >
+                                <Label.Content>
+                                    <MultiBinding Converter="{StaticResource FMPercentConverter}">
+                                        <Binding Path="PhysiqueContent.FM" />
+                                        <Binding Path="PhysiqueContent.Weight"  />
+                                    </MultiBinding>
+                                </Label.Content>
+                            </Label>
                             <Label Content="%)*"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="200">
                             <Label Content="脂肪重量指数:"/>
-                            <TextBox x:Name="txFMI" Width="60" VerticalContentAlignment="Center" IsReadOnly="True" />
+                            <TextBox x:Name="txFMI" Width="60" VerticalContentAlignment="Center" IsReadOnly="True" >
+                                <TextBox.Text>
+                                    <MultiBinding Converter="{StaticResource FMIndexConverter}">
+                                        <Binding Path="PhysiqueContent.FM" />
+                                        <Binding Path="PhysiqueContent.Hight"  />
+                                    </MultiBinding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label Content="kg/㎡"/>
                         </StackPanel>
                     </WrapPanel>
@@ -158,10 +192,19 @@
                             CellTwoLength="80" CellTwoText="正常"
                             CellThreeLength="80" CellThreeText="稍高"
                             CellFourLength="80" CellFourText="高"
+                            IndicatorStart="0"
                             IndicatorOneText="1.5"
                             IndicatorTwoText="5.6"
                             IndicatorThreeText="8"
-                            IndicatorValue="12.5"  Orientation="0"/>
+                            IndicatorEnd="12"                            
+                            Orientation="0">
+                            <custom:ColorValueBar.IndicatorValue>
+                                <MultiBinding Converter="{StaticResource FMIndexConverter}" ConverterParameter="BarValue">
+                                    <Binding Path="PhysiqueContent.FM" />
+                                    <Binding Path="PhysiqueContent.Hight"  />
+                                </MultiBinding>
+                            </custom:ColorValueBar.IndicatorValue>
+                        </custom:ColorValueBar>
 
                     </WrapPanel>
                 </StackPanel>
@@ -170,32 +213,69 @@
             <GroupBox Header="水分" Grid.Row="2" Margin="5" >
                 <StackPanel Margin="0,5,0,0" HorizontalAlignment="Left">
                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
-                        <StackPanel Margin="0,0,15,0" Width="120">
+                        <StackPanel Margin="0,0,15,0" Width="135">
                             <Label Content="体液总量(TBW):"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBox x:Name="txTBW" Width="45" Height="25" VerticalContentAlignment="Center" />
+                                <TextBox x:Name="txTBW" Width="45" Height="25" VerticalContentAlignment="Center" >
+                                    <TextBox.Text>
+                                        <Binding Path="PhysiqueContent.TBW" >
+                                            <Binding.ValidationRules>
+                                                <m:DoubleRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                                 <Label Content="("/>
-                                <Label x:Name="txTBW2" Content=" "/>
+                                <Label x:Name="txTBW2" >
+                                    <Label.Content>
+                                        <MultiBinding Converter="{StaticResource TBWConverter}">
+                                            <Binding Path="PhysiqueContent.TBW" />
+                                            <Binding Path="PhysiqueContent.Weight"  />
+                                        </MultiBinding>
+                                    </Label.Content>
+                                </Label>
                                 <Label Content="%)*"/>
                             </StackPanel>
 
                         </StackPanel>
-                        <StackPanel Margin="0,0,15,0" Width="120">
+                        <StackPanel Margin="0,0,15,0" Width="135">
 
                             <Label Content="细胞外液(BCW):"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBox x:Name="txBCW" Width="45" Height="25" VerticalContentAlignment="Center"  />
+                                <TextBox x:Name="txBCW" Width="45" Height="25" VerticalContentAlignment="Center"  >
+                                    <TextBox.Text>
+                                        <Binding Path="PhysiqueContent.BCW" >
+                                            <Binding.ValidationRules>
+                                                <m:DoubleRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                                 <Label Content="("/>
-                                <Label x:Name="txBCW2" Content=" "/>
+                                <Label x:Name="txBCW2" >
+                                    <Label.Content>
+                                        <MultiBinding Converter="{StaticResource BCWConverter}">
+                                            <Binding Path="PhysiqueContent.BCW" />
+                                            <Binding Path="PhysiqueContent.Weight"  />
+                                        </MultiBinding>
+                                    </Label.Content>
+                                </Label>
                                 <Label Content="%)*"/>
                             </StackPanel>
 
                         </StackPanel>
-                        <StackPanel Margin="0,0,15,0" Width="120">
+                        <StackPanel Margin="0,0,15,0" Width="135">
                             <Label Content="BCW/TBW:"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBox x:Name="txEBW" Width="45" Height="25" VerticalContentAlignment="Center" IsReadOnly="True" />
-                                <Label Content="%"/>
+                                <TextBox x:Name="txEBW" Width="45" Height="25" VerticalContentAlignment="Center" IsReadOnly="True" >
+                                    <TextBox.Text>
+                                        <MultiBinding Converter="{StaticResource EBWConverter}">
+                                            <Binding Path="PhysiqueContent.BCW" />
+                                            <Binding Path="PhysiqueContent.TBW"  />
+                                        </MultiBinding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                    <Label Content="%"/>
                             </StackPanel>
 
                         </StackPanel>
@@ -203,47 +283,76 @@
                     <WrapPanel>
                         <Label Width="50" Content="TBW[1]" Margin="10,35,10,0"/>
 
-                        <custom:ColorValueBar Margin="0,5,0,5"
-                            Width="320" Height="80" Color="LightGreen"
-                            CellOneLength="60" CellOneText="低" 
-                            CellTwoLength="60" 
-                            CellThreeLength="60" 
-                            CellFourLength="60" CellFourText="高"
-                            IndicatorOneText="1.5"
-                            IndicatorTwoText="5.6"
-                            IndicatorThreeText="8"
-                            IndicatorValue="12.5"  Orientation="0"/>
+                        <custom:ColorValueBar 
+                            Margin="0,5,0,5"
+                            Width="320" Height="80"
+                            Color="LightGreen"
+                            CellOneLength="80" CellOneText="低" 
+                            CellTwoLength="80" 
+                            CellThreeLength="80" 
+                            CellFourLength="80" CellFourText="高"
+                            IndicatorStart="28"
+                            IndicatorOneText="32.9"
+                            IndicatorTwoText="36.6"
+                            IndicatorThreeText="40.2"
+                            IndicatorEnd="45"
+                            Orientation="0">
+                            <custom:ColorValueBar.IndicatorValue>
+                                <MultiBinding Converter="{StaticResource TBWConverter}" ConverterParameter="BarValue">
+                                    <Binding Path="PhysiqueContent.TBW" />
+                                    <Binding Path="PhysiqueContent.Weight"  />
+                                </MultiBinding>
+                            </custom:ColorValueBar.IndicatorValue>
+                        </custom:ColorValueBar>
 
                     </WrapPanel>
                     <WrapPanel>
-                        <Label Width="50" Content="ECW[1]" Margin="10,35,10,0"/>
-                        <custom:ColorValueBar Margin="0,5,0,5"
+                        <Label Width="50" Content="BCW[1]" Margin="10,35,10,0"/>
+                        <custom:ColorValueBar 
+                            Margin="0,5,0,5"
                             Width="320" Height="80" Color="LightGreen"
-                            CellOneLength="60" CellOneText="低" 
-                            CellTwoLength="60" 
-                            CellThreeLength="60" 
-                            CellFourLength="60" CellFourText="高"
-                            IndicatorOneText="1.5"
-                            IndicatorTwoText="5.6"
-                            IndicatorThreeText="8"
-                            IndicatorValue="12.5"  Orientation="0"/>
+                            CellOneLength="80" CellOneText="低" 
+                            CellTwoLength="80" 
+                            CellThreeLength="80" 
+                            CellFourLength="80" CellFourText="高"
+                            IndicatorStart="11.5"
+                            IndicatorOneText="13.6"
+                            IndicatorTwoText="15.2"
+                            IndicatorThreeText="16.9"
+                            IndicatorEnd="18"                                              
+                            Orientation="0">
+                            <custom:ColorValueBar.IndicatorValue>
+                                <MultiBinding Converter="{StaticResource BCWConverter}" ConverterParameter="BarValue">
+                                    <Binding Path="PhysiqueContent.BCW" />
+                                    <Binding Path="PhysiqueContent.Weight"  />
+                                </MultiBinding>
+                            </custom:ColorValueBar.IndicatorValue>
+                        </custom:ColorValueBar>
 
                     </WrapPanel>
 
                     <WrapPanel>
-
-                        <Label Width="50" Content="EBW/&#xD;&#xA;TBW%" Margin="10,35,10,0"/>
-
-                        <custom:ColorValueBar Margin="0,5,0,5"
+                        <Label Width="50" Content="BCW/&#xD;&#xA;TBW%" Margin="10,35,10,0"/>
+                        <custom:ColorValueBar 
+                            Margin="0,5,0,5"
                             Width="320" Height="80" Color="LightGreen"
-                            CellOneLength="60" CellOneText="低" 
-                            CellTwoLength="60" 
-                            CellThreeLength="60" 
-                            CellFourLength="60" CellFourText="高"
-                            IndicatorOneText="1.5"
-                            IndicatorTwoText="5.6"
-                            IndicatorThreeText="8"
-                            IndicatorValue="12.5"  Orientation="0"/>
+                            CellOneLength="80" CellOneText="低" 
+                            CellTwoLength="80" 
+                            CellThreeLength="80" 
+                            CellFourLength="80" CellFourText="高"
+                            IndicatorStart="38"
+                            IndicatorOneText="39.7"
+                            IndicatorTwoText="41.8"
+                            IndicatorThreeText="44"
+                            IndicatorEnd="46"
+                            Orientation="0">
+                            <custom:ColorValueBar.IndicatorValue>
+                                <MultiBinding Converter="{StaticResource EBWConverter}" ConverterParameter="BarValue">
+                                    <Binding Path="PhysiqueContent.BCW" />
+                                    <Binding Path="PhysiqueContent.TBW"  />
+                                </MultiBinding>
+                            </custom:ColorValueBar.IndicatorValue>
+                        </custom:ColorValueBar>
 
                     </WrapPanel>
                 </StackPanel>

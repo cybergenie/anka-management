@@ -103,6 +103,7 @@ namespace Anka2.ViewModels
             }
             set
             {
+                
                 if (PhysiqueIndex >= 0)
                 {
                     BasicInfo.PPhysique[PhysiqueIndex] = value;
@@ -111,30 +112,7 @@ namespace Anka2.ViewModels
             }
         }
 
-        public string BMI
-        {
-            get
-            {
-                string result = null;
-                if (PhysiqueContent is not null)
-                {
-                    if (PhysiqueContent.Hight > 0)
-                    {
-                        result = (PhysiqueContent.Weight / (PhysiqueContent.Hight * PhysiqueContent.Hight)).ToString("f2");
-                    }
-                }
-
-                return result;
-            }
-            //set
-            //{
-            //    if (PhysiqueIndex >= 0)
-            //    {
-            //        BasicInfo.PPhysique[PhysiqueIndex] = value;
-            //    }
-            //    RaisePropertyChanged(nameof(PhysiqueContent));
-            //}
-        }
+       
 
 
         private string _physiqueNumberText;

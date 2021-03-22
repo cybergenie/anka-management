@@ -98,7 +98,7 @@
                                        />                          
                         </StackPanel>
                         <Canvas 
-                            Canvas.Left="0"
+                            Canvas.Left="{c:Binding ElementName=Bar, Path=-1*Height/2}"
                             Canvas.Top="{c:Binding ElementName=Bar, Path=Height+35}">
 
                             <Label
@@ -111,8 +111,9 @@
                                    Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
                                 AncestorType={x:Type local:ColorValueBar}},
                                 Path=IndicatorOneShow}"   
-                                MinWidth="40"
-                                HorizontalContentAlignment="Left"                               
+                                MinWidth="20"
+                                
+                                HorizontalContentAlignment="Center"                               
                                >
                                 <Label.RenderTransform>
                                     <RotateTransform Angle="{c:Binding RelativeSource={RelativeSource FindAncestor, 
