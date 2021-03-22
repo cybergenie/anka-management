@@ -141,12 +141,11 @@ namespace Anka2.Models
                             
                         }
                         break;
-                }
-               
+                }              
 
             }
             dr[columnName] = ConvertorResult;
-        }      
+        }
         private static void  TUGConverter(DataRow dr, string columnName)
         {
             string SitUpTestingResult = dr[columnName] as string;
@@ -210,6 +209,5 @@ namespace Anka2.Models
             };
             dr[columnName] = gender;
         }
-
     }
 }

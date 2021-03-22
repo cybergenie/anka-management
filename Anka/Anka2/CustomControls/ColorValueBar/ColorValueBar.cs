@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -181,17 +182,50 @@ namespace Anka2.CustomControls
             set { SetValue(CellFourShowProperty, value); }
         }
         #endregion
+
+        #region IndicatorStart
+        /// <summary>
+        /// IndicatorOne
+        /// </summary>    
+
+        public static readonly DependencyProperty IndicatorStartProperty =
+          DependencyProperty.Register("IndicatorStart", typeof(double), typeof(ColorValueBar));
+
+        public double IndicatorStart
+        {
+            get { return (double)GetValue(IndicatorStartProperty); }
+            set { SetValue(IndicatorStartProperty, value); }
+        }
+        #endregion
+
+        #region IndicatorEnd
+        /// <summary>
+        /// IndicatorOne
+        /// </summary>    
+
+        public static readonly DependencyProperty IndicatorEndProperty =
+          DependencyProperty.Register("IndicatorEnd", typeof(double), typeof(ColorValueBar));
+
+        public double IndicatorEnd
+        {
+            get { return (double)GetValue(IndicatorEndProperty); }
+            set { SetValue(IndicatorEndProperty, value); }
+        }
+        #endregion
+
+
+
         #region IndicatorOne
         /// <summary>
         /// IndicatorOne
         /// </summary>    
 
         public static readonly DependencyProperty IndicatorOneTextProperty =
-          DependencyProperty.Register("IndicatorOneText", typeof(string), typeof(ColorValueBar));
+          DependencyProperty.Register("IndicatorOneText", typeof(double), typeof(ColorValueBar));
 
-        public string IndicatorOneText
+        public double IndicatorOneText
         {
-            get { return (string)GetValue(IndicatorOneTextProperty); }
+            get { return (double)GetValue(IndicatorOneTextProperty); }
             set { SetValue(IndicatorOneTextProperty, value); }
         }
 
@@ -209,17 +243,18 @@ namespace Anka2.CustomControls
             get { return CellOneLength; }            
         }
         #endregion
+
         #region IndicatorTwo
         /// <summary>
         /// IndicatorTwo
         /// </summary>    
 
         public static readonly DependencyProperty IndicatorTwoTextProperty =
-          DependencyProperty.Register("IndicatorTwoText", typeof(string), typeof(ColorValueBar));
+          DependencyProperty.Register("IndicatorTwoText", typeof(double), typeof(ColorValueBar));
 
-        public string IndicatorTwoText
+        public double IndicatorTwoText
         {
-            get { return (string)GetValue(IndicatorTwoTextProperty); }
+            get { return (double)GetValue(IndicatorTwoTextProperty); }
             set { SetValue(IndicatorTwoTextProperty, value); }
         }
 
@@ -242,11 +277,11 @@ namespace Anka2.CustomControls
         /// </summary>    
 
         public static readonly DependencyProperty IndicatorThreeTextProperty =
-          DependencyProperty.Register("IndicatorThreeText", typeof(string), typeof(ColorValueBar));
+          DependencyProperty.Register("IndicatorThreeText", typeof(double), typeof(ColorValueBar));
 
-        public string IndicatorThreeText
+        public double IndicatorThreeText
         {
-            get { return (string)GetValue(IndicatorThreeTextProperty); }
+            get { return (double)GetValue(IndicatorThreeTextProperty); }
             set { SetValue(IndicatorThreeTextProperty, value); }
         }
 
@@ -269,22 +304,28 @@ namespace Anka2.CustomControls
         /// </summary>    
         /// 
 
-        public static readonly DependencyProperty IndicatorPositionProperty =
-          DependencyProperty.Register("IndicatorPosition", typeof(double), typeof(ColorValueBar));
+        //public static readonly DependencyProperty IndicatorPositionProperty =
+        //  DependencyProperty.Register("IndicatorPosition", typeof(double), typeof(ColorValueBar));
 
-        public double IndicatorPosition
-        {
-            get { return (double)GetValue(IndicatorPositionProperty); }
-            set { SetValue(IndicatorPositionProperty, value); }
-        }
+        //public double IndicatorPosition
+        //{
+        //    get { return (double)GetValue(IndicatorPositionProperty); }
+        //    set { SetValue(IndicatorPositionProperty, value); }
+        //}
 
         public static readonly DependencyProperty IndicatorValueProperty =
-          DependencyProperty.Register("IndicatorValue", typeof(string), typeof(ColorValueBar));
+          DependencyProperty.Register("IndicatorValue", typeof(double), typeof(ColorValueBar));
 
-        public string IndicatorValue
+        public double IndicatorValue
         {
-            get { return (string)GetValue(IndicatorValueProperty); }
-            set { SetValue(IndicatorValueProperty, value); }
+            get { 
+                return Math.Round((double)GetValue(IndicatorValueProperty),2); 
+            }
+            set 
+            {
+                value = Math.Round(value, 2);
+                SetValue(IndicatorValueProperty, value); 
+            }
         }
 
         public static readonly DependencyProperty IndicatorShowProperty =

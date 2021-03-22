@@ -17,7 +17,7 @@ namespace Anka2.Models
     }
 
 
-    public class NumberRule : ValidationRule
+    public class DoubleRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

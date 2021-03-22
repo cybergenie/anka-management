@@ -11,6 +11,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ColorValueBar}">
                     <Canvas Name="ValueBarCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" >
+                        <Canvas.Resources>
+                            <local:ColorValueBarConverter x:Key="ColorValueBarConverter"/>
+                        </Canvas.Resources>
                         <Rectangle Name="Bar"
                             Width="{Binding ElementName=ValueBarCanvas, Path=Width}"
                             Height="{c:Binding ElementName=ValueBarCanvas, Path=Height-55}"                            
@@ -20,7 +23,7 @@
                             Canvas.Left="0"
                             Canvas.Top="35"/>
                         <StackPanel Orientation="Horizontal"  
-                                    Canvas.Left="{Binding ElementName=Bar, Path=RadiusX}"
+                                    Canvas.Left="0"
                             Canvas.Top="35">
                             <Label Name="CellOne"   
                                      BorderBrush="Gray" BorderThickness="0,0,0.5,0"
@@ -165,13 +168,25 @@
 
 
                         </Canvas>
-                        <StackPanel  Canvas.Left="{Binding RelativeSource={RelativeSource FindAncestor,
-                                AncestorType={x:Type local:ColorValueBar}},
-                                Path=IndicatorPosition}" 
+                        <StackPanel   
                                      Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
                                 AncestorType={x:Type local:ColorValueBar}},
                                 Path=IndicatorShow}"
                                  Canvas.Top="0" >
+                            <Canvas.Left>
+                                <MultiBinding Converter="{StaticResource ColorValueBarConverter}">
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="IndicatorValue"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="IndicatorStart"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="IndicatorOneText"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="IndicatorTwoText"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="IndicatorThreeText"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="IndicatorEnd"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="CellOneLength"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="CellTwoLength"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="CellThreeLength"/>
+                                    <Binding  RelativeSource="{RelativeSource FindAncestor,AncestorType={x:Type local:ColorValueBar}}" Path="CellFourLength"/>
+                                </MultiBinding>
+                            </Canvas.Left>
                             <Label Margin="-20,0,0,0"
                             Content="{Binding RelativeSource={RelativeSource FindAncestor,
                                 AncestorType={x:Type local:ColorValueBar}},

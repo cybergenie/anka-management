@@ -119,7 +119,7 @@
                         <TextBox.Text>
                             <Binding Path="IPAQContent.IPAQ1">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule/>
+                                    <m:DoubleRule/>
                                 </Binding.ValidationRules>                                
                             </Binding>
                         </TextBox.Text>
@@ -147,7 +147,7 @@
                         <TextBox.Text>
                             <Binding Path="IPAQContent.IPAQ2">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule/>
+                                    <m:DoubleRule/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -176,7 +176,7 @@
                         <TextBox.Text>
                             <Binding Path="IPAQContent.IPAQ3">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule/>
+                                    <m:DoubleRule/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>

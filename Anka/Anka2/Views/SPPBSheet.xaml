@@ -379,7 +379,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.FRTLeft1">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -390,7 +390,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.FRTLeft2">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -403,7 +403,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.FRTRight1">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -414,7 +414,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.FRTRight2">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -432,7 +432,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.SFO1">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -445,7 +445,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.SFO2">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -462,7 +462,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.OneFootLeft1">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -473,7 +473,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.OneFootLeft2">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -486,7 +486,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.OneFootRight1">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -497,7 +497,7 @@
                         <TextBox.Text>
                             <Binding Path="SPPBContent.OneFootRight2">
                                 <Binding.ValidationRules>
-                                    <m:NumberRule />
+                                    <m:DoubleRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -518,7 +518,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Hight">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -531,7 +531,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Weight">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -544,7 +544,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Waistline">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -557,7 +557,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Hipline">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -573,7 +573,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.ArmlineLeft">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -586,7 +586,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.ArmlineRight">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -599,7 +599,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LeglineLeft">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -612,7 +612,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LeglineRight">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -671,7 +671,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Temperature">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -684,7 +684,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.Breathe">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -707,7 +707,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.GripStrengthLeft1">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -718,7 +718,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.GripStrengthLeft2">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -747,7 +747,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.GripStrengthRight1">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -758,7 +758,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.GripStrengthRight2">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -794,7 +794,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LapStrengthLeft1">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -805,7 +805,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LapStrengthLeft2">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -834,7 +834,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LapStrengthRight1">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -845,7 +845,7 @@
                             <TextBox.Text>
                                 <Binding Path="SPPBContent.LapStrengthRight2">
                                     <Binding.ValidationRules>
-                                        <m:NumberRule />
+                                        <m:DoubleRule />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
