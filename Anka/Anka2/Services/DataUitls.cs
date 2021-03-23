@@ -92,19 +92,34 @@ namespace Anka2.Services
             string personId = Person.Number;
             try
             {
-                using (var context = new DbAdapter())
+                SaveBasicInfo(Person);
+                foreach(var item in Person.PExercise)
                 {
-                    var existingPerson = context.DbPerson.Find(personId);
-                    if (existingPerson != null)
-                    {
-                        context.Entry(existingPerson).CurrentValues.SetValues(Person);
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
-                    }
+                    SaveExercise(item);
+                }
+                foreach (var item in Person.PGAD)
+                {
+                    SaveGAD(item);
+                }               
+                foreach (var item in Person.PIPAQ)
+                {
+                    SaveIPAQ(item);
+                }
+                foreach (var item in Person.POHQ)
+                {
+                    SaveOHQ(item);
+                }
+                foreach (var item in Person.PPHQ)
+                {
+                    SavePHQ(item);
+                }
+                foreach (var item in Person.PPhysique)
+                {
+                    SavePhysique(item);
+                }
+                foreach (var item in Person.PSPPB)
+                {
+                    SaveSPPB(item);
                 }
             }
             catch (Exception e)
@@ -116,17 +131,17 @@ namespace Anka2.Services
 
         }
 
-        public static bool SaveBasicInfo(BasicInfo Person)
+        public static bool SaveBasicInfo(BasicInfo basicInfo)
         {
-            string personId = Person.Number;
+            string basicInfoId = basicInfo.Number;
             try
             {
                 using (var context = new DbAdapter())
                 {
-                    var existingPerson = context.DbPerson.Find(personId);
+                    var existingPerson = context.DbPerson.Find(basicInfoId);
                     if (existingPerson != null)
                     {
-                        context.Entry(existingPerson).CurrentValues.SetValues(Person);
+                        context.Entry(existingPerson).CurrentValues.SetValues(basicInfo);
                         context.SaveChanges();
                     }
                     else
@@ -155,13 +170,13 @@ namespace Anka2.Services
                     if (existingExercise != null)
                     {
                         context.Entry(existingExercise).CurrentValues.SetValues(exercise);
-                        context.SaveChanges();
+                        
                     }
                     else
                     {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
+                        context.Add(exercise);                        
                     }
+                    context.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -183,14 +198,15 @@ namespace Anka2.Services
                     if (existingGAD != null)
                     {
                         context.Entry(existingGAD).CurrentValues.SetValues(gad);
-                        context.SaveChanges();
+                        
                     }
                     else
                     {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
+                        context.Add(gad);
                     }
+                    context.SaveChanges();
                 }
+
             }
             catch (Exception e)
             {
@@ -215,9 +231,9 @@ namespace Anka2.Services
                     }
                     else
                     {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
+                        context.Add(phq);
                     }
+                    context.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -243,9 +259,9 @@ namespace Anka2.Services
                     }
                     else
                     {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
+                        context.Add(ipaq);
                     }
+                    context.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -271,9 +287,9 @@ namespace Anka2.Services
                     }
                     else
                     {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
+                        context.Add(ohq);
                     }
+                    context.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -299,9 +315,9 @@ namespace Anka2.Services
                     }
                     else
                     {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
+                        context.Add(sppb);
                     }
+                    context.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -327,9 +343,9 @@ namespace Anka2.Services
                     }
                     else
                     {
-                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return false;
+                        context.Add(physique);
                     }
+                    context.SaveChanges();
                 }
             }
             catch (Exception e)

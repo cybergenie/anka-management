@@ -235,5 +235,25 @@ namespace Anka2.ViewModels
                 return _load_Physique_Executed;
             }
         }
+
+        private CommandObject<RoutedEventArgs> _save_Physique_Executed;
+        public CommandObject<RoutedEventArgs> Save_Physique_Executed
+        {
+            get
+            {
+                if (_save_Physique_Executed == null)
+                    _save_Physique_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            if (PhysiqueContent != null)
+                            {
+                                bool saveInfo = DataUitls.SavePhysique(PhysiqueContent);
+                                if (saveInfo == true)
+                                    NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "的档案保存成功。档案编号为：" + PhysiqueContent.PhysiqueNumber);
+                            }
+                        }));
+                return _save_Physique_Executed;
+            }
+        }
     }
 }

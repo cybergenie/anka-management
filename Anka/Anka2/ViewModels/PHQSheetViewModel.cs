@@ -229,5 +229,25 @@ namespace Anka2.ViewModels
                 return _load_PHQ_Executed;
             }
         }
+
+        private CommandObject<RoutedEventArgs> _save_PHQ_Executed;
+        public CommandObject<RoutedEventArgs> Save_PHQ_Executed
+        {
+            get
+            {
+                if (_save_PHQ_Executed == null)
+                    _save_PHQ_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            if (PHQContent != null)
+                            {
+                                bool saveInfo = DataUitls.SavePHQ(PHQContent);
+                                if (saveInfo == true)
+                                    NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "的档案保存成功。档案编号为：" + PHQContent.PHQNumber);
+                            }
+                        }));
+                return _save_PHQ_Executed;
+            }
+        }
     }
 }

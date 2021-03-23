@@ -217,5 +217,25 @@ namespace Anka2.ViewModels
                 return _load_IPAQ_Executed;
             }
         }
+
+        private CommandObject<RoutedEventArgs> _save_IPAQ_Executed;
+        public CommandObject<RoutedEventArgs> Save_IPAQ_Executed
+        {
+            get
+            {
+                if (_save_IPAQ_Executed == null)
+                    _save_IPAQ_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            if (IPAQContent != null)
+                            {
+                                bool saveInfo = DataUitls.SaveIPAQ(IPAQContent);
+                                if (saveInfo == true)
+                                    NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "的档案保存成功。档案编号为：" + IPAQContent.IPAQNumber);
+                            }
+                        }));
+                return _save_IPAQ_Executed;
+            }
+        }
     }    
 }

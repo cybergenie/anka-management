@@ -225,5 +225,25 @@ namespace Anka2.ViewModels
                 return _load_SPPB_Executed;
             }
         }
+
+        private CommandObject<RoutedEventArgs> _save_SPPB_Executed;
+        public CommandObject<RoutedEventArgs> Save_SPPB_Executed
+        {
+            get
+            {
+                if (_save_SPPB_Executed == null)
+                    _save_SPPB_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            if (SPPBContent != null)
+                            {
+                                bool saveInfo = DataUitls.SaveSPPB(SPPBContent);
+                                if (saveInfo == true)
+                                    NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "的档案保存成功。档案编号为：" + SPPBContent.SPPBNumber);
+                            }
+                        }));
+                return _save_SPPB_Executed;
+            }
+        }
     }
 }

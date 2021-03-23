@@ -46,7 +46,7 @@
             <Button x:Name="btIPAQLoad" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <m:EventCommand Command="{Binding Load_IPAQ_Executed }"/>
+                            <m:EventCommand Command="{Binding Save_IPAQ_Executed }"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>

@@ -52,7 +52,7 @@
             <Button x:Name="btPhysiqueLoad" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <m:EventCommand Command="{Binding Load_Physique_Executed }"/>
+                        <m:EventCommand Command="{Binding Save_Physique_Executed }"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>

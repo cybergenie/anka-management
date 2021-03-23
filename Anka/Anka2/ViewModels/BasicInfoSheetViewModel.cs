@@ -78,5 +78,58 @@ namespace Anka2.ViewModels
         {
             NotifyStatusInfo += notify;
         }
+
+
+        private void loadBasicInfoContent()
+        {
+
+            if (BasicInfo is not null)
+            {
+                var NewPersonContent = new BasicInfo { Number = BasicInfo.Number, Name = BasicInfo.Name, Age = BasicInfo.Age, Male = BasicInfo.Male };
+                BasicInfo = NewPersonContent;
+                NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的基本信息记录创建成功。记录编号为：" + BasicInfo.Number + "。");
+            }
+            else
+            {
+                MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+
+        private CommandObject<RoutedEventArgs> _load_BasicInfo_Executed;
+        public CommandObject<RoutedEventArgs> Load_BasicInfo_Executed
+        {
+            get
+            {
+                if (_load_BasicInfo_Executed == null)
+                    _load_BasicInfo_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            loadBasicInfoContent();
+                        }));
+                return _load_BasicInfo_Executed;
+            }
+        }
+
+        private CommandObject<RoutedEventArgs> _save_BasicInfo_Executed;
+        public CommandObject<RoutedEventArgs> Save_BasicInfo_Executed
+        {
+            get
+            {
+                if (_save_BasicInfo_Executed == null)
+                    _save_BasicInfo_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            if (BasicInfo != null)
+                            {
+                                bool saveInfo = DataUitls.SaveBasicInfo(BasicInfo);
+                                if (saveInfo == true)
+                                    NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "的档案保存成功。档案编号为：" + BasicInfo.Number);
+                            }
+                        }));
+                return _save_BasicInfo_Executed;
+            }
+        }
+
     }
 }

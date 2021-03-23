@@ -89,7 +89,7 @@ namespace Anka2.ViewModels
             }
         }
 
-        //private Exercise _exerciseContent;
+        //private GAD _exerciseContent;
         public GAD GADContent
         {
             get
@@ -213,7 +213,7 @@ namespace Anka2.ViewModels
                     else
                     {
                         var gadContent = new GAD { GADNumber = BasicInfo.Number + "-" + GADNumberText, basicinfoNumber = BasicInfo.Number };
-                        //ExerciseContent.ExerciseNumber = BasicInfo.Number + "-" + ExerciseNumberText;
+                        //GADContent.GADNumber = BasicInfo.Number + "-" + GADNumberText;
                         BasicInfo.PGAD.Add(gadContent);
                         BasicInfo = BasicInfo;
                         GADIndex = BasicInfo.PGAD.FindIndex((GAD e) => e.GADNumber == BasicInfo.Number + "-" + GADNumberText);
@@ -227,6 +227,26 @@ namespace Anka2.ViewModels
                 {
                     MessageBox.Show("当前档案不存在，请新建档案信息。", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+            }
+        }
+
+        private CommandObject<RoutedEventArgs> _save_GAD_Executed;
+        public CommandObject<RoutedEventArgs> Save_GAD_Executed
+        {
+            get
+            {
+                if (_save_GAD_Executed == null)
+                    _save_GAD_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            if (GADContent != null)
+                            {
+                                bool saveInfo = DataUitls.SaveGAD(GADContent);
+                                if (saveInfo == true)
+                                    NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "的档案保存成功。档案编号为：" + GADContent.GADNumber);
+                            }
+                        }));
+                return _save_GAD_Executed;
             }
         }
     }

@@ -229,6 +229,26 @@ namespace Anka2.ViewModels
             }
         }
 
+        private CommandObject<RoutedEventArgs> _save_Exercise_Executed;
+        public CommandObject<RoutedEventArgs> Save_Exercise_Executed
+        {
+            get
+            {
+                if (_save_Exercise_Executed == null)
+                    _save_Exercise_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            if (ExerciseContent != null)
+                            {
+                                bool saveInfo = DataUitls.SaveExercise(ExerciseContent);
+                                if (saveInfo == true)
+                                    NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "的档案保存成功。档案编号为：" + ExerciseContent.ExerciseNumber);
+                            }
+                        }));
+                return _save_Exercise_Executed;
+            }
+        }
+
 
     }
 }
