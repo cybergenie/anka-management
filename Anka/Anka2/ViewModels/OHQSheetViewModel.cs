@@ -96,7 +96,18 @@ namespace Anka2.ViewModels
             {
                 if (OHQIndex >= 0)
                 {
-                    return BasicInfo.POHQ[OHQIndex];
+                    try
+                    {
+                        if (BasicInfo.POHQ is not null)
+                            return BasicInfo.POHQ[OHQIndex];
+                        else
+                            return null;
+                    }
+                    catch(IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return null;
+                    }
                 }
                 else
                     return null;
@@ -105,7 +116,16 @@ namespace Anka2.ViewModels
             {
                 if (OHQIndex >= 0)
                 {
-                    BasicInfo.POHQ[OHQIndex] = value;
+                    try
+                    {
+                        if (BasicInfo.POHQ is not null)
+                            BasicInfo.POHQ[OHQIndex] = value;
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
                 RaisePropertyChanged(nameof(OHQContent));
             }

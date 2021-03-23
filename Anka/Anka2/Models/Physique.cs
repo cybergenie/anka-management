@@ -13,16 +13,16 @@ namespace Anka2.Models
         public string FM { get; set; }
         public string TBW { get; set; }
         public string BCW { get; set; }
-        public double SMMAll { get; set; }
-        public double SMMArmLeft { get; set; }
-        public double SMMArmRight { get; set; }
-        public double SMMBody { get; set; }
-        public double SMMLegLeft { get; set; }
-        public double SMMLegRight { get; set; }
-        public double VAT { get; set; }
-        public double Waistline { get; set; }
-        public double PA { get; set; }
-        public double PAPercent { get; set; }        
+        public string SMMAll { get; set; }
+        public string SMMArmLeft { get; set; }
+        public string SMMArmRight { get; set; }
+        public string SMMBody { get; set; }
+        public string SMMLegLeft { get; set; }
+        public string SMMLegRight { get; set; }
+        public string VAT { get; set; }
+        public string Waistline { get; set; }
+        public string PA { get; set; }
+        public string PAPercent { get; set; }        
         public string? basicinfoNumber { set; get; }
         public BasicInfo Basicinfo { get; set; }
     }
@@ -38,16 +38,16 @@ namespace Anka2.Models
         public string? FM { get; set; }
         public string? TBW { get; set; }
         public string? BCW { get; set; }
-        public double? SMMAll { get; set; }
-        public double? SMMArmLeft { get; set; }
-        public double? SMMArmRight { get; set; }
-        public double? SMMBody { get; set; }
-        public double? SMMLegLeft { get; set; }
-        public double? SMMLegRight { get; set; }
-        public double? VAT { get; set; }
-        public double? Waistline { get; set; }
-        public double? PA { get; set; }
-        public double? PAPercent { get; set; }
+        public string? SMMAll { get; set; }
+        public string? SMMArmLeft { get; set; }
+        public string? SMMArmRight { get; set; }
+        public string? SMMBody { get; set; }
+        public string? SMMLegLeft { get; set; }
+        public string? SMMLegRight { get; set; }
+        public string? VAT { get; set; }
+        public string? Waistline { get; set; }
+        public string? PA { get; set; }
+        public string? PAPercent { get; set; }
 
     }
 }

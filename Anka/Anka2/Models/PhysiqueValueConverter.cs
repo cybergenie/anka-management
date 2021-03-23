@@ -328,6 +328,70 @@ namespace Anka2.Models.PhysiqueValueConverter
         }
     }
 
+    public class PAConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            double  Age = 50, PA = 160;
+            Point result ;
+            if (values is not null)
+            {
+                if (values[0] is not null)
+                {
+                    try
+                    {
+                        var tempAge = System.Convert.ToDouble(values[0].ToString());
+
+                        if (tempAge < 17.5)
+                        {
+                            tempAge = 17.5; ;
+                        }
+                        else if (tempAge > 67.5)
+                        {
+                            tempAge = 67.5; ;
+                        }
+
+                        Age += (tempAge-17.5)*300/50;
+                    }
+                    catch (Exception)
+                    {
+                        Age += 0;
+                    }
+                }
+                if (values[1] is not null)
+                {
+                    try
+                    {
+                        var tempPA = System.Convert.ToDouble(values[1].ToString());
+                        if (tempPA < 4.25)
+                        {
+                            tempPA = 4.25;
+                        }
+                        else if (tempPA > 7.75)
+                        {
+                            tempPA = 7.75;
+                        }
+                        PA -= ((tempPA-4.25) * 160/3.5);
+                    }
+                    catch (Exception)
+                    {
+                        PA -= 0;
+                    }
+                }
+
+
+                result = new Point(Age, PA);
+
+            }           
+            return result.ToString();
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 
 
 

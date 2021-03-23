@@ -11,6 +11,5 @@ namespace Anka2
         {
             InitializeComponent();
         }
-
     }
 }

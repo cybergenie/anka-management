@@ -52,7 +52,7 @@ namespace Anka2.CustomControls
         }
 
         public static readonly DependencyProperty PAPointPositionProperty =
-            DependencyProperty.Register("PAPointText", typeof(string), typeof(ColorValueBar));
+            DependencyProperty.Register("PAPointPosition", typeof(string), typeof(PAContent));
 
         public string PAPointPosition
         {
@@ -61,7 +61,7 @@ namespace Anka2.CustomControls
         }
 
         public static readonly DependencyProperty PAPointShowProperty =
-            DependencyProperty.Register("PAPointShow", typeof(Visibility), typeof(ColorValueBar));
+            DependencyProperty.Register("PAPointShow", typeof(Visibility), typeof(PAContent));
 
         public Visibility PAPointShow
         {

@@ -96,7 +96,15 @@ namespace Anka2.ViewModels
             {
                 if (SPPBIndex >= 0)
                 {
-                    return BasicInfo.PSPPB[SPPBIndex];
+                    try
+                    {
+                        return BasicInfo.PSPPB[SPPBIndex];
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("返回值错误！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return null;
+                    }
                 }
                 else
                     return null;
@@ -105,7 +113,15 @@ namespace Anka2.ViewModels
             {
                 if (SPPBIndex >= 0)
                 {
-                    BasicInfo.PSPPB[SPPBIndex] = value;
+                    try
+                    {
+                        BasicInfo.PSPPB[SPPBIndex] = value;
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
                 RaisePropertyChanged(nameof(SPPBContent));
             }

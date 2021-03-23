@@ -85,7 +85,18 @@ namespace Anka2.ViewModels
             {
                 if (IPAQIndex >= 0)
                 {
-                    return BasicInfo.PIPAQ[IPAQIndex];
+                    try
+                    {
+                        if (BasicInfo.PIPAQ is not null)
+                            return BasicInfo.PIPAQ[IPAQIndex];
+                        else
+                            return null;
+                    }
+                    catch(IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return null;
+                    }
                 }
                 else
                     return null;
@@ -94,7 +105,16 @@ namespace Anka2.ViewModels
             {
                 if (IPAQIndex >= 0)
                 {
-                    BasicInfo.PIPAQ[IPAQIndex] = value;
+                    try
+                    {
+                        if (BasicInfo.PIPAQ is not null)
+                            BasicInfo.PIPAQ[IPAQIndex] = value;
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
                 RaisePropertyChanged(nameof(IPAQContent));
             }

@@ -96,7 +96,18 @@ namespace Anka2.ViewModels
             {
                 if (PHQIndex >= 0)
                 {
-                    return BasicInfo.PPHQ[PHQIndex];
+                    try
+                    {
+                        if (BasicInfo.PPHQ is not null)
+                            return BasicInfo.PPHQ[PHQIndex];
+                        else
+                            return null;
+                    }
+                    catch(IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return null;
+                    }
                 }
                 else
                     return null;
@@ -105,7 +116,16 @@ namespace Anka2.ViewModels
             {
                 if (PHQIndex >= 0)
                 {
-                    BasicInfo.PPHQ[PHQIndex] = value;
+                    try
+                    {
+                        if (BasicInfo.PPHQ is not null)
+                            BasicInfo.PPHQ[PHQIndex] = value;
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
                 RaisePropertyChanged(nameof(PHQContent));
             }

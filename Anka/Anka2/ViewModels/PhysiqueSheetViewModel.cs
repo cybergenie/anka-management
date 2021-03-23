@@ -94,9 +94,23 @@ namespace Anka2.ViewModels
         {
             get
             {
+                
                 if (PhysiqueIndex >= 0)
                 {
-                    return BasicInfo.PPhysique[PhysiqueIndex];
+                    try
+                    {
+                        if (BasicInfo.PPhysique is not null)
+                            return BasicInfo.PPhysique[PhysiqueIndex];
+                        else
+                            return null;
+
+                    }
+                    catch(IndexOutOfRangeException e )
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:"+e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return null;
+                    }
+                    
                 }
                 else
                     return null;
@@ -106,7 +120,16 @@ namespace Anka2.ViewModels
                 
                 if (PhysiqueIndex >= 0)
                 {
-                    BasicInfo.PPhysique[PhysiqueIndex] = value;
+                    try
+                    {
+                        if (BasicInfo.PPhysique is not null)
+                            BasicInfo.PPhysique[PhysiqueIndex] = value;
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
                 RaisePropertyChanged(nameof(PhysiqueContent));
             }

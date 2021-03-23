@@ -96,7 +96,15 @@ namespace Anka2.ViewModels
             {
                 if (ExerciseIndex >= 0)
                 {
-                    return BasicInfo.PExercise[ExerciseIndex];
+                    try
+                    {
+                        return BasicInfo.PExercise[ExerciseIndex];
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("返回值错误！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return null;
+                    }
                 }
                 else
                     return null;
@@ -105,7 +113,16 @@ namespace Anka2.ViewModels
             {
                 if (ExerciseIndex >= 0)
                 {
-                    BasicInfo.PExercise[ExerciseIndex] = value;  
+                    try
+                    {
+                        if (BasicInfo.PExercise is not null)
+                            BasicInfo.PExercise[ExerciseIndex] = value;
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
                 RaisePropertyChanged(nameof(ExerciseContent));
             }

@@ -96,7 +96,18 @@ namespace Anka2.ViewModels
             {
                 if (GADIndex >= 0)
                 {
-                    return BasicInfo.PGAD[GADIndex];
+                    try
+                    {
+                        if (BasicInfo.PGAD is not null)
+                            return BasicInfo.PGAD[GADIndex];
+                        else
+                            return null;
+                    }
+                    catch(IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return null;
+                    }
                 }
                 else
                     return null;
@@ -105,7 +116,16 @@ namespace Anka2.ViewModels
             {
                 if (GADIndex >= 0)
                 {
-                    BasicInfo.PGAD[GADIndex] = value;
+                    try
+                    {
+                        if (BasicInfo.PGAD is not null)
+                            BasicInfo.PGAD[GADIndex] = value;
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        MessageBox.Show("返回值错误！错误信息为:" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
                 RaisePropertyChanged(nameof(GADContent));
             }

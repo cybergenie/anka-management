@@ -14,8 +14,9 @@
             <mc:FMPercentConverter x:Key="FMPercentConverter"/>
             <mc:FMIndexConverter x:Key="FMIndexConverter"/>
             <mc:TBWConverter x:Key="TBWConverter"/>
-            <mc:BCWConverter x:Key="BCWConverter"/>
+            <mc:BCWConverter x:Key="BCWConverter"/> 
             <mc:EBWConverter x:Key="EBWConverter"/>
+            <mc:PAConverter x:Key="PAConverter"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" Height="25" Margin="5">
             <Label Content="姓  名：" Height="25" Width="50" />
@@ -363,27 +364,75 @@
                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <StackPanel Margin="0,0,15,0" >
                             <Label Content="骨骼肌肉质量(SMM):" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txSMM" />
+                            <TextBox x:Name="txSMM" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.SMMAll" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="左臂肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txLA" />
+                            <TextBox x:Name="txLA" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.SMMArmLeft" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="躯干肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txTK" />
+                            <TextBox x:Name="txTK" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.SMMBody" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="右臂肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txRA"/>
+                            <TextBox x:Name="txRA" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.SMMArmRight" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="左腿肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txLL" />
+                            <TextBox x:Name="txLL" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.SMMLegLeft" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0">
                             <Label Content="右腿肌肉质量:" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="txRL" />
+                            <TextBox x:Name="txRL" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.SMMLegRight" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                     </WrapPanel>
                     <Grid Margin="0,10,0,10">
@@ -404,14 +453,20 @@
                             <Label  Content="整个身体" HorizontalContentAlignment="Center"/>
                             <custom:ColorValueBar  
                             Width="140" Height="70" Color="LightGreen"
-                            CellOneLength="30" 
-                            CellTwoLength="30" 
-                            CellThreeLength="30" 
-                            CellFourLength="30" 
-                            IndicatorOneText="30.7"
-                            IndicatorTwoText="25.2"
-                            IndicatorThreeText="20.7"
-                            IndicatorValue="5"   Orientation="90">
+                                CellOneLength="35" 
+                                CellTwoLength="35" 
+                                CellThreeLength="35" 
+                                CellFourLength="35" 
+                                IndicatorStart="10"
+                                IndicatorOneText="20.7"
+                                IndicatorTwoText="25.2"
+                                IndicatorThreeText="30.7"
+                                IndicatorEnd="40"
+                                Orientation="90">
+                                <custom:ColorValueBar.IndicatorValue>
+                                    <Binding Path="PhysiqueContent.SMMAll" />                                        
+                                </custom:ColorValueBar.IndicatorValue>
+
                                 <custom:ColorValueBar.LayoutTransform>
                                     <RotateTransform Angle="-90"/>
                                 </custom:ColorValueBar.LayoutTransform>
@@ -422,14 +477,19 @@
                             <Label  Content="左臂" HorizontalContentAlignment="Center"/>
                             <custom:ColorValueBar   
                             Width="70" Height="65" Color="LightGreen"
-                            CellOneLength="12.5" 
+                            CellOneLength="17.5" 
                             CellTwoLength="17.5" 
                             CellThreeLength="17.5" 
-                            CellFourLength="12.5" 
-                            IndicatorOneText="30.7"
-                            IndicatorTwoText="25.2"
-                            IndicatorThreeText="20.7"
-                            IndicatorValue="5"   Orientation="90">
+                            CellFourLength="17.5" 
+                                IndicatorStart="0"
+                            IndicatorOneText="1.21"
+                            IndicatorTwoText="1.59"
+                            IndicatorThreeText="2.04"
+                                IndicatorEnd="3"
+                            Orientation="90">
+                                <custom:ColorValueBar.IndicatorValue>
+                                    <Binding Path="PhysiqueContent.SMMArmLeft" />
+                                </custom:ColorValueBar.IndicatorValue>
                                 <custom:ColorValueBar.LayoutTransform>
                                     <RotateTransform Angle="-90"/>
                                 </custom:ColorValueBar.LayoutTransform>
@@ -439,14 +499,19 @@
                             <Label  Content="躯干" Canvas.Left="5" Canvas.Top="5" HorizontalContentAlignment="Center"/>
                             <custom:ColorValueBar   
                             Width="70" Height="65" Color="LightGreen"
-                            CellOneLength="12.5" 
+                            CellOneLength="17.5" 
                             CellTwoLength="17.5" 
                             CellThreeLength="17.5" 
-                            CellFourLength="12.5" 
-                            IndicatorOneText="30.7"
-                            IndicatorTwoText="25.2"
-                            IndicatorThreeText="20.7"
-                            IndicatorValue="5"   Orientation="90">
+                            CellFourLength="17.5" 
+                                IndicatorStart="7"
+                            IndicatorOneText="9.5"
+                            IndicatorTwoText="11.5"
+                            IndicatorThreeText="13.9"
+                                IndicatorEnd="16"
+                            Orientation="90">
+                                <custom:ColorValueBar.IndicatorValue>
+                                    <Binding Path="PhysiqueContent.SMMBody" />
+                                </custom:ColorValueBar.IndicatorValue>
                                 <custom:ColorValueBar.LayoutTransform>
                                     <RotateTransform Angle="-90"/>
                                 </custom:ColorValueBar.LayoutTransform>
@@ -457,14 +522,19 @@
                             <Label  Content="右臂" Canvas.Left="5" Canvas.Top="5" HorizontalContentAlignment="Center"/>
                             <custom:ColorValueBar   
                             Width="70" Height="65" Color="LightGreen"
-                            CellOneLength="12.5" 
+                            CellOneLength="17.5" 
                             CellTwoLength="17.5" 
                             CellThreeLength="17.5" 
-                            CellFourLength="12.5" 
-                            IndicatorOneText="30.7"
-                            IndicatorTwoText="25.2"
-                            IndicatorThreeText="20.7"
-                            IndicatorValue="5"   Orientation="90">
+                            CellFourLength="17.5" 
+                                IndicatorStart="0"
+                            IndicatorOneText="1.23"
+                            IndicatorTwoText="1.63"
+                            IndicatorThreeText="2.11"
+                                IndicatorEnd="3"
+                            Orientation="90">
+                                <custom:ColorValueBar.IndicatorValue>
+                                    <Binding Path="PhysiqueContent.SMMArmRight" />
+                                </custom:ColorValueBar.IndicatorValue>
                                 <custom:ColorValueBar.LayoutTransform>
                                     <RotateTransform Angle="-90"/>
                                 </custom:ColorValueBar.LayoutTransform>
@@ -479,14 +549,19 @@
                             <Label  Content="左腿" Canvas.Left="5" Canvas.Top="5" HorizontalContentAlignment="Center" />
                             <custom:ColorValueBar   
                             Width="70" Height="65" Color="LightGreen"
-                            CellOneLength="12.5" 
+                            CellOneLength="17.5" 
                             CellTwoLength="17.5" 
                             CellThreeLength="17.5" 
-                            CellFourLength="12.5" 
-                            IndicatorOneText="30.7"
-                            IndicatorTwoText="25.2"
-                            IndicatorThreeText="20.7"
-                            IndicatorValue="5"   Orientation="90">
+                            CellFourLength="17.5" 
+                                IndicatorStart="3"
+                            IndicatorOneText="4.19"
+                            IndicatorTwoText="5.26"
+                            IndicatorThreeText="6.55"
+                                IndicatorEnd="8"
+                            Orientation="90">
+                                <custom:ColorValueBar.IndicatorValue>
+                                    <Binding Path="PhysiqueContent.SMMLegLeft" />
+                                </custom:ColorValueBar.IndicatorValue>
                                 <custom:ColorValueBar.LayoutTransform>
                                     <RotateTransform Angle="-90"/>
                                 </custom:ColorValueBar.LayoutTransform>
@@ -499,14 +574,19 @@
                             <Label  Content="右腿" Canvas.Left="5" Canvas.Top="5" HorizontalContentAlignment="Center"/>
                             <custom:ColorValueBar   
                             Width="70" Height="65" Color="LightGreen"
-                            CellOneLength="12.5" 
+                            CellOneLength="17.5" 
                             CellTwoLength="17.5" 
                             CellThreeLength="17.5" 
-                            CellFourLength="12.5" 
-                            IndicatorOneText="30.7"
-                            IndicatorTwoText="25.2"
-                            IndicatorThreeText="20.7"
-                            IndicatorValue="5"   Orientation="90">
+                            CellFourLength="17.5" 
+                                IndicatorStart="3"
+                            IndicatorOneText="4.16"
+                            IndicatorTwoText="5.24"
+                            IndicatorThreeText="6.54"
+                                IndicatorEnd="8"
+                            Orientation="90">
+                                <custom:ColorValueBar.IndicatorValue>
+                                    <Binding Path="PhysiqueContent.SMMLegRight" />
+                                </custom:ColorValueBar.IndicatorValue>
                                 <custom:ColorValueBar.LayoutTransform>
                                     <RotateTransform Angle="-90"/>
                                 </custom:ColorValueBar.LayoutTransform>
@@ -526,40 +606,70 @@
                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <StackPanel Margin="0,0,15,0" Width="120">
                             <Label Content="内脏脂肪(VAT):"/>
-                            <TextBox x:Name="txVAT" />
+                            <TextBox x:Name="txVAT" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.VAT" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0" Width="120">
 
                             <Label Content="腰围 单位(WC):"/>
-                            <TextBox x:Name="txWC"  />
+                            <TextBox x:Name="txWC" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.Waistline" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
 
                     </WrapPanel>
                     <WrapPanel>
                         <Label Width="50" Content="VAT[1]" Margin="10,35,10,0"/>
-                        <custom:ColorValueBar Margin="0,5,0,5"
+                        <custom:ColorValueBar 
+                            Margin="0,5,0,5"
                             Width="320" Height="80" Color="Transparent"
                             CellOneLength="90" CellOneText="低" 
                             CellTwoLength="90" 
                             CellThreeLength="60" CellThreeShow="Collapsed"
                             CellFourLength="90" CellFourText="高"
-                            IndicatorOneText="1.5"
-                            IndicatorTwoText="5.6"
-                            IndicatorThreeText="8" IndicatorThreeShow="Collapsed"
-                            IndicatorValue="12.5"  Orientation="0"/>
+                            IndicatorStart="0"                                              
+                            IndicatorOneText="2.3"
+                            IndicatorTwoText="3.8"
+                            IndicatorThreeText="3.8" IndicatorThreeShow="Collapsed"
+                            IndicatorEnd="6"
+                              Orientation="0">
+                            <custom:ColorValueBar.IndicatorValue>
+                                <Binding Path="PhysiqueContent.VAT" />
+                            </custom:ColorValueBar.IndicatorValue>
+                        </custom:ColorValueBar>
                     </WrapPanel>
                     <WrapPanel>
                         <Label Width="50" Content="WC[1]" Margin="10,35,10,0"/>
-                        <custom:ColorValueBar Margin="0,5,0,5"
+                        <custom:ColorValueBar
+                            Margin="0,5,0,5"
                             Width="320" Height="80" Color="Transparent"
-                            CellOneLength="130" CellOneText="低" 
-                            CellTwoLength="60" CellTwoShow="Collapsed"
-                            CellThreeLength="60" CellThreeShow="Collapsed"
-                            CellFourLength="130" CellFourText="高"
-                            IndicatorOneText="1.5" IndicatorOneShow="Collapsed"
-                            IndicatorTwoText="5.6" IndicatorTwoShow="Collapsed"
-                            IndicatorThreeText="8" IndicatorThreeShow="Collapsed"
-                            IndicatorValue="12.5"  Orientation="0"/>
+                            CellOneLength="160" CellOneText="&lt;0.900m"
+                            CellTwoLength="0" CellTwoShow="Collapsed"
+                            CellThreeLength="0" CellThreeShow="Collapsed"
+                            CellFourLength="160" CellFourText=">0.900m"
+                            IndicatorStart="0"
+                            IndicatorOneText="0.9" IndicatorOneShow="Collapsed"
+                            IndicatorTwoText="0.9" IndicatorTwoShow="Collapsed"
+                            IndicatorThreeText="0.9" IndicatorThreeShow="Collapsed"
+                            IndicatorEnd="2"
+                            Orientation="0">
+                            <custom:ColorValueBar.IndicatorValue>
+                                <Binding Path="PhysiqueContent.Waistline" />
+                            </custom:ColorValueBar.IndicatorValue>
+                        </custom:ColorValueBar>
                     </WrapPanel>
 
                 </StackPanel>
@@ -570,20 +680,40 @@
                     <WrapPanel Orientation="Horizontal" Margin="15,0,0,0">
                         <StackPanel Margin="0,0,15,0" Width="120">
                             <Label Content="相角(φ):"/>
-                            <TextBox x:Name="txPA"  />
+                            <TextBox x:Name="txPA"  >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.PA" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Margin="0,0,15,0" Width="120">
                             <Label Content="百分位:"/>
-                            <TextBox x:Name="txPAPercent" />
+                            <TextBox x:Name="txPAPercent" >
+                                <TextBox.Text>
+                                    <Binding Path="PhysiqueContent.PAPercent" >
+                                        <Binding.ValidationRules>
+                                            <m:DoubleRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                     </WrapPanel>
                     <WrapPanel Margin="0,15,0,0">
-                        <custom:PAContent  Margin="0,5,0,5"
-                            PAPointPosition="80,60" 
-                            PAPointShow="Visible"/>
+                        <custom:PAContent  Margin="0,5,0,5"                            
+                            PAPointShow="Visible">
+                            <custom:PAContent.PAPointPosition>
+                                <MultiBinding Converter="{StaticResource PAConverter}">
+                                    <Binding Path="BasicInfo.Age"/>
+                                    <Binding Path="PhysiqueContent.PA"/>
+                                </MultiBinding>
+                            </custom:PAContent.PAPointPosition>
+                        </custom:PAContent>
                     </WrapPanel>
-
-
                 </StackPanel>
             </GroupBox>
 

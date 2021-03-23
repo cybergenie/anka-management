@@ -319,11 +319,10 @@ namespace Anka2.CustomControls
         public double IndicatorValue
         {
             get { 
-                return Math.Round((double)GetValue(IndicatorValueProperty),2); 
+                return (double)GetValue(IndicatorValueProperty); 
             }
             set 
-            {
-                value = Math.Round(value, 2);
+            {                
                 SetValue(IndicatorValueProperty, value); 
             }
         }
