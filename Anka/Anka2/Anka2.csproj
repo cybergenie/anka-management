@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Nullable>annotations</Nullable>
+    <ApplicationIcon>beating_heart.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -12,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\About.png" />
     <None Remove="Resources\Images\AlignObjectsBottom.png" />
     <None Remove="Resources\Images\AlignObjectsCenteredHorizontal.png" />
     <None Remove="Resources\Images\AlignObjectsCenteredVertical.png" />
@@ -19,10 +21,12 @@
     <None Remove="Resources\Images\AlignObjectsRight.png" />
     <None Remove="Resources\Images\AlignObjectsTop.png" />
     <None Remove="Resources\Images\Backup.png" />
+    <None Remove="Resources\Images\beating_heart.ico" />
     <None Remove="Resources\Images\BringForward.png" />
     <None Remove="Resources\Images\BringForwardBig.png" />
     <None Remove="Resources\Images\BringToFront.png" />
     <None Remove="Resources\Images\Buffer.png" />
+    <None Remove="Resources\Images\Closed.png" />
     <None Remove="Resources\Images\ConnectBig.png" />
     <None Remove="Resources\Images\Connection.png" />
     <None Remove="Resources\Images\Copy.png" />
@@ -35,7 +39,9 @@
     <None Remove="Resources\Images\GenericDocument.png" />
     <None Remove="Resources\Images\Group.png" />
     <None Remove="Resources\Images\GroupBig.png" />
+    <None Remove="Resources\Images\Help.png" />
     <None Remove="Resources\Images\NewBig.png" />
+    <None Remove="Resources\Images\Nursing.jpg" />
     <None Remove="Resources\Images\OpenFolder.png" />
     <None Remove="Resources\Images\Paste.png" />
     <None Remove="Resources\Images\PasteBig.png" />
@@ -74,6 +80,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\About.png" />
     <Resource Include="Resources\Images\AlignObjectsBottom.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -93,6 +100,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Backup.png" />
+    <Resource Include="Resources\Images\beating_heart.ico" />
     <Resource Include="Resources\Images\BringForward.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -105,6 +113,7 @@
     <Resource Include="Resources\Images\Buffer.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Closed.png" />
     <Resource Include="Resources\Images\ConnectBig.png" />
     <Resource Include="Resources\Images\Copy.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -133,7 +142,9 @@
     <Resource Include="Resources\Images\GroupBig.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Help.png" />
     <Resource Include="Resources\Images\NewBig.png" />
+    <Resource Include="Resources\Images\Nursing.jpg" />
     <Resource Include="Resources\Images\OpenFolder.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

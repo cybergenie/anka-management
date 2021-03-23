@@ -1,13 +1,16 @@
 ﻿using Anka2.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 
 namespace Anka2.Services
 {
-    public class DataPreviewService : NotifyObject
+    public class DataPreview : NotifyObject
     {
 
         private static DataTable ToDataTable<T>(IList<T> data, Dictionary<string, string> Dict)
@@ -469,7 +472,7 @@ namespace Anka2.Services
                                    LapStrengthRight2 = sppb.LapStrengthRight2
                                }).ToList();
                 DataTable DtSPPB = ToDataTable<SPPBList>(SPPBList, DicSPPB);
-                DtSPPB.TableName = "SPPB/平衡能力";
+                DtSPPB.TableName = "SPPB-平衡能力";
                 SPPBExportConverter.SPPBValueConvertor(ref DtSPPB);
                 return DtSPPB.DefaultView;
 
@@ -557,6 +560,71 @@ namespace Anka2.Services
         }
 
 
+        private CommandObject<RoutedEventArgs> _export_Executed;
+        public CommandObject<RoutedEventArgs> Export_Executed
+        {
+            get
+            {
+                if (_export_Executed == null)
+                    _export_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {                          
+
+                            DataTable[] dtOutputs = {
+                                DtBasicInfo.ToTable(),
+                                DtExercise.ToTable(),
+                                DtGAD.ToTable(),
+                                DtIPAQ.ToTable(),
+                                DtOHQ.ToTable(),
+                                DtPHQ.ToTable(),
+                                DtSPPB.ToTable(),
+                                DtPhysique.ToTable()
+                            };
+                            try
+                            {
+                                string strName = null;
+                                SaveFileDialog dlg = new SaveFileDialog();
+                                dlg.RestoreDirectory = true;
+                                dlg.DefaultExt = "xls";
+                                dlg.Filter = "Excle工作簿|*.xlsx|Excle97-2003工作簿|*.xls";
+                                if (dlg.ShowDialog() == true)
+                                {
+                                    strName = dlg.FileName;
+#if DEBUG
+                                    Debug.WriteLine(strName);
+#endif
+                                }
+                                if (strName == null)
+                                    return;
+                                NPOIHelper.TableToExcel(dtOutputs, strName);
+                                MessageBox.Show("数据导出已完成");
+                            }
+
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+
+                            }
+                        }));
+                return _export_Executed;
+            }
+        }
+
+        private CommandObject<RoutedEventArgs> _closed_Executed;
+        public CommandObject<RoutedEventArgs> Closed_Executed
+        {
+            get
+            {
+                if (_closed_Executed == null)
+                    _closed_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            DataUitls.GetParentWindow((DependencyObject)e.Source).Close();
+                            
+                        }));
+                return _closed_Executed;
+            }
+        }
 
     }
 }

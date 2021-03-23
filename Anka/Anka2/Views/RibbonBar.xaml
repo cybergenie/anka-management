@@ -4,14 +4,17 @@
                     xmlns:Fluent="urn:fluent-ribbon" 
                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
                     xmlns:cmd="clr-namespace:Anka2.Models">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Views/AboutContent.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
 
-    <Fluent:Ribbon x:Key="RibbonBar" Grid.Row="0">
+    <Fluent:Ribbon x:Key="RibbonBar" Grid.Row="0">       
 
         <Fluent:Ribbon.Resources>
             <RoutedUICommand x:Key="New" Text="新建" />
             <RoutedUICommand x:Key="Open" Text="连接" />
             <RoutedUICommand x:Key="Save" Text="保存" />
-            <RoutedUICommand x:Key="Export" Text="导出" />
+            <RoutedUICommand x:Key="Export" Text="导出" />  
         </Fluent:Ribbon.Resources>
         <Fluent:Ribbon.InputBindings>
             <KeyBinding Gesture="Ctrl+N" Command="{Binding New_Executed}" />
@@ -27,18 +30,10 @@
         <Fluent:Ribbon.Menu>
             <Fluent:Backstage>
                 <Fluent:BackstageTabControl>
-                    <Fluent:BackstageTabItem Header="开始" />
-                    <Fluent:BackstageTabItem Header="新建" >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <cmd:EventCommand Command="{Binding New_Executed }"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Fluent:BackstageTabItem>
-                    <Fluent:BackstageTabItem Header="打开" />
-                    <RibbonSeparator/>
                     <Fluent:BackstageTabItem Header="选项" />
-                    <Fluent:BackstageTabItem Header="关于" />
+                    <Fluent:BackstageTabItem Header="关于" >
+                        <ContentControl Content="{StaticResource AboutContent}"/>
+                    </Fluent:BackstageTabItem>
                 </Fluent:BackstageTabControl>
             </Fluent:Backstage>
         </Fluent:Ribbon.Menu>
@@ -68,19 +63,8 @@
                             <cmd:EventCommand Command="{Binding Save_Executed }"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </Fluent:Button>
-                
-            </Fluent:RibbonGroupBox>
-            <Fluent:RibbonGroupBox x:Name="gbEdit" Header="编辑">
-                <Fluent:Button x:Name="btnPaste" Header="粘贴" LargeIcon="/Resources/Images/PasteBig.png" Margin="5,0,5,0" Size="Large" ToolTip="粘贴（Ctrl+V）"                               
-                              />
-                <Fluent:Button x:Name="btnCut" Header="剪切" Icon="/Resources/Images/Cut.png" Size="Middle" Margin="5,0,5,0" ToolTip="剪切（Ctrl+X）"                               
-                              />
-                <Fluent:Button x:Name="btnCopy" Header="复制" Icon="/Resources/Images/Copy.png" Size="Middle" Margin="5,0,5,0" ToolTip="复制（Ctrl+C）"                               
-                               />
-                <Fluent:Button x:Name="btnDelete" Header="删除" Icon="/Resources/Images/Delete.png" Size="Middle" Margin="5,0,5,0" ToolTip="删除（Del）"                               
-                               />
-            </Fluent:RibbonGroupBox>
+                </Fluent:Button>                
+            </Fluent:RibbonGroupBox>           
         </Fluent:RibbonTabItem>
         <Fluent:RibbonTabItem Header="工具" Width="65">
             <Fluent:RibbonGroupBox x:Name="gbTools" Header="工具">
@@ -116,6 +100,22 @@
                         </i:Interaction.Triggers>
                     </Fluent:Button>
                 </Fluent:RibbonGroupBox>
+            <Fluent:RibbonGroupBox x:Name="gbAboutt" Header="关于">
+                <Fluent:Button x:Name="btnHelp" Header="帮助" LargeIcon="/Resources/Images/Help.png" Size="Large" Margin="5,0,5,0" ToolTip="帮助">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cmd:EventCommand Command="{Binding Help_Executed }"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Fluent:Button>
+                <Fluent:Button x:Name="btnAbout" Header="关于" LargeIcon="/Resources/Images/About.png" Size="Large" Margin="5,0,5,0" ToolTip="关于">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <cmd:EventCommand Command="{Binding About_Executed }"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Fluent:Button>
+            </Fluent:RibbonGroupBox>
         </Fluent:RibbonTabItem>
     </Fluent:Ribbon>
 

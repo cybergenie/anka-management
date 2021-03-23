@@ -4,16 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anka2.Views"
-        xmlns:Services="clr-namespace:Anka2.Services" x:Class="Anka2.Views.ExportPreview"
+        xmlns:Services="clr-namespace:Anka2.Services"
+    xmlns:Fluent="urn:fluent-ribbon" 
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+    xmlns:cmd="clr-namespace:Anka2.Models" xmlns:s="clr-namespace:Anka2.ViewModels"
+    x:Class="Anka2.Views.ExportPreview"
         mc:Ignorable="d"
         Title="导出预览" Height="450" Width="800">
     <Grid>
-        <TabControl TabStripPlacement="Bottom">
+        <Grid.DataContext>
+            <Services:DataPreview/>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Fluent:Ribbon  Grid.Row="0">
+            <Fluent:RibbonTabItem Header="导出" Width="65">
+                <Fluent:RibbonGroupBox x:Name="gbFile" Header="导出">
+                    <Fluent:Button x:Name="btnExport" Header="导出" LargeIcon="/Resources/Images/ExportBig.png" Size="Large" Margin="5,0,5,0" ToolTip="导出数据表格(Crtl+P)">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <cmd:EventCommand Command="{Binding Export_Executed }"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Fluent:Button>
+
+                    <Fluent:Button x:Name="btnClosed" Header="关闭" LargeIcon="/Resources/Images/Closed.png" Size="Large" Margin="5,0,5,0" ToolTip="关闭数据预览(Crtl+P)">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <cmd:EventCommand Command="{Binding Closed_Executed }"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+        </Fluent:Ribbon>
+        <TabControl TabStripPlacement="Bottom" Grid.Row="1">
             <TabItem Header="基本信息">
                 <Grid Background="#FFE5E5E5">
-                    <Grid.DataContext>
-                        <Services:DataPreviewService/>
-                    </Grid.DataContext>
+                   
                     <DataGrid ItemsSource="{Binding DtBasicInfo}"/>
 
                 </Grid>
@@ -21,7 +51,7 @@
             <TabItem Header="运动负荷">
                 <Grid Background="#FFE5E5E5">
                     <Grid.DataContext>
-                        <Services:DataPreviewService/>
+                        <Services:DataPreview/>
                     </Grid.DataContext>
                     <DataGrid ItemsSource="{Binding DtExercise}"/>
                 </Grid>
@@ -29,7 +59,7 @@
             <TabItem Header="PHQ评估量表">
                 <Grid Background="#FFE5E5E5">
                     <Grid.DataContext>
-                        <Services:DataPreviewService/>
+                        <Services:DataPreview/>
                     </Grid.DataContext>
                     <DataGrid ItemsSource="{Binding DtPHQ}"/>
                 </Grid>
@@ -37,7 +67,7 @@
             <TabItem Header="GAD评估量表">
                 <Grid Background="#FFE5E5E5">
                     <Grid.DataContext>
-                        <Services:DataPreviewService/>
+                        <Services:DataPreview/>
                     </Grid.DataContext>
                     <DataGrid ItemsSource="{Binding DtGAD}"/>
                 </Grid>
@@ -45,7 +75,7 @@
             <TabItem Header="IPAQ评估量表">
                 <Grid Background="#FFE5E5E5">
                     <Grid.DataContext>
-                        <Services:DataPreviewService/>
+                        <Services:DataPreview/>
                     </Grid.DataContext>
                     <DataGrid ItemsSource="{Binding DtIPAQ}"/>
                 </Grid>
@@ -53,7 +83,7 @@
             <TabItem Header="口腔卫生评估量表">
                 <Grid Background="#FFE5E5E5">
                     <Grid.DataContext>
-                        <Services:DataPreviewService/>
+                        <Services:DataPreview/>
                     </Grid.DataContext>
                     <DataGrid ItemsSource="{Binding DtOHQ}"/>
                 </Grid>
@@ -61,7 +91,7 @@
             <TabItem Header="SPPB/平衡能力">
                 <Grid Background="#FFE5E5E5">
                     <Grid.DataContext>
-                        <Services:DataPreviewService/>
+                        <Services:DataPreview/>
                     </Grid.DataContext>
                     <DataGrid ItemsSource="{Binding DtSPPB}"/>
                 </Grid>
@@ -69,12 +99,20 @@
             <TabItem Header="体质成分">
                 <Grid Background="#FFE5E5E5">
                     <Grid.DataContext>
-                        <Services:DataPreviewService/>
+                        <Services:DataPreview/>
                     </Grid.DataContext>
                     <DataGrid ItemsSource="{Binding DtPhysique}"/>
                 </Grid>
             </TabItem>
         </TabControl>
+        <StatusBar x:Name="StatusBar" VerticalAlignment="Bottom" Height="25" Grid.Row="1" >
+            <StatusBar.DataContext>
+                <s:StatusBarViewModel/>
+            </StatusBar.DataContext>
+            <StatusBarItem VerticalContentAlignment="Center">
+                <TextBlock x:Name="txStatusInfo" FontWeight="Bold"  Text="{Binding TipInfo}"/>
+            </StatusBarItem>
+        </StatusBar>
 
     </Grid>
 </Window>

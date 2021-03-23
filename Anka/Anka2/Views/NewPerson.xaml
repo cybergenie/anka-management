@@ -7,7 +7,7 @@
         xmlns:m="clr-namespace:Anka2.Models" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="新建档案" Height="400" Width="600" WindowStyle="None" ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" BorderThickness="1,1,1,1" MouseLeftButtonDown="Window_MouseLeftButtonDown" KeyDown="Window_KeyDown">
+        Title="新建档案" Height="400" Width="600" WindowStyle="None" ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" BorderThickness="1,1,1,1" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.DataContext>
         <s:NewPersonViewModel/>
     </Window.DataContext>
@@ -68,8 +68,8 @@
             </TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,45,0,20">
-            <Button x:Name="btNewPerson" Content="新 建" Width="65" Margin="20,0,35,0" Click="NewPerson_Click" />
-            <Button x:Name="btCancel"  Content="取 消" Width="65" Margin="35,0,20,0" Click="Cancel_Click"/>             
+            <Button x:Name="btNewPerson" Content="新 建" Width="65" Margin="20,0,35,0" Click="NewPerson_Click" IsDefault="True" />
+            <Button x:Name="btCancel"  Content="取 消" Width="65" Margin="35,0,20,0" Click="Cancel_Click" IsCancel="True"/>             
         </StackPanel>       
 
     </StackPanel>

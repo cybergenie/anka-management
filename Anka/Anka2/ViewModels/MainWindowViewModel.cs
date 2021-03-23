@@ -1,7 +1,10 @@
 ﻿using Anka2.Models;
 using Anka2.Services;
 using Anka2.Views;
+using Microsoft.Win32;
 using System;
+using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,6 +20,23 @@ namespace Anka2.ViewModels
         private BasicInfo NewPersonInfo { set; get; }
         private Window RootSource { set; get; }
 
+
+        private CommandObject<RoutedEventArgs> _about_Executed;
+        public CommandObject<RoutedEventArgs> About_Executed
+        {
+            get
+            {
+                if (_about_Executed == null)
+                    _about_Executed = new CommandObject<RoutedEventArgs>(
+                        new Action<RoutedEventArgs>(e =>
+                        {
+                            RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
+                            About about = new About();
+                            about.ShowDialog();
+                        }));
+                return _about_Executed;
+            }
+        }
 
         private CommandObject<RoutedEventArgs> _new_Executed;
         public CommandObject<RoutedEventArgs> New_Executed
@@ -63,10 +83,43 @@ namespace Anka2.ViewModels
                     _export_Executed = new CommandObject<RoutedEventArgs>(
                         new Action<RoutedEventArgs>(e =>
                         {
-                            RootSource = DataUitls.GetParentWindow((DependencyObject)e.Source);
-                            ExportPreview ExportPreview = new ExportPreview();
-                            //newPerson.AddNewPerson(this.GetNewPersonInfo);
-                            ExportPreview.Show();
+                            DataPreview dataPreview = new DataPreview();
+
+                            DataTable[] dtOutputs = { 
+                                dataPreview.DtBasicInfo.ToTable(),
+                                dataPreview.DtExercise.ToTable(),
+                                dataPreview.DtGAD.ToTable(),
+                                dataPreview.DtIPAQ.ToTable(),
+                                dataPreview.DtOHQ.ToTable(),
+                                dataPreview.DtPHQ.ToTable(),
+                                dataPreview.DtSPPB.ToTable(),
+                                dataPreview.DtPhysique.ToTable()
+                            };
+                            try
+                            {
+                                string strName = null;
+                                SaveFileDialog dlg = new SaveFileDialog();
+                                dlg.RestoreDirectory = true;
+                                dlg.DefaultExt = "xls";
+                                dlg.Filter = "Excle工作簿|*.xlsx|Excle97-2003工作簿|*.xls";
+                                if (dlg.ShowDialog() == true)
+                                {
+                                    strName = dlg.FileName;
+#if DEBUG
+                                    Debug.WriteLine(strName);
+#endif
+                                }
+                                if (strName == null)
+                                    return;
+                                NPOIHelper.TableToExcel(dtOutputs, strName);
+                                MessageBox.Show("数据导出已完成");
+                            }
+
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+
+                            }
                         }));
                 return _export_Executed;
             }

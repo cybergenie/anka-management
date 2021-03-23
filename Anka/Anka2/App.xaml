@@ -17,9 +17,10 @@
                 <ResourceDictionary Source="/Views/IPAQSheet.xaml"/>
                 <ResourceDictionary Source="/Views/OHQSheet.xaml"/>
                 <ResourceDictionary Source="/Views/SPPBSheet.xaml"/>
+                <ResourceDictionary Source="/Views/AboutContent.xaml"/>
                 <ResourceDictionary Source="/CustomControls/ColorValueBar/Themes/ColorValueBar.xaml"/>
                 <ResourceDictionary Source="/CustomControls/PAContent/Themes/PAContent.xaml"/>
-                <ResourceDictionary Source="/Resources/Styles/ValidationTextBox.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/ValidationTextBox.xaml"/>                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
