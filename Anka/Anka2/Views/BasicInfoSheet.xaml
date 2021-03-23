@@ -37,8 +37,8 @@
             <Label x:Name="lbBasicAge" Content="{Binding BasicInfo.Age}" Height="25" Width="65" />
             <Label Content="病案号：" Height="25" Width="50" />
             <Label x:Name="lbBasicNumber" Content="{Binding BasicInfo.Number}" Height="25" Width="80"  />
-            <Button x:Name="btBasicSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
-            <Button x:Name="btBasicLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
+            <Button x:Name="btBasicSave" Content="新  建" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
+            <Button x:Name="btBasicLoad" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45"  />
         </StackPanel>
         <Grid x:Name="BasicInfoContent"  DockPanel.Dock="Top" Margin="5" IsEnabled="{Binding BasicInfoContentEnable}">
             <Grid.RowDefinitions>

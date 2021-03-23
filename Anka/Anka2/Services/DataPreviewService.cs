@@ -469,7 +469,7 @@ namespace Anka2.Services
                                    LapStrengthRight2 = sppb.LapStrengthRight2
                                }).ToList();
                 DataTable DtSPPB = ToDataTable<SPPBList>(SPPBList, DicSPPB);
-                DtSPPB.TableName = "SPPB/平衡能力评估量表";
+                DtSPPB.TableName = "SPPB/平衡能力";
                 SPPBExportConverter.SPPBValueConvertor(ref DtSPPB);
                 return DtSPPB.DefaultView;
 
@@ -481,6 +481,77 @@ namespace Anka2.Services
                     _dtSPPB = value;
                 }
                 RaisePropertyChanged(nameof(DtSPPB));
+            }
+
+        }
+
+        public DataView _dtPhysique;
+        public DataView DtPhysique
+        {
+            get
+            {
+                Dictionary<string, string> DicPhysique = new Dictionary<string, string> {
+                    { "Number", "病案号" },
+                    { "Name",  "姓名" },
+                    { "Age", "年龄" },
+                    { "Male",  "性别" },
+                    { "PhysiqueNumber", "记录编号"  },
+                    { "Weight", "体重"  },
+                    { "Hight", "身高"  },
+                    { "FM", "脂肪重量"  },
+                    { "TBW", "体液总量(TBW)"  },
+                    { "BCW", "细胞外液(BCW)"  },
+                    { "SMMAll", "骨骼肌肉质量(SMM)"  },
+                    { "SMMArmLeft", "左臂肌肉质量"  },
+                    { "SMMBody", "躯干肌肉质量"  },
+                    { "SMMArmRight", "右臂肌肉质量"  },
+                    { "SMMLegLeft", "左腿肌肉质量"  },
+                    { "SMMLegRight", "右腿肌肉质量"  },
+                    { "VAT", "内脏脂肪(VAT)"  },
+                    { "Waistline", "腰围 单位(WC)"  },
+                    { "PA", "相角"  },
+                    { "PAPercent", "百分位"  }                    
+                };
+                using var context = new DbAdapter();
+                var PhysiqueList = (from basicInfo in context.DbPerson
+                                join physique in context.DbPhysique
+                                on basicInfo.Number equals physique.basicinfoNumber
+                                select new PhysiqueList
+                                {
+                                    Number = basicInfo.Number,
+                                    Name = basicInfo.Name,
+                                    Male = basicInfo.Male,
+                                    Age = basicInfo.Age,
+                                    PhysiqueNumber = physique.PhysiqueNumber.Remove(0, basicInfo.Number.Length + 1),
+                                    Weight = physique.Weight,
+                                    Hight = physique.Hight,
+                                    FM = physique.FM,
+                                    TBW = physique.TBW,
+                                    BCW = physique.BCW,
+                                    SMMAll = physique.SMMAll,
+                                    SMMArmLeft = physique.SMMArmLeft,
+                                    SMMArmRight = physique.SMMArmRight,
+                                    SMMBody = physique.SMMBody,
+                                    SMMLegLeft = physique.SMMLegLeft,
+                                    SMMLegRight = physique.SMMLegRight,
+                                    VAT = physique.VAT,
+                                    Waistline = physique.Waistline,
+                                    PA = physique.PA,
+                                    PAPercent = physique.PAPercent                                   
+                                }).ToList();
+                DataTable DtPhysique = ToDataTable<PhysiqueList>(PhysiqueList, DicPhysique);
+                DtPhysique.TableName = "体质成分";
+                PhysiqueExportConverter.PhysiqueValueConvertor(ref DtPhysique);
+                return DtPhysique.DefaultView;
+
+            }
+            set
+            {
+                if (_dtPhysique != value)
+                {
+                    _dtPhysique = value;
+                }
+                RaisePropertyChanged(nameof(DtPhysique));
             }
 
         }

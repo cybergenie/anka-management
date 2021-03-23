@@ -42,14 +42,14 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>
-            <Button x:Name="btOHQSave" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45">
+            <Button x:Name="btOHQSave" Content="新  建" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <m:EventCommand Command="{Binding Load_OHQ_Executed }"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button x:Name="btOHQLoad" Content="读  取" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" >
+            <Button x:Name="btOHQLoad" Content="保  存" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="85,0,0,0" Height="25" Width="45" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <m:EventCommand Command="{Binding Load_OHQ_Executed }"/>

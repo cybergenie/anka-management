@@ -116,6 +116,230 @@ namespace Anka2.Services
 
         }
 
+        public static bool SaveBasicInfo(BasicInfo Person)
+        {
+            string personId = Person.Number;
+            try
+            {
+                using (var context = new DbAdapter())
+                {
+                    var existingPerson = context.DbPerson.Find(personId);
+                    if (existingPerson != null)
+                    {
+                        context.Entry(existingPerson).CurrentValues.SetValues(Person);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
+                return false;
+            }
+            return true;
+        }
+
+        public static bool SaveExercise(Exercise exercise)
+        {
+            string exerciseId = exercise.ExerciseNumber;
+            try
+            {
+                using (var context = new DbAdapter())
+                {
+                    var existingExercise = context.DbExercise.Find(exerciseId);
+                    if (existingExercise != null)
+                    {
+                        context.Entry(existingExercise).CurrentValues.SetValues(exercise);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
+                return false;
+            }
+            return true;
+        }
+
+        public static bool SaveGAD(GAD gad)
+        {
+            string gadId = gad.GADNumber;
+            try
+            {
+                using (var context = new DbAdapter())
+                {
+                    var existingGAD = context.DbGAD.Find(gadId);
+                    if (existingGAD != null)
+                    {
+                        context.Entry(existingGAD).CurrentValues.SetValues(gad);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
+                return false;
+            }
+            return true;
+        }
+
+        public static bool SavePHQ(PHQ phq)
+        {
+            string phqId = phq.PHQNumber;
+            try
+            {
+                using (var context = new DbAdapter())
+                {
+                    var existingPHQ = context.DbPHQ.Find(phqId);
+                    if (existingPHQ != null)
+                    {
+                        context.Entry(existingPHQ).CurrentValues.SetValues(phq);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
+                return false;
+            }
+            return true;
+        }
+
+        public static bool SaveIPAQ(IPAQ ipaq)
+        {
+            string ipaqId = ipaq.IPAQNumber;
+            try
+            {
+                using (var context = new DbAdapter())
+                {
+                    var existingIPAQ = context.DbIPAQ.Find(ipaqId);
+                    if (existingIPAQ != null)
+                    {
+                        context.Entry(existingIPAQ).CurrentValues.SetValues(ipaq);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
+                return false;
+            }
+            return true;
+        }
+
+        public static bool SaveOHQ(OHQ ohq)
+        {
+            string ohqId = ohq.OHQNumber;
+            try
+            {
+                using (var context = new DbAdapter())
+                {
+                    var existingOHQ = context.DbOHQ.Find(ohqId);
+                    if (existingOHQ != null)
+                    {
+                        context.Entry(existingOHQ).CurrentValues.SetValues(ohq);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
+                return false;
+            }
+            return true;
+        }
+
+        public static bool SaveSPPB(SPPB sppb)
+        {
+            string sppbId = sppb.SPPBNumber;
+            try
+            {
+                using (var context = new DbAdapter())
+                {
+                    var existingSPPB = context.DbSPPB.Find(sppbId);
+                    if (existingSPPB != null)
+                    {
+                        context.Entry(existingSPPB).CurrentValues.SetValues(sppb);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
+                return false;
+            }
+            return true;
+        }
+
+        public static bool SavePhysique(Physique physique)
+        {
+            string physiqueId = physique.PhysiqueNumber;
+            try
+            {
+                using (var context = new DbAdapter())
+                {
+                    var existingPhysique = context.DbPhysique.Find(physiqueId);
+                    if (existingPhysique != null)
+                    {
+                        context.Entry(existingPhysique).CurrentValues.SetValues(physique);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("新建档案错误，错误信息为：" + e.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Information);
+                return false;
+            }
+            return true;
+        }
+
 
         public static Window GetParentWindow(DependencyObject Source)
         {

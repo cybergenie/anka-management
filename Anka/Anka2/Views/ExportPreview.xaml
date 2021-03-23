@@ -66,6 +66,14 @@
                     <DataGrid ItemsSource="{Binding DtSPPB}"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="体质成分">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        <Services:DataPreviewService/>
+                    </Grid.DataContext>
+                    <DataGrid ItemsSource="{Binding DtPhysique}"/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>
