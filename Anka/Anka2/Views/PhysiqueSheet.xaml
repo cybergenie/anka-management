@@ -105,7 +105,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="155">
                             <Label Content="BMI:"/>
-                            <TextBox x:Name="bmiBMI" Width="60" Height="25" VerticalContentAlignment="Center" IsReadOnly="True" >
+                            <TextBox x:Name="bmiBMI" Width="60" Height="25" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False">
                                 <TextBox.Text>
                                     <MultiBinding Converter="{StaticResource BMIConverter}">
                                         <Binding Path="PhysiqueContent.Weight" />
@@ -121,7 +121,7 @@
                             <Label  Content="BMI"/>
                             <Label  Content="[kg/㎡]"/>
                         </StackPanel>
-                        <custom:ColorValueBar 
+                        <custom:ColorValueBar Focusable="False"
                             Width="320" Height="80" Color="Transparent"
                             CellOneLength="80" CellOneText="低体重" 
                             CellTwoLength="80" CellTwoText="正常体重"
@@ -171,7 +171,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,15,0" Width="200">
                             <Label Content="脂肪重量指数:"/>
-                            <TextBox x:Name="txFMI" Width="60" VerticalContentAlignment="Center" IsReadOnly="True" >
+                            <TextBox x:Name="txFMI" Width="60" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False">
                                 <TextBox.Text>
                                     <MultiBinding Converter="{StaticResource FMIndexConverter}">
                                         <Binding Path="PhysiqueContent.FM" />
@@ -187,7 +187,7 @@
                             <Label  Content="FMI"/>
                             <Label  Content="[kg/㎡]"/>
                         </StackPanel>
-                        <custom:ColorValueBar 
+                        <custom:ColorValueBar Focusable="False"
                             Width="320" Height="80" Color="Transparent"
                             CellOneLength="80" CellOneText="低" 
                             CellTwoLength="80" CellTwoText="正常"
@@ -268,7 +268,7 @@
                         <StackPanel Margin="0,0,15,0" Width="135">
                             <Label Content="BCW/TBW:"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBox x:Name="txEBW" Width="45" Height="25" VerticalContentAlignment="Center" IsReadOnly="True" >
+                                <TextBox x:Name="txEBW" Width="45" Height="25" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False">
                                     <TextBox.Text>
                                         <MultiBinding Converter="{StaticResource EBWConverter}">
                                             <Binding Path="PhysiqueContent.BCW" />
@@ -282,9 +282,9 @@
                         </StackPanel>
                     </WrapPanel>
                     <WrapPanel>
-                        <Label Width="50" Content="TBW[1]" Margin="10,35,10,0"/>
+                        <Label Width="60" Content="TBW[1]" Margin="10,35,10,0"/>
 
-                        <custom:ColorValueBar 
+                        <custom:ColorValueBar Focusable="False"
                             Margin="0,5,0,5"
                             Width="320" Height="80"
                             Color="LightGreen"
@@ -308,8 +308,8 @@
 
                     </WrapPanel>
                     <WrapPanel>
-                        <Label Width="50" Content="BCW[1]" Margin="10,35,10,0"/>
-                        <custom:ColorValueBar 
+                        <Label Width="60" Content="BCW[1]" Margin="10,35,10,0"/>
+                        <custom:ColorValueBar Focusable="False"
                             Margin="0,5,0,5"
                             Width="320" Height="80" Color="LightGreen"
                             CellOneLength="80" CellOneText="低" 
@@ -333,8 +333,8 @@
                     </WrapPanel>
 
                     <WrapPanel>
-                        <Label Width="50" Content="BCW/&#xD;&#xA;TBW%" Margin="10,35,10,0"/>
-                        <custom:ColorValueBar 
+                        <Label Width="60" Content="BCW/&#xD;&#xA;TBW%" Margin="10,35,10,0"/>
+                        <custom:ColorValueBar Focusable="False"
                             Margin="0,5,0,5"
                             Width="320" Height="80" Color="LightGreen"
                             CellOneLength="80" CellOneText="低" 
@@ -451,7 +451,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.RowSpan="2" >
                             <Label  Content="整个身体" HorizontalContentAlignment="Center"/>
-                            <custom:ColorValueBar  
+                            <custom:ColorValueBar  Focusable="False"
                             Width="140" Height="70" Color="LightGreen"
                                 CellOneLength="35" 
                                 CellTwoLength="35" 
@@ -475,7 +475,7 @@
 
                         <StackPanel Grid.Column="1" Grid.ColumnSpan="2">
                             <Label  Content="左臂" HorizontalContentAlignment="Center"/>
-                            <custom:ColorValueBar   
+                            <custom:ColorValueBar   Focusable="False"
                             Width="70" Height="65" Color="LightGreen"
                             CellOneLength="17.5" 
                             CellTwoLength="17.5" 
@@ -497,7 +497,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="3" Grid.ColumnSpan="2">
                             <Label  Content="躯干" Canvas.Left="5" Canvas.Top="5" HorizontalContentAlignment="Center"/>
-                            <custom:ColorValueBar   
+                            <custom:ColorValueBar   Focusable="False"
                             Width="70" Height="65" Color="LightGreen"
                             CellOneLength="17.5" 
                             CellTwoLength="17.5" 
@@ -520,7 +520,7 @@
                         <StackPanel Grid.Column="5" Grid.ColumnSpan="2">
 
                             <Label  Content="右臂" Canvas.Left="5" Canvas.Top="5" HorizontalContentAlignment="Center"/>
-                            <custom:ColorValueBar   
+                            <custom:ColorValueBar   Focusable="False"
                             Width="70" Height="65" Color="LightGreen"
                             CellOneLength="17.5" 
                             CellTwoLength="17.5" 
@@ -547,7 +547,7 @@
                         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
 
                             <Label  Content="左腿" Canvas.Left="5" Canvas.Top="5" HorizontalContentAlignment="Center" />
-                            <custom:ColorValueBar   
+                            <custom:ColorValueBar   Focusable="False"
                             Width="70" Height="65" Color="LightGreen"
                             CellOneLength="17.5" 
                             CellTwoLength="17.5" 
@@ -572,7 +572,7 @@
                         <StackPanel Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3">
 
                             <Label  Content="右腿" Canvas.Left="5" Canvas.Top="5" HorizontalContentAlignment="Center"/>
-                            <custom:ColorValueBar   
+                            <custom:ColorValueBar   Focusable="False"
                             Width="70" Height="65" Color="LightGreen"
                             CellOneLength="17.5" 
                             CellTwoLength="17.5" 
@@ -633,7 +633,7 @@
                     </WrapPanel>
                     <WrapPanel>
                         <Label Width="50" Content="VAT[1]" Margin="10,35,10,0"/>
-                        <custom:ColorValueBar 
+                        <custom:ColorValueBar Focusable="False"
                             Margin="0,5,0,5"
                             Width="320" Height="80" Color="Transparent"
                             CellOneLength="90" CellOneText="低" 
@@ -653,7 +653,7 @@
                     </WrapPanel>
                     <WrapPanel>
                         <Label Width="50" Content="WC[1]" Margin="10,35,10,0"/>
-                        <custom:ColorValueBar
+                        <custom:ColorValueBar Focusable="False"
                             Margin="0,5,0,5"
                             Width="320" Height="80" Color="Transparent"
                             CellOneLength="160" CellOneText="&lt;0.900m"
@@ -704,7 +704,7 @@
                         </StackPanel>
                     </WrapPanel>
                     <WrapPanel Margin="0,15,0,0">
-                        <custom:PAContent  Margin="0,5,0,5"                            
+                        <custom:PAContent  Margin="0,5,0,5"     Focusable="False"                       
                             PAPointShow="Visible">
                             <custom:PAContent.PAPointPosition>
                                 <MultiBinding Converter="{StaticResource PAConverter}">

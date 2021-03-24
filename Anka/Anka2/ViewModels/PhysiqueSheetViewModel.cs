@@ -199,7 +199,7 @@ namespace Anka2.ViewModels
                     if (PhysiqueIndex >= 0)
                     {
                         PhysiqueContent = BasicInfo.PPhysique[PhysiqueIndex];
-                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "Physique/身体平衡记录加载成功。记录编号为：" + PhysiqueNumberText + "。");
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "体质成分记录加载成功。记录编号为：" + PhysiqueNumberText + "。");
                     }
                     else
                     {
@@ -210,7 +210,7 @@ namespace Anka2.ViewModels
                         PhysiqueIndex = BasicInfo.PPhysique.FindIndex((Physique e) => e.PhysiqueNumber == BasicInfo.Number + "-" + PhysiqueNumberText);
                         PhysiqueContent = BasicInfo.PPhysique[PhysiqueIndex];
 
-                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的Physique/身体平衡记录创建成功。记录编号为：" + PhysiqueNumberText + "。");
+                        NotifyStatusInfo(InfoType.Success, BasicInfo.Name + "新的体质成分记录创建成功。记录编号为：" + PhysiqueNumberText + "。");
                     }
 
                 }
