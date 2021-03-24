@@ -8,7 +8,7 @@
         </StackPanel>
         <Border BorderBrush="LightGray" BorderThickness="0,1,0,0" />
         <StackPanel Orientation="Horizontal" Margin="20" VerticalAlignment="Center">
-            <TextBlock Text="吉林大学第一人民&#13;心脏康复信息录入 &#13;版本号：V2.0 &#13;&#13;© 2021 吉林大学护理学院" />
+            <TextBlock Text="吉林大学第一人民医院&#13;心脏康复信息录入 &#13;版本号：V2.0 &#13;&#13;© 2021 吉林大学护理学院" />
             <Image Source="/Resources/Images/Nursing.jpg" Width="60" Margin="120,0,0,0"/>
         </StackPanel>
         <Border BorderBrush="LightGray" BorderThickness="0,1,0,0" />

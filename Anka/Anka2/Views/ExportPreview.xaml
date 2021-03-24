@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Fluent:Ribbon  Grid.Row="0">
             <Fluent:RibbonTabItem Header="导出" Width="65">
@@ -40,12 +41,11 @@
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
         </Fluent:Ribbon>
-        <TabControl TabStripPlacement="Bottom" Grid.Row="1">
-            <TabItem Header="基本信息">
+        <TabControl TabStripPlacement="Bottom" Grid.Row="1"  >
+            <TabItem Header="基本信息" >
                 <Grid Background="#FFE5E5E5">
-                   
-                    <DataGrid ItemsSource="{Binding DtBasicInfo}"/>
 
+                    <DataGrid ItemsSource="{Binding DtBasicInfo}" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow"  />
                 </Grid>
             </TabItem>
             <TabItem Header="运动负荷">
@@ -53,7 +53,7 @@
                     <Grid.DataContext>
                         <Services:DataPreview/>
                     </Grid.DataContext>
-                    <DataGrid ItemsSource="{Binding DtExercise}"/>
+                    <DataGrid ItemsSource="{Binding DtExercise}" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow" />
                 </Grid>
             </TabItem>
             <TabItem Header="PHQ评估量表">
@@ -61,7 +61,7 @@
                     <Grid.DataContext>
                         <Services:DataPreview/>
                     </Grid.DataContext>
-                    <DataGrid ItemsSource="{Binding DtPHQ}"/>
+                    <DataGrid ItemsSource="{Binding DtPHQ}" IsReadOnly="True"  LoadingRow="DataGrid_LoadingRow"/>
                 </Grid>
             </TabItem>
             <TabItem Header="GAD评估量表">
@@ -69,7 +69,7 @@
                     <Grid.DataContext>
                         <Services:DataPreview/>
                     </Grid.DataContext>
-                    <DataGrid ItemsSource="{Binding DtGAD}"/>
+                    <DataGrid ItemsSource="{Binding DtGAD}" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow" />
                 </Grid>
             </TabItem>
             <TabItem Header="IPAQ评估量表">
@@ -77,7 +77,7 @@
                     <Grid.DataContext>
                         <Services:DataPreview/>
                     </Grid.DataContext>
-                    <DataGrid ItemsSource="{Binding DtIPAQ}"/>
+                    <DataGrid ItemsSource="{Binding DtIPAQ}" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow" />
                 </Grid>
             </TabItem>
             <TabItem Header="口腔卫生评估量表">
@@ -85,7 +85,7 @@
                     <Grid.DataContext>
                         <Services:DataPreview/>
                     </Grid.DataContext>
-                    <DataGrid ItemsSource="{Binding DtOHQ}"/>
+                    <DataGrid ItemsSource="{Binding DtOHQ}" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow" />
                 </Grid>
             </TabItem>
             <TabItem Header="SPPB/平衡能力">
@@ -93,7 +93,7 @@
                     <Grid.DataContext>
                         <Services:DataPreview/>
                     </Grid.DataContext>
-                    <DataGrid ItemsSource="{Binding DtSPPB}"/>
+                    <DataGrid ItemsSource="{Binding DtSPPB}" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow" />
                 </Grid>
             </TabItem>
             <TabItem Header="体质成分">
@@ -101,11 +101,11 @@
                     <Grid.DataContext>
                         <Services:DataPreview/>
                     </Grid.DataContext>
-                    <DataGrid ItemsSource="{Binding DtPhysique}"/>
+                    <DataGrid ItemsSource="{Binding DtPhysique}" LoadingRow="DataGrid_LoadingRow" />
                 </Grid>
             </TabItem>
         </TabControl>
-        <StatusBar x:Name="StatusBar" VerticalAlignment="Bottom" Height="25" Grid.Row="1" >
+        <StatusBar x:Name="StatusBar" VerticalAlignment="Bottom" Height="25" Grid.Row="2" >
             <StatusBar.DataContext>
                 <s:StatusBarViewModel/>
             </StatusBar.DataContext>
