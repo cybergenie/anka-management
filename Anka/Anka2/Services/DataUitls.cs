@@ -89,37 +89,58 @@ namespace Anka2.Services
 
         public static bool SavePersonInfo( BasicInfo Person)
         {
-            string personId = Person.Number;
+            
             try
             {
                 SaveBasicInfo(Person);
-                foreach(var item in Person.PExercise)
+                if (Person.PExercise is not null)
                 {
-                    SaveExercise(item);
+                    foreach (var item in Person.PExercise)
+                    {
+                        SaveExercise(item);
+                    }
                 }
-                foreach (var item in Person.PGAD)
+                if (Person.PGAD is not null)
                 {
-                    SaveGAD(item);
-                }               
-                foreach (var item in Person.PIPAQ)
-                {
-                    SaveIPAQ(item);
+                    foreach (var item in Person.PGAD)
+                    {
+                        SaveGAD(item);
+                    }
                 }
-                foreach (var item in Person.POHQ)
+                if (Person.PIPAQ is not null)
                 {
-                    SaveOHQ(item);
+                    foreach (var item in Person.PIPAQ)
+                    {
+                        SaveIPAQ(item);
+                    }
                 }
-                foreach (var item in Person.PPHQ)
+                if (Person.POHQ is not null)
                 {
-                    SavePHQ(item);
+                    foreach (var item in Person.POHQ)
+                    {
+                        SaveOHQ(item);
+                    }
                 }
-                foreach (var item in Person.PPhysique)
+                if (Person.PPHQ is not null)
                 {
-                    SavePhysique(item);
+                    foreach (var item in Person.PPHQ)
+                    {
+                        SavePHQ(item);
+                    }
                 }
-                foreach (var item in Person.PSPPB)
+                if (Person.PPhysique is not null)
                 {
-                    SaveSPPB(item);
+                    foreach (var item in Person.PPhysique)
+                    {
+                        SavePhysique(item);
+                    }
+                }
+                if (Person.PSPPB is not null)
+                {
+                    foreach (var item in Person.PSPPB)
+                    {
+                        SaveSPPB(item);
+                    }
                 }
             }
             catch (Exception e)
@@ -141,7 +162,8 @@ namespace Anka2.Services
                     var existingPerson = context.DbPerson.Find(basicInfoId);
                     if (existingPerson != null)
                     {
-                        context.Entry(existingPerson).CurrentValues.SetValues(basicInfo);                        
+                        context.Entry(existingPerson).CurrentValues.SetValues(basicInfo);
+                        context.SaveChanges();
                     }
                     else
                     {

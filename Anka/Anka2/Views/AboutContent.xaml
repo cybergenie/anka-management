@@ -4,7 +4,7 @@
     <StackPanel x:Key="AboutContent"  Margin="50">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center">
             <Image Source="/Resources/Images/beating_heart.ico" />
-            <Label Content="Anka V2.0" FontSize="36" VerticalAlignment="Center"/>
+            <Label Content="Anka V2.01" FontSize="36" VerticalAlignment="Center"/>
         </StackPanel>
         <Border BorderBrush="LightGray" BorderThickness="0,1,0,0" />
         <StackPanel Orientation="Horizontal" Margin="20" VerticalAlignment="Center">
