@@ -6,6 +6,11 @@
     <UseWPF>true</UseWPF>
     <Nullable>annotations</Nullable>
     <ApplicationIcon>beating_heart.ico</ApplicationIcon>
+    <Version>2.01</Version>
+    <Authors>李金卫</Authors>
+    <Company>吉林大学护理学院</Company>
+    <Copyright>吉林大学护理学院</Copyright>
+    <Description>Email:jinwei.li@outlook.com</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Anka2.Views"
         mc:Ignorable="d"
-        Title="RepairInfo" Height="450" Width="800" ResizeMode="NoResize" Topmost="True">
+        Title="数据库修复" Height="450" Width="800" ResizeMode="NoResize" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>

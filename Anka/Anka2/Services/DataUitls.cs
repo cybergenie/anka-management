@@ -141,8 +141,7 @@ namespace Anka2.Services
                     var existingPerson = context.DbPerson.Find(basicInfoId);
                     if (existingPerson != null)
                     {
-                        context.Entry(existingPerson).CurrentValues.SetValues(basicInfo);
-                        context.SaveChanges();
+                        context.Entry(existingPerson).CurrentValues.SetValues(basicInfo);                        
                     }
                     else
                     {
@@ -169,12 +168,11 @@ namespace Anka2.Services
                     var existingExercise = context.DbExercise.Find(exerciseId);
                     if (existingExercise != null)
                     {
-                        context.Entry(existingExercise).CurrentValues.SetValues(exercise);
-                        
+                        context.Entry(existingExercise).CurrentValues.SetValues(exercise);                        
                     }
                     else
                     {
-                        context.Add(exercise);                        
+                        context.DbExercise.Add(exercise);                        
                     }
                     context.SaveChanges();
                 }
@@ -197,12 +195,11 @@ namespace Anka2.Services
                     var existingGAD = context.DbGAD.Find(gadId);
                     if (existingGAD != null)
                     {
-                        context.Entry(existingGAD).CurrentValues.SetValues(gad);
-                        
+                        context.Entry(existingGAD).CurrentValues.SetValues(gad);                        
                     }
                     else
                     {
-                        context.Add(gad);
+                        context.DbGAD.Add(gad);
                     }
                     context.SaveChanges();
                 }
@@ -226,12 +223,11 @@ namespace Anka2.Services
                     var existingPHQ = context.DbPHQ.Find(phqId);
                     if (existingPHQ != null)
                     {
-                        context.Entry(existingPHQ).CurrentValues.SetValues(phq);
-                        context.SaveChanges();
+                        context.Entry(existingPHQ).CurrentValues.SetValues(phq);                        
                     }
                     else
                     {
-                        context.Add(phq);
+                        context.DbPHQ.Add(phq);
                     }
                     context.SaveChanges();
                 }
@@ -254,12 +250,11 @@ namespace Anka2.Services
                     var existingIPAQ = context.DbIPAQ.Find(ipaqId);
                     if (existingIPAQ != null)
                     {
-                        context.Entry(existingIPAQ).CurrentValues.SetValues(ipaq);
-                        context.SaveChanges();
+                        context.Entry(existingIPAQ).CurrentValues.SetValues(ipaq);                        
                     }
                     else
                     {
-                        context.Add(ipaq);
+                        context.DbIPAQ.Add(ipaq);
                     }
                     context.SaveChanges();
                 }
@@ -282,12 +277,11 @@ namespace Anka2.Services
                     var existingOHQ = context.DbOHQ.Find(ohqId);
                     if (existingOHQ != null)
                     {
-                        context.Entry(existingOHQ).CurrentValues.SetValues(ohq);
-                        context.SaveChanges();
+                        context.Entry(existingOHQ).CurrentValues.SetValues(ohq);                        
                     }
                     else
                     {
-                        context.Add(ohq);
+                        context.DbOHQ.Add(ohq);
                     }
                     context.SaveChanges();
                 }
@@ -310,12 +304,11 @@ namespace Anka2.Services
                     var existingSPPB = context.DbSPPB.Find(sppbId);
                     if (existingSPPB != null)
                     {
-                        context.Entry(existingSPPB).CurrentValues.SetValues(sppb);
-                        context.SaveChanges();
+                        context.Entry(existingSPPB).CurrentValues.SetValues(sppb);                        
                     }
                     else
                     {
-                        context.Add(sppb);
+                        context.DbSPPB.Add(sppb);
                     }
                     context.SaveChanges();
                 }
@@ -338,12 +331,11 @@ namespace Anka2.Services
                     var existingPhysique = context.DbPhysique.Find(physiqueId);
                     if (existingPhysique != null)
                     {
-                        context.Entry(existingPhysique).CurrentValues.SetValues(physique);
-                        context.SaveChanges();
+                        context.Entry(existingPhysique).CurrentValues.SetValues(physique);                       
                     }
                     else
                     {
-                        context.Add(physique);
+                        context.DbPhysique.Add(physique);
                     }
                     context.SaveChanges();
                 }
