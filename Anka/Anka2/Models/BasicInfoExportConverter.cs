@@ -31,9 +31,9 @@ namespace Anka2.Models
         {
             var DominantCoronary = dr[columnName] switch
             {
-                "1" => "左优势型",
+                "1" => "右优势型",
                 "0" => "均衡型",
-                "-1" => "右优势型",
+                "-1" => "左优势型",
                 _ => string.Empty,
             };
             dr[columnName] = DominantCoronary;
