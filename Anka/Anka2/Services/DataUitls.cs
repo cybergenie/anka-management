@@ -157,20 +157,29 @@ namespace Anka2.Services
             string basicInfoId = basicInfo.Number;
             try
             {
+                string debuginfo = null;
                 using (var context = new DbAdapter())
                 {
+                    
                     var existingPerson = context.DbPerson.Find(basicInfoId);
+                    debuginfo += "病案号：" + basicInfoId + "\n";
                     if (existingPerson != null)
                     {
+                        debuginfo += "开始更新基本信息数据...\n";
                         context.Entry(existingPerson).CurrentValues.SetValues(basicInfo);
+                        debuginfo += "开始保存基本信息数据...\n";
+                        debuginfo += basicInfo.ToString() + "\n";
                         context.SaveChanges();
+                        debuginfo += "基本信息数据保存完成...\n";
                     }
                     else
                     {
+                        debuginfo += "该档案不存在";
                         MessageBox.Show("档案号不存在。", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
                 }
+                MessageBox.Show(debuginfo);
             }
             catch (Exception e)
             {
